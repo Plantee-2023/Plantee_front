@@ -7,13 +7,13 @@ const Header = () => {
     return (
         <div className='display'>
             <Row>
-                <Col lg={1}>
-                    <a>1</a>
+                <Col lg={2}>
+                    <img src='/image/1.jpg' width={20} height={20}></img>
                 </Col>
-                <Col lg={11}>
+                <Col lg={8}>
                     <form>
                         <InputGroup className='center'>
-                            <input type='search' className='search' />
+                            <input type='search' className='search' placeholder='검색어를 입력해주세요.' />
                             <Button className='search_btn' type='submit'><FaSearch /></Button>
                         </InputGroup>
                     </form>
