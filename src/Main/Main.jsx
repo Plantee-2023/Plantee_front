@@ -1,5 +1,6 @@
 import React from 'react'
 import { Card, Row, Col, Carousel } from 'react-bootstrap';
+import './Main.css'
 
 const Main = () => {
     return (
@@ -24,11 +25,11 @@ const Main = () => {
             <Carousel className='mb-5 mt-5'>
                 <Carousel.Item>
                     <Row>
-                        <Col>
-                            <Card>
-                                <Card.Body>
+                        <Col >
+                            <Card border='light'>
+                                <Card.Body >
                                     <Card.Img src='/image/tee1.jpg' width={200} height={200} />
-                                    <Card.Body>
+                                    <Card.Body className='text'>
                                         <h7>이름 : </h7><br/>
                                         <h7>가격 : </h7>
                                     </Card.Body>
@@ -36,10 +37,10 @@ const Main = () => {
                             </Card>
                         </Col>
                         <Col>
-                            <Card>
+                            <Card border='light'>
                                 <Card.Body>
                                     <Card.Img src='/image/tee2.jpg' width={200} height={200} />
-                                    <Card.Body>
+                                    <Card.Body className='text'>
                                         <h7>이름 : </h7><br/>
                                         <h7>가격 : </h7>
                                     </Card.Body>
@@ -50,7 +51,7 @@ const Main = () => {
                             <Card>
                                 <Card.Body>
                                     <Card.Img src='/image/tee3.jpg' width={200} height={200} />
-                                    <Card.Body>
+                                    <Card.Body className='text'>
                                         <h7>이름 : </h7><br/>
                                         <h7>가격 : </h7>
                                     </Card.Body>
@@ -61,7 +62,7 @@ const Main = () => {
                             <Card>
                                 <Card.Body>
                                     <Card.Img src='/image/tee4.jpg' width={200} height={200} />
-                                    <Card.Body>
+                                    <Card.Body className='text'>
                                         <h7>이름 : </h7><br/>
                                         <h7>가격 : </h7>
                                     </Card.Body>
@@ -76,7 +77,7 @@ const Main = () => {
                             <Card>
                                 <Card.Body>
                                     <Card.Img src='/image/what1.jpg' width={200} height={200} />
-                                    <Card.Body>
+                                    <Card.Body className='text'>
                                         <h7>이름 : </h7><br/>
                                         <h7>가격 : </h7>
                                     </Card.Body>
@@ -87,7 +88,7 @@ const Main = () => {
                             <Card>
                                 <Card.Body>
                                     <Card.Img src='/image/what2.jpg' width={200} height={200} />
-                                    <Card.Body>
+                                    <Card.Body className='text'>
                                         <h7>이름 : </h7><br/>
                                         <h7>가격 : </h7>
                                     </Card.Body>
@@ -98,7 +99,7 @@ const Main = () => {
                             <Card>
                                 <Card.Body>
                                     <Card.Img src='/image/what3.jpg' width={200} height={200} />
-                                    <Card.Body>
+                                    <Card.Body className='text'>
                                         <h7>이름 : </h7><br/>
                                         <h7>가격 : </h7>
                                     </Card.Body>
@@ -109,7 +110,7 @@ const Main = () => {
                             <Card>
                                 <Card.Body>
                                     <Card.Img src='/image/what4.jpg' width={200} height={200} />
-                                    <Card.Body>
+                                    <Card.Body className='text'>
                                         <h7>이름 : </h7><br/>
                                         <h7>가격 : </h7>
                                     </Card.Body>

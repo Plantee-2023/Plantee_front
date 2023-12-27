@@ -1,6 +1,5 @@
 import React from 'react'
 import './Menu.css';
-import { NavLink } from 'react-router-dom';
 import RouterPage from './RouterPage';
 
 
@@ -8,9 +7,6 @@ const Menu = () => {
     return (
         <div className='display'> 
             <ul className='nav recommend title'>
-                <li className='nav-item'>
-                    <NavLink className='nav-link ' href='/'>PlanTee</NavLink>
-                </li>
                 <li className='nav-item'>
                     <a className='nav-link' href='/search'>추천</a>
                 </li>
