@@ -3,9 +3,13 @@
     justify-content: center;
     margin-top: 50px;
     font-size: 30px;
-    background-color: antiquewhite;
+    background-color: #4cc37c;
     text-emphasis-color: #000000;
 }
 .title{
     background-color: #4cc37c;
+}
+
+.size{
+    text-size-adjust: 0.5rem;
 }

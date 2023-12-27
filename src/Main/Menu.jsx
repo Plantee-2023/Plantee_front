@@ -1,6 +1,7 @@
 import React from 'react'
 import './Menu.css';
 import RouterPage from './RouterPage';
+import { NavLink } from 'react-router-dom';
 
 
 const Menu = () => {
@@ -26,7 +27,7 @@ const Menu = () => {
                     <a className='nav-link' href='/'>로그아웃</a>
                 </li>
                 <li className='nav-item'>
-                    <a className='nav-link' href='/'>회원가입</a>
+                    <NavLink className='nav-link' href='/'>회원가입</NavLink>
                 </li>
             </ul>
             <RouterPage/>

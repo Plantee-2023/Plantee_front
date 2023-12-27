@@ -2,16 +2,15 @@ import React from 'react'
 import { Button, Col, InputGroup, Row } from 'react-bootstrap'
 import './Header.css';
 import { FaSearch } from "react-icons/fa";
-import { NavLink } from 'react-router-dom';
 
 const Header = () => {
     return (
         <div className='display'>
             <Row>
-                <Col md={1}>
-                    <NavLink>PlanTee</NavLink>
+                <Col lg={1}>
+                    <a>1</a>
                 </Col>
-                <Col>
+                <Col lg={11}>
                     <form>
                         <InputGroup className='center'>
                             <input type='search' className='search' />
