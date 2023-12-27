@@ -8,7 +8,7 @@ const Header = () => {
         <div className='display'>
             <Row>
                 <Col lg={2}>
-                    <img src='/image/1.jpg' width={20} height={20}></img>
+                    <img className='header_img' src='/image/1.jpg' width={100} height={50}></img>
                 </Col>
                 <Col lg={8}>
                     <form>
