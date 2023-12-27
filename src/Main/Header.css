@@ -12,10 +12,11 @@
     box-sizing: border-box;
     border-radius: 20px;
 }
-.btn{
+.search_btn{
     background-color: #4cc67c !important;
     border-style: solid 1px;
     border-color: #4cc67c !important;
+    height: 50px;
 }
 
 p{

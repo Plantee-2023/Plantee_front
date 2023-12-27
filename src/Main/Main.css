@@ -1,3 +1,10 @@
-.text{
+.main_btn{
+    margin-right: 10px;
+    margin-top: 10px;
+    background-color: #4cc67c !important;
+    border-color: #4cc67c !important;
+}
+
+.main_text{
     text-align: start;
 }

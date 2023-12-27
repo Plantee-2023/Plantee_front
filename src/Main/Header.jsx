@@ -14,7 +14,7 @@ const Header = () => {
                     <form>
                         <InputGroup className='center'>
                             <input type='search' className='search' />
-                            <Button className='btn' type='submit'><FaSearch /></Button>
+                            <Button className='search_btn' type='submit'><FaSearch /></Button>
                         </InputGroup>
                     </form>
                 </Col>
