@@ -1,0 +1,25 @@
+.center{
+    justify-content: center;
+    margin-top: 50px;
+}
+
+.search{
+    border-style: solid;
+    border-color: #4cc67c ;
+    width: 800px;
+    height: 50px;
+    position: relative;
+    box-sizing: border-box;
+    border-radius: 20px;
+}
+.search_btn{
+    background-color: #4cc67c !important;
+    border-style: solid 1px;
+    border-color: #4cc67c !important;
+    height: 50px;
+}
+
+.header_img{
+    margin-Top: 33%;
+    margin-left: 3%;
+}

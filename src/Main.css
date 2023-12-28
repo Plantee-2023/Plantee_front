@@ -1,0 +1,25 @@
+.main_btn{
+    margin-right: 10px;
+    margin-top: 10px;
+    background-color: #4cc67c !important;
+    border-color: #4cc67c !important;
+}
+
+.main_text{
+    text-align: start;
+}
+
+.main_more{
+    margin-left: 550px;
+    color: #000000 !important;
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.main-title{
+    font-weight: 900;
+    text-align: start;
+    font-size: 35px;
+}
