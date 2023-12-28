@@ -1,15 +1,16 @@
 .recommend {
     background-color: #4cc37c;
     text-emphasis-color: #000000;
+    padding: 15px;
 }
 
 .icon{
-    font-size: 30px;
-    margin-top: 4px;
+    font-size: 28px;
+    margin-top: 10px;
 }
 
-.menu_login{
-    margin-left: 500px;
+.menu-login{
+    margin-left: 350px;
     color: #ffffff !important;
     text-decoration: none;
     cursor: pointer;
@@ -17,7 +18,15 @@
     font-weight: 900;
 }
 
-.text_color{
+.text-color{
     font-weight: 900;
     font-size: 20px;
+}
+
+.menu-magazine{
+    text-decoration: none;
+    color: #000000 !important;
+    font-size: 20px;
+    font-weight: 900;
+    margin-top: 7px;
 }

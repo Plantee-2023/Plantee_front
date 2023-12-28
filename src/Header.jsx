@@ -1,14 +1,17 @@
 import React from 'react'
-import { Button, Col, InputGroup, Row } from 'react-bootstrap'
-import './Header.css';
+import { Button, Col, InputGroup,  Row } from 'react-bootstrap'
 import { FaSearch } from "react-icons/fa";
+import './Header.css';
+import { NavLink } from 'react-router-dom';
 
 const Header = () => {
     return (
         <div className='display'>
             <Row>
                 <Col lg={2}>
-                    <img className='header_img' src='/image/1.jpg' width={100} height={50}></img>
+                    <NavLink to='/'>
+                        <img className='header_img'src='/image/1.jpg' width={100} height={50}></img>
+                    </NavLink>
                 </Col>
                 <Col lg={8}>
                     <form>

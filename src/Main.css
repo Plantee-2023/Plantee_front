@@ -11,7 +11,15 @@
 
 .main_more{
     margin-left: 550px;
-    color: #000000;
+    color: #000000 !important;
     text-decoration: none;
     cursor: pointer;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.main-title{
+    font-weight: 900;
+    text-align: start;
+    font-size: 35px;
 }

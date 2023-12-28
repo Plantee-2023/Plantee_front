@@ -1,7 +1,7 @@
-import Menu from './Main/Menu';
-import Main from './Main/Main';
-import Foot from './Main/Foot';
-import Header from './Main/Header';
+import Menu from './Menu';
+import Foot from './Foot';
+import Header from './Header';
+import RouterPage from './RouterPage';
 import './App.css';
 
 function App() {
@@ -9,7 +9,7 @@ function App() {
 		<div className="App">
 			<Header/>
 			<Menu/>
-			<Main/>
+			<RouterPage/>
 			<Foot/>
 		</div>
 	);
