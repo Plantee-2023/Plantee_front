@@ -24,6 +24,9 @@ const Menu = () => {
                     <a className='nav-link' href='/'>마이페이지</a>
                 </li>
                 <li className='nav-item'>
+                    <a className='nav-link' href='/diary'>캘린더</a>
+                </li>
+                <li className='nav-item'>
                     <a className='nav-link' href='/'>로그인</a>
                 </li>
                 <li className='nav-item'>
