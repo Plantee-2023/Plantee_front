@@ -333,11 +333,6 @@ const Main = () => {
                         매거진
                     </h2>
                 </Col>
-                <Col>
-                    <a className='main_more' href='/'>
-                        더보기<CgChevronRight />
-                    </a>
-                </Col>
             </Row>
             <Carousel className='mb-5 mt-5'>
                 <Carousel.Item>
