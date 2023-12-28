@@ -1,9 +1,9 @@
 import React from 'react'
 import { Card, Row, Col, Carousel, Button, InputGroup } from 'react-bootstrap';
-import './Main.css'
 import { CgChevronRight } from "react-icons/cg";
 import { MdFavoriteBorder } from "react-icons/md";
 import { FaRegBookmark } from "react-icons/fa6";
+import './Main.css'
 
 const Main = () => {
     return (
@@ -29,9 +29,9 @@ const Main = () => {
                     </h2>
                 </Col>
                 <Col>
-                    <div className='text-end'>
+                    <a className='main_more' href='/'>
                         더보기<CgChevronRight />
-                    </div>
+                    </a>
                 </Col>
             </Row>
             <Carousel className='mb-5 mt-5'>
@@ -163,9 +163,9 @@ const Main = () => {
                     </h2>
                 </Col>
                 <Col>
-                    <div className='text-end'>
+                    <a className='main_more' href='/'>
                         더보기<CgChevronRight />
-                    </div>
+                    </a>
                 </Col>
             </Row>
             <InputGroup>
@@ -215,9 +215,9 @@ const Main = () => {
                     </h2>
                 </Col>
                 <Col>
-                    <div className='text-end'>
+                    <a className='main_more' href='/'>
                         더보기<CgChevronRight />
-                    </div>
+                    </a>
                 </Col>
             </Row>
             <InputGroup>
@@ -321,9 +321,9 @@ const Main = () => {
                     </h2>
                 </Col>
                 <Col>
-                    <div className='text-end'>
+                    <a className='main_more' href='/'>
                         더보기<CgChevronRight />
-                    </div>
+                    </a>
                 </Col>
             </Row>
             <Carousel className='mb-5 mt-5'>

@@ -44,11 +44,12 @@
 }
 
 a :link{
-  color: black;
+  color: #ffffff;
 }
 a:visited{
-  color: black;
+  color: #ffffff;
 }
 a:hover{
-  color: #ffffff !important ;
+  color: #000000 !important ;
 }
+

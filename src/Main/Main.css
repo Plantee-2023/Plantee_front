@@ -8,3 +8,10 @@
 .main_text{
     text-align: start;
 }
+
+.main_more{
+    margin-left: 550px;
+    color: #000000;
+    text-decoration: none;
+    cursor: pointer;
+}

@@ -1,15 +1,24 @@
 .recommend {
-    padding: 10px;
-    justify-content: center;
-    margin-top: 50px;
-    font-size: 30px;
     background-color: #4cc37c;
     text-emphasis-color: #000000;
 }
-.title{
-    background-color: #4cc37c;
+
+.icon{
+    font-size: 30px;
+    margin-top: 4px;
 }
 
-.size{
-    text-size-adjust: 0.5rem;
+.menu_login{
+    margin-left: 500px;
+    color: #ffffff !important;
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: 900;
+}
+
+.text_color{
+    font-weight: 900;
+    font-size: 20px;
+    color: #ffffff;
 }
