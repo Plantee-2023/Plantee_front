@@ -1,22 +1,13 @@
 import React from 'react'
-import {Table} from 'react-bootstrap';
+
 const Magazine = () => {
     return (
         <div>
-            <Table>
-                <thead>
-                    <tr>
-                        <th>매거진 번호</th>
-                        <th>제목</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td></td>
-                    </tr>
-                </tbody>
-            </Table>
+            <h1 className='mt-5 mb-5'>얘는 무슨 식물이냐?</h1>
+            <img src="/image/what1.jpg" width={900} height={600}/>
+            <h5 className='mt-5'>얘는 무슨 식물이냐?</h5>
+            <hr/>
+            s
         </div>
     )
 }
