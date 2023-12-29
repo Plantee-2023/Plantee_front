@@ -133,6 +133,12 @@
 
 /* 매거진 */
 
-.maga-table{
+.magazine-table{
     margin-top: 7%;
+    font-size: larger;
+    font-weight: 900
+}
+
+.magazine-a {
+    color: #000000 !important;
 }
