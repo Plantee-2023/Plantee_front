@@ -18,7 +18,7 @@ const MagazineList = () => {
                 <tbody>
                     <tr>
                         <td className='text-center'>1</td>
-                        <td><a href='/'>이 식물은 무엇일까?</a></td>
+                        <td><a href='/main/magazine' className='magazine-a'>얘는 무슨 식물이냐?</a></td>
                         <td className='text-center'>관리자</td>
                         <td className='text-center'>2023/12/29</td>
                         <td className='text-center'>0</td>

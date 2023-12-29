@@ -141,4 +141,17 @@
 
 .magazine-a {
     color: #000000 !important;
+    text-decoration: none;
+}
+
+.magazine-page {
+    text-align: center;
+}
+
+.magazine-marini{
+    margin-top: 50%;
+}
+
+.magazine-title {
+    
 }
