@@ -5,7 +5,7 @@ const Magazine = () => {
     return (
         <div className='display magazine-page'>
             <Row>
-                <Col lg={8}>
+                <Col lg={8} >
                     <h1 className='mt-5 mb-5 text-end'>얘는 무슨 식물이냐?</h1>
                 </Col>
                 <Col lg={2}>
@@ -14,7 +14,6 @@ const Magazine = () => {
             </Row>
             <img src="/image/what1.jpg" width={900} height={600} />
             <h5 className='mt-5'>얘는 무슨 식물이냐?</h5>
-            <hr />
         </div>
     )
 }

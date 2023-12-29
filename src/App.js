@@ -1,14 +1,13 @@
 import Foot from './component/Foot';
 import Menu from './component/Menu';
-import Main from './component/Main';
-
 import './App.css';
+import RouterPage from './component/RouterPage';
 
 function App() {
 	return (
 		<div>
 			<Menu/>
-			<Main/>
+			<RouterPage/>
 			<Foot/>
 		</div>
 	);

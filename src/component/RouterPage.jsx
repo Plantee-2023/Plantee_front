@@ -22,7 +22,6 @@ const RouterPage = () => {
 
             {/* 다이어리 */}
             <Route path='/diary/DiaryMain' element={<DiaryMain />} />
-
         </Routes>
     )
 }
