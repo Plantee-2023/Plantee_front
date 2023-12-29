@@ -1,13 +1,11 @@
-import Menu from './Menu';
-import Foot from './Foot';
-import Header from './Header';
-import RouterPage from './RouterPage';
+import Menu from './component/common/Menu';
+import Foot from './component/common/Foot';
+import RouterPage from './component/common/RouterPage';
 import './App.css';
 
 function App() {
 	return (
 		<div className="App">
-			<Header/>
 			<Menu/>
 			<RouterPage/>
 			<Foot/>
