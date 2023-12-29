@@ -1,0 +1,144 @@
+/* 메인 */
+.main_btn {
+    margin-right: 10px;
+    margin-top: 10px;
+    background-color: #4cc67c !important;
+    border-color: #4cc67c !important;
+}
+
+.main_text {
+    text-align: start;
+}
+
+.main_more {
+    margin-left: 550px;
+    color: #000000 !important;
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.main-title {
+    font-weight: 900;
+    text-align: start;
+    font-size: 35px;
+}
+
+/* 메뉴 */
+.recommend {
+    background-color: #4cc37c;
+    text-emphasis-color: #000000;
+    padding: 15px;
+}
+
+.icon {
+    font-size: 28px;
+    margin-top: 10px;
+}
+
+.menu-login {
+    margin-left: 350px;
+    color: #ffffff !important;
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: 900;
+}
+
+.text-color {
+    font-weight: 900;
+    font-size: 20px;
+}
+
+.menu-magazine {
+    text-decoration: none;
+    color: #000000 !important;
+    font-size: 20px;
+    font-weight: 900;
+    margin-top: 7px;
+}
+
+/* 검색창 */
+.search {
+    justify-content: center;
+    margin-top: 50px;
+    margin-left: 5%;
+}
+
+.inputGroup-search {
+    border-style: solid;
+    border-color: #4cc67c;
+    width: 800px;
+    height: 50px;
+    position: relative;
+    box-sizing: border-box;
+    border-radius: 20px;
+}
+
+.search_btn {
+    background-color: #4cc67c !important;
+    border-style: solid 1px;
+    border-color: #4cc67c !important;
+    height: 50px;
+}
+
+.logo {
+    margin-left: 3%;
+    margin-right: 20%;
+}
+
+/* 회원 가입 */
+
+.join-img{
+    margin-left: 30%;
+}
+
+.join-check{
+    margin-top: 10px;
+    margin-bottom: 15px;
+    margin-left: 9%;
+}
+
+.join-input{
+    margin-bottom: 30px;
+    max-width: 650px;
+    margin-left: 70px;
+}
+
+.join-address{
+    margin-bottom: 5px;
+    max-width: 650px;
+    margin-left: 70px;
+}
+
+.join-btn{
+    background-color: #4cc67c;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    font-weight: 900;
+    font-size: large;
+}
+.join-add{
+    background-color: #4cc67c;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    font-weight: 900;
+    font-size: large;
+    padding: 10px;
+    width: 12%;
+}
+
+/* 매거진 */
+
+.magazine-table{
+    margin-top: 7%;
+    font-size: larger;
+    font-weight: 900
+}
+
+.magazine-a {
+    color: #000000 !important;
+}
