@@ -130,3 +130,15 @@
     padding: 10px;
     width: 12%;
 }
+
+/* 매거진 */
+
+.magazine-table{
+    margin-top: 7%;
+    font-size: larger;
+    font-weight: 900
+}
+
+.magazine-a {
+    color: #000000 !important;
+}
