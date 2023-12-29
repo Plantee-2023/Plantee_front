@@ -2,7 +2,9 @@ import React from 'react'
 
 const LoginPage = () => {
     return (
-        <div><h1>로그인</h1></div>
+        <div>
+            <h1 className='text-center mt-5'>로그인</h1>
+        </div>
     )
 }
 

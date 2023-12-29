@@ -1,11 +1,11 @@
-import Menu from './component/common/Menu';
-import Foot from './component/common/Foot';
-import RouterPage from './component/common/RouterPage';
+import Foot from './component/Foot';
+import RouterPage from './component/RouterPage';
 import './App.css';
+import Menu from './component/Menu';
 
 function App() {
 	return (
-		<div className="App">
+		<div>
 			<Menu/>
 			<RouterPage/>
 			<Foot/>
