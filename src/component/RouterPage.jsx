@@ -1,9 +1,9 @@
 import React from 'react'
 import { Routes, Route } from 'react-router-dom'
-import Magazine from './Magazine';
+import Magazine from './common/Magazine';
 import Main from './Main';
-import Join from '../users/Join'; 
-import LoginPage from '../users/LoginPage';
+import Join from './users/Join'; 
+import LoginPage from './users/LoginPage';
 
 
 const RouterPage = () => {

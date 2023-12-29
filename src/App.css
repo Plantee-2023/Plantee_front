@@ -40,7 +40,13 @@
 .display{
   position: relative;
   margin: 0 auto;
-  width: 1280px;
+  width: 1280px !important;
+}
+
+.add{
+  position: relative;
+  margin: 0 auto;
+  width: 800px !important;
 }
 
 a :link{

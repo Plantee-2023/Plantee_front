@@ -1,23 +1,23 @@
 import React from 'react'
-import { Nav, Navbar, NavDropdown, Row, Col, InputGroup, Button  } from 'react-bootstrap';
+import './Main.css'
+import { Row, Col, InputGroup, Button, NavDropdown, Navbar, Nav } from 'react-bootstrap'
+import { NavLink } from 'react-router-dom'
+import { FaSearch } from "react-icons/fa";
 import { LiaStoreAltSolid } from "react-icons/lia";
 import { PiUserListBold } from "react-icons/pi";
 import { GiTalk } from "react-icons/gi";
 import { FiBookOpen } from "react-icons/fi";
-import { FaSearch } from "react-icons/fa";
-import './Main.css';
-import { NavLink } from 'react-router-dom';
 
 const Menu = () => {
     return (
         <div className='display'>
             <Row>
-                <Col lg={2}>
+                <Col xs={3} md={6} lg={2}>
                     <NavLink to='/'>
-                        <img className='logo'src='/image/logo.png' width={200} height={150}></img>
+                        <img className='logo' src='/image/logo.png' width={200} height={150}></img>
                     </NavLink>
                 </Col>
-                <Col lg={8}>
+                <Col xs={1} md={2} lg={8}>
                     <form>
                         <InputGroup className='search'>
                             <input type='search' className='inputGroup-search' placeholder='검색어를 입력해주세요.' />
@@ -26,14 +26,14 @@ const Menu = () => {
                     </form>
                 </Col>
             </Row>
-            <Navbar expand="lg" className="mt-5 recommend" >
+            <Navbar expand="lg" className="mt-5 recommend">
                 <Nav>
                     <PiUserListBold className='icon ms-5' />
                     <NavDropdown className='text-color' title="메뉴유" id="basic-nav-dropdown">
-                        <NavDropdown.Item  href="">식물 추천</NavDropdown.Item>
-                        <NavDropdown.Item  href="">식물 큐레이트</NavDropdown.Item>
-                        <NavDropdown.Item  href="">레시피</NavDropdown.Item>
-                        <NavDropdown.Item  href="">지도</NavDropdown.Item>
+                        <NavDropdown.Item href="">식물 추천</NavDropdown.Item>
+                        <NavDropdown.Item href="">식물 큐레이트</NavDropdown.Item>
+                        <NavDropdown.Item href="">레시피</NavDropdown.Item>
+                        <NavDropdown.Item href="">지도</NavDropdown.Item>
                     </NavDropdown>
                     <GiTalk className='icon ms-5' />
                     <NavDropdown className='text-color' title="커뮤니티" id="basic-nav-dropdown">
