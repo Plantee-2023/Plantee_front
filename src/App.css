@@ -37,9 +37,8 @@
     transform: rotate(360deg);
   }
 }
-
 /* 웹 사이즈 */
-.display {
+.display{
   position: relative;
   margin: 0 auto;
   width: 1280px !important;
@@ -51,28 +50,21 @@
   width: 800px !important;
 }
 
-.magazini {
-  position: relative;
-  margin: 0 auto;
-  width: 1000px !important;
-}
-
-.login {
-  position: relative;
-  margin: 0 auto;
-  width: 600px !important;
+.magazini{
+    position: relative;
+    margin: 0 auto;
+    width: 1000px !important;
 }
 
 /* 웹 사이즈 */
 
-a :link {
+a :link{
   color: #ffffff;
 }
-
-a:visited {
+a:visited{
   color: #ffffff;
 }
-
-a:hover {
-  color: #000000 !important;
+a:hover{
+  color: #000000 !important ;
 }
+

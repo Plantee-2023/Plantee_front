@@ -1,13 +1,16 @@
-import Foot from './component/Foot';
-import Menu from './component/Menu';
-import './App.css';
+import Footer from './component/Footer';
 import RouterPage from './component/RouterPage';
+import './App.css';
+import Menu from './component/Menu';
+import Main from './component/Main';
+
+import './App.css';
 
 function App() {
 	return (
 		<div className='display'>
 			<Menu/>
-			<RouterPage/>
+			<Main/>
 			<Foot/>
 		</div>
 	);

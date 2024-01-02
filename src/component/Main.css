@@ -1,10 +1,27 @@
 /* 메인 */
-.main_btn {
-    margin-right: 10px;
-    margin-top: 10px;
-    background-color: #4cc67c !important;
-    border-color: #4cc67c !important;
-}
+.main_btn { margin-right: 10px; margin-top: 10px; background-color: #4cc67c !important; border-color: #4cc67c !important;}
+
+/* menu_search */
+.menu_header {width: 1280px; padding: 3rem 0 0; display: flex; justify-content: space-between;}
+.menu_logo img {width: 140px;}
+.menu_left {display: flex; align-items: center;}
+.menu_right {display: flex; align-items: center;}
+
+/* menu_left */
+.menu_searchwrap {margin-left: 4%; width: 500px;}
+.menu_searchinputwrap {border: 1px solid #4cc37c; padding: 3%; border-radius: 40px;}
+.menu_searchinput {width: 88%; border: none;}
+input:focus {outline:none;}
+
+.menu_searchbtn {border: none; background: none;}
+.menu_searchbtn img {width: 26px; height: 26px; margin-left: 70%;}
+
+/* menu_right */
+.menu_mymenu {display: flex; align-items: center;}
+.menu_right ul {list-style: none; display: flex; align-items: center; margin-top: 9%;}
+.menu_mymenu>li {align-items: center; margin-left: 2rem;}
+.menu_mymenu a {font-size: 17px; text-decoration: none; color: #333333;}
+
 
 .main_text {
     text-align: start;
@@ -59,35 +76,6 @@
     margin-top: 7px;
 }
 
-/* 검색창 */
-.search {
-    justify-content: center;
-    margin-top: 50px;
-    margin-left: 5%;
-}
-
-.inputGroup-search {
-    border-style: solid;
-    border-color: #4cc67c;
-    width: 800px;
-    height: 50px;
-    position: relative;
-    box-sizing: border-box;
-    border-radius: 20px;
-}
-
-.search_btn {
-    background-color: #4cc67c !important;
-    border-style: solid 1px;
-    border-color: #4cc67c !important;
-    height: 50px;
-}
-
-.logo {
-    margin-left: 3%;
-    margin-right: 20%;
-}
-
 /* 회원 가입 */
 
 .join-img{
@@ -131,53 +119,3 @@
     width: 12%;
 }
 
-/* 매거진 */
-
-.magazine-table{
-    margin-top: 7%;
-    font-size: larger;
-    font-weight: 900
-}
-
-.magazine-a {
-    color: #000000 !important;
-    text-decoration: none;
-}
-
-.magazine-page {
-    text-align: center;
-}
-
-.magazine-marini{
-    margin-top: 50%;
-}
-
-/* 로그인 */
-.login-card{
-    margin-top: 100px;
-}
-
-.login-text{
-    margin-top: 30px;
-    margin-bottom: 50px;
-    text-align: center;
-    font-weight: 900;
-}
-
-.login-input{
-    margin-bottom: 20px;
-    max-width: 400px;
-    margin-left: 100px;
-}
-
-.login-btn{
-    background-color: #4cc67c;
-    color: #ffffff;
-    border: none;
-    border-radius: 5px;
-    font-weight: 900;
-    font-size: large;
-    padding: 10px;
-    width: 67%;
-    margin-left: 100px;
-}
