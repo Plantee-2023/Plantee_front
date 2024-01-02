@@ -1,16 +1,14 @@
-import Menu from './Main/Menu';
-import Main from './Main/Main';
+import Footer from './component/Footer';
+import RouterPage from './component/RouterPage';
 import './App.css';
-import Foot from './Main/Foot';
-import Header from './Main/Header';
+import Menu from './component/Menu';
 
 function App() {
 	return (
-		<div className="App">
-			<Header/>
+		<div>
 			<Menu/>
-			<Main/>
-			<Foot/>
+			<RouterPage/>
+			<Footer/>
 		</div>
 	);
 }
