@@ -25,6 +25,9 @@ const Menu = () => {
                         </InputGroup>
                     </form>
                 </Col>
+                <Col>
+                    <a className="text-color" href='/'>login</a>
+                </Col>
             </Row>
             <Navbar expand="lg" className="mt-5 recommend">
                 <Nav>
@@ -35,6 +38,7 @@ const Menu = () => {
                         <NavDropdown.Item href="">레시피</NavDropdown.Item>
                         <NavDropdown.Item href="">지도</NavDropdown.Item>
                     </NavDropdown>
+
                     <GiTalk className='icon ms-5' />
                     <NavDropdown className='text-color' title="커뮤니티" id="basic-nav-dropdown">
                         <NavDropdown.Item href="">내 식물 자랑</NavDropdown.Item>
@@ -42,12 +46,17 @@ const Menu = () => {
                         <NavDropdown.Item href="">자유게시판</NavDropdown.Item>
                         <NavDropdown.Item href="">Q&A</NavDropdown.Item>
                     </NavDropdown>
-                    <LiaStoreAltSolid className='icon ms-5' />
+
+                    <LiaStoreAltSolid className='icon ms-3' />
                     <NavLink className='menu-magazine' to='/store'>스토어</NavLink>
-                    <FiBookOpen className='icon ms-5' />
+
+                    <FiBookOpen className='icon ms-3' />
                     <NavLink className='menu-magazine' to='/main/magazineList'>매거진</NavLink>
+
+                    <FiBookOpen className='icon ms-3' />
                     <NavLink className='menu-magazine' to='/diary/diarymain'>다이어리</NavLink>
                 </Nav>
+
                 <NavLink className='menu-login' to='/users/loginPage'>
                     로그인
                 </NavLink>

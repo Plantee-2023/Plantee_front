@@ -1,0 +1,7 @@
+/* Store */
+.store_wrap {width: 100%; margin: 0 auto; border: 1px solid red;}
+.store_contents {width: 1280px; margin: 0 auto;}
+.store_filterbtn_group {margin-top: 2%; border-bottom: 1px dashed #cccccc; padding-bottom: 1%;}
+.store_filterbtn1 {background-color: #4cc67c; border: none; border-radius: 30px; color: #fff; width: 60px; height: 40px; justify-content: center; align-items: center;}
+.store_filterbtn2, .store_filterbtn3, .store_filterbtn4  {background-color: #fff; margin-left: 0.5%; border: 1px solid #adadad; border-radius: 30px; color: #333333; width: 110px; height: 40px; justify-content: center; align-items: center;}
+.store_filterbtn_group2 {margin-top: 1%;}
