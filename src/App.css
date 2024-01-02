@@ -37,12 +37,16 @@
     transform: rotate(360deg);
   }
 }
-/* 웹 사이즈 */
-.display{
-  position: relative;
-  margin: 0 auto;
-  width: 1280px !important;
-}
+
+.main_wrap{width: 100%; margin: 0 auto;}
+.main_contents {width: 1280px; margin: 0 auto;}
+
+.menu_wrap{width: 100%; margin: 0 auto;}
+.menu_contents {width: 1280px; margin: 0 auto;}
+
+/* footer */
+.main_wrap hr {margin-top: 3%; margin-bottom: 3%;}
+.footer_title {font-weight: 800;}
 
 .add {
   position: relative;
@@ -50,21 +54,23 @@
   width: 800px !important;
 }
 
-.magazini{
-    position: relative;
-    margin: 0 auto;
-    width: 1000px !important;
-}
-
 /* 웹 사이즈 */
 
-a :link{
+/* a :link{
   color: #ffffff;
 }
 a:visited{
   color: #ffffff;
+  color: #ffffff;
 }
 a:hover{
   color: #000000 !important ;
+} */
+
+a:visited {
+  color: #ffffff;
 }
 
+a:hover {
+  color: #000000 !important;
+}

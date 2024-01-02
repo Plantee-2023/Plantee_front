@@ -1,6 +1,6 @@
 import React from 'react'
 import { Routes, Route } from 'react-router-dom'
-import Magazine from './main/Magazine';
+import Magazine from './common/Magazine';
 import Main from './Main';
 import Join from './users/Join'; 
 import LoginPage from './users/LoginPage';
@@ -16,7 +16,7 @@ const RouterPage = () => {
             {/* 메인 */}
             <Route path='/' element={<Main />} />
             <Route path='/plant/dictionary' element={<Dictionary />} />
-            <Route path='/main/magazine' element={<Magazine />} />
+            <Route path='/common/magazine' element={<Magazine />} />
             <Route path='/main/magazineList' element={<MagazineList/>}/>
             <Route path='/users/loginPage' element={<LoginPage />} />
             <Route path='/users/join' element={<Join />} />

@@ -7,7 +7,6 @@ import { LiaStoreAltSolid } from "react-icons/lia";
 import { PiUserListBold } from "react-icons/pi";
 import { GiTalk } from "react-icons/gi";
 import { FiBookOpen } from "react-icons/fi";
-import { SlCalender } from "react-icons/sl";
 
 const Menu = () => {
     return (

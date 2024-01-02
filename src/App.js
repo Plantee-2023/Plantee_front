@@ -11,7 +11,8 @@ function App() {
 		<div className='display'>
 			<Menu/>
 			<Main/>
-			<Foot/>
+			<RouterPage/>
+			<Footer/>
 		</div>
 	);
 }
