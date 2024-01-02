@@ -2,7 +2,7 @@ import React from 'react'
 
 const Foot = () => {
     return (
-        <div className='pt-5'>
+        <div className='pt-5 text-center'>
             <hr/>
             <div className='p-5'>
                 <h1> Plantee </h1>
