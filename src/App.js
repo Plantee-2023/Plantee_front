@@ -5,7 +5,7 @@ import RouterPage from './component/RouterPage';
 
 function App() {
 	return (
-		<div>
+		<div className='display'>
 			<Menu/>
 			<RouterPage/>
 			<Foot/>
