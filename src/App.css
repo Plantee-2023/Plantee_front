@@ -53,10 +53,13 @@
   width: 800px !important;
 }
 
+/* 웹 사이즈 */
+
 /* a :link{
   color: #ffffff;
 }
 a:visited{
+  color: #ffffff;
   color: #ffffff;
 }
 a:hover{
