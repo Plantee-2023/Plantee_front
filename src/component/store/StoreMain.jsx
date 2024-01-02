@@ -3,7 +3,8 @@ import "./Store.css";
 
 const StoreMain = () => {
 
-    const [isClick, setClick] = useState(false);
+    const [isClickPlant, setClickPlant] = useState(false);
+    const [isClickGoods, setClickGoods] = useState(false);
 
     return (
         <>
@@ -11,45 +12,43 @@ const StoreMain = () => {
             <div className='store_wrap'>
                 <div className='store_contents'>
 
+                    <div className='store_filterbtn_group'>
 
-                    <button
-                        onClick={() => {
-                            // setCheck로 state값을 변경해주자.
-                            // e로 상태값을 받아왔다. 클릭시 상태값은 !상태값이므로 값이 반전된다 false -> true
-                            setClick((e) => !e);
-                        }}
-                    >
-                        <div style={{ background: !isClick ? "red" : "blue" }} >
-                        {isClick ? "식물" : "식물"}
-                        </div>
-                    </button>
-
-
-                    {isClick && (
-                        <p>
-                            <div className='store_filterbtn_group2'>
-                                <button className='store_filterbtn2'>초보자용</button>
-                                <button className='store_filterbtn3'>중급자용</button>
-                                <button className='store_filterbtn4'>상급자용</button>
-                                <button className='store_filterbtn4'>상급자용</button>
+                        <button className='button_hide' onClick={() => { setClickPlant((e1) => !e1); }} >
+                            <div className={`${!isClickPlant ? 'store_filterbtn' : 'store_filterbtn_clicked'}`} >
+                                <div style={{ verticalAlign: 'middle' }}>식물</div>
                             </div>
-                        </p>
+                        </button>
+                        <button className='button_hide' onClick={() => { setClickGoods((e2) => !e2); }} >
+                            <div className={`${!isClickGoods ? 'store_filterbtn' : 'store_filterbtn_clicked'}`} >
+                                <div style={{ verticalAlign: 'middle' }}>용품</div>
+                            </div>
+                        </button>
+                        
+                    </div>
+
+
+                    {isClickPlant && (
+                        <>
+                            <div className='store_filterbtn_group'>
+                                <button className='store_filterbtn'>초보자용</button>
+                                <button className='store_filterbtn'>중급자용</button>
+                                <button className='store_filterbtn'>상급자용</button>
+                            </div>
+                        </>
+                    )}
+                    {isClickGoods && (
+                        <>
+                            <div className='store_filterbtn_group'>
+                                <button className='store_filterbtn'>전체</button>
+                                <button className='store_filterbtn'>화분</button>
+                                <button className='store_filterbtn'>수분</button>
+                            </div>
+                        </>
                     )}
 
 
 
-                    <div className='store_filterbtn_group'>
-                        <button className='store_filterbtn1'>↺</button>
-                        <button className='store_filterbtn2'>신상</button>
-                        <button className='store_filterbtn2'>식물</button>
-                        <button className='store_filterbtn3'>용품</button>
-                    </div>
-                    <div className='store_filterbtn_group2'>
-                        <button className='store_filterbtn2'>초보자용</button>
-                        <button className='store_filterbtn3'>중급자용</button>
-                        <button className='store_filterbtn4'>상급자용</button>
-                        <button className='store_filterbtn4'>상급자용</button>
-                    </div>
                 </div>
             </div>
 

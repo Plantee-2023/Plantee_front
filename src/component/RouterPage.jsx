@@ -7,8 +7,8 @@ import LoginPage from './users/LoginPage';
 import Update from './users/Update';
 import MagazineList from './main/MagazineList';
 import DiaryMain from './diary/DiaryMain';
+import Dictionary from './plant/Dictionary';
 import StoreMain from './store/StoreMain';
-
 
 
 const RouterPage = () => {
@@ -16,6 +16,7 @@ const RouterPage = () => {
         <Routes>
             {/* 메인 */}
             <Route path='/' element={<Main />} />
+            <Route path='/plant/dictionary' element={<Dictionary />} />
             <Route path='/main/magazine' element={<Magazine />} />
             <Route path='/main/magazineList' element={<MagazineList />} />
 
