@@ -19,3 +19,86 @@ input:focus {outline:none;}
   }
 
 .diary_btn {background-color: #fff; border: 1px solid #adadad; border-radius: 2rem; margin-right: 0.5rem; padding: 0.6rem 2rem 0.6rem 2rem;}
+
+/* 캘린더 */
+button {
+  cursor: pointer;
+}
+
+.diary {
+  width: 600px;
+  height: 400px;
+  margin: auto;
+  padding: 20px 20px;
+  border: 1px solid rgba(128, 128, 128, 0.267);
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.diary .title {
+  display: flex;
+}
+
+.diary .title > button {
+  border: none;
+  margin-left: 5px;
+  height: 20px;
+  align-self: center;
+  background: none;
+}
+
+.diary .title .pagination {
+  margin-left: auto;
+  align-self: center;
+}
+.diary .title .pagination button {
+  margin: 0 10px;
+  border: none;
+  background: none;
+}
+
+.diary .week {
+  display: flex;
+}
+
+.diary .week .weekday {
+  width: calc(500px / 7);
+  text-align: center;
+}
+
+.diary .week .sunday {
+  color: red;
+}
+
+.diary .week .saturday {
+  color: blue;
+}
+
+.diary .date {
+  margin-top: 20px;
+}
+
+.diary .date .weekday {
+  width: calc(500px / 7);
+  float: left;
+  text-align: center;
+  height: 50px;
+  line-height: 50px;
+}
+
+.diary .date .sunday {
+  color: red;
+}
+
+.diary .date .saturday {
+  color: blue;
+}
+
+.diary .date .today {
+  background-color: rgb(88, 111, 187);
+  color: white;
+  font-weight: 700;
+  border-radius: 50%;
+}
