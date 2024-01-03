@@ -1,11 +1,21 @@
-import React from 'react'
-import { Card, Form, InputGroup } from 'react-bootstrap'
+import React, { useRef,useState } from 'react'
+import { Card, Form, InputGroup, Button, Spinner } from 'react-bootstrap'
 
 const Update = () => {
+
+    const img_ref = useRef(null);
+    const [loading, setLoading] = useState(false);
+
+    if (loading) return <div className='text-center'><Spinner/></div>
     return (
         <div className='add'>
             <Card className='mt-5'>
-                <img src='/image/logo.png' width={300} height={300} className='join-img' />
+                <div className='join-img'>
+                    <img src='http://via.placeholder.com/150x150' onClick={()=>img_ref.current.click()} style={{cursor:'pointer'}} width={300} height={300} />
+                    <input type='file' ref={img_ref} style={{ display: 'none' }} />
+                    <br />
+                    <Button className='update-img-btn'>이미지 수정</Button>
+                </div>
                 <InputGroup className='join-input'>
                     <InputGroup.Text>이름</InputGroup.Text>
                     <Form.Control type='text' />

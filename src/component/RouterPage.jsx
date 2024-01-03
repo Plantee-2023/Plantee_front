@@ -9,6 +9,7 @@ import MagazineList from './main/MagazineList';
 import DiaryMain from './diary/DiaryMain';
 import Dictionary from './plant/Dictionary';
 import MagazineInsert from './main/MagazineInsert';
+import MyPage from './users/MyPage';
 
 
 const RouterPage = () => {
@@ -24,6 +25,7 @@ const RouterPage = () => {
             <Route path='/users/loginPage' element={<LoginPage />} />
             <Route path='/users/join' element={<Join />} />
             <Route path='/users/update' element={<Update />} />
+            <Route path='/users/myPage' element={<MyPage />} />
 
             {/* 추천 */}
             <Route path='/plant/dictionary' element={<Dictionary />} />

@@ -14,19 +14,20 @@ const Menu = () => {
                 <div className='menu_header'>
                     <div className='menu_left'>
                         <h1 className='menu_logo'>
-                            <a href='/'><img src='/image/logo.png'/></a>
+                            <a href='/'><img src='/image/logo.png' /></a>
                         </h1>
                         <div className='menu_searchwrap'>
                             <form>
                                 <InputGroup className='menu_searchinputwrap'>
                                     <input type='search' className='menu_searchinput' placeholder='검색어를 입력해주세요.' />
-                                    <button className='menu_searchbtn' type='submit'><img src='/image/search_icon.png'/></button>
+                                    <button className='menu_searchbtn' type='submit'><img src='/image/search_icon.png' /></button>
                                 </InputGroup>
                             </form>
                         </div>
                     </div>
                     <div className='menu_right'>
                         <ul className='menu_mymenu'>
+                            <li><NavLink to='/users/myPage'>마이 페이지</NavLink></li>
                             <li><NavLink to='/users/LoginPage'>로그인</NavLink></li>
                             <li><NavLink to='/users/Join'>회원가입</NavLink></li>
                         </ul>
