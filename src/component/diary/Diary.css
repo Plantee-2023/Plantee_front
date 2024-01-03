@@ -1,0 +1,21 @@
+.diary_wrap {width: 100%; margin: 0 auto;}
+.diary_contents {width: 1280px; margin: 0 auto;}
+
+/* 검색창 */
+.menu_left {display: flex; align-items: center;}
+
+.diary_searchwrap {margin-left: 4%; width: 500px;}
+.diary_searchinputwrap {border: 1px solid #4cc37c; padding: 3%; border-radius: 40px;}
+.diary_searchinput {width: 88%; border: none;}
+input:focus {outline:none;}
+
+.diary_searchbtn {border: none; background: none;}
+.diary_searchbtn img {width: 26px; height: 26px; margin-left: 70%;}
+
+/* 목록 세로선 */
+.line {
+    border-left: thick solid gray; /* 오른쪽에만 선 부여 */
+    height: 20px; /* 높이로 조절 */
+  }
+
+.diary_btn {background-color: #fff; border: 1px solid #adadad; border-radius: 2rem; margin-right: 0.5rem; padding: 0.6rem 2rem 0.6rem 2rem;}
