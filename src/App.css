@@ -32,6 +32,7 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
@@ -48,22 +49,17 @@
 .footer_title {font-weight: 800;}
 .footer_text {margin-bottom: 3%;}
 
-.add{
+.add {
   position: relative;
   margin: 0 auto;
   width: 800px !important;
 }
 
 /* 웹 사이즈 */
-
-/* a :link{
-  color: #ffffff;
+a:visited {
+  color: #000000;
 }
-a:visited{
-  color: #ffffff;
-  color: #ffffff;
-}
-a:hover{
-  color: #000000 !important ;
-} */
 
+a:hover {
+  color: #000000 !important;
+}
