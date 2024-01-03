@@ -4,12 +4,14 @@ import '../Main.css'
 
 const Join = () => {
     const img_ref = useRef(null);
+    const img1_ref = useRef(null);
     const [loading, setLoading] = useState(false);
 
     if (loading) return <div className='text-center'><Spinner/></div>
     return (
-        <div className='add'>
-            <Card className='mt-5'>
+        <div>                                                                                    
+            <div className='join-title'>회원가입</div>
+            <Card className='join-card'>
                 <div className='join-img'>
                     <img src='http://via.placeholder.com/150x150' onClick={()=>img_ref.current.click()} width={300} height={300} style={{cursor:'pointer'}} />
                     <input type='file' ref={img_ref} style={{display:'none'}}/>
@@ -47,8 +49,7 @@ const Join = () => {
                 <Form.Control className='join-input' type='text' placeholder='상세주소' />
                 <InputGroup className='join-input'>
                     <InputGroup.Text>사업자 등록증</InputGroup.Text>
-                    <Form.Control />
-                    <button className='join-btn'>파일 검색</button>
+                    <input className='btn' type='file' ref={img1_ref}/>
                 </InputGroup>
             </Card>
             <div className='text-center'>

@@ -8,7 +8,7 @@ const Update = () => {
 
     if (loading) return <div className='text-center'><Spinner/></div>
     return (
-        <div className='add'>
+        <div>
             <Card className='mt-5'>
                 <div className='join-img'>
                     <img src='http://via.placeholder.com/150x150' onClick={()=>img_ref.current.click()} style={{cursor:'pointer'}} width={300} height={300} />

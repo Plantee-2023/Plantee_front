@@ -1,11 +1,14 @@
-import React from 'react'
-import {Card, InputGroup, Form} from 'react-bootstrap'
+import React, { useState } from 'react'
+import {Card, InputGroup, Form, Button, Spinner} from 'react-bootstrap'
 
 const LoginPage = () => {
+    const [loading , setLoading] = useState(false);
+
+    if(loading) return <div className='text-center'><Spinner/></div>
     return (
-        <div className='login'>
+        <div>
             <Card className='login-card'>
-                <h3 className='login-text'>로그인</h3>
+                <div className='login-title'>로그인</div>
                 <InputGroup className='login-input'>
                     <InputGroup.Text>아이디</InputGroup.Text>
                     <Form.Control />
@@ -14,7 +17,8 @@ const LoginPage = () => {
                     <InputGroup.Text>비밀번호</InputGroup.Text>
                     <Form.Control type='password'/>
                 </InputGroup>
-                <button className='login-btn'>로그인</button>
+                <Form.Check className='login-check' label="로그인 상태 유지"/>
+                <Button className='login-btn'>로그인</Button>
             </Card>
         </div>
     )
