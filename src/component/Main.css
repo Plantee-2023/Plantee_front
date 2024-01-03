@@ -89,7 +89,6 @@ input:focus {outline:none;}
 
 .join-check{
     margin-left: 24px;
-    margin-top: 10px;
     margin-bottom: 15px;
 }
 
@@ -146,6 +145,12 @@ input:focus {outline:none;}
     border: none !important;
     margin-top: 15px;
     margin-left: 18%;
+}
+
+.update-card {
+    width: 700px;
+    margin: 0 auto;
+    margin-top: 50px;
 }
 
 /* 로그인 페이지 */

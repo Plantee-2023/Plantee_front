@@ -5,11 +5,22 @@ const Update = () => {
 
     const img_ref = useRef(null);
     const [loading, setLoading] = useState(false);
+    const [user, setUser] = useState({
+        uid: '',
+        upass: '',
+        uname: '',
+        phone: '',
+        address1: '',
+        address2: '',
+        photo: '',
+        file: null
+    })
+    const { uid, upass, uname, phone, address1, address2, fmtdate, fmtmodi, photo, file } = user;
 
     if (loading) return <div className='text-center'><Spinner/></div>
     return (
         <div>
-            <Card className='mt-5'>
+            <Card className='update-card'>
                 <div className='join-img'>
                     <img src='http://via.placeholder.com/150x150' onClick={()=>img_ref.current.click()} style={{cursor:'pointer'}} width={300} height={300} />
                     <input type='file' ref={img_ref} style={{ display: 'none' }} />
@@ -18,15 +29,15 @@ const Update = () => {
                 </div>
                 <InputGroup className='join-input'>
                     <InputGroup.Text>이름</InputGroup.Text>
-                    <Form.Control type='text' />
+                    <Form.Control name='uname' type='text' />
                 </InputGroup>
                 <InputGroup className='join-input'>
                     <InputGroup.Text>아이디</InputGroup.Text>
-                    <Form.Control type='text' />
+                    <Form.Control name='uid' type='text' />
                 </InputGroup>
                 <InputGroup className='join-input'>
                     <InputGroup.Text>비밀번호</InputGroup.Text>
-                    <Form.Control type='password' />
+                    <Form.Control name='upass' type='password' />
                 </InputGroup>
                 <InputGroup className='join-input'>
                     <InputGroup.Text>비밀번호 확인</InputGroup.Text>
@@ -34,17 +45,17 @@ const Update = () => {
                 </InputGroup>
                 <InputGroup className='join-input'>
                     <InputGroup.Text>연락처</InputGroup.Text>
-                    <Form.Control type='text' />
+                    <Form.Control name='phone' type='text' />
                 </InputGroup>
                 <InputGroup className='join-address'>
                     <InputGroup.Text>주소</InputGroup.Text>
-                    <Form.Control type='text' />
+                    <Form.Control name='address1' type='text' />
                     <button className='join-btn'>검색</button>
                 </InputGroup>
+                <Form.Control name='address2' className='join-input' type='text' placeholder='상세주소' />
                 <Form className='join-check'>
                     <Form.Check label="꽃집 사장님"></Form.Check>
                 </Form>
-                <Form.Control className='join-input' type='text' placeholder='상세주소' />
                 <InputGroup className='join-input'>
                     <InputGroup.Text>사업자 등록증</InputGroup.Text>
                     <Form.Control />

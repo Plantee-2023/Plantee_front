@@ -43,10 +43,10 @@ const Join = () => {
                     <Form.Control type='text' />
                     <button className='join-btn'>검색</button>
                 </InputGroup>
+                <Form.Control className='join-input' type='text' placeholder='상세주소' />
                 <Form className='join-check'>
                     <Form.Check label="꽃집 사장님"></Form.Check>
                 </Form>
-                <Form.Control className='join-input' type='text' placeholder='상세주소' />
                 <InputGroup className='join-input'>
                     <InputGroup.Text>사업자 등록증</InputGroup.Text>
                     <input className='btn' type='file' ref={img1_ref}/>
