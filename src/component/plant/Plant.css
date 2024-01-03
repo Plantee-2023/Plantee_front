@@ -1,7 +1,26 @@
 /* Dictionary */
 .plant_wrap {width: 100%; margin: 0 auto;}
 .plant_contents {width: 1280px; margin: 0 auto;}
-.plant_filterbtn_group {margin-top: 2%; border-bottom: 1px dashed #cccccc; padding-bottom: 1%;}
-.plant_filterbtn1 {background-color: #4cc67c; border: none; border-radius: 30px; color: #fff; width: 60px; height: 40px; justify-content: center; align-items: center;}
-.plant_filterbtn2, .plant_filterbtn3, .plant_filterbtn4  {background-color: #fff; margin-left: 0.5%; border: 1px solid #adadad; border-radius: 30px; color: #333333; width: 110px; height: 40px; justify-content: center; align-items: center;}
-.plant_filterbtn_group2 {margin-top: 1%;}
+
+.first_filter_section {margin: 2rem 0 0 -2rem; padding: 0; border: 0; vertical-align: baseline;}
+.filter_list {display: flex; flex-wrap: wrap;}
+.filter_reset_btn {background-color: #4cc67c; border: none; border-radius: 2rem; padding: 0.6rem 1.4rem 0.6rem 1.4rem; color: #fff; font-weight: 800; line-height: 2px; margin-right: 0.5rem;}
+.filter_reset_btn img {width: 14px; height: 14px; filter: invert(1); vertical-align: middle;}
+.filter_btn {background-color: #fff; border: 1px solid #adadad; border-radius: 2rem; margin-right: 0.5rem; padding: 0.6rem 2rem 0.6rem 2rem;}
+
+.filter_division {border: 1px dashed #f0f0f0; margin: 0 0 1rem 2rem;}
+
+.second_filter_section {margin: 0 0 0 -2rem; padding: 0; border: 0; vertical-align: baseline;}
+
+/* .selected {background-color: #4cc67c; color: #fff; font-weight: 600;} */
+
+.plant_count {margin-top: 3%;}
+
+.plant_list {margin-top: 40px;}
+.plant_list_items {display: flex; padding-bottom: 2%;}
+.plant_list_item {margin: 0 6rem 0 -2rem;}
+.plant_list_item a {text-decoration: none; color: #000;}
+.plant_image {width: 200px; height: 200px; margin-bottom: 3%;}
+.plant_image img {width: 100%; height: 100%;}
+.plant_title {display: flex; align-items: center; justify-content: center; text-align: center;}
+.plant_title h3 {overflow: hidden; text-overflow: ellipsis; font-size: 16px; color: #000; font-weight: 600; margin: 0; padding: 4%;}
