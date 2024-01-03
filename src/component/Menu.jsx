@@ -2,7 +2,6 @@ import React from 'react'
 import './Main.css'
 import { Row, Col, InputGroup, Button, NavDropdown, Navbar, Nav } from 'react-bootstrap'
 import { NavLink } from 'react-router-dom'
-import { FaSearch } from "react-icons/fa";
 import { LiaStoreAltSolid } from "react-icons/lia";
 import { PiUserListBold } from "react-icons/pi";
 import { GiTalk } from "react-icons/gi";
@@ -15,21 +14,22 @@ const Menu = () => {
                 <div className='menu_header'>
                     <div className='menu_left'>
                         <h1 className='menu_logo'>
-                            <a href='/'><img src='/image/logo.png'/></a>
+                            <a href='/'><img src='/image/logo.png' /></a>
                         </h1>
                         <div className='menu_searchwrap'>
                             <form>
                                 <InputGroup className='menu_searchinputwrap'>
                                     <input type='search' className='menu_searchinput' placeholder='검색어를 입력해주세요.' />
-                                    <button className='menu_searchbtn' type='submit'><img src='/image/search_icon.png'/></button>
+                                    <button className='menu_searchbtn' type='submit'><img src='/image/search_icon.png' /></button>
                                 </InputGroup>
                             </form>
                         </div>
                     </div>
                     <div className='menu_right'>
                         <ul className='menu_mymenu'>
-                            <li><a href='/'>로그인</a></li>
-                            <li><a href='/'>회원가입</a></li>
+                            <li><NavLink to='/users/myPage'>마이 페이지</NavLink></li>
+                            <li><NavLink to='/users/LoginPage'>로그인</NavLink></li>
+                            <li><NavLink to='/users/Join'>회원가입</NavLink></li>
                         </ul>
                     </div>
                 </div>
@@ -52,7 +52,7 @@ const Menu = () => {
                         <LiaStoreAltSolid className='icon ms-5' />
                         <NavLink className='menu-magazine' to='/store/main'>스토어</NavLink>
                         <FiBookOpen className='icon ms-5' />
-                        <NavLink className='menu-magazine' to='/magazine'>매거진</NavLink>
+                        <NavLink className='menu-magazine' to='/main/magazineList'>매거진</NavLink>
                     </Nav>
                 </Navbar>
             </div>
