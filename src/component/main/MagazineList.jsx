@@ -1,13 +1,18 @@
 import React from 'react'
-import { Col, Form, InputGroup, Row, Button, Table } from 'react-bootstrap'
+import { Col, Form, InputGroup, Row, Button, Table, Spinner} from 'react-bootstrap'
 import './Magazine.css'
 import { NavLink } from 'react-router-dom'
 import { AiOutlineEdit } from "react-icons/ai";
+import { useState } from 'react';
 
 const MagazineList = () => {
+    const [loading , setLoading] = useState(false); 
+
+    if (loading) return <div className='text-center'><Spinner size='lg'/></div>
     return (
         <div>
             <div className='magazine-list-title'>매거진</div>
+            <hr/>
             <NavLink className="magazine-insert" to="/main/magazineInsert"><AiOutlineEdit />글쓰기</NavLink>
             <Table className='list' bordered hover>
                 <thead className='text-center'>

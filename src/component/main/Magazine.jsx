@@ -1,7 +1,12 @@
 import React from 'react'
 import '../Main.css'
+import { useState } from 'react';
+import { Spinner } from 'react-bootstrap';
 
 const Magazine = () => {
+    const [loading , setLoading] = useState(false); 
+
+    if (loading) return <div className='text-center'><Spinner size='lg'/></div>
     return (
         <div>
             <h1 className='magazine-title'>얘는 무슨 식물이냐?</h1>

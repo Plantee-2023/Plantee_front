@@ -18,14 +18,14 @@ td>a {
     margin-left: 85%;
 }
 
-.magazine-insert{
+.magazine-insert {
     text-decoration: none;
     color: #000000;
     margin-left: 91%;
     font-size: large;
 }
 
-.list{
+.list {
     margin-top: 50px;
 }
 
@@ -55,7 +55,47 @@ td>a {
     text-align: center;
 }
 
-.magazine-text{
+.magazine-text {
     text-align: center;
     margin-top: 100px;
+}
+
+/* 매거진 추가 */
+
+.insert-btn1 {
+    background-color: #4cc67c !important;
+    border: none !important;
+    margin-top: 20px;
+    margin-right: 15px;
+    margin-left: 45%;
+}
+
+.insert-btn2 {
+    background-color: #4cc67c !important;
+    border: none !important;
+    margin-top: 20px;
+}
+
+.insert-img{
+    text-align: center;
+}
+
+.insert-text {
+    margin-left: 5%;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    max-width: 900px;
+}
+
+.insert-card{
+    width: 1000px;
+    margin: 0 auto;
+    margin-top: 30px;
+}
+
+.insert-img-btn {
+    background-color: #4cc67c !important;
+    font-weight: 900 !important;
+    border: none !important;
+    margin-top: 15px;
 }
