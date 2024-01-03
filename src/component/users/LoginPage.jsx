@@ -1,10 +1,8 @@
-import React, { useState } from 'react'
-import {Card, InputGroup, Form, Button, Spinner} from 'react-bootstrap'
+import React from 'react'
+import {Card, InputGroup, Form, Button} from 'react-bootstrap'
+
 
 const LoginPage = () => {
-    const [loading , setLoading] = useState(false);
-
-    if(loading) return <div className='text-center'><Spinner/></div>
     return (
         <div>
             <Card className='login-card'>

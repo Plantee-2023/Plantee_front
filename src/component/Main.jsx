@@ -1,5 +1,5 @@
-import React, {useEffect}from 'react'
-import { Row, Col, InputGroup, Button, Card, Carousel } from 'react-bootstrap';
+import React, { useEffect, useState } from 'react'
+import { Row, Col, InputGroup, Button, Card, Carousel, Spinner } from 'react-bootstrap';
 import { CgChevronRight } from "react-icons/cg";
 import { MdFavoriteBorder } from "react-icons/md";
 import { FaRegBookmark } from "react-icons/fa6";
@@ -7,11 +7,16 @@ import { LiaComment } from "react-icons/lia";
 import './Main.css'
 
 const Main = () => {
-
-    useEffect(()=>{
-
+    const [loading, setLoading] = useState(false);
+    const getMain = () => {
+        setLoading(true);
+        setLoading(false);
+    }
+    useEffect(() => {
+        getMain();
     });
-    
+
+    if (loading) return <div className='main-spinner'><Spinner /></div>
     return (
         <div className="main_wrap">
             <div className='main_contents'>

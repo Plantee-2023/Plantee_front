@@ -1,5 +1,6 @@
 /* 메인 */
 .main_btn { margin-right: 10px; margin-top: 10px; background-color: #4cc67c !important; border-color: #4cc67c !important;}
+.main-spinner{ margin-top: 50px; text-align: center; font-size: 200px;}
 
 /* menu_search */
 .menu_header {width: 1280px; padding: 3rem 0 0; display: flex; justify-content: space-between;}
@@ -23,24 +24,10 @@ input:focus {outline:none;}
 .menu_mymenu a {font-size: 17px; text-decoration: none; color: #333333;}
 
 
-.main_text {
-    text-align: start;
-}
-
-.main_more {
-    margin-left: 550px;
-    color: #000000 !important;
-    text-decoration: none;
-    cursor: pointer;
-    font-size: 15px;
-    font-weight: 600;
-}
-
-.main-title {
-    font-weight: 900;
-    text-align: start;
-    font-size: 35px;
-}
+.main_text {text-align: start;}
+.main_more {margin-left: 550px; color: #000000 !important; text-decoration: none;
+    cursor: pointer; font-size: 15px; font-weight: 600;}
+.main-title {font-weight: 900;text-align: start;font-size: 35px;}
 
 /* 메뉴 */
 .menu-back-color {
