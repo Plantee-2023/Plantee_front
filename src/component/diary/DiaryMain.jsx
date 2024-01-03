@@ -1,23 +1,26 @@
 import moment from 'moment';
 import React, { useState } from 'react';
-import { Button, Card, CardBody, Col, InputGroup, Row } from 'react-bootstrap';
+import { Button, Card, Col, InputGroup, Row } from 'react-bootstrap';
 import Calendar from 'react-calendar';
-import 'react-calendar/dist/Calendar.css';
 
 const DiaryMain = () => {
     const [value, onChange] = useState(new Date());
 
     return (
-        <>
-            <div>
-                <InputGroup className='center'>
-                    <input type='search' />
-                    <Button variant='success'>검색</Button>
-                </InputGroup>
-            </div>
-            <div className='text-end mt-5'>
-                <Button>등록하기</Button>
-            </div>
+        <div className='display'>
+            <Row>
+                <Col>
+                    <InputGroup className=''>
+                        <input type='search' />
+                        <Button variant='success'>검색</Button>
+                    </InputGroup>
+                </Col>
+                <Col>
+                    <div className='text-end mt-5'>
+                        <Button>등록하기</Button>
+                    </div>
+                </Col>
+            </Row>
             <div className='my-5'>
                 <Row>
                     <Col>
@@ -106,7 +109,7 @@ const DiaryMain = () => {
                 <Calendar onChange={onChange} value={value}></Calendar>
             </div>
 
-        </>
+        </div>
     );
 };
 
