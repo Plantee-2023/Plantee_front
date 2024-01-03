@@ -55,20 +55,8 @@
 }
 
 /* 웹 사이즈 */
-
-/* a :link{
-  color: #ffffff;
-}
-a:visited{
-  color: #ffffff;
-  color: #ffffff;
-}
-a:hover{
-  color: #000000 !important ;
-} */
-
 a:visited {
-  color: #ffffff;
+  color: #000000;
 }
 
 a:hover {

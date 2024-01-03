@@ -2,7 +2,6 @@ import React from 'react'
 import './Main.css'
 import { Row, Col, InputGroup, Button, NavDropdown, Navbar, Nav } from 'react-bootstrap'
 import { NavLink } from 'react-router-dom'
-import { FaSearch } from "react-icons/fa";
 import { LiaStoreAltSolid } from "react-icons/lia";
 import { PiUserListBold } from "react-icons/pi";
 import { GiTalk } from "react-icons/gi";
@@ -28,8 +27,8 @@ const Menu = () => {
                     </div>
                     <div className='menu_right'>
                         <ul className='menu_mymenu'>
-                            <li><a href='/'>로그인</a></li>
-                            <li><a href='/'>회원가입</a></li>
+                            <li><NavLink to='/users/LoginPage'>로그인</NavLink></li>
+                            <li><NavLink to='/users/Join'>회원가입</NavLink></li>
                         </ul>
                     </div>
                 </div>
@@ -52,7 +51,7 @@ const Menu = () => {
                         <LiaStoreAltSolid className='icon ms-5' />
                         <NavLink className='menu-magazine' to='/store/main'>스토어</NavLink>
                         <FiBookOpen className='icon ms-5' />
-                        <NavLink className='menu-magazine' to='/magazine'>매거진</NavLink>
+                        <NavLink className='menu-magazine' to='/main/magazineList'>매거진</NavLink>
                     </Nav>
                 </Navbar>
             </div>

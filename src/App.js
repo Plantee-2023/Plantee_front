@@ -2,15 +2,13 @@ import Footer from './component/Footer';
 import RouterPage from './component/RouterPage';
 import './App.css';
 import Menu from './component/Menu';
-import Main from './component/Main';
 
 import './App.css';
 
 function App() {
 	return (
-		<div className='display'>
+		<div className='main_contents'>
 			<Menu/>
-			<Main/>
 			<RouterPage/>
 			<Footer/>
 		</div>
