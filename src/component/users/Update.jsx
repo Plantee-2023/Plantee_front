@@ -1,21 +1,13 @@
-import React, { useRef,useState } from 'react'
+import React, { useRef,useState,useEffect } from 'react'
 import { Card, Form, InputGroup, Button, Spinner } from 'react-bootstrap'
 
 const Update = () => {
-
     const img_ref = useRef(null);
     const [loading, setLoading] = useState(false);
-    const [user, setUser] = useState({
-        uid: '',
-        upass: '',
-        uname: '',
-        phone: '',
-        address1: '',
-        address2: '',
-        photo: '',
-        file: null
-    })
-    const { uid, upass, uname, phone, address1, address2, fmtdate, fmtmodi, photo, file } = user;
+
+    useEffect(()=>{
+
+    });
 
     if (loading) return <div className='text-center'><Spinner/></div>
     return (

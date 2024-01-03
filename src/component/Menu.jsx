@@ -52,10 +52,10 @@ const Menu = () => {
                         </NavDropdown>
                         <LiaStoreAltSolid className='menu-icon' />
                         <NavLink className='menu-magazine' to='/store/main'>스토어</NavLink>
-                        <FiBookOpen className='menu-icon' />
+                        <FiBookOpen className='menu-icon'/>
                         <NavLink className='menu-magazine' to='/main/magazineList'>매거진</NavLink>
                         <RiBookletLine className='menu-icon' />
-                        <NavLink className='menu-magazine' to='/main/magazineList'>다이어리</NavLink>
+                        <NavLink className='menu-magazine' to='/diary/DiaryMain'>다이어리</NavLink>
                     </Nav>
                 </Navbar>
             </div>

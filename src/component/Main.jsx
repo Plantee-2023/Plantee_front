@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect}from 'react'
 import { Row, Col, InputGroup, Button, Card, Carousel } from 'react-bootstrap';
 import { CgChevronRight } from "react-icons/cg";
 import { MdFavoriteBorder } from "react-icons/md";
@@ -7,6 +7,11 @@ import { LiaComment } from "react-icons/lia";
 import './Main.css'
 
 const Main = () => {
+
+    useEffect(()=>{
+
+    });
+    
     return (
         <div className="main_wrap">
             <div className='main_contents'>
