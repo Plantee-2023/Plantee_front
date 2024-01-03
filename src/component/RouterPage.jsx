@@ -14,6 +14,10 @@ import MyPage from './users/MyPage';
 import Community from './community/Community';
 import Comm_Read from './community/Comm_Read';
 import Comm_Write from './community/Comm_Write';
+import DiaryInsert from './diary/DiaryInsert';
+import DiaryRead from './diary/DiaryRead';
+import DiaryCalendar from './diary/DiaryCalendar';
+import DiaryList from './diary/DiaryList';
 
 
 
@@ -38,12 +42,18 @@ const RouterPage = () => {
             {/* 추천 */}
             <Route path='/plant/dictionary' element={<Dictionary />} />
 
+            {/* 커뮤니티 */}
+
+
             {/* 스토어 */}
             <Route path='/store' element={<StoreMain />} />
 
             {/* 다이어리 */}
             <Route path='/diary/DiaryMain' element={<DiaryMain />} />
-
+            <Route path='/diary/diarycalendar' element={<DiaryCalendar />} />
+            <Route path='/diary/diarymain/insert' element={<DiaryInsert />} />
+            <Route path='/diary/diarymain/read' element={<DiaryRead />} />
+            <Route path='/diary/diarylist' element={<DiaryList />} />
         </Routes>
     )
 }
