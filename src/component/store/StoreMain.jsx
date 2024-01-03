@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import axios from 'axios';
+import React, { useState, useEffect } from 'react'
 import { Button, Container, Form, Nav, Navbar, NavDropdown, InputGroup } from 'react-bootstrap';
 import "./Store.css";
 
@@ -6,6 +7,18 @@ const StoreMain = () => {
 
     const [isClickPlant, setClickPlant] = useState(false);
     const [isClickGoods, setClickGoods] = useState(false);
+
+    const [list, setList] = useState([]);
+    const store_id = 2;
+
+    const getList = async () => {
+        
+        const res = await axios.get(`/store/read.json/${store_id}`);
+        console.log(res.data);
+        
+    }
+
+    useEffect(() => { getList(); }, []);
 
     return (
         <>
