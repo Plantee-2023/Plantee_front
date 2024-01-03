@@ -29,7 +29,7 @@ const Menu = () => {
                     </div>
                     <div className='menu_right'>
                         <ul className='menu_mymenu'>
-                            <li><NavLink to='/users/myPage'>마이 페이지</NavLink></li>
+                            <li><NavLink to='/users/myPage'>마이페이지</NavLink></li>
                             <li><NavLink to='/users/LoginPage'>로그인</NavLink></li>
                             <li><NavLink to='/users/Join'>회원가입</NavLink></li>
                         </ul>

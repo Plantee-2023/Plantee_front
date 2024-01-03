@@ -30,8 +30,8 @@ const RouterPage = () => {
             <Route path='/main/magazineList' element={<MagazineList />} />
 
             {/* 로그인 */}
-            <Route path='/main/magazineList' element={<MagazineList/>}/>
-            <Route path='/main/magazineInsert' element={<MagazineInsert/>}/>
+            <Route path='/main/magazineList' element={<MagazineList />} />
+            <Route path='/main/magazineInsert' element={<MagazineInsert />} />
 
             {/* 회원 */}
             <Route path='/users/loginPage' element={<LoginPage />} />
@@ -43,7 +43,9 @@ const RouterPage = () => {
             <Route path='/plant/dictionary' element={<Dictionary />} />
 
             {/* 커뮤니티 */}
-
+            <Route path="/comm" element={<Community />} />
+            <Route path="/comm/read" element={<Comm_Read />} />
+            <Route path="/comm/write" element={<Comm_Write />} />
 
             {/* 스토어 */}
             <Route path='/store' element={<StoreMain />} />
