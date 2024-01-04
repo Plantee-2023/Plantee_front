@@ -1,4 +1,4 @@
-import React, { useRef,useState } from 'react'
+import React, { useRef, useState, useEffect } from 'react'
 import { Button, Card, Form, InputGroup, Spinner } from 'react-bootstrap'
 import '../Main.css'
 
@@ -7,15 +7,22 @@ const Join = () => {
     const img1_ref = useRef(null);
     const [loading, setLoading] = useState(false);
 
-    if (loading) return <div className='text-center'><Spinner/></div>
+    const getJoin = () => {
+        setLoading(true);
+        setLoading(false);
+    }
+    useEffect(() => {
+        getJoin();
+    });
+    if (loading) return <div className='text-center'><Spinner /></div>
     return (
-        <div>                                                                                    
+        <div>
             <div className='join-title'>회원가입</div>
             <Card className='join-card'>
                 <div className='join-img'>
-                    <img src='http://via.placeholder.com/150x150' onClick={()=>img_ref.current.click()} width={300} height={300} style={{cursor:'pointer'}} />
-                    <input type='file' ref={img_ref} style={{display:'none'}}/>
-                    <br/>
+                    <img src='http://via.placeholder.com/150x150' onClick={() => img_ref.current.click()} width={300} height={300} style={{ cursor: 'pointer' }} />
+                    <input type='file' ref={img_ref} style={{ display: 'none' }} />
+                    <br />
                     <Button className='join-img-btn'>이미지 저장</Button>
                 </div>
                 <InputGroup className='join-input'>
@@ -49,7 +56,7 @@ const Join = () => {
                 </Form>
                 <InputGroup className='join-input'>
                     <InputGroup.Text>사업자 등록증</InputGroup.Text>
-                    <input className='btn' type='file' ref={img1_ref}/>
+                    <input className='btn' type='file' ref={img1_ref} />
                 </InputGroup>
             </Card>
             <div className='text-center'>

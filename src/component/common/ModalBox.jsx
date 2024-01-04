@@ -2,6 +2,7 @@ import React from 'react'
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 
+
 const ModalBox = ({ box, setBox }) => {// show, message, action
     const onClose = () => {
         setBox({
@@ -31,7 +32,7 @@ const ModalBox = ({ box, setBox }) => {// show, message, action
                 </Modal.Body>
                 <Modal.Footer>
                     {box.action && 
-                        <Button onClick={onClose} variant="dark">취소</Button>
+                        <Button variant="dark" onClick={onClose}>취소</Button>
                     }
                     <Button variant="dark" onClick={onConfirm} >확인</Button>
                 </Modal.Footer>

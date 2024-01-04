@@ -1,0 +1,128 @@
+/* 전체 타이틀*/
+.all-title{
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+/* 회원 수정 */
+.update-img-btn {
+    background-color: #4cc67c !important;
+    font-weight: 900 !important;
+    border: none !important;
+    margin-left: 33%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.update-img {
+    margin: 0 auto;
+    margin-top: 50px;
+}
+
+.update-card {
+    width: 700px;
+    margin: 0 auto;
+    margin-top: 50px;
+}
+
+.update-text {
+    width: 110px;
+}
+
+.update-btn {
+    background-color: #4cc67c;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    font-weight: 500;
+    font-size: large;
+}
+
+/* 비밀번호 변경 */
+.password-card {
+    width: 600px;
+    margin: 0 auto;
+    margin-top: 100px;
+}
+
+.password-group {
+    margin: 0 auto;
+    margin-top: 20px;
+    width: 550px !important;
+}
+
+.password-text {
+    width: 130px;
+}
+
+.password-btn {
+    width: 550px;
+    background-color: #4cc67c !important;
+    border: none !important;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+/* 회원 탈퇴 */
+
+.delete-btn {
+    background-color: #4cc67c !important;
+    border: none !important;
+}
+
+/* 좋아요 리스트 */
+.favorite-list-table {
+    margin: 0 auto;
+    width: 900px !important;
+}
+.favorite-list-delete-btn {
+    margin-left: 880px;
+    margin-bottom: 10px;
+    background-color: #4cc67c !important;
+    border: none !important;
+    font-weight: 600 !important;
+    width: 100px;
+}
+/* 장바구니 */
+.cart-btn-order {
+    background-color: #4cc67c !important;
+    border: none !important;
+    margin-right: 5px;
+}
+.cart-btn-cancel {
+    background-color: #4cc67c !important;
+    border: none !important;
+}
+.cart-alert {
+    margin: 0 auto;
+    width: 900px !important;
+    background-color: #4cc67c !important;
+    border: none !important;
+    opacity: 70%;
+}
+.cart-table {
+    margin: 0 auto;
+    width: 900px !important;
+}
+.cart-price {
+    color: #ffffff !important;
+}
+.cart-order-btn {
+    background-color: #4cc67c !important;
+    border: none !important;
+    margin-left: 817px;
+    width: 100px;
+    margin-right: 10px;
+    font-weight: 600 !important;
+}
+.cart-cancel-btn {
+    background-color: #4cc67c !important;
+    border: none !important;
+    font-weight: 600 !important;
+}
+/* 주문 / 배송조회 */
+/* 취소 / 반품 / 교환 */
+/* 게시글 */
+/* 댓글 */
+/* 좋아요 */

@@ -1,4 +1,4 @@
-/* Dictionary */
+/* DictionaryPage */
 .plant_wrap {width: 100%; margin: 0 auto;}
 .plant_contents {width: 1280px; margin: 0 auto;}
 
@@ -12,7 +12,7 @@
 
 .second_filter_section {margin: 0 0 0 -2rem; padding: 0; border: 0; vertical-align: baseline;}
 
-/* .selected {background-color: #4cc67c; color: #fff; font-weight: 600;} */
+.filter_btn.active {background-color: #4cc67c; color: #fff; font-weight: 500; border: 1px solid #4cc67c;}
 
 .plant_count {margin-top: 3%;}
 
@@ -24,3 +24,20 @@
 .plant_image img {width: 100%; height: 100%;}
 .plant_title {display: flex; align-items: center; justify-content: center; text-align: center;}
 .plant_title h3 {overflow: hidden; text-overflow: ellipsis; font-size: 16px; color: #000; font-weight: 600; margin: 0; padding: 4%;}
+
+/* DetailPage */
+.details_wrap {width: 100%; margin: 0 auto;}
+.details_contents {width: 1280px; margin: 0 auto;}
+.details_layout {display: flex; flex-wrap: wrap; margin-top: 3rem;}
+.details_img_section {width: 425px; margin: 0 56px 0 0; position: relative;}
+.details_img_section img {width: 480px; height: 480px;}
+
+.details_info_layout {width: calc(100% - 481px);}
+.details_info_section {margin-left: 3rem;}
+.details_title_section {padding-right: 0; position: initial;}
+.details_title {margin-top: 1rem; padding: 1rem 0;}
+.details_maintitle { font-size: 28px; font-weight: 600;}
+
+.details_simpleinfo_section {width: 100%; padding: 0;}
+.plant_items {margin-bottom: 2rem; display: flex; flex-wrap: wrap; list-style: none; margin-left: -2rem;}
+.plant_item {border: solid 1px #dddddd; background-color: #f0f0f0; border-radius: 3rem; margin-right: 0.6rem; padding: 0.6rem 0.8rem; font-size: 12px; }
