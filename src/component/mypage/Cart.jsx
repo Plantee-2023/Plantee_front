@@ -39,8 +39,8 @@ const Cart = () => {
             <Alert className='cart-alert'>
                 <div className='cart-price'>총 주문 금액 : </div>
             </Alert>
-            <Button>주문하기</Button>
-            <Button>삭제</Button>
+            <Button className='cart-order-btn'>주문하기</Button>
+            <Button className='cart-cancel-btn'>삭제</Button>
         </div>
     )
 }

@@ -108,6 +108,19 @@
 .cart-price {
     color: #ffffff !important;
 }
+.cart-order-btn {
+    background-color: #4cc67c !important;
+    border: none !important;
+    margin-left: 817px;
+    width: 100px;
+    margin-right: 10px;
+    font-weight: 600 !important;
+}
+.cart-cancel-btn {
+    background-color: #4cc67c !important;
+    border: none !important;
+    font-weight: 600 !important;
+}
 /* 주문 / 배송조회 */
 /* 취소 / 반품 / 교환 */
 /* 게시글 */
