@@ -1,33 +1,114 @@
 /* 메인 */
-.main_btn { margin-right: 10px; margin-top: 10px; background-color: #4cc67c !important; border-color: #4cc67c !important;}
-.main-spinner{ margin-top: 50px; text-align: center; font-size: 200px;}
+.main_btn {
+    margin-right: 10px;
+    margin-top: 10px;
+    background-color: #4cc67c !important;
+    border-color: #4cc67c !important;
+}
+
+.main-spinner {
+    margin-top: 50px;
+    text-align: center;
+    font-size: 200px;
+}
 
 /* menu_search */
-.menu_header {width: 1280px; padding: 3rem 0 0; display: flex; justify-content: space-between;}
-.menu_logo img {width: 140px;}
-.menu_left {display: flex; align-items: center;}
-.menu_right {display: flex; align-items: center;}
+.menu_header {
+    width: 1280px;
+    padding: 3rem 0 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+.menu_logo img {
+    width: 140px;
+}
+
+.menu_left {
+    display: flex;
+    align-items: center;
+}
+
+.menu_right {
+    display: flex;
+    align-items: center;
+}
 
 /* menu_left */
-.menu_searchwrap {margin-left: 4%; width: 500px;}
-.menu_searchinputwrap {border: 1px solid #4cc37c; padding: 3%; border-radius: 40px;}
-.menu_searchinput {width: 88%; border: none;}
-input:focus {outline:none;}
+.menu_searchwrap {
+    margin-left: 4%;
+    width: 500px;
+}
 
-.menu_searchbtn {border: none; background: none;}
-.menu_searchbtn img {width: 26px; height: 26px; margin-left: 70%;}
+.menu_searchinputwrap {
+    border: 1px solid #4cc37c;
+    padding: 3%;
+    border-radius: 40px;
+}
+
+.menu_searchinput {
+    width: 88%;
+    border: none;
+}
+
+input:focus {
+    outline: none;
+}
+
+.menu_searchbtn {
+    border: none;
+    background: none;
+}
+
+.menu_searchbtn img {
+    width: 26px;
+    height: 26px;
+    margin-left: 70%;
+}
 
 /* menu_right */
-.menu_mymenu {display: flex; align-items: center;}
-.menu_right ul {list-style: none; display: flex; align-items: center; margin-top: 9%;}
-.menu_mymenu>li {align-items: center; margin-left: 2rem;}
-.menu_mymenu a {font-size: 17px; text-decoration: none; color: #333333;}
+.menu_mymenu {
+    display: flex;
+    align-items: center;
+}
+
+.menu_right ul {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    margin-top: 9%;
+}
+
+.menu_mymenu>li {
+    align-items: center;
+    margin-left: 2rem;
+}
+
+.menu_mymenu a {
+    font-size: 17px;
+    text-decoration: none;
+    color: #333333;
+}
 
 
-.main_text {text-align: start;}
-.main_more {margin-left: 550px; color: #000000 !important; text-decoration: none;
-    cursor: pointer; font-size: 15px; font-weight: 600;}
-.main-title {font-weight: 900;text-align: start;font-size: 35px;}
+.main_text {
+    text-align: start;
+}
+
+.main_more {
+    margin-left: 550px;
+    color: #000000 !important;
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.main-title {
+    font-weight: 900;
+    text-align: start;
+    font-size: 35px;
+}
 
 /* 메뉴 */
 .menu-back-color {
@@ -66,10 +147,11 @@ input:focus {outline:none;}
     margin-top: 7px;
 }
 
-.menu-card{
+.menu-card {
     margin-top: 10px;
     padding: 5px;
 }
+
 .menu-btn {
     background-color: #4cc67c !important;
     border: none !important;
@@ -77,44 +159,47 @@ input:focus {outline:none;}
     font-weight: 600 !important;
     margin-left: 78%;
 }
+
 .menu-toast {
     margin-right: 22%;
-    margin-top: 5%;
+    margin-top: 6%;
 }
 
 .menu-close-btn {
     margin-left: 90%;
     margin-top: 3%;
 }
+
 /* 회원 가입 */
 .join-card {
     width: 700px;
     margin: 0 auto;
 }
-.join-img{
+
+.join-img {
     margin-left: 30%;
     margin-bottom: 50px;
     margin-top: 30px;
 }
 
-.join-check{
+.join-check {
     margin-left: 24px;
     margin-bottom: 15px;
 }
 
-.join-input{
+.join-input {
     max-width: 650px;
     margin: 0 auto;
     margin-bottom: 15px;
 }
 
-.join-address{
+.join-address {
     max-width: 650px;
     margin: 0 auto;
     margin-bottom: 5px;
 }
 
-.join-btn{
+.join-btn {
     background-color: #4cc67c;
     color: #ffffff;
     border: none;
@@ -122,7 +207,8 @@ input:focus {outline:none;}
     font-weight: 900;
     font-size: large;
 }
-.join-add{
+
+.join-add {
     background-color: #4cc67c;
     color: #ffffff;
     border: none;
@@ -174,7 +260,7 @@ input:focus {outline:none;}
 .login-title {
     text-align: center;
     font-size: 40px;
-    
+
 }
 
 .login-btn {
@@ -197,4 +283,33 @@ input:focus {outline:none;}
 .login-check {
     margin-top: 7px;
     margin-left: 26px;
+}
+
+/* 마이 페이지 */
+.mypage-list {
+    margin-top: 30px;
+}
+
+.mypage-item {
+    color: #747272 !important;
+    font-weight: 500 !important;
+}
+
+.mypage-disabled {
+    color: #000000 !important;
+    font-weight: 700 !important;
+    font-size: x-large !important;
+}
+
+.mypage-title {
+    margin: 0 auto !important;
+    font-weight: 900 !important;
+    font-size: x-large !important;
+    margin-top: 10px !important;
+}
+
+.mypage-img {
+    margin: 0 auto !important;
+    margin-top: 10px !important;
+    margin-bottom: 10px !important;
 }
