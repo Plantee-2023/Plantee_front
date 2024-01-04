@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Foot = () => {
+const Footer = () => {
     return (
         <div className='main_wrap'>
             <hr/>
@@ -15,4 +15,4 @@ const Foot = () => {
     )
 }
 
-export default Foot
+export default Footer

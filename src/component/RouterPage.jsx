@@ -18,6 +18,7 @@ import DiaryInsert from './diary/DiaryInsert';
 import DiaryRead from './diary/DiaryRead';
 import DiaryCalendar from './diary/DiaryCalendar';
 import DiaryList from './diary/DiaryList';
+import StoreRead from './store/StoreRead';
 
 
 
@@ -49,6 +50,7 @@ const RouterPage = () => {
 
             {/* 스토어 */}
             <Route path='/store' element={<StoreMain />} />
+            <Route path='/store/read/:store_id' element={<StoreRead />} />
 
             {/* 다이어리 */}
             <Route path='/diary/DiaryMain' element={<DiaryMain />} />
