@@ -14,7 +14,7 @@ const Update = () => {
     return (
         <div>
             <Card className='update-card'>
-                <h1 className='update-title'>정보 수정</h1>
+                <h1 className='all-title'>정보 수정</h1>
                 <div className='update-img'>
                     <img src='http://via.placeholder.com/150x150' onClick={() => img_ref.current.click()} style={{ cursor: 'pointer' }} width={300} height={300} />
                     <input type='file' ref={img_ref} style={{ display: 'none' }} />

@@ -6,7 +6,7 @@ const PasswordChange = () => {
     return (
         <div>
             <Card className='password-card'>
-                <h1 className='password-title'>비밀번호 변경</h1>
+                <h1 className='all-title'>비밀번호 변경</h1>
                 <form>
                     <InputGroup className='password-group'>
                         <InputGroup.Text className='password-text'>현재 비밀번호</InputGroup.Text>
