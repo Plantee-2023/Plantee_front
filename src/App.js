@@ -1,7 +1,7 @@
-import Footer from './component/Footer';
-import RouterPage from './component/RouterPage';
-import './App.css';
 import Menu from './component/Menu';
+import RouterPage from './component/RouterPage';
+import Footer from './component/Footer';
+import './App.css';
 
 import './App.css';
 
