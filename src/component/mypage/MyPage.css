@@ -1,0 +1,31 @@
+/* 회원 수정 */
+.update-img-btn {
+    background-color: #4cc67c !important;
+    font-weight: 900 !important;
+    border: none !important;
+    margin-left: 33%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.update-img {
+    margin: 0 auto;
+    margin-top: 50px;
+}
+.update-card {
+    width: 700px;
+    margin: 0 auto;
+    margin-top: 50px;
+}
+
+.update-text { 
+    width: 110px;
+}
+
+.update-btn {
+    background-color: #4cc67c;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    font-weight: 500;
+    font-size: large;
+}

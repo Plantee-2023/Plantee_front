@@ -234,21 +234,6 @@ input:focus {
     margin-bottom: 30px;
 }
 
-/* 회원 수정 */
-.update-img-btn {
-    background-color: #4cc67c !important;
-    font-weight: 900 !important;
-    border: none !important;
-    margin-top: 15px;
-    margin-left: 18%;
-}
-
-.update-card {
-    width: 700px;
-    margin: 0 auto;
-    margin-top: 50px;
-}
-
 /* 로그인 페이지 */
 
 .login-card {

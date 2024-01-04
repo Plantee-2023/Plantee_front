@@ -1,7 +1,9 @@
 import React from 'react'
 import { Col, Row, Tab, Nav, Card } from 'react-bootstrap'
 import '../Main.css'
-import Update from './Update'
+import Update from '../mypage/Update'
+import PasswordChange from '../mypage/PasswordChange'
+import UserDelete from '../mypage/UserDelete'
 
 const MyPage = () => {
     return (
@@ -69,8 +71,8 @@ const MyPage = () => {
                             <Tab.Pane eventKey="6">6</Tab.Pane>
                             <Tab.Pane eventKey="7">7</Tab.Pane>
                             <Tab.Pane eventKey="a"><Update/></Tab.Pane>
-                            <Tab.Pane eventKey="b">b</Tab.Pane>
-                            <Tab.Pane eventKey="c">c</Tab.Pane>
+                            <Tab.Pane eventKey="b"><PasswordChange/></Tab.Pane>
+                            <Tab.Pane eventKey="c"><UserDelete/></Tab.Pane>
                         </Tab.Content>
                     </Col>
                 </Row>
