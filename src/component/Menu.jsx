@@ -43,7 +43,6 @@ const Menu = () => {
                             <NavDropdown.Item href="/plant/dictionary">식물백과</NavDropdown.Item>
                             <NavDropdown.Item href="">식물 큐레이트</NavDropdown.Item>
                             <NavDropdown.Item href="">레시피</NavDropdown.Item>
-                            <NavDropdown.Item href="">지도</NavDropdown.Item>
                         </NavDropdown>
 
                         <GiTalk className='icon ms-5' />
