@@ -7,7 +7,7 @@ import './App.css';
 
 function App() {
 	return (
-		<div className='main_contents'>
+		<div className='main_wrap'>
 			<Menu/>
 			<RouterPage/>
 			<Footer/>
