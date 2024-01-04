@@ -30,7 +30,7 @@ const LoginPage = () => {
         } else {
             sessionStorage.setItem("uid", uid);
             alert("로그인 성공!");
-              window.location.href = "/";
+            window.location.href = "/";
         }
     };
 

@@ -4,7 +4,6 @@ import Magazine from './main/Magazine';
 import Main from './Main';
 import Join from './users/Join';
 import LoginPage from './users/LoginPage';
-import Update from './users/Update';
 import MagazineList from './main/MagazineList';
 import DiaryMain from './diary/DiaryMain';
 import StoreMain from './store/StoreMain';
@@ -37,7 +36,6 @@ const RouterPage = () => {
             {/* 회원 */}
             <Route path='/users/loginPage' element={<LoginPage />} />
             <Route path='/users/join' element={<Join />} />
-            <Route path='/users/update' element={<Update />} />
             <Route path='/users/myPage' element={<MyPage />} />
 
             {/* 추천 */}
