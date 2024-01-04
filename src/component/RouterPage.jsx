@@ -6,7 +6,6 @@ import Join from './users/Join';
 import LoginPage from './users/LoginPage';
 import MagazineList from './main/MagazineList';
 import DiaryMain from './diary/DiaryMain';
-import Dictionary from './plant/Dictionary';
 import StoreMain from './store/StoreMain';
 import MagazineInsert from './main/MagazineInsert';
 import MyPage from './users/MyPage';
@@ -17,6 +16,8 @@ import DiaryInsert from './diary/DiaryInsert';
 import DiaryRead from './diary/DiaryRead';
 import DiaryCalendar from './diary/DiaryCalendar';
 import DiaryList from './diary/DiaryList';
+import PlantDictionary from './plant/PlantDictionary';
+import PlantDetails from './plant/PlantDetails';
 
 
 
@@ -38,7 +39,8 @@ const RouterPage = () => {
             <Route path='/users/myPage' element={<MyPage />} />
 
             {/* 추천 */}
-            <Route path='/plant/dictionary' element={<Dictionary />} />
+            <Route path='/plant/dictionary' element={<PlantDictionary />} />
+            <Route path='/plant/details' element={<PlantDetails />} />
 
             {/* 커뮤니티 */}
             <Route path="/comm" element={<Community />} />
