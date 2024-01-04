@@ -6,6 +6,7 @@ import { useState } from 'react';
 import { Container } from 'react-bootstrap';
 import { BoxContext } from './component/common/BoxContext'
 import BoxModal from './component/common/BoxModal'
+
 function App() {
 	const [box, setBox] = useState({
 		show: false,
@@ -15,7 +16,7 @@ function App() {
 	return (
 		<BoxContext.Provider value={{ box, setBox }}>
 			<Container>
-				<div className='main_contents'>
+				<div className='main_wrap'>
 					<Menu />
 					<RouterPage />
 					<Footer />

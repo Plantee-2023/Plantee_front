@@ -1,17 +1,18 @@
 import React from 'react'
 import { Routes, Route } from 'react-router-dom'
-import Magazine from './main/Magazine';
 import Main from './Main';
 import Join from './users/Join';
 import LoginPage from './users/LoginPage';
-import MagazineList from './main/MagazineList';
-import DiaryMain from './diary/DiaryMain';
-import StoreMain from './store/StoreMain';
-import MagazineInsert from './main/MagazineInsert';
 import MyPage from './users/MyPage';
+import Magazine from './main/Magazine';
+import MagazineList from './main/MagazineList';
+import MagazineInsert from './main/MagazineInsert';
+import StoreMain from './store/StoreMain';
+import StoreRead from './store/StoreRead';
 import Community from './community/Community';
 import Comm_Read from './community/Comm_Read';
 import Comm_Write from './community/Comm_Write';
+import DiaryMain from './diary/DiaryMain';
 import DiaryInsert from './diary/DiaryInsert';
 import DiaryRead from './diary/DiaryRead';
 import DiaryCalendar from './diary/DiaryCalendar';
@@ -49,6 +50,7 @@ const RouterPage = () => {
 
             {/* 스토어 */}
             <Route path='/store' element={<StoreMain />} />
+            <Route path='/store/read/:store_id' element={<StoreRead />} />
 
             {/* 다이어리 */}
             <Route path='/diary/diarymain' element={<DiaryMain />} />

@@ -1,19 +1,33 @@
-import React, { useState } from 'react'
-import { Button, Container, Form, Nav, Navbar, NavDropdown, InputGroup } from 'react-bootstrap';
+import axios from 'axios';
+import React, { useState, useEffect } from 'react'
+import { NavLink } from 'react-router-dom';
+import { Container, Nav, Navbar, Spinner, Row, Col, Card, Badge, InputGroup } from 'react-bootstrap';
 import "./Store.css";
+import Pagination from 'react-js-pagination';
+import "../common/Pagination.css"
 
 const StoreMain = () => {
+    const [loading, setLoading] = useState(false);
 
     const [isClickPlant, setClickPlant] = useState(false);
     const [isClickGoods, setClickGoods] = useState(false);
 
+    const [goods, setGoods] = useState([]);
+
+    const getList = async () => {
+        setLoading(true)
+        const res = await axios.get(`/store/list.json`);
+        setGoods(res.data.list)
+        setLoading(false);
+    }
+
+    useEffect(() => { getList(); }, []);
+
+    if (loading) return <div className='text-center my-5'><Spinner animation="border" variant="success" /></div>
     return (
         <>
-
             <div className='store_wrap'>
                 <div className='store_contents'>
-
-
 
                     <div className='store_filterbtn_group'>
                         <button className='plant_filterbtn'>↺</button>
@@ -27,9 +41,7 @@ const StoreMain = () => {
                                 <div>용품</div>
                             </div>
                         </button>
-
                     </div>
-
 
                     {isClickPlant && (
                         <>
@@ -50,19 +62,17 @@ const StoreMain = () => {
                         </>
                     )}
 
-
                     <div>
                         <Navbar bg="#ffffff" data-bs-theme="light" className='pt-3 pb-3'>
+                            <div>총 ###,###건</div>
                             <Container fluid>
                                 <Navbar.Collapse id="navbarScroll">
                                     <Nav className="me-auto my-2 my-lg-0" style={{ maxHeight: '100px' }} navbarScroll >
-                                        <NavDropdown title="정렬" id="navbarScrollingDropdown">
-                                            <NavDropdown.Item href="#action1">최신순</NavDropdown.Item>
-                                            <NavDropdown.Item href="#action2">인기순</NavDropdown.Item>
-                                            <NavDropdown.Item href="#action3">리뷰많은순</NavDropdown.Item>
-                                            <NavDropdown.Item href="#action4">낮은가격순</NavDropdown.Item>
-                                            <NavDropdown.Item href="#action5">높은가격순</NavDropdown.Item>
-                                        </NavDropdown>
+                                        <Nav.Link href="#home">최신순</Nav.Link>
+                                        <Nav.Link href="#home">인기순</Nav.Link>
+                                        <Nav.Link href="#home">리뷰많은순</Nav.Link>
+                                        <Nav.Link href="#home">낮은가격순</Nav.Link>
+                                        <Nav.Link href="#home">높은가격순</Nav.Link>
                                     </Nav>
                                     <form>
                                         <InputGroup className='store_searchinputwrap'>
@@ -75,11 +85,34 @@ const StoreMain = () => {
                         </Navbar>
                     </div>
 
-
+                    <Row sm={1} md={3} lg={5} className="g-4">
+                        {goods.map(g =>
+                            <Col key={g.store_id} className="p-4">
+                                <Card style={{ border: 'none' }}>
+                                    <NavLink to={`/store/read/${g.store_id}`} style={{ color: "black" }}>
+                                        <Card.Img variant="top" src="http://via.placeholder.com/10x10" />
+                                        <Card.Body>
+                                            <Card.Title>{g.title}</Card.Title>
+                                            <Card.Text>{g.fmtprice}원<br /></Card.Text>
+                                            <h5><Badge pill bg="success" style={{ background: '#4cc37c' }}>{g.tag}</Badge></h5>
+                                        </Card.Body>
+                                    </NavLink>
+                                </Card>
+                            </Col>
+                        )}
+                    </Row>
 
                 </div>
             </div>
 
+            <Pagination
+                activePage={1}
+                itemsCountPerPage={8}
+                totalItemsCount={88}
+                pageRangeDisplayed={10}
+                prevPageText={"‹"}
+                nextPageText={"›"}
+                onChange={(page) => { }} />
 
         </>
     )

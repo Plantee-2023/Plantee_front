@@ -1,14 +1,15 @@
 /* Store */
 
 /* 틀 */
-.store_wrap { width: 100%; margin: 0 auto; }
-.store_contents { width: 1280px; margin: 0 auto; }
+.store_wrap {width: 100%; margin: 0 auto;}
+.store_contents {width: 1280px; margin: 0 auto;}
 
 /* 검색바 */
-.button_hide { background-color: #ffffff; border: #ffffff; }
-.store_filterbtn_group { margin-top: 2%;}
-.store_filterbtn { background-color: #fff; border: 1px solid #adadad; border-radius: 30px; color: #333333; padding: 0 25px 0 25px; height: 40px; justify-content: center; align-items: center; }
-.store_filterbtn_clicked { background-color: #4cc67c; border: none; border-radius: 30px; color: #fff; padding: 0 25px 0 25px; height: 40px; justify-content: center; align-items: center; }
+.button_hide {background-color: #ffffff; border: #ffffff;}
+.store_filterbtn_group {margin-top: 2%;}
+.store_filterbtn {background-color: #fff; border: 1px solid #adadad; border-radius: 30px; color: #333333; padding: 0 25px 0 25px; height: 40px; justify-content: center; align-items: center;}
+.store_filterbtn:hover {background-color: #4cc67c; border-radius: 30px; color: #fff; padding: 0 25px 0 25px; height: 40px; justify-content: center; align-items: center;}
+.store_filterbtn_clicked {background-color: #4cc67c; border: none; border-radius: 30px; color: #fff; padding: 0 25px 0 25px; height: 40px; justify-content: center; align-items: center;}
 
 .store_searchinputwrap {border: 1px solid #4cc37c; padding: 3%; border-radius: 40px;}
 .store_searchinput {width: 75%; border: none;}
@@ -16,4 +17,24 @@ input:focus {outline:none;}
 .store_searchbtn {border: none; background: none;}
 .store_searchbtn img {width: 26px; height: 26px; margin-left: 70%;}
 
-/*  */
+/* 스토어 메인 리스트 */
+.bordernone { border: none; }
+.store_contents a {text-decoration: none; color: #000;}
+
+/* 스토어 상품 상세페이지 */
+.details_wrap {width: 100%; margin: 0 auto;}
+.details_contents {width: 1000px; margin: 0 auto;}
+.details_layout {display: flex; flex-wrap: wrap; margin-top: 3rem;}
+.details_img_section {width: 425px; margin: 0 56px 0 0; position: relative;}
+.details_img_section img {width: 480px; height: 480px;}
+
+.details_info_layout {width: calc(100% - 481px);}
+.details_info_section {margin-left: 3rem;}
+.details_title_section {padding-right: 0; position: initial;}
+.details_title {margin-top: 1rem; padding: 1rem 0;}
+.details_maintitle {font-size: 28px; font-weight: 600;}
+.details_subtitle {font-size: 20px; font-weight: 600;}
+
+.details_simpleinfo_section {width: 100%; padding: 0;}
+
+.select_box {background-color: #fff; border: 1px solid #adadad; border-radius: 10px; color: #333333; padding: 7px;}
