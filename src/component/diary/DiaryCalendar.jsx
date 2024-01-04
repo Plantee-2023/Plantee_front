@@ -7,6 +7,7 @@ import DiaryTag from "./DiaryTag";
 const cx = classNames.bind(Diary);
 
 const DiaryCalendar = () => {
+
     const today = {
         year: new Date().getFullYear(), //오늘 연도
         month: new Date().getMonth() + 1, //오늘 월
@@ -162,24 +163,27 @@ const DiaryCalendar = () => {
     }, [selectedYear, selectedMonth, dateTotalCount]);
 
     return (
-        <div>
-            <div className='mt-3'>
-                <Container>
-                    <DiaryTag />
-                </Container>
-            </div>
-            <div className="diary">
-                <div className="title">
-                    <h3>
-                        {yearControl()}년 {monthControl()}월
-                    </h3>
-                    <div className="pagination">
-                        <button onClick={prevMonth}>◀︎</button>
-                        <button onClick={nextMonth}>▶︎</button>
-                    </div>
+        <div className="diary_wrap">
+            <div className="diary_contents">
+                <div className='mt-3'>
+                    <Container>
+                        <DiaryTag />
+                    </Container>
                 </div>
-                <div className="week">{returnWeek()}</div>
-                <div className="date">{returnDay()}</div>
+                <h1 className="text-center mt-5">나의 달력</h1>
+                <div className="diary">
+                    <div className="title">
+                        <div className="pagination">
+                            <button onClick={prevMonth}>◀︎</button>
+                            <h3>
+                                {yearControl()} {monthControl()}
+                            </h3>
+                            <button onClick={nextMonth}>▶︎</button>
+                        </div>
+                    </div>
+                    <div className="week">{returnWeek()}</div>
+                    <div className="date">{returnDay()}</div>
+                </div>
             </div>
         </div>
     );
