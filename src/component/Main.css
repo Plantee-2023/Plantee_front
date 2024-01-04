@@ -66,6 +66,10 @@ input:focus {outline:none;}
     margin-top: 7px;
 }
 
+.menu-card{
+    margin-top: 10px;
+}
+
 /* 회원 가입 */
 .join-card {
     width: 700px;
