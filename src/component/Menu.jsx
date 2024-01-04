@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react'
 import './Main.css'
-import { InputGroup, NavDropdown, Navbar, Nav, Toast, CloseButton, Button, Card } from 'react-bootstrap'
+import { InputGroup, NavDropdown, Navbar, Nav, Toast, CloseButton, ToastContainer, Card } from 'react-bootstrap'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { LiaStoreAltSolid } from "react-icons/lia";
 import { PiUserListBold } from "react-icons/pi";
@@ -10,6 +10,7 @@ import { SlNotebook } from "react-icons/sl";
 import { BoxContext } from './common/BoxContext';
 
 const Menu = () => {
+
     const [showA, setShowA] = useState(false);
     const toggleShowA = () => setShowA(!showA);
     const { box, setBox } = useContext(BoxContext);
@@ -51,17 +52,19 @@ const Menu = () => {
                                 :
                                 <>
                                     <li>
-                                        <div onClick={toggleShowA} style={{ cursor: 'pointer' }}>{sessionStorage.getItem("uid")}님
-                                            <Toast show={showA}>
-                                                <CloseButton />
-                                                <Toast.Body>
-                                                    <Button>내 정보</Button>
-                                                    <Card className='menu-card'>캘린더</Card>
-                                                    <Card className='menu-card'>나의 레시피</Card>
-                                                    <Card className='menu-card'>내가 등록한글</Card>
-                                                    <Card className='menu-card'>좋아요 목록</Card>
-                                                </Toast.Body>
-                                            </Toast>
+                                        <div onClick={toggleShowA} style={{ cursor: 'pointer' }} >{sessionStorage.getItem("uid")}님
+                                            <ToastContainer position={'top-end'} className='menu-toast'>
+                                                <Toast show={showA}>
+                                                    <CloseButton className='menu-close-btn'/>
+                                                    <Toast.Body>
+                                                        <NavLink className='menu-btn btn' to="/users/mypage">내 정보</NavLink>
+                                                        <Card className='menu-card'>캘린더</Card>
+                                                        <Card className='menu-card'>나의 레시피</Card>
+                                                        <Card className='menu-card'>내가 등록한글</Card>
+                                                        <Card className='menu-card'>좋아요 목록</Card>
+                                                    </Toast.Body>
+                                                </Toast>
+                                            </ToastContainer>
                                         </div>
                                     </li>
                                     <li><NavLink onClick={onLogout}>로그아웃</NavLink></li>
