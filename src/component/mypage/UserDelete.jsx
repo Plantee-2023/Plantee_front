@@ -1,9 +1,13 @@
 import React from 'react'
+import { Card, Button } from 'react-bootstrap'
 import './MyPage.css'
 const UserDelete = () => {
     return (
         <div>
-            <h1>회원 탈퇴</h1>
+            <h1 className="delete-title">회원 탈퇴</h1>
+            <div className="text-center">
+                <Button className='delete-btn' type="submit">탈퇴 신청</Button>
+            </div>
         </div>
     )
 }

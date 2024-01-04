@@ -1,4 +1,4 @@
-import React, { useRef,useState,useEffect } from 'react'
+import React, { useRef, useState, useEffect } from 'react'
 import { Card, Form, InputGroup, Button, Spinner } from 'react-bootstrap'
 import './MyPage.css'
 
@@ -6,17 +6,17 @@ const Update = () => {
     const img_ref = useRef(null);
     const [loading, setLoading] = useState(false);
 
-    useEffect(()=>{
+    useEffect(() => {
 
     });
 
-    if (loading) return <div className='text-center'><Spinner/></div>
+    if (loading) return <div className='text-center'><Spinner /></div>
     return (
         <div>
-            <div>정보 수정</div>
             <Card className='update-card'>
+                <h1 className='update-title'>정보 수정</h1>
                 <div className='update-img'>
-                    <img src='http://via.placeholder.com/150x150' onClick={()=>img_ref.current.click()} style={{cursor:'pointer'}} width={300} height={300} />
+                    <img src='http://via.placeholder.com/150x150' onClick={() => img_ref.current.click()} style={{ cursor: 'pointer' }} width={300} height={300} />
                     <input type='file' ref={img_ref} style={{ display: 'none' }} />
                     <br />
                     <Button className='update-img-btn'>이미지 수정</Button>

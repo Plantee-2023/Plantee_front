@@ -77,7 +77,7 @@ const Menu = () => {
                 <Navbar expand="lg" className="menu-back-color">
                     <Nav>
                         <PiUserListBold className='menu-icon' />
-                        <NavDropdown className='menu-text-color' title="메뉴유" id="basic-nav-dropdown">
+                        <NavDropdown className='menu-text-color' title="식물정보" id="basic-nav-dropdown">
                             <NavDropdown.Item href="/plant/dictionary">식물백과</NavDropdown.Item>
                             <NavDropdown.Item href="">식물 큐레이트</NavDropdown.Item>
                             <NavDropdown.Item href="">레시피</NavDropdown.Item>

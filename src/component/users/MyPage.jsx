@@ -8,26 +8,26 @@ import UserDelete from '../mypage/UserDelete'
 const MyPage = () => {
     return (
         <div>
-            <Tab.Container id="left-tabs-example">
+            <Tab.Container id="left-tabs-example" defaultActiveKey="a">
                 <Row>
                     <Col sm={2}>
-                    <Card className='mypage-list'>
-                            <div className='mypage-title'>uid님</div>
-                            <img className='mypage-img' src='/image/logo.png' width={30} height={20}/>
-                            <Nav className="flex-column" >
-                            <Nav.Item>
+                        <Card className='mypage-list'>
+                            <div className='mypage-title'>{sessionStorage.getItem("uid")}님</div>
+                            <img className='mypage-img' src='/image/logo.png' width={30} height={20} />
+                            <Nav className="flex-column">
+                                <Nav.Item>
                                     <Nav.Link className='mypage-disabled' disabled>회원정보</Nav.Link>
                                 </Nav.Item>
                                 <Nav.Item>
                                     <Nav.Link eventKey="a" className='mypage-item'>정보 수정</Nav.Link>
                                 </Nav.Item>
                                 <Nav.Item>
-                                    <Nav.Link eventKey="b"  className='mypage-item'>비밀번호 변경</Nav.Link>
+                                    <Nav.Link eventKey="b" className='mypage-item'>비밀번호 변경</Nav.Link>
                                 </Nav.Item>
                                 <Nav.Item>
                                     <Nav.Link eventKey="c" className='mypage-item'>회원 탈퇴</Nav.Link>
                                 </Nav.Item>
-                                <hr/>
+                                <hr />
                                 <Nav.Item>
                                     <Nav.Link className='mypage-disabled' disabled>관심 상품</Nav.Link>
                                 </Nav.Item>
@@ -70,9 +70,9 @@ const MyPage = () => {
                             <Tab.Pane eventKey="5">5</Tab.Pane>
                             <Tab.Pane eventKey="6">6</Tab.Pane>
                             <Tab.Pane eventKey="7">7</Tab.Pane>
-                            <Tab.Pane eventKey="a"><Update/></Tab.Pane>
-                            <Tab.Pane eventKey="b"><PasswordChange/></Tab.Pane>
-                            <Tab.Pane eventKey="c"><UserDelete/></Tab.Pane>
+                            <Tab.Pane eventKey="a"><Update /></Tab.Pane>
+                            <Tab.Pane eventKey="b"><PasswordChange /></Tab.Pane>
+                            <Tab.Pane eventKey="c"><UserDelete /></Tab.Pane>
                         </Tab.Content>
                     </Col>
                 </Row>
