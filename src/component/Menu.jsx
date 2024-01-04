@@ -25,6 +25,7 @@ const Menu = () => {
             }
         });
     }
+    
     return (
         <div className='menu_wrap'>
             <div className='menu_contents'>
@@ -50,13 +51,13 @@ const Menu = () => {
                                     <li><NavLink to='/users/Join'>회원가입</NavLink></li>
                                 </>
                                 :
-                                <>  
+                                <>
                                     <li><NavLink to='/users/mypage'>마이 페이지</NavLink></li>
                                     <li>
                                         <div onClick={toggleShowA} style={{ cursor: 'pointer' }} >{sessionStorage.getItem("uid")}님
                                             <ToastContainer position={'top-end'} className='menu-toast'>
                                                 <Toast show={showA}>
-                                                    <CloseButton className='menu-close-btn'/>
+                                                    <CloseButton className='menu-close-btn' />
                                                     <Toast.Body>
                                                         <NavLink className='menu-btn btn' to="/users/mypage">내 정보</NavLink>
                                                         <Card className='menu-card'><a href='/diary/diarycalendar'>캘린더</a></Card>
@@ -90,7 +91,7 @@ const Menu = () => {
                             <NavDropdown.Item href="">Q&A</NavDropdown.Item>
                         </NavDropdown>
                         <LiaStoreAltSolid className='menu-icon' />
-                        <NavLink className='menu-magazine' to='/store/main'>스토어</NavLink>
+                        <NavLink className='menu-magazine' to='/store'>스토어</NavLink>
                         <FiBookOpen className='menu-icon' />
                         <NavLink className='menu-magazine' to='/main/magazineList'>매거진</NavLink>
                     </Nav>
