@@ -7,6 +7,12 @@
 /* diaryListPage*/
 /* .diarylist_card{margin: 50px;} */
 
+/* 로고 */
+.diary_logo img {width: 140px;}
+
+/* 메인 이미지 */
+.diary_img .img{width: 600px; height: 400px; }
+
 /* 검색창 */
 .diary_searchwrap {width: 600px; margin: 0 auto; padding: 2rem;}
 .diary_searchinputwrap {border: 1px solid #4cc37c; padding: 2%; border-radius: 40px;}
@@ -20,6 +26,10 @@ input:focus {outline:none;}
 .diary_detail a {text-decoration: none; color: black;}
 .diary_icon_sun {margin-top: 1rem;}
 
+/* 상단 태그 */
+.diary_btn {background-color: #fff; border: 1px solid #adadad; border-radius: 2rem; margin-right: 0.5rem; padding: 0.6rem 2rem 0.6rem 2rem;}
+.diary_btn a {text-decoration: none;}
+
 /* 목록 세로선 */
 .line {
     border-left: thick solid gray; /* 오른쪽에만 선 부여 */
@@ -29,12 +39,40 @@ input:focus {outline:none;}
     margin-top: 50px;
   }
 
-/* 상단 태그 */
-.diary_btn {background-color: #fff; border: 1px solid #adadad; border-radius: 2rem; margin-right: 0.5rem; padding: 0.6rem 2rem 0.6rem 2rem;}
-.diary_btn a {text-decoration: none;}
+/* 등록 */
 
-/* 목록 리스트 */
+.diary-img-btn {
+  background-color: #4cc67c !important;
+  font-weight: 900 !important;
+  border: none !important;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
 
+.diary-input-memo{width: 50px; height: 150px; max-width: 500px; margin: 0 auto;}
+
+.diary-text {
+  max-width: 650px;
+  margin: 0 auto;
+  margin-bottom: 0 auto;
+}
+
+.diary-input {
+  max-width: 500px;
+  margin: 0 auto;
+  margin-bottom: 15px;
+}
+
+.diary-add {
+  background-color: #4cc67c;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  font-weight: 900;
+  font-size: large;
+  padding: 10px;
+  width: 10%;
+}
 
 /* 캘린더 */
 button {
