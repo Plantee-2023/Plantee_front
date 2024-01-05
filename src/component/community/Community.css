@@ -38,4 +38,10 @@
     right: -15px; content: "▶"; color: #F9EB54; }
    .date {
     float:left; font-size: 0.5rem; }
+
+
+
+    .ck.ck-editor__editable:not(.ck-editor__nested-editable) {
+        min-height: 400px; margin-bottom: 20px;
+       }
    
