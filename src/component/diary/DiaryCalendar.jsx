@@ -170,7 +170,6 @@ const DiaryCalendar = () => {
                         <DiaryTag />
                     </Container>
                 </div>
-                <h1 className="text-center mt-5">나의 달력</h1>
                 <div className="diary">
                     <div className="title">
                         <div className="pagination">

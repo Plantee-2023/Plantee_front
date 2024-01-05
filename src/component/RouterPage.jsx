@@ -50,15 +50,15 @@ const RouterPage = () => {
             <Route path="/comm/read/:post_id" element={<Comm_Read />} />
 
             {/* 스토어 */}
-            <Route path='/store/main' element={<StoreMain />} />
+            <Route path='/store' element={<StoreMain />} />
             <Route path='/store/read/:store_id' element={<StoreRead />} />
 
             {/* 다이어리 */}
-            <Route path='/diary/diarymain' element={<DiaryMain />} />
-            <Route path='/diary/diarycalendar' element={<DiaryCalendar />} />
-            <Route path='/diary/diarymain/insert' element={<DiaryInsert />} />
-            <Route path='/diary/diarymain/read' element={<DiaryRead />} />
-            <Route path='/diary/diarylist' element={<DiaryList />} />
+            <Route path='/diary/main/:uid' element={<DiaryMain />} />
+            <Route path='/diary/calendar' element={<DiaryCalendar />} />
+            <Route path='/diary/main/insert' element={<DiaryInsert />} />
+            <Route path='/diary/main/read/:diary_id' element={<DiaryRead />} />
+            <Route path='/diary/list' element={<DiaryList />} />
         </Routes>
     )
 }
