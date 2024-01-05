@@ -1,27 +1,49 @@
-import React from 'react'
- 
+import React, { useEffect, useState } from 'react'
+import axios from 'axios';
 import { Col, Card,FormControl, Button,Pagination,ProgressBar, Row, NavLink, Image } from 'react-bootstrap'
 import Comm_coment from './Comm_coment'
-import Comm_chat from './Comm_chat'
+ 
 import Comm_share from './Comm_share'
+import { useParams } from 'react-router-dom'
+import { FaRegThumbsUp } from "react-icons/fa";
+import Chat_modal from './Chat_modal';
+import CandidateList from './CandidateList';
+import Comm_vote from './Comm_vote';
 
 
 const Comm_Read = () => {
+
+    const { post_id } = useParams();
+    const [post, setPost] = useState('');
+    const { title, red_date, contents,address,nickname,uid } = post;
+
+    const getPost = async () => {
+        const res = await axios(`/comm/read.json/${post_id}`)
+        console.log(res.data)
+        setPost(res.data);
+    }
+
+    useEffect(() => {
+        getPost();
+    }, []);
+
+ 
+
 
  
 
 
   return (
-    <div className='my-5' style={{width:"50%", margin:"600px"}}>
+    <div className='my-5'>
             <h1 className='text-center mb-5'>게시글 상세</h1>
             <Row className='justify-content-center'>
                 <Col xs lg={15}>
                 <div className='text-start mb-2'>
-            <Button   vaiant='success'>목록</Button>
+            <a className='btn btn-success' style={{color:"white" }} href='/comm'   >목록</a>
             
             </div>
                     <Card className='p-5'>
-                      <h4 className="text-center" style={{"font-weight":"bold"}}>[지역] 여기는 제목 란입니다. </h4>
+                      <h4 className="text-center" style={{"font-weight":"bold"}}>[{address}] {title} </h4>
                         <Row>
                             <Col lg={3} xs={5} md={4} className='align-self-center'>
                                 <div className='mt-1'>
@@ -36,7 +58,7 @@ const Comm_Read = () => {
                                 <h5  > </h5>
                                 <hr/> 
 
-                                <div  >닉네임 : [아이콘 png] 홍길동(아이디)  </div>
+                                <div  >닉네임 : [아이콘 png] {nickname}({uid})  </div>
                                
                                <div  >작성일 : 2023.12.31 </div>
                                <div  >추천 :1 </div>
@@ -53,19 +75,28 @@ const Comm_Read = () => {
                         <Row>
                             <Col>
                             <hr/>
-                            여기는 내용이 적히는 곳입니다.<br/>
-                            <img src='/image/3.jpg' width={500} height={300} />
+                            <div className='text-center'>
+                            {contents}
+                            </div>
+                            <br/>
+                           
                             </Col>
                         </Row>
 
-                        추천 아이콘 
+                        <div className='mx-auto' width="50%" style={{padding:"3px",width: '5%',borderStyle:"solid" ,borderWidth: '3px'}}>
+                               
+                               <FaRegThumbsUp style={{fontSize:"50px"}}/>
+                               
+                            </div>
                     </Card>
 
 
                     <div className='text-end mt-2'>
-            <Button className='me-2' vaiant='success'>대화하기</Button>
-            <Button className='me-2' vaiant='success'>수정</Button>
-            <Button  className='text-end' vaiant='secondary'>취소</Button>
+           
+            <Comm_vote/>
+            <Chat_modal />
+            <Button className='ms-2 me-2' vaiant='success'>수정</Button>
+            
             </div>
                 </Col>
             </Row>
@@ -77,7 +108,7 @@ const Comm_Read = () => {
               
               </div>
               <Comm_coment/>
-              <Comm_chat/>
+              
             
         </div>
  

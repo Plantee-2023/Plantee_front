@@ -7,7 +7,7 @@ function clip(){
    var url = '';
    var textarea = document.createElement("textarea");
    document.body.appendChild(textarea);
-   url = 'window.location.href';
+   url = window.location.href;
    textarea.value = url;
    textarea.select();
    document.execCommand("copy");
