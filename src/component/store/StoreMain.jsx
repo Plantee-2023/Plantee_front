@@ -17,7 +17,7 @@ const StoreMain = () => {
     const getList = async () => {
         setLoading(true)
         const res = await axios.get(`/store/list.json`);
-        setGoods(res.data.list)
+        setGoods(res.data.list);
         setLoading(false);
     }
 

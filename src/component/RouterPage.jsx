@@ -49,7 +49,7 @@ const RouterPage = () => {
             <Route path="/comm/write" element={<Comm_Write />} />
 
             {/* 스토어 */}
-            <Route path='/store' element={<StoreMain />} />
+            <Route path='/store/main' element={<StoreMain />} />
             <Route path='/store/read/:store_id' element={<StoreRead />} />
 
             {/* 다이어리 */}

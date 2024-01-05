@@ -11934,6 +11934,11 @@ package-json@^6.3.0:
     registry-url "^5.0.0"
     semver "^6.2.0"
 
+pagination@^0.4.6:
+  version "0.4.6"
+  resolved "https://registry.npmjs.org/pagination/-/pagination-0.4.6.tgz"
+  integrity sha512-TnZ3l17uuC5H9Wlc9FMYuEi65JlUCSn1ZAbnLnvUGkR7RgaFknUNGQTEumhjq1Jy1ePkXSiYUFFbHH70LGb9dA==
+
 paginator@^1.0.0:
   version "1.0.0"
   resolved "https://registry.npmjs.org/paginator/-/paginator-1.0.0.tgz"
