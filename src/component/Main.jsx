@@ -18,7 +18,7 @@ const Main = () => {
 
     if (loading) return <div className='main-spinner'><Spinner /></div>
     return (
-        <div className="main_wrap">
+        <div id="main_wrap">
             <div className='main_contents'>
                 <Carousel className='mb-5 mt-5'>
                     <Carousel.Item>

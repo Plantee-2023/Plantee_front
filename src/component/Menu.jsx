@@ -1,5 +1,4 @@
 import React, { useContext, useState } from 'react'
-import './Main.css'
 import { InputGroup, NavDropdown, Navbar, Nav, Toast, CloseButton, ToastContainer, Card } from 'react-bootstrap'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { LiaStoreAltSolid } from "react-icons/lia";
@@ -11,6 +10,7 @@ import { CiCalendar } from "react-icons/ci";
 import { MdFavoriteBorder } from "react-icons/md";
 import { TfiWrite } from "react-icons/tfi";
 import { BoxContext } from './common/BoxContext';
+import './Main.css'
 
 const Menu = () => {
 
@@ -29,7 +29,7 @@ const Menu = () => {
         });
     }
     return (
-        <div className='menu_wrap'>
+        <div id='menu_wrap'>
             <div className='menu_contents'>
                 <div className='menu_header'>
                     <div className='menu_left'>
@@ -98,7 +98,7 @@ const Menu = () => {
                         </ul>
                     </div>
                 </div>
-                <Navbar expand="lg" className="menu-back-color">
+                <Navbar className="menu-back-color">
                     <Nav>
                         <PiUserListBold className='menu-icon' />
                         <NavDropdown className='menu-text-color' title="식물정보" id="basic-nav-dropdown">

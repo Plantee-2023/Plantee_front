@@ -1,199 +1,247 @@
 /* 메인 */
-.main_btn {
-    margin-right: 10px;
-    margin-top: 10px;
-    background-color: #4cc67c !important;
-    border-color: #4cc67c !important;
-}
+#main_wrap {
+    width: 100%;
+    margin: 0 auto;
 
-.main-spinner {
-    margin-top: 50px;
-    text-align: center;
-    font-size: 200px;
-}
+    .main_btn {
+        margin-right: 10px;
+        margin-top: 10px;
+        background-color: #4cc67c;
+        border-color: #4cc67c;
+    }
 
-/* menu_search */
-.menu_header {
-    width: 1280px;
-    padding: 3rem 0 0;
-    display: flex;
-    justify-content: space-between;
-}
+    .main-spinner {
+        margin-top: 50px;
+        text-align: center;
+        font-size: 200px;
+    }
 
-.menu_logo img {
-    width: 140px;
-}
+    .main_text {
+        text-align: start;
+    }
 
-.menu_left {
-    display: flex;
-    align-items: center;
-}
+    .main_more {
+        margin-left: 550px;
+        color: #000000;
+        text-decoration: none;
+        cursor: pointer;
+        font-size: 15px;
+        font-weight: 600;
+    }
 
-.menu_right {
-    display: flex;
-    align-items: center;
-}
-
-/* menu_left */
-.menu_searchwrap {
-    margin-left: 4%;
-    width: 500px;
-}
-
-.menu_searchinputwrap {
-    border: 1px solid #4cc37c;
-    padding: 3%;
-    border-radius: 40px;
-}
-
-.menu_searchinput {
-    width: 88%;
-    border: none;
-}
-
-input:focus {
-    outline: none;
-}
-
-.menu_searchbtn {
-    border: none;
-    background: none;
-}
-
-.menu_searchbtn img {
-    width: 26px;
-    height: 26px;
-    margin-left: 70%;
-}
-
-/* menu_right */
-.menu_mymenu {
-    display: flex;
-    align-items: center;
-}
-
-.menu_right ul {
-    list-style: none;
-    display: flex;
-    align-items: center;
-    margin-top: 9%;
-}
-
-.menu_mymenu>li {
-    align-items: center;
-    margin-left: 2rem;
-}
-
-.menu_mymenu a {
-    font-size: 17px;
-    text-decoration: none;
-    color: #333333;
-}
-
-
-.main_text {
-    text-align: start;
-}
-
-.main_more {
-    margin-left: 550px;
-    color: #000000 !important;
-    text-decoration: none;
-    cursor: pointer;
-    font-size: 15px;
-    font-weight: 600;
-}
-
-.main-title {
-    font-weight: 900;
-    text-align: start;
-    font-size: 35px;
+    .main-title {
+        font-weight: 900;
+        text-align: start;
+        font-size: 35px;
+    }
 }
 
 /* 메뉴 */
-.menu-back-color {
-    background-color: #4cc37c;
-    text-emphasis-color: #000000;
-    padding: 15px;
-    margin-top: 30px;
-}
-
-.menu-icon {
-    font-size: 25px;
-    margin-top: 10px;
-    margin-right: 10px;
-    margin-left: 30px;
-}
-
-.menu-login {
-    margin-left: 350px;
-    color: #ffffff !important;
-    text-decoration: none;
-    cursor: pointer;
-    font-size: 20px;
-    font-weight: 900;
-}
-
-.menu-text-color {
-    font-weight: 900;
-    font-size: 20px;
-}
-
-.menu-magazine {
-    text-decoration: none;
-    color: #000000 !important;
-    font-size: 20px;
-    font-weight: 900;
-    margin-top: 7px;
-}
-.menu-card1 {margin-right: 16px; margin-left: 10px; margin-bottom: 10px; border: none !important;
-    background-color: #BA55D3 !important; padding: 3px;}
-.menu-card2 {margin-right: 16px; margin-left: 10px; margin-bottom: 10px; border: none !important;
-    background-color: 	#1E90FF !important; padding: 3px;}
-.menu-card3 {margin-right: 16px; margin-left: 10px; margin-bottom: 10px; border: none !important;
-    background-color: 	#90EE90 !important; padding: 3px;}
-.menu-card4 {margin-right: 16px; margin-left: 10px; margin-bottom: 10px; border: none !important;
-    background-color: #CD5C5C !important; padding: 3px;}
-.menu-card-card {
-    margin-top: 10px;
-}
-ul,li{
-    list-style: none;
+#menu_wrap {
+    width: 100%;
     margin: 0 auto;
-    padding: 0px !important;
+
+    .menu_contents {
+        width: 1280px; 
+        margin: 0 auto;
+    }
+
+    /* menu_search */
+    .menu_header {
+        width: 1280px;
+        padding: 3rem 0 0;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .menu_logo img {
+        width: 140px;
+    }
+
+    .menu_left {
+        display: flex;
+        align-items: center;
+    }
+
+    .menu_right {
+        display: flex;
+        align-items: center;
+    }
+
+    /* menu_left */
+    .menu_searchwrap {
+        margin-left: 4%;
+        width: 500px;
+    }
+
+    .menu_searchinputwrap {
+        border: 1px solid #4cc37c;
+        padding: 3%;
+        border-radius: 40px;
+    }
+
+    .menu_searchinput {
+        width: 88%;
+        border: none;
+    }
+
+    input:focus {
+        outline: none;
+    }
+
+    .menu_searchbtn {
+        border: none;
+        background: none;
+    }
+
+    .menu_searchbtn img {
+        width: 26px;
+        height: 26px;
+        margin-left: 70%;
+    }
+
+    /* menu_right */
+    .menu_mymenu {
+        display: flex;
+        align-items: center;
+    }
+
+    .menu_right ul {
+        list-style: none;
+        display: flex;
+        align-items: center;
+        margin-top: 9%;
+    }
+
+    .menu_mymenu>li {
+        align-items: center;
+        margin-left: 2rem;
+    }
+
+    .menu_mymenu a {
+        font-size: 17px;
+        text-decoration: none;
+        color: #333333;
+    }
+
+
+    .menu-back-color {
+        background-color: #4cc37c;
+        text-emphasis-color: #000000;
+        margin-top: 30px;
+        height: 70px;
+        padding: 0px;
+    }
+
+    .menu-icon {
+        font-size: 25px;
+        margin-top: 10px;
+        margin-right: 10px;
+        margin-left: 30px;
+    }
+
+    .menu-text-color {
+        margin-top: 7px;
+        font-weight: 900;
+        font-size: 20px;
+    }
+
+    .menu-magazine {
+        text-decoration: none;
+        color: #000000;
+        font-size: 20px;
+        font-weight: 900;
+        margin-top: 7px;
+    }
+
+    .menu-card1 {
+        margin-right: 16px;
+        margin-left: 10px;
+        margin-bottom: 10px;
+        border: none;
+        background-color: #BA55D3;
+        padding: 3px;
+    }
+
+    .menu-card2 {
+        margin-right: 16px;
+        margin-left: 10px;
+        margin-bottom: 10px;
+        border: none;
+        background-color: #1E90FF;
+        padding: 3px;
+    }
+
+    .menu-card3 {
+        margin-right: 16px;
+        margin-left: 10px;
+        margin-bottom: 10px;
+        border: none;
+        background-color: #90EE90;
+        padding: 3px;
+    }
+
+    .menu-card4 {
+        margin-right: 16px;
+        margin-left: 10px;
+        margin-bottom: 10px;
+        border: none ;
+        background-color: #CD5C5C;
+        padding: 3px;
+    }
+
+    .menu-card-card {
+        margin-top: 10px;
+    }
+
+    ul,
+    li {
+        list-style: none;
+        margin: 0 auto;
+        padding: 0px;
+    }
+
+    .menu-toast-icon {
+        font-size: 50px;
+    }
+
+    .menu-btn {
+        background-color: #4cc67c;
+        border: none;
+        color: #ffffff !important;
+        font-weight: 600;
+        margin-left: 78%;
+    }
+
+    .menu-toast {
+        margin-right: 22%;
+        margin-top: 6%;
+    }
     
-}
-.menu-toast-icon {
-    font-size: 50px;
-}
-.menu-btn {
-    background-color: #4cc67c !important;
-    border: none !important;
-    color: #ffffff !important;
-    font-weight: 600 !important;
-    margin-left: 78%;
+    .menu-toast-text {
+        margin-left: 19px;
+        margin-bottom: 7px;
+        font-weight: 600;
+        font-size: 15px;
+    }
+    
+    .menu-card-text {
+        font-weight: 600;
+        margin-left: 13px;
+        margin-top: 13px;
+    }
+    
+    .menu-close-btn {
+        margin-left: 90%;
+        margin-top: 3%;
+    }
 }
 
-.menu-toast {
-    margin-right: 22%;
-    margin-top: 6%;
-}
 
-.menu-toast-text {
-    margin-left: 19px;
-    margin-bottom: 7px;
-    font-weight: 600;
-    font-size: 15px;
-}
-.menu-card-text {
-    font-weight: 600;
-    margin-left: 13px;
-    margin-top: 13px;
-}
-.menu-close-btn {
-    margin-left: 90%;
-    margin-top: 3%;
-}
+
+
+
+
 
 /* 회원 가입 */
 .join-card {
@@ -266,8 +314,9 @@ ul,li{
     margin: 0 auto;
     margin-top: 100px;
 }
+
 .login-width {
-    width: 80px ;
+    width: 80px;
 }
 
 .login-title {

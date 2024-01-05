@@ -21,8 +21,13 @@ td>a {
 .magazine-insert {
     text-decoration: none;
     color: #000000;
-    margin-left: 91%;
     font-size: large;
+}
+.magazine-write-btn {
+    width: 100px;
+    margin-left: 92%;
+    background-color: aliceblue !important;
+    border: none !important;
 }
 
 .list {
