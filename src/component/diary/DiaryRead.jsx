@@ -1,7 +1,32 @@
-import React from 'react'
-import { Card, CardBody, Col, Row } from 'react-bootstrap'
+import axios from 'axios';
+import React, { useEffect, useState } from 'react'
+import { Card, CardBody, Col, Row, Spinner } from 'react-bootstrap'
+import { useParams } from 'react-router-dom';
 
 const DiaryRead = () => {
+    const [loading, setLoading] = useState(false);
+    const { diary_id } = useParams();
+    const [diary, setDiary] = useState({
+        diary_id: "", user_id: "", image:"", contents:"", reg_date:"",category:"", fmtdate:""
+    })
+
+    const { user_id, plant_name, image, contents, reg_date, category, fmtdate } = diary;
+
+
+    const getDiary = async () => {
+        setLoading(true);
+        const res = await axios.get(`/diary/read/${diary_id}`);
+        console.log(res.data);
+        // setDiary(res.data);
+        setLoading(false);
+
+    }
+
+    useEffect(() => {
+        getDiary();
+    }, [])
+
+    if (loading) return <div className='text-center my-5'><Spinner animation="border" variant="success" /></div>
     return (
         <div className='plant_wrap'>
             <div className='plant_contents'>

@@ -59,7 +59,7 @@ const Menu = () => {
                                                     <CloseButton className='menu-close-btn'/>
                                                     <Toast.Body>
                                                         <NavLink className='menu-btn btn' to="/users/mypage">내 정보</NavLink>
-                                                        <Card className='menu-card'><a href='/diary/diarycalendar'>캘린더</a></Card>
+                                                        <Card className='menu-card'><a href='/diary/calendar'>캘린더</a></Card>
                                                         <Card className='menu-card'>나의 레시피</Card>
                                                         <Card className='menu-card'>내가 등록한글</Card>
                                                         <Card className='menu-card'>좋아요 목록</Card>
@@ -88,7 +88,7 @@ const Menu = () => {
                             <NavDropdown.Item href="">나눔</NavDropdown.Item>
                         </NavDropdown>
                         <LiaStoreAltSolid className='menu-icon' />
-                        <NavLink className='menu-magazine' to='/store/main'>스토어</NavLink>
+                        <NavLink className='menu-magazine' to='/store'>스토어</NavLink>
                         <FiBookOpen className='menu-icon' />
                         <NavLink className='menu-magazine' to='/main/magazineList'>매거진</NavLink>
                     </Nav>
