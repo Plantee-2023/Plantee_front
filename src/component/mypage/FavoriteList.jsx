@@ -6,7 +6,7 @@ const FavoriteList = () => {
         <div>
             <h1 className='all-title'>좋아요 리스트</h1>
             <Button className='favorite-list-delete-btn'>삭제</Button>
-            <Table className='favorite-list-table' hover striped bordered>
+            <Table hover striped bordered>
                 <thead className='text-center'>
                     <tr>
                         <th><Form.Check /></th>

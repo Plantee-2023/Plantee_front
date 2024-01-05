@@ -72,10 +72,6 @@
 }
 
 /* 좋아요 리스트 */
-.favorite-list-table {
-    margin: 0 auto;
-    width: 900px !important;
-}
 .favorite-list-delete-btn {
     margin-left: 880px;
     margin-bottom: 10px;
@@ -96,14 +92,9 @@
 }
 .cart-alert {
     margin: 0 auto;
-    width: 900px !important;
     background-color: #4cc67c !important;
     border: none !important;
     opacity: 70%;
-}
-.cart-table {
-    margin: 0 auto;
-    width: 900px !important;
 }
 .cart-price {
     color: #ffffff !important;
@@ -111,7 +102,7 @@
 .cart-order-btn {
     background-color: #4cc67c !important;
     border: none !important;
-    margin-left: 817px;
+    margin-left: 914px;
     width: 100px;
     margin-right: 10px;
     font-weight: 600 !important;

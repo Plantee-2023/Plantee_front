@@ -5,7 +5,7 @@ const Cart = () => {
     return (
         <div>
             <h1 className='all-title'>장바구니</h1>
-            <Table className='cart-table' hover striped bordered>
+            <Table hover striped bordered>
                 <thead className='text-center'>
                     <tr>
                         <th><Form.Check/></th>
