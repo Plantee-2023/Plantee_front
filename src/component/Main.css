@@ -146,14 +146,14 @@ input:focus {
     font-weight: 900;
     margin-top: 7px;
 }
-.menu-card1 {margin-right: 23px; margin-left: 10px; margin-bottom: 10px; border: none !important;
-    background-color: purple !important;}
-.menu-card2 {margin-right: 23px; margin-left: 10px; margin-bottom: 10px; border: none !important;
-    background-color: blue !important;}
-.menu-card3 {margin-right: 23px; margin-left: 10px; margin-bottom: 10px; border: none !important;
-    background-color: green !important;}
-.menu-card4 {margin-right: 23px; margin-left: 10px; margin-bottom: 10px; border: none !important;
-    background-color: red !important;}
+.menu-card1 {margin-right: 16px; margin-left: 10px; margin-bottom: 10px; border: none !important;
+    background-color: #BA55D3 !important; padding: 3px;}
+.menu-card2 {margin-right: 16px; margin-left: 10px; margin-bottom: 10px; border: none !important;
+    background-color: 	#1E90FF !important; padding: 3px;}
+.menu-card3 {margin-right: 16px; margin-left: 10px; margin-bottom: 10px; border: none !important;
+    background-color: 	#90EE90 !important; padding: 3px;}
+.menu-card4 {margin-right: 16px; margin-left: 10px; margin-bottom: 10px; border: none !important;
+    background-color: #CD5C5C !important; padding: 3px;}
 .menu-card-card {
     margin-top: 10px;
 }
@@ -180,12 +180,16 @@ ul,li{
 }
 
 .menu-toast-text {
-    margin-left: 15px;
+    margin-left: 19px;
     margin-bottom: 7px;
     font-weight: 600;
     font-size: 15px;
 }
-
+.menu-card-text {
+    font-weight: 600;
+    margin-left: 13px;
+    margin-top: 13px;
+}
 .menu-close-btn {
     margin-left: 90%;
     margin-top: 3%;

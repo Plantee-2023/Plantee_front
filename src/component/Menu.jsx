@@ -63,7 +63,8 @@ const Menu = () => {
                                                     <Toast.Body>
                                                         <NavLink className='menu-btn btn' to="/users/mypage">내 정보</NavLink>
                                                         <Card className='menu-card-card'>
-                                                            <ul id='menu-ul'>
+                                                            <div className="menu-card-text">마이페이지</div>
+                                                            <ul>
                                                                 <li>
                                                                     <Card className='menu-card1'><a href='/diary/diarycalendar'>
                                                                         <CiCalendar className='menu-toast-icon' /></a></Card>
