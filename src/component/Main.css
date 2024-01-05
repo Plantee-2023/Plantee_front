@@ -3,6 +3,11 @@
     width: 100%;
     margin: 0 auto;
 
+    .main_contents {
+        width: 1280px;
+        margin: 0 auto;
+    }
+
     .main_btn {
         margin-right: 10px;
         margin-top: 10px;
@@ -34,6 +39,139 @@
         text-align: start;
         font-size: 35px;
     }
+
+    /* 회원 가입 */
+    .join-card {
+        width: 700px;
+        margin: 0 auto;
+    }
+
+    .join-img {
+        margin-left: 30%;
+        margin-bottom: 50px;
+        margin-top: 30px;
+    }
+
+    .join-check {
+        margin-left: 24px;
+        margin-bottom: 15px;
+    }
+
+    .join-input {
+        max-width: 650px;
+        margin: 0 auto;
+        margin-bottom: 15px;
+    }
+
+    .join-address {
+        max-width: 650px;
+        margin: 0 auto;
+        margin-bottom: 5px;
+    }
+
+    .join-btn {
+        background-color: #4cc67c;
+        color: #ffffff;
+        border: none;
+        border-radius: 5px;
+        font-weight: 900;
+        font-size: large;
+    }
+
+    .join-add {
+        background-color: #4cc67c;
+        color: #ffffff;
+        border: none;
+        border-radius: 5px;
+        font-weight: 900;
+        font-size: large;
+        padding: 10px;
+        width: 12%;
+    }
+
+    .join-img-btn {
+        background-color: #4cc67c;
+        font-weight: 900;
+        border: none;
+        margin-top: 15px;
+        margin-left: 18%;
+    }
+
+    .join-title {
+        text-align: center;
+        font-size: 40px;
+        margin-top: 50px;
+        margin-bottom: 30px;
+    }
+
+    /* 로그인 페이지 */
+
+    .login-card {
+        width: 550px;
+        margin: 0 auto;
+        margin-top: 100px;
+    }
+
+    .login-width {
+        width: 80px;
+    }
+
+    .login-title {
+        text-align: center;
+        font-size: 40px;
+
+    }
+
+    .login-btn {
+        background-color: #4cc67c;
+        color: #ffffff;
+        font-weight: 900;
+        border: none;
+        width: 500px;
+        margin: 0 auto;
+        margin-top: 30px;
+        margin-bottom: 10px;
+    }
+
+    .login-input {
+        margin: 0 auto;
+        margin-top: 10px;
+        width: 500px;
+    }
+
+    .login-check {
+        margin-top: 7px;
+        margin-left: 26px;
+    }
+
+    /* 마이 페이지 */
+    .mypage-list {
+        margin-top: 30px;
+    }
+
+    .mypage-item {
+        color: #747272 ;
+        font-weight: 500;
+    }
+
+    .mypage-disabled {
+        color: #000000;
+        font-weight: 700;
+        font-size: x-large;
+    }
+
+    .mypage-title {
+        margin: 0 auto;
+        font-weight: 900;
+        font-size: x-large;
+        margin-top: 10px;
+    }
+
+    .mypage-img {
+        margin: 0 auto ;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
 }
 
 /* 메뉴 */
@@ -42,7 +180,7 @@
     margin: 0 auto;
 
     .menu_contents {
-        width: 1280px; 
+        width: 1280px;
         margin: 0 auto;
     }
 
@@ -185,7 +323,7 @@
         margin-right: 16px;
         margin-left: 10px;
         margin-bottom: 10px;
-        border: none ;
+        border: none;
         background-color: #CD5C5C;
         padding: 3px;
     }
@@ -217,161 +355,22 @@
         margin-right: 22%;
         margin-top: 6%;
     }
-    
+
     .menu-toast-text {
         margin-left: 19px;
         margin-bottom: 7px;
         font-weight: 600;
         font-size: 15px;
     }
-    
+
     .menu-card-text {
         font-weight: 600;
         margin-left: 13px;
         margin-top: 13px;
     }
-    
+
     .menu-close-btn {
         margin-left: 90%;
         margin-top: 3%;
     }
-}
-
-
-
-
-
-
-
-/* 회원 가입 */
-.join-card {
-    width: 700px;
-    margin: 0 auto;
-}
-
-.join-img {
-    margin-left: 30%;
-    margin-bottom: 50px;
-    margin-top: 30px;
-}
-
-.join-check {
-    margin-left: 24px;
-    margin-bottom: 15px;
-}
-
-.join-input {
-    max-width: 650px;
-    margin: 0 auto;
-    margin-bottom: 15px;
-}
-
-.join-address {
-    max-width: 650px;
-    margin: 0 auto;
-    margin-bottom: 5px;
-}
-
-.join-btn {
-    background-color: #4cc67c;
-    color: #ffffff;
-    border: none;
-    border-radius: 5px;
-    font-weight: 900;
-    font-size: large;
-}
-
-.join-add {
-    background-color: #4cc67c;
-    color: #ffffff;
-    border: none;
-    border-radius: 5px;
-    font-weight: 900;
-    font-size: large;
-    padding: 10px;
-    width: 12%;
-}
-
-.join-img-btn {
-    background-color: #4cc67c !important;
-    font-weight: 900 !important;
-    border: none !important;
-    margin-top: 15px;
-    margin-left: 18%;
-}
-
-.join-title {
-    text-align: center;
-    font-size: 40px;
-    margin-top: 50px;
-    margin-bottom: 30px;
-}
-
-/* 로그인 페이지 */
-
-.login-card {
-    width: 550px;
-    margin: 0 auto;
-    margin-top: 100px;
-}
-
-.login-width {
-    width: 80px;
-}
-
-.login-title {
-    text-align: center;
-    font-size: 40px;
-
-}
-
-.login-btn {
-    background-color: #4cc67c !important;
-    color: #ffffff;
-    font-weight: 900 !important;
-    border: none !important;
-    width: 500px;
-    margin: 0 auto;
-    margin-top: 30px;
-    margin-bottom: 10px;
-}
-
-.login-input {
-    margin: 0 auto;
-    margin-top: 10px;
-    width: 500px !important;
-}
-
-.login-check {
-    margin-top: 7px;
-    margin-left: 26px;
-}
-
-/* 마이 페이지 */
-.mypage-list {
-    margin-top: 30px;
-}
-
-.mypage-item {
-    color: #747272 !important;
-    font-weight: 500 !important;
-}
-
-.mypage-disabled {
-    color: #000000 !important;
-    font-weight: 700 !important;
-    font-size: x-large !important;
-}
-
-.mypage-title {
-    margin: 0 auto !important;
-    font-weight: 900 !important;
-    font-size: x-large !important;
-    margin-top: 10px !important;
-}
-
-.mypage-img {
-    margin: 0 auto !important;
-    margin-top: 10px !important;
-    margin-bottom: 10px !important;
 }
