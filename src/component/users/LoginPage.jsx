@@ -41,7 +41,7 @@ const LoginPage = () => {
                 <div className='login-title'>로그인</div>
                 <form onSubmit={onSubmit}>
                     <InputGroup className='login-input'>
-                        <InputGroup.Text>아이디</InputGroup.Text>
+                        <InputGroup.Text className="login-width">아이디</InputGroup.Text>
                         <Form.Control
                             placeholder="id"
                             name="uid"
@@ -50,7 +50,7 @@ const LoginPage = () => {
                         />
                     </InputGroup>
                     <InputGroup className='login-input'>
-                        <InputGroup.Text>비밀번호</InputGroup.Text>
+                        <InputGroup.Text className="login-width">비밀번호</InputGroup.Text>
                         <Form.Control
                             type="password"
                             placeholder="Password"

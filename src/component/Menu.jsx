@@ -65,24 +65,24 @@ const Menu = () => {
                                                         <Card className='menu-card-card'>
                                                             <ul id='menu-ul'>
                                                                 <li>
-                                                                    <Card className='menu-card'><a href='/diary/diarycalendar'>
-                                                                        <CiCalendar className='menu-toast-icon' />
-                                                                        <div className='menu-toast-text'>캘린더</div></a></Card>
+                                                                    <Card className='menu-card1'><a href='/diary/diarycalendar'>
+                                                                        <CiCalendar className='menu-toast-icon' /></a></Card>
+                                                                        <div className='menu-toast-text'>캘린더</div>
                                                                 </li>
                                                                 <li>
-                                                                    <Card className='menu-card'><a href='/plant/recipe'>
-                                                                        <PiCookingPot className='menu-toast-icon' />
-                                                                        <div className='menu-toast-text'>레시피</div></a></Card>
+                                                                    <Card className='menu-card2'><a href='/plant/recipe'>
+                                                                        <PiCookingPot className='menu-toast-icon' /></a></Card>
+                                                                        <div className='menu-toast-text'>레시피</div>
                                                                 </li>
                                                                 <li>
-                                                                    <Card className='menu-card'><a href='/mypage/comment'>
-                                                                        <TfiWrite className='menu-toast-icon' />
-                                                                        <div className='menu-toast-text'>나의 글</div></a></Card>
+                                                                    <Card className='menu-card3'><a href='/mypage/comment'>
+                                                                        <TfiWrite className='menu-toast-icon' /></a></Card>
+                                                                        <div className='menu-toast-text'>나의 글</div>
                                                                 </li>
                                                                 <li>
-                                                                    <Card className='menu-card'><a href='/mypage/favorite'>
-                                                                        <MdFavoriteBorder className='menu-toast-icon' />
-                                                                        <div className='menu-toast-text'>좋아요</div></a></Card>
+                                                                    <Card className='menu-card4'><a href='/mypage/favorite'>
+                                                                        <MdFavoriteBorder className='menu-toast-icon' /></a></Card>
+                                                                        <div className='menu-toast-text'>좋아요</div>
                                                                 </li>
                                                             </ul>
                                                         </Card>
