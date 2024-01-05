@@ -76,12 +76,12 @@ const Menu = () => {
                                                                         <div className='menu-toast-text'>레시피</div>
                                                                 </li>
                                                                 <li>
-                                                                    <Card className='menu-card3'><a href='/mypage/comment'>
+                                                                    <Card className='menu-card3'><a href='/mypage/mypagecomment'>
                                                                         <TfiWrite className='menu-toast-icon' /></a></Card>
                                                                         <div className='menu-toast-text'>나의 글</div>
                                                                 </li>
                                                                 <li>
-                                                                    <Card className='menu-card4'><a href='/mypage/favorite'>
+                                                                    <Card className='menu-card4'><a href='/mypage/mypagefavorite'>
                                                                         <MdFavoriteBorder className='menu-toast-icon' /></a></Card>
                                                                         <div className='menu-toast-text'>좋아요</div>
                                                                 </li>

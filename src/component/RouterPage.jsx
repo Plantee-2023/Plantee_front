@@ -19,8 +19,8 @@ import DiaryCalendar from './diary/DiaryCalendar';
 import DiaryList from './diary/DiaryList';
 import PlantDictionary from './plant/PlantDictionary';
 import PlantDetails from './plant/PlantDetails';
-import Favorite from './mypage/Favorite';
-import Comment from './mypage/Comment';
+import MyPageFavorite from './mypage/MyPageFavorite';
+import MyPageComment from './mypage/MyPageComment';
 
 
 
@@ -31,8 +31,8 @@ const RouterPage = () => {
             <Route path='/' element={<Main />} />
             <Route path='/main/magazine' element={<Magazine />} />
             <Route path='/main/magazineList' element={<MagazineList />} />
-            <Route path='/mypage/favorite' element={<Favorite/>} />
-            <Route path='/mypage/comment' element={<Comment/>} />
+            <Route path='/mypage/mypagefavorite' element={<MyPageFavorite/>} />
+            <Route path='/mypage/mypagecomment' element={<MyPageComment/>} />
 
             {/* 회원 */}
             <Route path='/users/loginPage' element={<LoginPage />} />
