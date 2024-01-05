@@ -7,13 +7,13 @@ import { Col, Card, FormControl, Form, InputGroup,  Pagination,  ProgressBar, Ro
 
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import Comm_plant from './Comm_plant';
+import Comm_plant from '../Comm_plant';
 
 const Comm_Write = () => {
  
 
   const [form, setForm] = useState({
-    user_id: 5, title: '테스트', category:1, contents: ''
+    user_id: 5, title: '테스트', category:3, contents: ''
   });
 
   const onChangeContents = (data) => {

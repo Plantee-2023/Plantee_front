@@ -85,7 +85,7 @@ const Menu = () => {
                         <GiTalk className='menu-icon' />
                         <NavDropdown className='menu-text-color' title="커뮤니티" id="basic-nav-dropdown">
                             <NavDropdown.Item href="/comm">자유게시판</NavDropdown.Item>
-                            <NavDropdown.Item href="">나눔</NavDropdown.Item>
+                            <NavDropdown.Item href="/comm/market">거래</NavDropdown.Item>
                         </NavDropdown>
                         <LiaStoreAltSolid className='menu-icon' />
                         <NavLink className='menu-magazine' to='/store/main'>스토어</NavLink>
