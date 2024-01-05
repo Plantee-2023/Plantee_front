@@ -1,20 +1,37 @@
  
 
 import axios from 'axios';
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState,useRef } from 'react'
 
 import { Col, Card, FormControl, Form, InputGroup,  Pagination,  ProgressBar, Row, NavLink, Image, Button } from 'react-bootstrap'
 
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import Comm_plant from './Comm_plant';
+import { useParams } from 'react-router-dom';
 
-const Comm_Write = () => {
+const Comm_Update = () => {
+
+
+    const {post_id } = useParams();
+    const [form, setForm] = useState("");
+    const ref_file = useReF(null);
+    const [src, setSrc] = useState('http://via.placeholder.com/200x200');
+    const [file, setFile] = useState(null);
+
  
 
-  const [form, setForm] = useState({
-    user_id: 5, title: '테스트', category:1, contents: ''
-  });
+    const getPost = async () => {
+        const res = await axios(`/comm/read/${post_id}`);
+        //console.log(res.data);
+        const data = {...res.data, html:content}
+        setForm(data);
+    }
+
+
+
+
+
 
   const onChangeContents = (data) => {
     setForm({
@@ -24,6 +41,9 @@ const Comm_Write = () => {
     });
 }
 
+
+
+
 const onClickSave = async () => {
   if (form.contents === "" ) {
       alert("내용을 입력해주세요.");
@@ -32,7 +52,7 @@ const onClickSave = async () => {
                   const data = { ...form, contents: form.contents 
          };
           //console.log(data);
-          await axios.post("/comm/insert", data);
+          await axios.post("/comm/update", data);
           alert("저장을 완료했습니다.");
         
       }
@@ -94,7 +114,7 @@ const onClickSave = async () => {
                 <hr />
 
 
-                <CKEditor config={{ ckfinder: { uploadUrl: '/comm/ckupload'  } }}
+                <CKEditor config={{ ckfinder: { uploadUrl: '/comm/ckupload/'  } }}
                     editor={ClassicEditor}
                     data={form.contents}
                     onChange={(event, editor) => { onChangeContents(editor.getData()); }} />
@@ -119,7 +139,7 @@ const onClickSave = async () => {
           
           <div className='text-end mt-2'>
 
-            <Button className='me-2' vaiant='success'  onClick={onClickSave}>등록</Button>
+            <Button className='me-2' vaiant='success'  onClick={onClickSave}>수정</Button>
             <Button className='text-end' vaiant='secondary'>취소</Button>
           </div>
         </Col>
@@ -130,4 +150,4 @@ const onClickSave = async () => {
   )
 }
 
-export default Comm_Write
+export default Comm_Update
