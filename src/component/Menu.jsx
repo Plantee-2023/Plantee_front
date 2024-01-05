@@ -47,8 +47,8 @@ const Menu = () => {
                         <ul className='menu_mymenu'>
                             {!sessionStorage.getItem("uid") ?
                                 <>
-                                    <li><NavLink to='/users/LoginPage'>로그인</NavLink></li>
                                     <li><NavLink to='/users/Join'>회원가입</NavLink></li>
+                                    <li><NavLink to='/users/LoginPage'>로그인</NavLink></li>
                                 </>
                                 :
                                 <>

@@ -1,6 +1,6 @@
 import React from 'react'
 
-const StoreComments = () => {
+const StoreQuestion = () => {
     return (
         <>
 
@@ -8,4 +8,4 @@ const StoreComments = () => {
     )
 }
 
-export default StoreComments
+export default StoreQuestion
