@@ -40,8 +40,8 @@ const RouterPage = () => {
             <Route path='/users/myPage' element={<MyPage />} />
 
             {/* 추천 */}
-            <Route path='/plant/dictionary' element={<PlantDictionary />} />
-            <Route path='/plant/details' element={<PlantDetails />} />
+            <Route path='/plant' element={<PlantDictionary />} />
+            <Route path='/plant/read/:plant_id' element={<PlantDetails />} />
 
             {/* 커뮤니티 */}
             <Route path="/comm" element={<Community />} />
