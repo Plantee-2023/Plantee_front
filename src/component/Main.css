@@ -146,12 +146,24 @@ input:focus {
     font-weight: 900;
     margin-top: 7px;
 }
-
 .menu-card {
-    margin-top: 10px;
-    padding: 5px;
+    margin-right: 23px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    border: none !important;
 }
-
+.menu-card-card {
+    margin-top: 10px;
+}
+ul,li{
+    list-style: none;
+    margin: 0 auto;
+    padding: 0px !important;
+    
+}
+.menu-toast-icon {
+    font-size: 50px;
+}
 .menu-btn {
     background-color: #4cc67c !important;
     border: none !important;
@@ -163,6 +175,13 @@ input:focus {
 .menu-toast {
     margin-right: 22%;
     margin-top: 6%;
+}
+
+.menu-toast-text {
+    margin-left: 4px;
+    margin-top: 5px;
+    font-weight: 600;
+    font-size: 15px;
 }
 
 .menu-close-btn {

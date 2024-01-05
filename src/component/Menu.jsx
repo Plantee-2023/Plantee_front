@@ -3,10 +3,13 @@ import './Main.css'
 import { InputGroup, NavDropdown, Navbar, Nav, Toast, CloseButton, ToastContainer, Card } from 'react-bootstrap'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { LiaStoreAltSolid } from "react-icons/lia";
-import { PiUserListBold } from "react-icons/pi";
+import { PiUserListBold, PiCookingPot } from "react-icons/pi";
 import { GiTalk } from "react-icons/gi";
 import { FiBookOpen } from "react-icons/fi";
 import { SlNotebook } from "react-icons/sl";
+import { CiCalendar } from "react-icons/ci";
+import { MdFavoriteBorder } from "react-icons/md";
+import { TfiWrite } from "react-icons/tfi";
 import { BoxContext } from './common/BoxContext';
 
 const Menu = () => {
@@ -50,19 +53,39 @@ const Menu = () => {
                                     <li><NavLink to='/users/Join'>회원가입</NavLink></li>
                                 </>
                                 :
-                                <>  
+                                <>
                                     <li><NavLink to='/users/mypage'>마이 페이지</NavLink></li>
                                     <li>
                                         <div onClick={toggleShowA} style={{ cursor: 'pointer' }} >{sessionStorage.getItem("uid")}님
                                             <ToastContainer position={'top-end'} className='menu-toast'>
                                                 <Toast show={showA}>
-                                                    <CloseButton className='menu-close-btn'/>
+                                                    <CloseButton className='menu-close-btn' />
                                                     <Toast.Body>
                                                         <NavLink className='menu-btn btn' to="/users/mypage">내 정보</NavLink>
-                                                        <Card className='menu-card'><a href='/diary/diarycalendar'>캘린더</a></Card>
-                                                        <Card className='menu-card'>나의 레시피</Card>
-                                                        <Card className='menu-card'>내가 등록한글</Card>
-                                                        <Card className='menu-card'>좋아요 목록</Card>
+                                                        <Card className='menu-card-card'>
+                                                            <ul id='menu-ul'>
+                                                                <li>
+                                                                    <Card className='menu-card'><a href='/diary/diarycalendar'>
+                                                                        <CiCalendar className='menu-toast-icon' />
+                                                                        <div className='menu-toast-text'>캘린더</div></a></Card>
+                                                                </li>
+                                                                <li>
+                                                                    <Card className='menu-card'><a href='/plant/recipe'>
+                                                                        <PiCookingPot className='menu-toast-icon' />
+                                                                        <div className='menu-toast-text'>레시피</div></a></Card>
+                                                                </li>
+                                                                <li>
+                                                                    <Card className='menu-card'><a href='/mypage/comment'>
+                                                                        <TfiWrite className='menu-toast-icon' />
+                                                                        <div className='menu-toast-text'>나의 글</div></a></Card>
+                                                                </li>
+                                                                <li>
+                                                                    <Card className='menu-card'><a href='/mypage/favorite'>
+                                                                        <MdFavoriteBorder className='menu-toast-icon' />
+                                                                        <div className='menu-toast-text'>좋아요</div></a></Card>
+                                                                </li>
+                                                            </ul>
+                                                        </Card>
                                                     </Toast.Body>
                                                 </Toast>
                                             </ToastContainer>
