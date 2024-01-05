@@ -50,7 +50,7 @@ const RouterPage = () => {
             <Route path="/comm/read/:post_id" element={<Comm_Read />} />
 
             {/* 스토어 */}
-            <Route path='/store/main' element={<StoreMain />} />
+            <Route path='/store' element={<StoreMain />} />
             <Route path='/store/read/:store_id' element={<StoreRead />} />
 
             {/* 다이어리 */}
