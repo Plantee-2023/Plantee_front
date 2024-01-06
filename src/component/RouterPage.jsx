@@ -9,6 +9,7 @@ import MagazineList from './main/MagazineList';
 import MagazineInsert from './main/MagazineInsert';
 import StoreMain from './store/StoreMain';
 import StoreRead from './store/StoreRead';
+import StoreUpdate from './store/StoreUpdate';
 import Community from './community/Community';
 import Comm_Read from './community/Comm_Read';
 import Comm_Write from './community/Comm_Write';
@@ -52,6 +53,7 @@ const RouterPage = () => {
             {/* 스토어 */}
             <Route path='/store' element={<StoreMain />} />
             <Route path='/store/read/:store_id' element={<StoreRead />} />
+            <Route path='/store/update/:store_id' element={<StoreUpdate />} />
 
             {/* 다이어리 */}
             <Route path='/diary/main/:uid' element={<DiaryMain />} />
