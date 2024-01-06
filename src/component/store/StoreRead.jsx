@@ -44,7 +44,6 @@ const StoreRead = () => {
 
     useEffect(() => { getStore(); }, [])
 
-
     if (loading) return <div className='text-center my-5'><Spinner animation="border" variant="success" /></div>
     return (
         <>

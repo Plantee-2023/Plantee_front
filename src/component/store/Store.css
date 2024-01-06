@@ -43,3 +43,6 @@ input:focus {outline:none;}
 
 /* 스토어 상품 수정 */
 .update_form {width: 100%;}
+
+/* 스토어 댓글 관련 */
+.comment_contents {padding-top: 50px;}
