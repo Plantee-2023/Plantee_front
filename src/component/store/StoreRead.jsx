@@ -62,7 +62,7 @@ const StoreRead = () => {
                             <section className='store_info_section'>
                                 <section className='store_title_section'>
                                     <div className='store_title'>
-                                        <h5><Badge>{tag}</Badge></h5>
+                                        <button className='tag_badge mb-2'>{tag}</button>
                                         <h1 className='store_maintitle'>{title}</h1>
                                     </div>
                                 </section>
