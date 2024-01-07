@@ -5,7 +5,7 @@ import { Spinner, Row, Col, Badge, Button, Tabs, Tab, Alert } from 'react-bootst
 import { BoxContext } from '../common/BoxContext';
 import "./Store.css";
 import { TiHeart } from "react-icons/ti";
-import StoreComments from "./StoreComments";
+import StoreReview from "./StoreReview";
 import StoreQuestion from "./StoreQuestion";
 import DeliveryService from './DeliveryService';
 
@@ -130,7 +130,7 @@ const StoreRead = () => {
                             {contents}
                         </Tab>
                         <Tab eventKey="review" title="상품리뷰">
-                            <StoreComments />
+                            <StoreReview />
                         </Tab>
                         <Tab eventKey="qna" title="상품문의">
                             <StoreQuestion />

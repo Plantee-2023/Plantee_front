@@ -46,3 +46,26 @@ input:focus {outline:none;}
 
 /* 스토어 댓글 관련 */
 .comment_contents {padding-top: 50px;}
+
+.star {
+    position: relative;
+    font-size: 32px;
+    color: #ddd;
+  }
+  
+  .star input {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    opacity: 0;
+  }
+  
+  .star span {
+    width: 0;
+    position: absolute;
+    left: 0;
+    color: red;
+    overflow: hidden;
+    pointer-events: none;
+  }
