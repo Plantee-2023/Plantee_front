@@ -79,14 +79,14 @@ const Menu = () => {
                     <Nav>
                         <PiUserListBold className='menu-icon' />
                         <NavDropdown className='menu-text-color' title="식물정보" id="basic-nav-dropdown">
-                            <NavDropdown.Item href="/plant/dictionary">식물백과</NavDropdown.Item>
+                            <NavDropdown.Item href="/plant">식물백과</NavDropdown.Item>
                             <NavDropdown.Item href="">식물 큐레이트</NavDropdown.Item>
                             <NavDropdown.Item href="">레시피</NavDropdown.Item>
                         </NavDropdown>
                         <GiTalk className='menu-icon' />
                         <NavDropdown className='menu-text-color' title="커뮤니티" id="basic-nav-dropdown">
                             <NavDropdown.Item href="/comm">자유게시판</NavDropdown.Item>
-                            <NavDropdown.Item href="">나눔</NavDropdown.Item>
+                            <NavDropdown.Item href="/comm/market">거래</NavDropdown.Item>
                         </NavDropdown>
                         <LiaStoreAltSolid className='menu-icon' />
                         <NavLink className='menu-magazine' to='/store'>스토어</NavLink>

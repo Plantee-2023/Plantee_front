@@ -8,3 +8,6 @@ ul.pagination li.active { background-color: #4cc37c; border-radius: 50px; }
 ul.pagination li a:hover, ul.pagination li a.active { color: #ccc; }
 
 .page-selection { width: 48px; height: 30px; color: #ccc; }
+
+
+.details_subtitle {font-size: 20px; font-weight: 600;}
