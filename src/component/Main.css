@@ -12,6 +12,19 @@
     font-size: 200px;
 }
 
+/* Button to Top */
+.btn_top {
+    position: fixed;
+    bottom: 10%;
+    right: 3rem;
+    background-color: #4cc37c;
+    color: white;
+    border: #4cc37c;
+    width: 50px;
+    height: 50px;
+    border-radius: 50px;
+}
+
 /* menu_search */
 .menu_header {
     width: 1280px;

@@ -25,6 +25,7 @@ const Menu = () => {
             }
         });
     }
+    
     return (
         <div className='menu_wrap'>
             <div className='menu_contents'>
@@ -46,20 +47,20 @@ const Menu = () => {
                         <ul className='menu_mymenu'>
                             {!sessionStorage.getItem("uid") ?
                                 <>
-                                    <li><NavLink to='/users/LoginPage'>로그인</NavLink></li>
                                     <li><NavLink to='/users/Join'>회원가입</NavLink></li>
+                                    <li><NavLink to='/users/LoginPage'>로그인</NavLink></li>
                                 </>
                                 :
-                                <>  
+                                <>
                                     <li><NavLink to='/users/mypage'>마이 페이지</NavLink></li>
                                     <li>
                                         <div onClick={toggleShowA} style={{ cursor: 'pointer' }} >{sessionStorage.getItem("uid")}님
                                             <ToastContainer position={'top-end'} className='menu-toast'>
                                                 <Toast show={showA}>
-                                                    <CloseButton className='menu-close-btn'/>
+                                                    <CloseButton className='menu-close-btn' />
                                                     <Toast.Body>
                                                         <NavLink className='menu-btn btn' to="/users/mypage">내 정보</NavLink>
-                                                        <Card className='menu-card'><a href='/diary/diarycalendar'>캘린더</a></Card>
+                                                        <Card className='menu-card'><a href='/diary/calendar'>캘린더</a></Card>
                                                         <Card className='menu-card'>나의 레시피</Card>
                                                         <Card className='menu-card'>내가 등록한글</Card>
                                                         <Card className='menu-card'>좋아요 목록</Card>
@@ -88,7 +89,7 @@ const Menu = () => {
                             <NavDropdown.Item href="/comm/market">거래</NavDropdown.Item>
                         </NavDropdown>
                         <LiaStoreAltSolid className='menu-icon' />
-                        <NavLink className='menu-magazine' to='/store/main'>스토어</NavLink>
+                        <NavLink className='menu-magazine' to='/store'>스토어</NavLink>
                         <FiBookOpen className='menu-icon' />
                         <NavLink className='menu-magazine' to='/main/magazineList'>매거진</NavLink>
                     </Nav>
