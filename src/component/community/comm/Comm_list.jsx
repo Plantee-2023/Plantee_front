@@ -1,12 +1,15 @@
 
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
-import { InputGroup, Table, FormControl, Button, Pagination, Row, NavLink, Col } from 'react-bootstrap'
+import { InputGroup, Table, FormControl, Button,  Row, NavLink, Col } from 'react-bootstrap'
 import { Link, useLocation, useNavigate } from 'react-router-dom';
+import Pagination from 'react-js-pagination';
+import "../../common/Pagination.css"
+import "../Community.css"
 
 
 
-const Community = () => {
+const Comm_list = () => {
 
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -97,8 +100,22 @@ const onChangeSingle = (e, post_id) => {
         <Row className='justify-content-center'>
 
           <h1 text-center mb-5>커뮤니티</h1>
-
+ 
+          <div className='plant_wrap'>
+      <div className='plant_contents'>
+        <div className='first_filter_section'>
+          <ul className='filter_list'>
          
+            <button className='filter_btn' type='button'  >식물자랑</button>
+            <button className='filter_btn' type='button'  >Q&A</button>
+            <button className='filter_btn' type='button'  >전체보기</button>
+            
+          </ul>
+        </div>
+        </div>
+        </div>
+
+
           <div className='text-end mb-2'> <Button  onClick={()=>onClickDelete()}  >삭제</Button></div>
 
         </Row>
@@ -108,7 +125,7 @@ const onChangeSingle = (e, post_id) => {
 
           <thead>
             <tr>
-            <input type='checkbox' onChange={onChangeAll} checked={posts.length === cnt}/>
+            <input type='checkbox' onChange={onChangeAll} checked={posts.length === cnt && !posts.length===0}/>
               <th>No</th>
               <th>구분</th>
               <th>제목</th>
@@ -154,41 +171,37 @@ const onChangeSingle = (e, post_id) => {
           
         
         </Table>
-        <div className='text-end mb-2' >  <a className='btn btn-success' href="http://localhost:3000/comm/write">글쓰기</a> </div>
+        <div className='text-end mb-2' >  <a className='btn btn-success' href="http://localhost:3000/comm/market/write">글쓰기</a> </div>
 
         
-  
+ 
+       
+                                   
+                                   
+        <form >
+                                        <InputGroup className='store_searchinputwrap'>
+                                            <input   type='search' className='store_searchinput' placeholder='검색어를 입력해주세요.' />
+                                            <button className='store_searchbtn' type='submit'><img src='/image/search_icon.png' /></button>
+                                        </InputGroup>
+                                    </form>
+                                    
+     
+        
+       
 
-        <InputGroup className="mb-3">
-          <FormControl
-            placeholder="Recipient's username"
-
-          /><Button variant='success'>검색</Button>
-
-        </InputGroup>
-
-
-        <Pagination  >
-          <Pagination.First />
-          <Pagination.Prev />
-          <Pagination.Item>{1}</Pagination.Item>
-          <Pagination.Ellipsis />
-
-          <Pagination.Item>{10}</Pagination.Item>
-          <Pagination.Item>{11}</Pagination.Item>
-          <Pagination.Item active>{12}</Pagination.Item>
-          <Pagination.Item>{13}</Pagination.Item>
-          <Pagination.Item disabled>{14}</Pagination.Item>
-
-          <Pagination.Ellipsis />
-          <Pagination.Item>{20}</Pagination.Item>
-          <Pagination.Next />
-          <Pagination.Last />
-        </Pagination>
       </div>
-
+       
+     
+      <Pagination
+                activePage={1}
+                itemsCountPerPage={8}
+                totalItemsCount={88}
+                pageRangeDisplayed={10}
+                prevPageText={"‹"}
+                nextPageText={"›"}
+                onChange={(page) => { }} />
     </div>
   )
 }
 
-export default Community 
+export default Comm_list 

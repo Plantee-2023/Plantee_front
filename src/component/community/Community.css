@@ -5,6 +5,32 @@
     height: 700px; padding: 40px 0; 
     background-color: #A8C0D6; overflow-y: scroll;
    }
+
+
+/* 필터  */
+.plant_wrap {width: 100%; margin: 0 auto;}
+.plant_contents {width: 1280px; margin: 0 auto;}
+.first_filter_section {margin: 2rem 0 0 -2rem; padding: 0; border: 0; vertical-align: baseline;}
+.filter_list {display: flex; flex-wrap: wrap;}
+
+/* 검색바 */
+.button_hide {background-color: #ffffff; border: #ffffff;}
+.store_filterbtn_group {margin-top: 2%;}
+.store_filterbtn {background-color: #fff; border: 1px solid #adadad; border-radius: 30px; color: #333333; padding: 0 25px 0 25px; height: 40px; justify-content: center; align-items: center;}
+.store_filterbtn:hover {background-color: #4cc67c; border-radius: 30px; color: #fff; padding: 0 25px 0 25px; height: 40px; justify-content: center; align-items: center;}
+.store_filterbtn_clicked {background-color: #4cc67c; border: none; border-radius: 30px; color: #fff; padding: 0 25px 0 25px; height: 40px; justify-content: center; align-items: center;}
+
+.store_searchinputwrap {border: 1px solid #4cc37c; padding: 3%; border-radius: 40px;}
+.store_searchinput {width: 75%; border: none;}
+input:focus {outline:none;}
+.store_searchbtn {border: none; background: none;}
+.store_searchbtn img {width: 26px; height: 26px; margin-left: 70%;}
+
+
+
+
+
+
    .wrap::-webkit-scrollbar {
     width: 10px; }
    .wrap::-webkit-scrollbar-track {
