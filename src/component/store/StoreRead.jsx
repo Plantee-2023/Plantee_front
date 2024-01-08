@@ -1,11 +1,11 @@
 import axios from 'axios';
 import React, { useEffect, useState, useContext } from 'react'
 import { useParams, useNavigate, NavLink } from 'react-router-dom';
-import { Spinner, Row, Col, Badge, Button, Tabs, Tab, Alert } from 'react-bootstrap';
+import { Spinner, Row, Col, Button, Tabs, Tab, Alert, Card, Badge } from 'react-bootstrap';
 import { BoxContext } from '../common/BoxContext';
 import "./Store.css";
 import { TiHeart } from "react-icons/ti";
-import StoreComments from "./StoreComments";
+import StoreReview from "./StoreReview";
 import StoreQuestion from "./StoreQuestion";
 import DeliveryService from './DeliveryService';
 
@@ -30,6 +30,15 @@ const StoreRead = () => {
         setLoading(false);
     }
 
+    const onClickCart = async () => {
+        await axios.post()
+        if (window.confirm("장바구니로 이동하시겠습니까?")) {
+            window.location.href = "/";
+        } else {
+            window.location.href = "/";
+        }
+    }
+
     const onDelete = () => {
         setBox({
             show: true,
@@ -44,7 +53,6 @@ const StoreRead = () => {
 
     useEffect(() => { getStore(); }, [])
 
-
     if (loading) return <div className='text-center my-5'><Spinner animation="border" variant="success" /></div>
     return (
         <>
@@ -54,7 +62,16 @@ const StoreRead = () => {
 
                         <section className='store_img_section'>
                             <div className='store_img'>
-                                <img src="http://via.placeholder.com/200x200" />
+                                {sessionStorage.getItem("uid") === uid ?
+                                    <>
+                                        <Card.Img variant="top" src="http://via.placeholder.com/200x200" />
+                                        <Card.ImgOverlay>
+                                            <h5><Badge bg="success">내가 쓴 글</Badge></h5>
+                                        </Card.ImgOverlay>
+                                    </>
+                                    :
+                                    <img src="http://via.placeholder.com/200x200" />
+                                }
                             </div>
                         </section>
 
@@ -62,7 +79,7 @@ const StoreRead = () => {
                             <section className='store_info_section'>
                                 <section className='store_title_section'>
                                     <div className='store_title'>
-                                        <button className='tag_badge mb-2'>{tag}</button>
+                                        <button className='store_tag_badge mb-2'>{tag}</button>
                                         <h1 className='store_maintitle'>{title}</h1>
                                     </div>
                                 </section>
@@ -110,7 +127,7 @@ const StoreRead = () => {
                                         </>
                                         :
                                         <>
-                                            <button className='store_filterbtn me-3'>장바구니</button>
+                                            <button className='store_filterbtn me-3' onClick={onClickCart}>장바구니</button>
                                             <button className='store_filterbtn'>바로구매</button>
                                         </>
                                     }
@@ -131,10 +148,10 @@ const StoreRead = () => {
                             {contents}
                         </Tab>
                         <Tab eventKey="review" title="상품리뷰">
-                            <StoreComments />
+                            <StoreReview uid={uid} />
                         </Tab>
                         <Tab eventKey="qna" title="상품문의">
-                            <StoreQuestion />
+                            <StoreQuestion uid={uid} />
                         </Tab>
                         <Tab eventKey="carry" title="배송/반품/교환">
                             <DeliveryService />
