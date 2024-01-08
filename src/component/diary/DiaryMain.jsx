@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Card, CardBody, Col, Container, Form, InputGroup, NavLink, Row, Spinner } from 'react-bootstrap';
+import { Button, Card, CardBody, Col, Container, Form, InputGroup, Row, Spinner } from 'react-bootstrap';
 import DiaryTag from './DiaryTag';
 import axios from 'axios'
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 
 const DiaryMain = () => {
     const [list, setList] = useState([]);
     // const { uid } = useParams();
     const [loading, setLoading] = useState(false);
-
     const navi = useNavigate();
 
     const getList = async () => {
@@ -25,6 +24,36 @@ const DiaryMain = () => {
         navi(`/diary/main/insert`);
 
     }
+
+    const getSun = (icon_sun) => {
+        switch (icon_sun) {
+            case '1':
+                return '100';
+            case '2':
+                return '2';
+            case '3':
+                return '5';
+            case '4':
+                return '2';
+            default:
+                return '1200';
+        }
+    };
+
+    const getWater = (icon_water) => {
+        switch (icon_water) {
+            case '1':
+                return '10110';
+            case '2':
+                return '1112';
+            case '3':
+                return '5111';
+            case '4':
+                return '21111';
+            default:
+                return '1200';
+        }
+    };
 
     useEffect(() => {
         getList();
@@ -48,26 +77,22 @@ const DiaryMain = () => {
                     </form>
                 </div>
                 <div className='text-end mt-3'>
-                <Button className='diary-img-btn' onClick={() => { onClickInsert() }}>등록하기</Button>
+                    <Button className='diary-img-btn' onClick={() => { onClickInsert() }}>등록하기</Button>
                 </div>
                 <div className='text-center'>
                     {list.map(d =>
                         <div className='diary_detail my-5'>
-                            <NavLink to={`/diary/main/read/`}>{/*${diary_id} */}
+                            <Link to={`/diary/read/${d.diary_id}`}>
                                 <Row>
                                     <Col>
                                         <br />
-                                        <h1>D-1</h1>
+                                        <h1>D-10</h1>
                                         <hr className='diary_dayline' />
                                         <p className='diary_icon_sun'>
-                                            <img src='/image/icon_sun.png' width={'60px'} height={'60px'} />
-                                            <img src='/image/icon_sun.png' width={'60px'} height={'60px'} />
-                                            <img src='/image/icon_sun.png' width={'60px'} height={'60px'} />
-                                            <img src='/image/icon_sun.png' width={'60px'} height={'60px'} />
+                                            <p>{getSun(d.icon_sun)}</p>
                                         </p>
                                         <p>
-                                            <img src='/image/icon_water.png' width={'40px'} height={'40px'} />
-                                            <img src='/image/icon_water.png' width={'40px'} height={'40px'} />
+                                            <p>{getWater(d.icon_water)}</p>
                                         </p>
                                     </Col>
                                     <Col>
@@ -80,7 +105,7 @@ const DiaryMain = () => {
                                         <h1>{d.plant_name}</h1>
                                     </Col>
                                 </Row>
-                            </NavLink>
+                            </Link>
                         </div>
                     )}
                     <div className='diarymain_cardgroup'>
