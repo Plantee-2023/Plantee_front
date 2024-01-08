@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './Plant.css';
 import { Spinner } from 'react-bootstrap';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 const PlantDictionary = () => {
 
@@ -74,13 +75,16 @@ const PlantDictionary = () => {
             <div className='plant_total'>
             <span>총 식물 데이터 : <strong>{total}</strong> </span>
             </div>
-            <div className='plant_filter'>
-              <button>인기순</button>
-              <span>|</span>
-              <button>최신순</button>
-            </div>
           </div>
         </div>
+        
+        {/* 관리자 */}
+        {sessionStorage.getItem('uid') === 'admin' &&
+          <div className='plant_insert'>
+            <Link to="/plant/insert"><button>추가하기</button></Link>
+          </div>
+        }
+        
         <div className='plant_list'>
           <ul className='plant_list_items'>
             {plants.map(p =>
