@@ -1,7 +1,17 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef, useState, useLocation } from 'react'
 import { Button, Card, Form, Spinner } from 'react-bootstrap'
+import { useNavigate } from 'react-router-dom'
 
 const MagazineInsert = () => {
+    const navi = useNavigate();
+    
+    const onSubmit = async (e) => {
+        e.preventDefault();
+        if (window.confirm("등록 하시겠습니까?")) {
+            alert("등록 성공.");
+            navi(`/main/magazineList`);
+        }
+    }
     const [loading, setLoading] = useState(false);
     const img_ref = useRef(null);
 
@@ -19,7 +29,7 @@ const MagazineInsert = () => {
                     </div>
                     <Form.Control placeholder='내용을 입력해주세요.' as="textarea" rows={10} className='insert-text' />
                 </Card>
-                <Button className='insert-btn1 btn-lg'>등록</Button>
+                <Button onClick={onSubmit} className='insert-btn1 btn-lg'>등록</Button>
                 <Button className='insert-btn2 btn-lg'>취소</Button>
             </div>
         </div>

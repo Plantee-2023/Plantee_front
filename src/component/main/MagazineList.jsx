@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { Col, Form, InputGroup, Row, Button, Table, Spinner, Card } from 'react-bootstrap'
-import { NavLink } from 'react-router-dom'
+import { NavLink,useLocation } from 'react-router-dom'
 import { AiOutlineEdit } from "react-icons/ai";
 import { useState } from 'react';
 import Pagination from 'react-js-pagination';
@@ -8,8 +8,11 @@ import "../common/Pagination.css"
 import './Magazine.css'
 
 const MagazineList = () => {
+    const location = useLocation();
+    const search = new URLSearchParams(location.search);
     const [loading, setLoading] = useState(false);
-
+    const page = search.get("page") ? parseInt(search.get("page")) : 1;
+    
     const getMagazineList = () => {
         setLoading(true);
         setLoading(false);
@@ -17,7 +20,7 @@ const MagazineList = () => {
 
     useEffect(() => {
         getMagazineList();
-    }, [])
+    }, [location])
 
     if (loading) return <div className='text-center'><Spinner size='lg' /></div>
     return (

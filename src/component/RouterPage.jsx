@@ -33,6 +33,7 @@ const RouterPage = () => {
             <Route path='/' element={<Main />} />
             <Route path='/main/magazine' element={<Magazine />} />
             <Route path='/main/magazineList' element={<MagazineList />} />
+            <Route path='/main/magazineInsert' element={<MagazineInsert />} />
             <Route path='/mypage/mypagefavorite' element={<MyPageFavorite/>} />
             <Route path='/mypage/mypagecomment' element={<MyPageComment/>} />
 
