@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import { InputGroup, NavDropdown, Navbar, Nav, Toast, CloseButton, ToastContainer, Card } from 'react-bootstrap'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { LiaStoreAltSolid } from "react-icons/lia";
@@ -12,8 +12,23 @@ import { TfiWrite } from "react-icons/tfi";
 import { BoxContext } from './common/BoxContext';
 import './Main.css'
 
-const Menu = () => {
+export const useScroll = () => {
+    const [state, setState] = useState({
+        x: 0,
+        y: 0
+    });
+    const onScroll = () => {
+        setState({ y: window.scrollY, x: window.screenX });
+    };
+    useEffect(() => {
+        window.addEventListener("scroll", onScroll);
+        return () => window.removeEventListener("scroll", onScroll);
+    }, []);
+    return state;
+};
 
+const Menu = () => {
+    const { y } = useScroll();
     const [showA, setShowA] = useState(false);
     const toggleShowA = () => setShowA(!showA);
     const { box, setBox } = useContext(BoxContext);
@@ -36,21 +51,13 @@ const Menu = () => {
                         <h1 className='menu_logo'>
                             <a href='/'><img src='/image/logo.png' /></a>
                         </h1>
-                        <div className='menu_searchwrap'>
-                            <form>
-                                <InputGroup className='menu_searchinputwrap'>
-                                    <input type='search' className='menu_searchinput' placeholder='검색어를 입력해주세요.' />
-                                    <button className='menu_searchbtn' type='submit'><img src='/image/search_icon.png' /></button>
-                                </InputGroup>
-                            </form>
-                        </div>
                     </div>
                     <div className='menu_right'>
                         <ul className='menu_mymenu'>
                             {!sessionStorage.getItem("uid") ?
                                 <>
-                                    <li><NavLink to='/users/LoginPage'>로그인</NavLink></li>
                                     <li><NavLink to='/users/Join'>회원가입</NavLink></li>
+                                    <li><NavLink to='/users/LoginPage'>로그인</NavLink></li>
                                 </>
                                 :
                                 <>
@@ -68,22 +75,22 @@ const Menu = () => {
                                                                 <li>
                                                                     <Card className='menu-card1'><a href='/diary/diarycalendar'>
                                                                         <CiCalendar className='menu-toast-icon' /></a></Card>
-                                                                        <div className='menu-toast-text'>캘린더</div>
+                                                                    <div className='menu-toast-text'>캘린더</div>
                                                                 </li>
                                                                 <li>
                                                                     <Card className='menu-card2'><a href='/plant/recipe'>
                                                                         <PiCookingPot className='menu-toast-icon' /></a></Card>
-                                                                        <div className='menu-toast-text'>레시피</div>
+                                                                    <div className='menu-toast-text'>레시피</div>
                                                                 </li>
                                                                 <li>
                                                                     <Card className='menu-card3'><a href='/mypage/mypagecomment'>
                                                                         <TfiWrite className='menu-toast-icon' /></a></Card>
-                                                                        <div className='menu-toast-text'>나의 글</div>
+                                                                    <div className='menu-toast-text'>나의 글</div>
                                                                 </li>
                                                                 <li>
                                                                     <Card className='menu-card4'><a href='/mypage/mypagefavorite'>
                                                                         <MdFavoriteBorder className='menu-toast-icon' /></a></Card>
-                                                                        <div className='menu-toast-text'>좋아요</div>
+                                                                    <div className='menu-toast-text'>좋아요</div>
                                                                 </li>
                                                             </ul>
                                                         </Card>
@@ -98,21 +105,21 @@ const Menu = () => {
                         </ul>
                     </div>
                 </div>
-                <Navbar className="menu-back-color">
+                <Navbar className={y < 100 ? "menu-back-color" : "menu-fixed-back-color"}>
                     <Nav>
                         <PiUserListBold className='menu-icon' />
                         <NavDropdown className='menu-text-color' title="식물정보" id="basic-nav-dropdown">
-                            <NavDropdown.Item href="/plant/dictionary">식물백과</NavDropdown.Item>
+                            <NavDropdown.Item href="/plant">식물백과</NavDropdown.Item>
                             <NavDropdown.Item href="">식물 큐레이트</NavDropdown.Item>
                             <NavDropdown.Item href="">레시피</NavDropdown.Item>
                         </NavDropdown>
                         <GiTalk className='menu-icon' />
                         <NavDropdown className='menu-text-color' title="커뮤니티" id="basic-nav-dropdown">
                             <NavDropdown.Item href="/comm">자유게시판</NavDropdown.Item>
-                            <NavDropdown.Item href="">나눔</NavDropdown.Item>
+                            <NavDropdown.Item href="/comm/market">거래</NavDropdown.Item>
                         </NavDropdown>
                         <LiaStoreAltSolid className='menu-icon' />
-                        <NavLink className='menu-magazine' to='/store/main'>스토어</NavLink>
+                        <NavLink className='menu-magazine' to='/store'>스토어</NavLink>
                         <FiBookOpen className='menu-icon' />
                         <NavLink className='menu-magazine' to='/main/magazineList'>매거진</NavLink>
                     </Nav>

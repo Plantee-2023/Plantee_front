@@ -2,17 +2,18 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { Row, Col, Card, Form,Button,Modal } from 'react-bootstrap'
 import moment from 'moment'
-import { app } from '../../firebaseInit'
+import { app } from '../../../firebaseInit'
 import { getDatabase, push, set, ref, onValue, remove } from 'firebase/database'
 
-const Chat_modal = ({box,setBox}) => {
+const Chat_modal = ({post,box,setBox}) => {
+    const uid=sessionStorage.getItem("uid");
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
 
     //const email = sessionStorage.getItem('email');
-    const uid='gold'
+    
     const db = getDatabase(app);
     const ref_bottom = useRef(null); 
     const [text, setText] = useState(''); 
@@ -23,7 +24,7 @@ const Chat_modal = ({box,setBox}) => {
         const key = push(ref(db, 'chat')).key; 
         const date = moment(new Date()).format('YYYY-MM-DD HH:mm:ss'); 
         await set(ref(db, `chat/${key}`), 
-        { date: date, uid: uid, text: text }); 
+        { date: date, uid:uid , text: text }); 
         setText('');
     }
 
@@ -58,7 +59,7 @@ const Chat_modal = ({box,setBox}) => {
         <>
 
 <Button variant="primary" onClick={handleShow}>
-                대화하기
+               대화하기
             </Button>
 
 
@@ -69,7 +70,7 @@ const Chat_modal = ({box,setBox}) => {
             keyboard={false}>
 
             <Modal.Header closeButton>
-                <Modal.Title> 대화하기 </Modal.Title>
+                <Modal.Title>  {post.uid}님과  대화하기 </Modal.Title>
             </Modal.Header>
 
 
@@ -77,7 +78,7 @@ const Chat_modal = ({box,setBox}) => {
             <Modal.Body>
                 <Card className='p-3'>
                 <Row className='my-5 justify-content-center'>
-            {uid}님과 채팅
+          
             <Col md={12}>
 
 
@@ -86,22 +87,28 @@ const Chat_modal = ({box,setBox}) => {
                     <div className='wrap'>
                         {messages.map(msg =>
                             <div key={msg.key}>
+                                {msg.uid===post.uid || msg.uid===sessionStorage.getItem("uid")?
+                                <>
                                 <div className={msg.uid === uid ? 'chat ch2' : 'chat ch1'}>
                                     {msg.uid !== uid &&
                                         <div className='icon'>
                                             <img src='https://via.placeholder.com/50x50' /><div className='sender'>{msg.uid}</div>
                                         </div>
                                     }
+                                
                                     <div className='textbox'>
                                         <div>
                                             {msg.text}
                                             {msg.uid === uid && <a href="#" onClick={(e) => onDelete(e, msg.key)}>x</a>}
                                         </div>
-                                        <div className='date'>{msg.date}</div>
+                                        <div className='date'>{msg.date}</div> 
                                     </div>
                                 </div>
-                            </div>
-                        )}
+                                </>: null }
+                            </div> 
+
+                           
+                        )} 
                         <div ref={ref_bottom}></div>
                     </div>
                     <Form onSubmit={onSend}>

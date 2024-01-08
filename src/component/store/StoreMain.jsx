@@ -13,6 +13,7 @@ const StoreMain = () => {
     const [isClickGoods, setClickGoods] = useState(false);
 
     const [goods, setGoods] = useState([]);
+    const [total, setTotal] = useState(0);
 
     const getList = async () => {
         setLoading(true)
@@ -28,7 +29,6 @@ const StoreMain = () => {
         <>
             <div className='store_wrap'>
                 <div className='store_contents'>
-
                     <div className='store_filterbtn_group'>
                         <button className='plant_filterbtn'>↺</button>
                         <button className='button_hide' onClick={() => { setClickPlant((e) => !e); }} >
@@ -42,7 +42,6 @@ const StoreMain = () => {
                             </div>
                         </button>
                     </div>
-
                     {isClickPlant && (
                         <>
                             <div className='store_filterbtn_group'>
@@ -61,10 +60,9 @@ const StoreMain = () => {
                             </div>
                         </>
                     )}
-
                     <div>
                         <Navbar bg="#ffffff" data-bs-theme="light" className='pt-3 pb-3'>
-                            <div>총 ###,###건</div>
+                            <div>총 {goods.length}건</div>
                             <Container fluid>
                                 <Navbar.Collapse id="navbarScroll">
                                     <Nav className="me-auto my-2 my-lg-0" style={{ maxHeight: '100px' }} navbarScroll >
@@ -84,27 +82,35 @@ const StoreMain = () => {
                             </Container>
                         </Navbar>
                     </div>
-
                     <Row sm={1} md={3} lg={5} className="g-4">
                         {goods.map(g =>
                             <Col key={g.store_id} className="p-4">
                                 <Card style={{ border: 'none' }}>
                                     <NavLink to={`/store/read/${g.store_id}`} style={{ color: "black" }}>
-                                        <Card.Img variant="top" src="http://via.placeholder.com/10x10" />
+                                        {sessionStorage.getItem("uid") === g.uid ?
+                                            <>
+                                                <Card.Img variant="top" src="http://via.placeholder.com/10x10" />
+                                                <Card.ImgOverlay>
+                                                    <h5><Badge bg="success">내가 쓴 글</Badge></h5>
+                                                </Card.ImgOverlay>
+                                            </>
+                                            :
+                                            <>
+                                                <Card.Img variant="top" src="http://via.placeholder.com/10x10" />
+                                            </>
+                                        }
                                         <Card.Body>
                                             <Card.Title>{g.title}</Card.Title>
                                             <Card.Text>{g.fmtprice}원<br /></Card.Text>
-                                            <h5><Badge pill bg="success" style={{ background: '#4cc37c' }}>{g.tag}</Badge></h5>
+                                            <button className='tag_badge'>{g.tag}</button>
                                         </Card.Body>
                                     </NavLink>
                                 </Card>
                             </Col>
                         )}
                     </Row>
-
                 </div>
             </div>
-
             <Pagination
                 activePage={1}
                 itemsCountPerPage={8}

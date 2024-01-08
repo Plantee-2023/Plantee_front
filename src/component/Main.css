@@ -15,10 +15,36 @@
         border-color: #4cc67c;
     }
 
+    /* Button to Top */
+    .btn_top {
+        position: fixed;
+        bottom: 10%;
+        right: 3rem;
+        background-color: #4cc37c;
+        color: white;
+        border: #4cc37c;
+        width: 50px;
+        height: 50px;
+        border-radius: 50px;
+    }
+
+    /* menu_search */
+    .menu_header {
+        width: 1280px;
+        padding: 3rem 0 0;
+        display: flex;
+        justify-content: space-between;
+    }
+
     .main-spinner {
         margin-top: 50px;
         text-align: center;
         font-size: 200px;
+    }
+    
+    .main-carousel{
+        margin-top: 30px;
+        margin-bottom: 50px;
     }
 
     .main_text {
@@ -150,7 +176,7 @@
     }
 
     .mypage-item {
-        color: #747272 ;
+        color: #747272;
         font-weight: 500;
     }
 
@@ -168,7 +194,7 @@
     }
 
     .mypage-img {
-        margin: 0 auto ;
+        margin: 0 auto;
         margin-top: 10px;
         margin-bottom: 10px;
     }
@@ -184,7 +210,6 @@
         margin: 0 auto;
     }
 
-    /* menu_search */
     .menu_header {
         width: 1280px;
         padding: 3rem 0 0;
@@ -199,43 +224,13 @@
     .menu_left {
         display: flex;
         align-items: center;
+        margin-bottom: 20px;
     }
 
     .menu_right {
         display: flex;
         align-items: center;
-    }
-
-    /* menu_left */
-    .menu_searchwrap {
-        margin-left: 4%;
-        width: 500px;
-    }
-
-    .menu_searchinputwrap {
-        border: 1px solid #4cc37c;
-        padding: 3%;
-        border-radius: 40px;
-    }
-
-    .menu_searchinput {
-        width: 88%;
-        border: none;
-    }
-
-    input:focus {
-        outline: none;
-    }
-
-    .menu_searchbtn {
-        border: none;
-        background: none;
-    }
-
-    .menu_searchbtn img {
-        width: 26px;
-        height: 26px;
-        margin-left: 70%;
+        margin-bottom: 20px;
     }
 
     /* menu_right */
@@ -262,13 +257,23 @@
         color: #333333;
     }
 
-
-    .menu-back-color {
+    .menu-fixed-back-color{
         background-color: #4cc37c;
         text-emphasis-color: #000000;
-        margin-top: 30px;
         height: 70px;
         padding: 0px;
+        z-index: 999;
+        width: 1280px;
+        top: 0;
+        position: fixed;
+    }
+    .menu-back-color{
+        background-color: #4cc37c;
+        text-emphasis-color: #000000;
+        height: 70px;
+        padding: 0px;
+        z-index: 999;
+        width: 1280px;
     }
 
     .menu-icon {
@@ -278,7 +283,7 @@
         margin-left: 30px;
     }
 
-    .menu-text-color{
+    .menu-text-color {
         font-weight: 900;
         font-size: 20px;
     }
