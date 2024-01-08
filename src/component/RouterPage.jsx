@@ -23,6 +23,8 @@ import DiaryCalendar from './diary/DiaryCalendar';
 import DiaryList from './diary/DiaryList';
 import PlantDictionary from './plant/PlantDictionary';
 import PlantDetails from './plant/PlantDetails';
+import PlantInsert from './plant/PlantInsert';
+import PlantUpdate from './plant/PlantUpdate';
 
 const RouterPage = () => {
     return (
@@ -43,7 +45,9 @@ const RouterPage = () => {
 
             {/* 추천 */}
             <Route path='/plant' element={<PlantDictionary />} />
+            <Route path='/plant/insert' element={<PlantInsert />} />
             <Route path='/plant/read/:plant_id' element={<PlantDetails />} />
+            <Route path='/plant/update/:plant_id' element={<PlantUpdate />} />
 
             {/* 커뮤니티 */}
             <Route path="/comm" element={<Comm_list />} />
