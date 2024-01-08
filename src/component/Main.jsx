@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import axios from 'axios';
 import { Row, Col, InputGroup, Button, Card, Carousel, Spinner } from 'react-bootstrap';
 import { CgChevronRight } from "react-icons/cg";
 import { MdFavoriteBorder } from "react-icons/md";
@@ -7,9 +8,21 @@ import { LiaComment } from "react-icons/lia";
 import './Main.css'
 
 const Main = () => {
+    const [plants, setplants] = useState([]); // 플랜트
+    const [community, setCommunity] = useState([]); // 커뮤니티
+    const [diary, setDiary] = useState([]); // 다이어리
+    const [goods, setGoods] = useState([]); //스토어
     const [loading, setLoading] = useState(false);
-    const getMain = () => {
+
+    const getMain = async () => {
         setLoading(true);
+        //const res = await axios.get(`/store/list.json`);
+        // const res1 = await axios.get(`/diary/list.json/${sessionStorage.getItem("uid")}`); 다이어리
+        // const res2 = await axios.get(`/comm/list.json?page=1&size=3`); 커뮤니티
+        // const res3 = await axios.get(`/plant/list.json`); 플랜트
+        //setGoods(res.data.list);
+        // setDiary(res1.data.list);
+        // setCommunity(res2.data.list);
         setLoading(false);
     }
     useEffect(() => {
@@ -20,7 +33,7 @@ const Main = () => {
     return (
         <div id="main_wrap">
             <div className='main_contents'>
-                <Carousel className='mb-5 mt-5'>
+                <Carousel className='main-carousel'>
                     <Carousel.Item>
                         <img src='/image/1.jpg' width={1280} height={300} />
                     </Carousel.Item>
@@ -46,16 +59,16 @@ const Main = () => {
                         </a>
                     </Col>
                 </Row>
-                <Carousel className='mb-5 mt-5'>
-                    <Carousel.Item>
-                        <Row>
-                            <Col >
+                {/* <Carousel className='mb-5 mt-5'>
+                    {goods.map(s =>
+                        <Carousel.Item>
+                            <Col key={s.store_id}>
                                 <Card>
                                     <Card.Body >
                                         <Card.Img src='/image/tee1.jpg' width={200} height={200} />
                                         <Card.Body className='main_text'>
-                                            <div>이름 : </div><br />
-                                            <div>가격 : </div>
+                                            <div>이름 : {s.title}</div><br />
+                                            <div>가격 : {s.fmtprice}</div>
                                         </Card.Body>
                                     </Card.Body>
                                     <Card.Footer className='text-start'>
@@ -63,111 +76,9 @@ const Main = () => {
                                     </Card.Footer>
                                 </Card>
                             </Col>
-                            <Col>
-                                <Card>
-                                    <Card.Body>
-                                        <Card.Img src='/image/tee2.jpg' width={200} height={200} />
-                                        <Card.Body className='main_text'>
-                                            <div>이름 : </div><br />
-                                            <div>가격 : </div>
-                                        </Card.Body>
-                                    </Card.Body>
-                                    <Card.Footer className='text-start'>
-                                        1 <MdFavoriteBorder /> 0 <FaRegBookmark /> 0 <LiaComment size={20} />
-                                    </Card.Footer>
-                                </Card>
-                            </Col>
-                            <Col>
-                                <Card>
-                                    <Card.Body >
-                                        <Card.Img src='/image/tee3.jpg' width={200} height={200} />
-                                        <Card.Body className='main_text'>
-                                            <div>이름 : </div><br />
-                                            <div>가격 : </div>
-                                        </Card.Body>
-                                    </Card.Body>
-                                    <Card.Footer className='text-start'>
-                                        1 <MdFavoriteBorder /> 0 <FaRegBookmark /> 0 <LiaComment size={20} />
-                                    </Card.Footer>
-                                </Card>
-                            </Col>
-                            <Col>
-                                <Card>
-                                    <Card.Body>
-                                        <Card.Img src='/image/tee4.jpg' width={200} height={200} />
-                                        <Card.Body className='main_text'>
-                                            <div>이름 : </div><br />
-                                            <div>가격 : </div>
-                                        </Card.Body>
-                                    </Card.Body>
-                                    <Card.Footer className='text-start'>
-                                        1 <MdFavoriteBorder /> 0 <FaRegBookmark /> 0 <LiaComment size={20} />
-                                    </Card.Footer>
-                                </Card>
-                            </Col>
-                        </Row>
-                    </Carousel.Item>
-                    <Carousel.Item>
-                        <Row>
-                            <Col>
-                                <Card>
-                                    <Card.Body>
-                                        <Card.Img src='/image/what1.jpg' width={200} height={200} />
-                                        <Card.Body className='main_text'>
-                                            <div>이름 : </div><br />
-                                            <div>가격 : </div>
-                                        </Card.Body>
-                                    </Card.Body>
-                                    <Card.Footer className='text-start'>
-                                        1 <MdFavoriteBorder /> 0 <FaRegBookmark /> 0 <LiaComment size={20} />
-                                    </Card.Footer>
-                                </Card>
-                            </Col>
-                            <Col>
-                                <Card>
-                                    <Card.Body>
-                                        <Card.Img src='/image/what2.jpg' width={200} height={200} />
-                                        <Card.Body className='main_text'>
-                                            <div>이름 : </div><br />
-                                            <div>가격 : </div>
-                                        </Card.Body>
-                                    </Card.Body>
-                                    <Card.Footer className='text-start'>
-                                        1 <MdFavoriteBorder /> 0 <FaRegBookmark /> 0 <LiaComment size={20} />
-                                    </Card.Footer>
-                                </Card>
-                            </Col>
-                            <Col>
-                                <Card>
-                                    <Card.Body>
-                                        <Card.Img src='/image/what3.jpg' width={200} height={200} />
-                                        <Card.Body className='main_text'>
-                                            <div>이름 : </div><br />
-                                            <div>가격 : </div>
-                                        </Card.Body>
-                                    </Card.Body>
-                                    <Card.Footer className='text-start'>
-                                        1 <MdFavoriteBorder /> 0 <FaRegBookmark /> 0 <LiaComment size={20} />
-                                    </Card.Footer>
-                                </Card>
-                            </Col>
-                            <Col>
-                                <Card>
-                                    <Card.Body>
-                                        <Card.Img src='/image/what4.jpg' width={200} height={200} />
-                                        <Card.Body className='main_text'>
-                                            <div>이름 : </div><br />
-                                            <div>가격 : </div>
-                                        </Card.Body>
-                                        <Card.Footer className='text-start'>
-                                            1 <MdFavoriteBorder /> 0 <FaRegBookmark /> 0 <LiaComment size={20} />
-                                        </Card.Footer>
-                                    </Card.Body>
-                                </Card>
-                            </Col>
-                        </Row>
-                    </Carousel.Item>
-                </Carousel>
+                        </Carousel.Item>
+                    )}
+                </Carousel> */}
                 <Row>
                     <Col>
                         <div className='main-title mb-4'>
