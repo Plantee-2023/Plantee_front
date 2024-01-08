@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState, useContext } from 'react'
 import { useParams, useNavigate, NavLink } from 'react-router-dom';
-import { Spinner, Row, Col, Badge, Button, Tabs, Tab, Alert } from 'react-bootstrap';
+import { Spinner, Row, Col, Button, Tabs, Tab, Alert } from 'react-bootstrap';
 import { BoxContext } from '../common/BoxContext';
 import "./Store.css";
 import { TiHeart } from "react-icons/ti";
@@ -28,6 +28,15 @@ const StoreRead = () => {
         const res = await axios.get(`/store/read/${store_id}`);
         setStore(res.data);
         setLoading(false);
+    }
+
+    const onClickCart = async () => {
+        await axios.post()
+        if (window.confirm("장바구니로 이동하시겠습니까?")) {
+            window.location.href = "/";
+        } else {
+            window.location.href = "/";
+        }
     }
 
     const onDelete = () => {
@@ -109,7 +118,7 @@ const StoreRead = () => {
                                         </>
                                         :
                                         <>
-                                            <button className='store_filterbtn me-3'>장바구니</button>
+                                            <button className='store_filterbtn me-3' onClick={onClickCart}>장바구니</button>
                                             <button className='store_filterbtn'>바로구매</button>
                                         </>
                                     }
@@ -133,7 +142,7 @@ const StoreRead = () => {
                             <StoreReview />
                         </Tab>
                         <Tab eventKey="qna" title="상품문의">
-                            <StoreQuestion />
+                            <StoreQuestion uid={uid} />
                         </Tab>
                         <Tab eventKey="carry" title="배송/반품/교환">
                             <DeliveryService />
