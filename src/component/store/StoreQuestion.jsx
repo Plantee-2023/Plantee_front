@@ -23,6 +23,14 @@ const StoreQuestion = ({ uid }) => {
         const res = await axios.get(`/store/question/${store_id}`);
         //console.log(res);
         let question = res.data.questionList;
+        let answer = res.data.answerList;
+        for (let i = 0; i < question.length; i++) {
+            answer.forEach(function (a) {
+                if (uid === a.uid && question[i].comment_id === a.upper_id) {
+                    question[i].answer = a;
+                }
+            });
+        }
         let total = res.data.questionCount;
         setQuestion(question);
         setTotal(total);
@@ -36,7 +44,7 @@ const StoreQuestion = ({ uid }) => {
     //             <div>
     //                 <Form.Control as="textarea" rows={5} className='mt-4' />
     //                 <div className='text-end mt-4'>
-    //                     <button className='store_filterbtn_clear'>취소</button>
+    //                     <button className='store_filterbtn_clean'>취소</button>
     //                     <button className='store_filterbtn'>등록</button>
     //                 </div>
     //             </div>)
@@ -56,69 +64,71 @@ const StoreQuestion = ({ uid }) => {
                 <div className='store_contents'>
 
                     {/* 상단 */}
-                    <Row className='m-3'>
-                        <Col>
-                            <Row>총 {total}건의 문의</Row>
-                            <Row>상품에 대한 궁금하신 내용을 문의해주세요!</Row>
-                        </Col>
-                        <Col rowSpan="2" className='text-end'>
-                            <button className='btn_common' >상품 문의하기</button>
-                        </Col>
-                        <div className='pt-4'>
-                            {total === 0 && <div className='select_box p-4 text-center' style={{ background: "#adadad2b" }}> 문의내역이 없습니다. </div>}
-                        </div>
-                    </Row>
-
-                    {/* 하단 */}
-                    <div className='comment_contents'>
-
-                        {sessionStorage.getItem("uid") &&
-                            <div>
+                    <Card className='mb-5'>
+                        <Row className='m-4'>
+                            <Col>
+                                <Row>총 {total}건의 문의</Row>
+                                <Row>상품에 대한 궁금하신 내용을 문의해주세요!</Row>
+                            </Col>
+                            <Col rowSpan="2" className='text-end'>
+                                <button className='btn_common' >상품 문의하기</button>
+                            </Col>
+                            <div className='mt-4'>
+                                {total === 0 && <div className='select_box p-4 text-center' style={{ background: "#adadad2b" }}> 문의내역이 없습니다. </div>}
+                            </div>
+                        </Row>
+                        {sessionStorage.getItem("uid") === uid ||
+                            <div className='m-4'>
                                 <Form.Control as="textarea" rows={5} className='mt-4' />
                                 <div className='text-end mt-4'>
-                                    <button className='store_filterbtn_clear'>취소</button>
+                                    <button className='store_filterbtn_clean me-3'>취소</button>
                                     <button className='store_filterbtn'>등록</button>
                                 </div>
                             </div>
                         }
+                    </Card>
 
+                    {/* 하단 */}
+                    <div className='comment_contents'>
                         {question.map(q =>
-                            <div key={q.reg_date}>
-                                <Row>
-                                    <Col>
-                                        <Row className='mb-3'>
-                                            {uid === q.uid ?
-                                                <Card className="ms-5 p-3" style={{ background: "#adadad2b" }}>
-                                                    <div className='ms-3'>
-                                                        <div className='small' style={{ color: "#adadad" }}><span style={{ color: "green" }}>판매자</span> | {q.reg_date}</div>
-                                                        <Row>{q.contents}</Row>
-                                                        <div className='text-end'>
-                                                            <button className='store_filterbtn_clicked'>수정하기</button>
+                            <>
+                                <div key={q.reg_date}>
+                                    <Row>
+                                        <Col>
+                                            <Row className='mb-3'>
+                                                <hr />
+                                                <div className='small' style={{ color: "#adadad" }}><span style={{ color: "#000000" }}>{q.uid}</span> | {q.reg_date}</div>
+                                                <Row>{q.contents}</Row>
+
+                                            </Row>
+                                        </Col>
+                                    </Row>
+                                </div>
+                                {typeof (q.answer) != 'undefined' ?
+                                    <div key={q.answer.reg_date}>
+                                        <Row>
+                                            <Col>
+                                                <Row className='mb-3'>
+                                                    <div className="p-3" style={{ background: "#adadad2b" }}>
+                                                        <div className='ms-3'>
+                                                            <div className='small' style={{ color: "#adadad" }}><span style={{ color: "green" }}>판매자</span> | {q.answer.reg_date}</div>
+                                                            <Row>{q.answer.contents}</Row>
+                                                            <div className='text-end'>
+                                                                {uid === sessionStorage.getItem("uid") && <button className='store_filterbtn_clean'>수정하기</button>}
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </Card>
-                                                :
-                                                <>
-                                                    <hr />
-                                                    <div className='small' style={{ color: "#adadad" }}><span style={{ color: "#000000" }}>{q.uid}</span> | {q.reg_date}</div>
-                                                    <Row>{q.contents}</Row>
-                                                    
-                                                    {sessionStorage.getItem("uid") === q.uid ?
-                                                        <>
-                                                        </>
-                                                        :
-                                                        <>
-                                                            <button className='store_filterbtn_clicked'>답글달기</button>
-                                                        </>
-                                                    }
-                                                </>
-                                            }
+                                                </Row>
+                                            </Col>
                                         </Row>
-                                    </Col>
-                                </Row>
-                            </div>
+                                    </div>
+                                    :
+                                    <div className='text-end'>
+                                        <button className='store_filterbtn_clicked'>답변하기</button>
+                                    </div>
+                                }
+                            </>
                         )}
-
                     </div>
 
                 </div>

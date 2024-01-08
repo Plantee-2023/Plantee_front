@@ -6,7 +6,7 @@ import "./Store.css";
 import { BoxContext } from '../common/BoxContext';
 import BtnToTop from '../common/BtnToTop';
 
-const StoreReview = () => {
+const StoreReview = ({ uid }) => {
     const navi = useNavigate();
     const location = useLocation();
 
@@ -78,15 +78,15 @@ const StoreReview = () => {
                             <Col rowSpan="2" className='text-end'>
                                 <button className='btn_common' onClick={() => onClickReviewWrite(store_id)}>리뷰 작성하기</button>
                             </Col>
-                            <div >
+                            <div className='mt-4'>
                                 {total === 0 && <div className='select_box p-4 text-center' style={{ background: "#adadad2b" }}> 이 상품의 첫 리뷰어가 되어주세요! </div>}
                             </div>
                         </Row>
-                        {sessionStorage.getItem("uid") &&
+                        {sessionStorage.getItem("uid") === uid ||
                             <div className='m-4'>
                                 <Form.Control as="textarea" rows={5} className='mt-4' />
                                 <div className='text-end mt-4'>
-                                    <button className='store_filterbtn_clear me-3'>취소</button>
+                                    <button className='store_filterbtn_clean me-3'>취소</button>
                                     <button className='store_filterbtn'>등록</button>
                                 </div>
                             </div>
@@ -98,7 +98,7 @@ const StoreReview = () => {
 
                         {reviews.map(r =>
                             <div key={r.reg_date}>
-                                <Row>
+                                <Row className='p-2 mb-3'>
                                     <Col xs={2} lg={2} style={{ verticalAlign: "center" }}>
                                         <Row style={{ fontWeight: "600" }}>{r.uid}</Row>
                                         <Row>{r.totalStars} | {r.stars}</Row>
@@ -107,13 +107,17 @@ const StoreReview = () => {
                                         <Row className='small' style={{ color: "#adadad" }}>{r.reg_date}</Row>
                                         <Row>{r.contents}</Row>
                                     </Col>
+                                    <Col xs={2} lg={2} className='text-end'>
+                                        <button className='store_btn_clean_sm'>수정</button>
+                                        <button className='store_btn_clicked_sm'>삭제</button>
+                                    </Col>
 
                                     {/* 댓글 수정 */}
-                                    <Form.Control value={r.contents} rows={3} as="textarea" />
+                                    {/* <Form.Control value={r.contents} rows={3} as="textarea" />
                                     <div className='text-end pt-3'>
-                                        <button className='store_filterbtn_clear me-3'>취소</button>
+                                        <button className='store_filterbtn_clean me-3'>취소</button>
                                         <button className='store_filterbtn'>수정</button>
-                                    </div>
+                                    </div> */}
 
                                 </Row>
                             </div>

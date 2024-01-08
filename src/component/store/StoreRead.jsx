@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState, useContext } from 'react'
 import { useParams, useNavigate, NavLink } from 'react-router-dom';
-import { Spinner, Row, Col, Button, Tabs, Tab, Alert } from 'react-bootstrap';
+import { Spinner, Row, Col, Button, Tabs, Tab, Alert, Card, Badge } from 'react-bootstrap';
 import { BoxContext } from '../common/BoxContext';
 import "./Store.css";
 import { TiHeart } from "react-icons/ti";
@@ -62,7 +62,16 @@ const StoreRead = () => {
 
                         <section className='store_img_section'>
                             <div className='store_img'>
-                                <img src="http://via.placeholder.com/200x200" />
+                                {sessionStorage.getItem("uid") === uid ?
+                                    <>
+                                        <Card.Img variant="top" src="http://via.placeholder.com/200x200" />
+                                        <Card.ImgOverlay>
+                                            <h5><Badge bg="success">내가 쓴 글</Badge></h5>
+                                        </Card.ImgOverlay>
+                                    </>
+                                    :
+                                    <img src="http://via.placeholder.com/200x200" />
+                                }
                             </div>
                         </section>
 
@@ -70,7 +79,7 @@ const StoreRead = () => {
                             <section className='store_info_section'>
                                 <section className='store_title_section'>
                                     <div className='store_title'>
-                                        <button className='tag_badge mb-2'>{tag}</button>
+                                        <button className='store_tag_badge mb-2'>{tag}</button>
                                         <h1 className='store_maintitle'>{title}</h1>
                                     </div>
                                 </section>
@@ -139,7 +148,7 @@ const StoreRead = () => {
                             {contents}
                         </Tab>
                         <Tab eventKey="review" title="상품리뷰">
-                            <StoreReview />
+                            <StoreReview uid={uid} />
                         </Tab>
                         <Tab eventKey="qna" title="상품문의">
                             <StoreQuestion uid={uid} />
