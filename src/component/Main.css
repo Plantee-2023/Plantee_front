@@ -36,75 +36,75 @@
         justify-content: space-between;
     }
 
-.menu_logo img {
-    width: 140px;
-}
+    .menu_logo img {
+        width: 140px;
+    }
 
-.menu_left {
-    display: flex;
-    align-items: center;
-}
+    .menu_left {
+        display: flex;
+        align-items: center;
+    }
 
-.menu_right {
-    display: flex;
-    align-items: center;
-}
+    .menu_right {
+        display: flex;
+        align-items: center;
+    }
 
-/* menu_left */
-.menu_searchwrap {
-    margin-left: 4%;
-    width: 500px;
-}
+    /* menu_left */
+    .menu_searchwrap {
+        margin-left: 4%;
+        width: 500px;
+    }
 
-.menu_searchinputwrap {
-    border: 1px solid #4cc37c;
-    padding: 3%;
-    border-radius: 40px;
-}
+    .menu_searchinputwrap {
+        border: 1px solid #4cc37c;
+        padding: 3%;
+        border-radius: 40px;
+    }
 
-.menu_searchinput {
-    width: 88%;
-    border: none;
-}
+    .menu_searchinput {
+        width: 88%;
+        border: none;
+    }
 
-input:focus {
-    outline: none;
-}
+    input:focus {
+        outline: none;
+    }
 
-.menu_searchbtn {
-    border: none;
-    background: none;
-}
+    .menu_searchbtn {
+        border: none;
+        background: none;
+    }
 
-.menu_searchbtn img {
-    width: 26px;
-    height: 26px;
-    margin-left: 70%;
-}
+    .menu_searchbtn img {
+        width: 26px;
+        height: 26px;
+        margin-left: 70%;
+    }
 
-/* menu_right */
-.menu_mymenu {
-    display: flex;
-    align-items: center;
-}
+    /* menu_right */
+    .menu_mymenu {
+        display: flex;
+        align-items: center;
+    }
 
-.menu_right ul {
-    list-style: none;
-    display: flex;
-    align-items: center;
-    margin-top: 9%;
-}
+    .menu_right ul {
+        list-style: none;
+        display: flex;
+        align-items: center;
+        margin-top: 9%;
+    }
 
-.menu_mymenu>li {
-    align-items: center;
-    margin-left: 2rem;
-}
+    .menu_mymenu>li {
+        align-items: center;
+        margin-left: 2rem;
+    }
 
-.menu_mymenu a {
-    font-size: 17px;
-    text-decoration: none;
-    color: #333333;
-}
+    .menu_mymenu a {
+        font-size: 17px;
+        text-decoration: none;
+        color: #333333;
+    }
 
 
     .main_text {
@@ -124,7 +124,9 @@ input:focus {
         font-weight: 900;
         text-align: start;
         font-size: 35px;
-    }
+    }  
+
+    
 
     /* 회원 가입 */
     .join-card {
@@ -317,7 +319,7 @@ input:focus {
         color: #333333;
     }
 
-    .menu-fixed-back-color{
+    .menu-fixed-back-color {
         background-color: #4cc37c;
         text-emphasis-color: #000000;
         height: 70px;
@@ -327,7 +329,8 @@ input:focus {
         top: 0;
         position: fixed;
     }
-    .menu-back-color{
+
+    .menu-back-color {
         background-color: #4cc37c;
         text-emphasis-color: #000000;
         height: 70px;

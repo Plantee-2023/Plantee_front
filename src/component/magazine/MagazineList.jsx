@@ -51,7 +51,7 @@ const MagazineList = () => {
                                 <td className='text-center'>{m.post_id}</td>
                                 <td><a href='/main/magazine'>{m.title}</a></td>
                                 <td className='text-center'>{m.nickname}</td>
-                                <td className='text-center'>{m.reg_date}</td>
+                                <td className='text-center'>{m.red_date}</td>
                                 <td className='text-center'>{m.view_cnt}</td>
                             </tr>
                         )}

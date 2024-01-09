@@ -7,9 +7,18 @@ const Update = () => {
     const img_ref = useRef(null);
     const [users, setUsers] = useState([]);
     const [loading, setLoading] = useState(false);
+    const [user, setUser] = useState({
+        nickname: '',
+        photo: '',
+        phone: '',
+        address1: '',
+        address2: '',
+        reg_date: ''
+    })
+    const {nickname,image,phone,address1,address2,reg_date} = user;
     const getList = async() => {
         setLoading(true);
-        const res = await axios.get(`/users/list.json?uid=${sessionStorage.getItem("uid")}`);
+        const res = await axios.get(`/users/read.json/${sessionStorage.getItem("uid")}`);
         console.log(res.data)
         setUsers(res.data.list);
         setLoading(false);
@@ -30,31 +39,19 @@ const Update = () => {
                     <Button className='update-img-btn'>이미지 수정</Button>
                 </div>
                 <InputGroup className='join-input'>
-                    <InputGroup.Text className='update-text'>이름</InputGroup.Text>
-                    <Form.Control name='uname' type='text' />
-                </InputGroup>
-                <InputGroup className='join-input'>
-                    <InputGroup.Text className='update-text'>아이디</InputGroup.Text>
-                    <Form.Control name='uid' type='text' />
-                </InputGroup>
-                <InputGroup className='join-input'>
-                    <InputGroup.Text className='update-text'>비밀번호</InputGroup.Text>
-                    <Form.Control name='upass' type='password' />
-                </InputGroup>
-                <InputGroup className='join-input'>
-                    <InputGroup.Text className='update-text'>비밀번호 확인</InputGroup.Text>
-                    <Form.Control type='password' />
+                    <InputGroup.Text className='update-text'>닉네임</InputGroup.Text>
+                    <Form.Control value={nickname} name='nickname' type='text' />
                 </InputGroup>
                 <InputGroup className='join-input'>
                     <InputGroup.Text className='update-text'>연락처</InputGroup.Text>
-                    <Form.Control name='phone' type='text' />
+                    <Form.Control value={phone} name='phone' type='text' />
                 </InputGroup>
                 <InputGroup className='join-address'>
                     <InputGroup.Text className='update-text'>주소</InputGroup.Text>
-                    <Form.Control name='address1' type='text' />
+                    <Form.Control value={address1} name='address1' type='text' />
                     <button className='update-btn'>검색</button>
                 </InputGroup>
-                <Form.Control name='address2' className='join-input' type='text' placeholder='상세주소' />
+                <Form.Control value={address2} name='address2' className='join-input' type='text' placeholder='상세주소' />
                 <Form className='join-check'>
                     <Form.Check label="꽃집 사장님"></Form.Check>
                 </Form>
@@ -65,7 +62,7 @@ const Update = () => {
                 </InputGroup>
             </Card>
             <div className='text-center'>
-                <button className='mt-4 join-add'>회원가입</button>
+                <button className='mt-4 join-add'>정보수정</button>
             </div>
         </div>
     )

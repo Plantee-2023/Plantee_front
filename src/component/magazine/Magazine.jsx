@@ -3,15 +3,18 @@ import axios from 'axios';
 import './Magazine.css'
 import { useState } from 'react';
 import { Spinner } from 'react-bootstrap';
+import { useParams } from 'react-router-dom';
 
 const Magazine = () => {
+    const {post_id} = useParams();
     const [loading, setLoading] = useState(false);
     const [magazine, setMagazine] = useState([]);
 
     const getMagazine = async () => {
         setLoading(true);
-        const res = await axios.get(`/magazine/list.json`);
-        setMagazine(res.data.list);
+        const res = await axios.get(`/magazine/read/` + post_id);
+        setMagazine(res.data);
+        console.log(res.data);
         setLoading(false);
     }
     useEffect(() => {

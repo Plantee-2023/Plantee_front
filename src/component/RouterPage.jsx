@@ -23,15 +23,18 @@ import DiaryCalendar from './diary/DiaryCalendar';
 import DiaryList from './diary/DiaryList';
 import PlantDictionary from './plant/PlantDictionary';
 import PlantDetails from './plant/PlantDetails';
-
+import MyPageFavorite from './mypage/MyPageFavorite'
+import MyPageComment from './mypage/MyPageComment'
+import PlantInsert from './plant/PlantInsert'
+import PlantUpdate from './plant/PlantUpdate'
 const RouterPage = () => {
     return (
         <Routes>
             {/* 메인, 매거진 */}
             <Route path='/' element={<Main />} />
-            <Route path='/main/magazine' element={<Magazine />} />
-            <Route path='/main/magazineList' element={<MagazineList />} />
-            <Route path='/main/magazineInsert' element={<MagazineInsert />} />
+            <Route path='/magazine/magazine' element={<Magazine />} />
+            <Route path='/magazine/magazineList' element={<MagazineList />} />
+            <Route path='/magazine/magazineInsert' element={<MagazineInsert />} />
             <Route path='/mypage/mypagefavorite' element={<MyPageFavorite/>} />
             <Route path='/mypage/mypagecomment' element={<MyPageComment/>} />
 

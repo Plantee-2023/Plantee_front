@@ -1,9 +1,10 @@
 import axios from 'axios'
 import React, { useRef, useState, useLocation, useEffect } from 'react'
 import { Button, Card, Form, Spinner } from 'react-bootstrap'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 
 const MagazineInsert = () => {
+    const post_id = useParams();
     const img_ref = useRef(null);
     const navi = useNavigate();
     const [loading, setLoading] = useState(false);
@@ -23,8 +24,8 @@ const MagazineInsert = () => {
 
     const getInsert = async () => {
         setLoading(true);
-        //const res = await axios.post(`/magazine/list.json/${post_id}`);
-        //setMagazine(res.data.list);
+        const res = await axios.get(`/magazine/list.json/${post_id}`);
+        setMagazine(res.data.list);
         setLoading(false);
     }
 

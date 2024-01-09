@@ -1,4 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react'
+import axios from 'axios'
 import { Button, Card, Form, InputGroup, Spinner } from 'react-bootstrap'
 import '../Main.css'
 
@@ -6,8 +7,20 @@ const Join = () => {
     const img_ref = useRef(null);
     const img1_ref = useRef(null);
     const [loading, setLoading] = useState(false);
+    // const [user, setUser] = useState({
+    //     uid: '',
+    //     upass: '',
+    //     uname: '',
+    //     image: '',
+    //     phone: '',
+    //     address1: '',
+    //     address2: '',
+    //     fmtdate: ''
+    // });
+    // const {uid,upass,uname,image,phone,address1,address2,fmtdate} = user;
     const getJoin = () => {
         setLoading(true);
+        //const res = await axios.post(`/users/`)
         setLoading(false);
     }
     useEffect(() => {
@@ -27,15 +40,15 @@ const Join = () => {
                     </div>
                     <InputGroup className='join-input'>
                         <InputGroup.Text>이름</InputGroup.Text>
-                        <Form.Control type='text' />
+                        <Form.Control name='uname' type='text' />
                     </InputGroup>
                     <InputGroup className='join-input'>
                         <InputGroup.Text>아이디</InputGroup.Text>
-                        <Form.Control type='text' />
+                        <Form.Control name='uid' type='text' />
                     </InputGroup>
                     <InputGroup className='join-input'>
                         <InputGroup.Text>비밀번호</InputGroup.Text>
-                        <Form.Control type='password' />
+                        <Form.Control name='upass' type='password' />
                     </InputGroup>
                     <InputGroup className='join-input'>
                         <InputGroup.Text>비밀번호 확인</InputGroup.Text>
@@ -43,14 +56,14 @@ const Join = () => {
                     </InputGroup>
                     <InputGroup className='join-input'>
                         <InputGroup.Text>연락처</InputGroup.Text>
-                        <Form.Control type='text' />
+                        <Form.Control name='phone' type='text' />
                     </InputGroup>
                     <InputGroup className='join-address'>
                         <InputGroup.Text>주소</InputGroup.Text>
-                        <Form.Control type='text' />
+                        <Form.Control name='address1' type='text' />
                         <button className='join-btn'>검색</button>
                     </InputGroup>
-                    <Form.Control className='join-input' type='text' placeholder='상세주소' />
+                    <Form.Control name='address2' className='join-input' type='text' placeholder='상세주소' />
                     <Form className='join-check'>
                         <Form.Check label="꽃집 사장님"></Form.Check>
                     </Form>

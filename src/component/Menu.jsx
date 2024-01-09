@@ -121,7 +121,7 @@ const Menu = () => {
                         <LiaStoreAltSolid className='menu-icon' />
                         <NavLink className='menu-magazine' to='/store'>스토어</NavLink>
                         <FiBookOpen className='menu-icon' />
-                        <NavLink className='menu-magazine' to='/main/magazineList'>매거진</NavLink>
+                        <NavLink className='menu-magazine' to='/magazine/magazineList'>매거진</NavLink>
                     </Nav>
                 </Navbar>
             </div>
