@@ -27,8 +27,8 @@
 
 /* menu_search */
 .menu_header {
-    width: 1280px;
-    padding: 3rem 0 0;
+    width: 99%;
+    padding: 1rem 0 0;
     display: flex;
     justify-content: space-between;
 }
@@ -95,7 +95,7 @@ input:focus {
 
 .menu_mymenu>li {
     align-items: center;
-    margin-left: 2rem;
+    margin-left: 1.4rem;
 }
 
 .menu_mymenu a {

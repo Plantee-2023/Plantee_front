@@ -5,22 +5,19 @@ import axios from 'axios';
 
 const PlantUpdate = () => {
 
+  const {plant_id} = useParams();
+  const [form, setForm] = useState("");
   const [loading, setLoading] = useState(false);
   const navi = useNavigate();
-  const {plant_id} = useParams();
-  const [form, setForm] = useState({
-    plant_id: '', common_name: '', image: '', contents: '', watering: '', sunlight: '', care_level: '', leaf: '',
-    flowers: '', fruits: '', type: '', indoor: '', poisonous_pet: '', cuisine: ''
-  });
-
-  const { common_name, image, contents, watering, sunlight, care_level, leaf, flowers, fruits, type, indoor, poisonous_pet, cuisine } = form;
-
+  
   const getPlant = async () => {
     setLoading(true);
     const res = await axios.get(`/plant/read/${plant_id}`);
     setForm(res.data);
     setLoading(false);
   }
+
+  const { common_name, image, contents, watering, sunlight, care_level, leaf, flowers, fruits, type, indoor, poisonous_pet, cuisine } = form;
 
   useEffect(() => {
     getPlant();
@@ -36,13 +33,9 @@ const PlantUpdate = () => {
   const onSubmit = async(e) => {
     e.preventDefault();
     if(window.confirm("수정하시겠습니까?")) {
-      const res = await axios.post("/plant/update", form);
-      if(res.data === 0) {
-        alert("수정 실패!");
-      }else {
-        alert("수정 완료!");
-        navi(`/plant/read/${plant_id}`);
-      }
+      await axios.post("/plant/update", form);
+      alert("수정완료!")
+      navi(`/plant/read/${plant_id}`);
     }
   }
 
@@ -151,7 +144,7 @@ const PlantUpdate = () => {
 
                   <div className='insert_info'>
                   <InputGroup className='insert_inputgroup'>
-                    <InputGroup.Text className='insert_inputgrouptext'>반려동물 안전</InputGroup.Text>
+                    <InputGroup.Text className='insert_inputgrouptext'>독성(반려안전)</InputGroup.Text>
                     <Form.Select value={poisonous_pet} name='poisonous_pet' onChange={onChange}>
                       <option value='y'>y</option>
                       <option value='n'>n</option>
@@ -176,7 +169,7 @@ const PlantUpdate = () => {
                   </div>
                   <div className='plantinsert_section'>
                     <div className='plantinsert_btngroup'>
-                      <button className='insert_submit' type='submit'>등록하기</button>
+                      <button className='insert_submit' type='submit'>저장하기</button>
                       <NavLink to={`/plant/read/${plant_id}`}>
                         <button className='insert_cancel' onClick={()=>getPlant()}>취소하기</button>
                       </NavLink>
