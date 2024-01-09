@@ -23,8 +23,6 @@ import DiaryCalendar from './diary/DiaryCalendar';
 import DiaryList from './diary/DiaryList';
 import PlantDictionary from './plant/PlantDictionary';
 import PlantDetails from './plant/PlantDetails';
-import MyPageFavorite from './mypage/MyPageFavorite';
-import MyPageComment from './mypage/MyPageComment';
 
 const RouterPage = () => {
     return (
@@ -44,7 +42,9 @@ const RouterPage = () => {
 
             {/* 추천 */}
             <Route path='/plant' element={<PlantDictionary />} />
+            <Route path='/plant/insert' element={<PlantInsert />} />
             <Route path='/plant/read/:plant_id' element={<PlantDetails />} />
+            <Route path='/plant/update/:plant_id' element={<PlantUpdate />} />
 
             {/* 커뮤니티 */}
             <Route path="/comm" element={<Comm_list />} />
@@ -52,7 +52,7 @@ const RouterPage = () => {
             <Route path="/comm/read/:post_id" element={<Comm_Read />} />
 
             {/* 나눔 */}
-            <Route path="comm/market" element={<Market_list/>} />
+            <Route path="/comm/market" element={<Market_list/>} />
             <Route path="/comm/market/write" element={<Market_write />} />
             <Route path="/comm/market/read/:post_id" element={<Market_read />} />
 
@@ -65,7 +65,7 @@ const RouterPage = () => {
             <Route path='/diary/main/:uid' element={<DiaryMain />} />
             <Route path='/diary/calendar' element={<DiaryCalendar />} />
             <Route path='/diary/main/insert' element={<DiaryInsert />} />
-            <Route path='/diary/main/read/:diary_id' element={<DiaryRead />} />
+            <Route path='/diary/read/:diary_id' element={<DiaryRead />} />
             <Route path='/diary/list' element={<DiaryList />} />
         </Routes>
     )

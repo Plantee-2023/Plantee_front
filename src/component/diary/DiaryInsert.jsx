@@ -1,5 +1,7 @@
 import React, { useRef } from 'react'
-import { Button, InputGroup, Form } from 'react-bootstrap'
+import { Button, InputGroup, Form, Dropdown, DropdownButton } from 'react-bootstrap'
+import ButtonGroup from 'react-bootstrap/ButtonGroup';
+
 
 const DiaryInsert = () => {
     const img_ref = useRef(null);
@@ -21,7 +23,13 @@ const DiaryInsert = () => {
                             </InputGroup>
                             <InputGroup className='diary-input'>
                                 <InputGroup.Text className='diary-text'>식물 종류</InputGroup.Text>
-                                <Form.Control name='uname' type='text' />
+
+                                <select className='select_box'>
+                                    <option>화분 선택 (*옵션)</option>
+                                    <option>스투키</option>
+                                    <option>알로에</option>
+                                    <option>선인장</option>
+                                </select>
                             </InputGroup>
                             <InputGroup className='diary-input'>
                                 <InputGroup.Text className='diary-text'>물 주기</InputGroup.Text>

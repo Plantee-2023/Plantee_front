@@ -16,20 +16,24 @@
 .filter_btn.active {background-color: #4cc67c; color: #fff; border: 1px solid #4cc67c;}
 
 .plant_data {width: 100%; height: 2rem; margin-top: 3%;}
-.plant_layout {width: 100%; height: 100%; justify-content: center; display: flex; justify-content: space-between;}
-.plant_total {display: flex; flex-direction: column; justify-content: center; height: 100%;}
+.plant_layout {width: 100%; height: 100%; justify-content: center; display: flex; }
+.plant_total {width: 100%; display: flex; justify-content: center; height: 100%; justify-content: space-between;}
 .plant_filter {display: flex; align-items: center;}
 .plant_filter button {border: none; background-color: #fff;}
 .plant_filter span {margin: 0 10px;}
 
-.plant_list {margin-top: 40px;}
-.plant_list_items {display: flex; padding-bottom: 2%;}
-.plant_list_item {margin: 0 6rem 0 -2rem;}
+.plant_list {margin-top: 20px;}
+.plant_list_items {display: flex; flex-wrap: wrap; padding-bottom: 2%;}
+.plant_list_item {margin: 0 5.1rem 0 -2rem;}
 .plant_list_item a {text-decoration: none; color: #000;}
 .plant_image {width: 200px; height: 200px; margin-bottom: 3%;}
 .plant_image img {width: 100%; height: 100%;}
 .plant_title {display: flex; align-items: center; justify-content: center; text-align: center;}
 .plant_title h3 {overflow: hidden; text-overflow: ellipsis; font-size: 16px; color: #000; font-weight: 600; margin: 0; padding: 4%;}
+
+/* DictionaryPage InsertBtn */
+.plant_insert {width: 100%; height: 40px; margin: 0;}
+.plant_insert button {width: 100px; height: 100%; border: none; background-color: #4cc67c; border-radius: 100px; color: #fff; float: right;}
 
 /* DetailPage */
 .details_wrap {width: 100%; margin: 0 auto;}
@@ -43,12 +47,12 @@
 .details_title_section {padding-right: 0; position: initial;}
 .detail_logo img {width: 16px; height: 16px; margin: 0 0 4px 4px}
 .detail_logo {font-weight: 900; font-style: italic; color: #4cc67c; padding: 1rem 0 0 0.6rem;}
-.details_title {margin: 1rem 0 0 0.5rem;}
-.details_maintitle { font-size: 28px; font-weight: 600;}
+.details_title {margin: 1rem 0 1rem 0.5rem;}
+.details_maintitle {font-size: 28px; font-weight: 600;}
 
 .details_simpleinfo_section {width: 100%; padding: 0;}
 .plant_items {margin-bottom: 2rem; display: flex; flex-wrap: wrap; list-style: none; margin-left: -2rem;}
-.plant_item {width: 80px; height: 30px; line-height: 30px; text-align: center; border-radius: 15px; border: 1px solid #ddd; font-size: 14px; margin-right: 10px;}
+.plant_item {width: 90px; height: 30px; line-height: 30px; text-align: center; border-radius: 15px; border: 1px solid #ddd; font-size: 14px; margin-right: 10px;}
 .plant_item:last-child {margin-right: 0;}
 
 .details_detailinfo_section {width: 100%; height: 6rem; justify-content: center; display: flex; align-items: center; margin-bottom: 2rem;}
@@ -57,6 +61,26 @@
 .detailinfo_items {width: 100%; height: 100%; display: flex; margin: 0; padding: 0;}
 .detailinfo_item {width: 50%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center;}
 .detailinfo_item:first-child {border-right: 1px dashed #ddd;}
-.detailinfo_item img {width: 12px; height: 12px; margin-top: 5px;}
+.detailinfo_item img {width: 12px; height: 12px; margin: 5px 0 5px 0;}
 .detailinfo_item p {margin: 0; text-align: center;}
 .detailinfo_item_content {font-weight: 800;}
+
+.update_btnarea {width: 19%; display: flex; margin: 0 auto;}
+.update_submit {width: 120px; height: 40px; border: none; border-radius: 50px; background-color: #4cc67c; color: #fff; margin-right: 1rem; margin-top: 1rem;}
+
+/* PlantInsertPage */
+.insert_simpleinfo_section {width: 100%; padding: 0;}
+.insert_textarea {width: 100%; margin: 1rem 0 0 0; display: flex; flex-wrap: wrap;}
+.insert_title {width: 100%; margin-bottom: 0.5rem;}
+.insert_info {width: 32.6%; margin-bottom: 0.6rem; margin-right: 0.5rem;}
+.insert_info:nth-child(4) {margin-right: 0;}
+.insert_info:nth-child(7) {margin-right: 0;}
+.insert_info:nth-child(10) {margin-right: 0;}
+.insert_inputgrouptext {width: 108px;}
+.insert_contents {width: 100%;}
+.insert_contents_form {width: 100%; height: 200px;}
+.plantinsert_section {width: 100%; margin: 1rem 0 0 0;}
+.plantinsert_btngroup {width: 35%; display: flex; margin: 0 auto;}
+.insert_submit {width: 120px; height: 40px; border: none; border-radius: 50px; background-color: #4cc67c; color: #fff; margin-right: 1rem;}
+.insert_cancel {width: 120px; height: 40px; border: 1px solid #4cc67c; border-radius: 50px; background-color: #fff; color: #4cc67c;}
+

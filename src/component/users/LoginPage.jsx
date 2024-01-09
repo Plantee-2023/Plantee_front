@@ -1,8 +1,10 @@
 import axios from "axios";
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom';
 import { Card, InputGroup, Form, Button, Spinner } from 'react-bootstrap'
 
 const LoginPage = () => {
+    const navi = useNavigate();
     const [loading, setLoading] = useState(false);
     const [form, setForm] = useState({
         uid: "",
@@ -29,12 +31,15 @@ const LoginPage = () => {
             alert("비밀번호가 일치하지 않습니다.");
         } else {
             sessionStorage.setItem("uid", uid);
-            alert("로그인 성공!");
-            window.location.href = "/";
+            if (sessionStorage.getItem("target")) {
+                navi(sessionStorage.getItem("target"));
+            } else {
+                navi("/");
+            }
         }
     };
 
-    if (loading) return <div className='text-center'><Spinner /></div>
+    if (loading) return <div className='text-center my-5'><Spinner animation="border" variant="success" /></div>
     return (
         <div id="main_wrap">
             <div className="main_contents">

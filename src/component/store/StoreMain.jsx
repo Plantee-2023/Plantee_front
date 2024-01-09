@@ -102,7 +102,7 @@ const StoreMain = () => {
                                         <Card.Body>
                                             <Card.Title>{g.title}</Card.Title>
                                             <Card.Text>{g.fmtprice}원<br /></Card.Text>
-                                            <button className='tag_badge'>{g.tag}</button>
+                                            <button className='store_tag_badge'>{g.tag}</button>
                                         </Card.Body>
                                     </NavLink>
                                 </Card>

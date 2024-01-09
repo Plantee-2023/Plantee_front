@@ -58,7 +58,6 @@ const DeliveryService = () => {
                     </ul>
                 </div>
             </div>
-
         </>
     )
 }
