@@ -32,17 +32,15 @@ input:focus {outline:none;}
 
 
 /* 앨범 세로선 */
+.line_top1 span {font-size: 32px; margin-top: 50px;}
 .line_top1 img {margin-left: 232px;}
 .line_1 { border-left: thick solid #f0f0f0; /* 오른쪽에만 선 부여 */ height: auto; /* 높이로 조절 */ margin-left: 250px; padding-left: 5%; margin-top: 20px;margin-bottom: 50px;}
 
 .line_top2 img {margin-left: 220px;}
 .line_2 { border-left: thick solid #f0f0f0; /* 오른쪽에만 선 부여 */ height: auto; /* 높이로 조절 */ margin-left: 250px; padding-left: 5%; margin-top: 20px;margin-bottom: 50px;}
 
-.line_top3 img {margin-left: 220px;}
+.line_top3 img {margin-left: 232px;}
 .line_3 { border-left: thick solid #f0f0f0; /* 오른쪽에만 선 부여 */ height: auto; /* 높이로 조절 */ margin-left: 250px; padding-left: 5%; margin-top: 20px;margin-bottom: 50px;}
-
-.line_top4 img {margin-left: 232px;}
-.line_4 { border-left: thick solid #f0f0f0; /* 오른쪽에만 선 부여 */ height: auto; /* 높이로 조절 */ margin-left: 250px; padding-left: 5%; margin-top: 20px;margin-bottom: 50px;}
 
 .list_col{margin-top: 40px !important;}
 
@@ -62,7 +60,7 @@ input:focus {outline:none;}
 /* 수정 */
 .diary-update-btn{background-color: #4cc67c !important; font-weight: 900 !important; border: none !important; margin-top: 20px; margin-left: 800px;}
 .diary-delete-btn{background-color: rgb(245, 85, 85) !important; font-weight: 900 !important; border: none !important; margin-top: 20px;}
-
+.diary-img-update{width: 25px; height: auto; margin-bottom: 10px; margin-left: 5px;}
 /* 캘린더 */
 button {cursor: pointer;}
 .diary {width: 1000px; height: 910px; margin: 3rem auto; padding: 40px 40px; border: 1px solid rgba(128, 128, 128, 0.267);/*position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);*/}
