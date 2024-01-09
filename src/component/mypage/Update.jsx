@@ -1,14 +1,22 @@
 import React, { useRef, useState, useEffect } from 'react'
+import axios from 'axios'
 import { Card, Form, InputGroup, Button, Spinner } from 'react-bootstrap'
 import './MyPage.css'
 
 const Update = () => {
     const img_ref = useRef(null);
+    const [users, setUsers] = useState([]);
     const [loading, setLoading] = useState(false);
-
+    const getList = async() => {
+        setLoading(true);
+        const res = await axios.get(`/users/list.json?uid=${sessionStorage.getItem("uid")}`);
+        console.log(res.data)
+        setUsers(res.data.list);
+        setLoading(false);
+    }
     useEffect(() => {
-
-    });
+        getList();
+    },[]);
 
     if (loading) return <div className='text-center'><Spinner /></div>
     return (

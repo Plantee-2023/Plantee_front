@@ -8,22 +8,23 @@ import { LiaComment } from "react-icons/lia";
 import './Main.css'
 
 const Main = () => {
-    const size = 3;
-    const [plants, setplants] = useState([]); // 플랜트
+    const [plants, setPlants] = useState([]); // 플랜트
     const [community, setCommunity] = useState([]); // 커뮤니티
-    const [diary, setDiary] = useState([]); // 다이어리
+    const [magazine, setMagazine] = useState([]);
     const [store, setStore] = useState([]); //스토어
     const [loading, setLoading] = useState(false);
 
     const getMain = async () => {
         setLoading(true);
         const res = await axios.get(`/store/list.json`);
-        // const res1 = await axios.get(`/diary/list.json/${sessionStorage.getItem("uid")}`); 다이어리
-        // const res2 = await axios.get(`/comm/list.json?page=1&size=3`); 커뮤니티
-        // const res3 = await axios.get(`/plant/list.json`); 플랜트
+        //const res1 = await axios.get(`/magazine/list.json`);
+        const res2 = await axios.get(`/comm/list.json`); //커뮤니티
+        const res3 = await axios.get(`/plant/list.json`); // 플랜트
         setStore(res.data.list);
-        // setDiary(res1.data.list);
-        // setCommunity(res2.data.list);
+        //setMagazine(res1.data.list);
+        //console.log(res1.data.list);
+        setCommunity(res2.data.list);
+        setPlants(res3.data.list);
         setLoading(false);
     }
     useEffect(() => {
@@ -55,7 +56,7 @@ const Main = () => {
                         </div>
                     </Col>
                     <Col>
-                        <a className='main_more' href='/'>
+                        <a className='main_more' href='/store/main'>
                             더보기<CgChevronRight />
                         </a>
                     </Col>
@@ -64,48 +65,6 @@ const Main = () => {
                     {store.map(s =>
                         <Carousel.Item>
                             <Row>
-                                <Col key={s.store_id}>
-                                    <Card>
-                                        <Card.Body >
-                                            <Card.Img width={200} height={200} >{s.image}</Card.Img>
-                                            <Card.Body className='main_text'>
-                                                <div>이름 : {s.title}</div><br />
-                                                <div>가격 : {s.fmtprice}</div>
-                                            </Card.Body>
-                                        </Card.Body>
-                                        <Card.Footer className='text-start'>
-                                            {s.like_cnt} <MdFavoriteBorder /> {s.review_cnt} <LiaComment size={20} />
-                                        </Card.Footer>
-                                    </Card>
-                                </Col>
-                                <Col key={s.store_id}>
-                                    <Card>
-                                        <Card.Body >
-                                            <Card.Img width={200} height={200} >{s.image}</Card.Img>
-                                            <Card.Body className='main_text'>
-                                                <div>이름 : {s.title}</div><br />
-                                                <div>가격 : {s.fmtprice}</div>
-                                            </Card.Body>
-                                        </Card.Body>
-                                        <Card.Footer className='text-start'>
-                                            {s.like_cnt} <MdFavoriteBorder /> {s.review_cnt} <LiaComment size={20} />
-                                        </Card.Footer>
-                                    </Card>
-                                </Col>
-                                <Col key={s.store_id}>
-                                    <Card>
-                                        <Card.Body >
-                                            <Card.Img width={200} height={200} >{s.image}</Card.Img>
-                                            <Card.Body className='main_text'>
-                                                <div>이름 : {s.title}</div><br />
-                                                <div>가격 : {s.fmtprice}</div>
-                                            </Card.Body>
-                                        </Card.Body>
-                                        <Card.Footer className='text-start'>
-                                            {s.like_cnt} <MdFavoriteBorder /> {s.review_cnt} <LiaComment size={20} />
-                                        </Card.Footer>
-                                    </Card>
-                                </Col>
                                 <Col key={s.store_id}>
                                     <Card>
                                         <Card.Body >
@@ -131,7 +90,7 @@ const Main = () => {
                         </div>
                     </Col>
                     <Col>
-                        <a className='main_more' href='/'>
+                        <a className='main_more' href='/plant'>
                             더보기<CgChevronRight />
                         </a>
                     </Col>
@@ -143,50 +102,25 @@ const Main = () => {
                     <Button className='main_btn'>태그</Button>
                 </InputGroup>
                 <Carousel className='mb-5 mt-5'>
-                    <Carousel.Item>
-                        <Row>
-                            <Col>
-                                <Card>
-                                    <Card.Body>
-                                        <Card.Img src='/image/what1.jpg' width={200} height={200} />
-                                    </Card.Body>
-                                    <Card.Footer className='text-start'>
-                                        1 <MdFavoriteBorder /> 0 <FaRegBookmark /> 0 <LiaComment size={20} />
-                                    </Card.Footer>
-                                </Card>
-                            </Col>
-                            <Col>
-                                <Card>
-                                    <Card.Body>
-                                        <Card.Img src='/image/what2.jpg' width={200} height={200} />
-                                    </Card.Body>
-                                    <Card.Footer className='text-start'>
-                                        1 <MdFavoriteBorder /> 0 <FaRegBookmark /> 0 <LiaComment size={20} />
-                                    </Card.Footer>
-                                </Card>
-                            </Col>
-                            <Col>
-                                <Card>
-                                    <Card.Body>
-                                        <Card.Img src='/image/what3.jpg' width={200} height={200} />
-                                    </Card.Body>
-                                    <Card.Footer className='text-start'>
-                                        1 <MdFavoriteBorder /> 0 <FaRegBookmark /> 0 <LiaComment size={20} />
-                                    </Card.Footer>
-                                </Card>
-                            </Col>
-                            <Col>
-                                <Card>
-                                    <Card.Body>
-                                        <Card.Img src='/image/what4.jpg' width={200} height={200} />
-                                    </Card.Body>
-                                    <Card.Footer className='text-start'>
-                                        1 <MdFavoriteBorder /> 0 <FaRegBookmark /> 0 <LiaComment size={20} />
-                                    </Card.Footer>
-                                </Card>
-                            </Col>
-                        </Row>
-                    </Carousel.Item>
+                    {plants.map(p =>
+                        <Carousel.Item>
+                            <Row>
+                                <Col key={p.plant_id}>
+                                    <Card>
+                                        <Card.Body>
+                                            <Card.Img width={200} height={200} ></Card.Img>
+                                            <Card.Body>
+                                                <div>이름 : {p.common_name}</div>
+                                                <div>난이도 : {p.care_level}단계</div>
+                                                <div>햇빛 : {p.sunlight}</div>
+                                                <div>물주기 : {p.watering}</div>
+                                            </Card.Body>
+                                        </Card.Body>
+                                    </Card>
+                                </Col>
+                            </Row>
+                        </Carousel.Item>
+                    )}
                 </Carousel>
                 <Row>
                     <Col>
@@ -195,7 +129,7 @@ const Main = () => {
                         </div>
                     </Col>
                     <Col>
-                        <a className='main_more' href='/'>
+                        <a className='main_more' href='/comm'>
                             더보기<CgChevronRight />
                         </a>
                     </Col>
@@ -207,92 +141,26 @@ const Main = () => {
                     <Button className='main_btn'>태그</Button>
                 </InputGroup>
                 <Carousel className='mb-5 mt-5'>
-                    <Carousel.Item>
-                        <Row>
-                            <Col>
-                                <Card>
-                                    <Card.Body>
-                                        <Card.Img src='/image/story1.jpg' width={200} height={200} />
-                                    </Card.Body>
-                                    <Card.Footer className='text-start'>
-                                        1 <MdFavoriteBorder /> 0 <FaRegBookmark /> 0 <LiaComment size={20} />
-                                    </Card.Footer>
-                                </Card>
-                            </Col>
-                            <Col>
-                                <Card>
-                                    <Card.Body>
-                                        <Card.Img src='/image/story2.jpg' width={200} height={200} />
-                                    </Card.Body>
-                                    <Card.Footer className='text-start'>
-                                        1 <MdFavoriteBorder /> 0 <FaRegBookmark /> 0 <LiaComment size={20} />
-                                    </Card.Footer>
-                                </Card>
-                            </Col>
-                            <Col>
-                                <Card>
-                                    <Card.Body>
-                                        <Card.Img src='/image/story3.jpg' width={200} height={200} />
-                                    </Card.Body>
-                                    <Card.Footer className='text-start'>
-                                        1 <MdFavoriteBorder /> 0 <FaRegBookmark /> 0 <LiaComment size={20} />
-                                    </Card.Footer>
-                                </Card>
-                            </Col>
-                            <Col>
-                                <Card>
-                                    <Card.Body>
-                                        <Card.Img src='/image/story4.jpg' width={200} height={200} />
-                                    </Card.Body>
-                                    <Card.Footer className='text-start'>
-                                        1 <MdFavoriteBorder /> 0 <FaRegBookmark /> 0 <LiaComment size={20} />
-                                    </Card.Footer>
-                                </Card>
-                            </Col>
-                        </Row>
-                        <Row className='mt-3'> {/* 스토리 두번째 */}
-                            <Col>
-                                <Card>
-                                    <Card.Body>
-                                        <Card.Img src='/image/story5.jpg' width={200} height={200} />
-                                    </Card.Body>
-                                    <Card.Footer className='text-start'>
-                                        1 <MdFavoriteBorder /> 0 <FaRegBookmark /> 0 <LiaComment size={20} />
-                                    </Card.Footer>
-                                </Card>
-                            </Col>
-                            <Col>
-                                <Card>
-                                    <Card.Body>
-                                        <Card.Img src='/image/story6.jpg' width={200} height={200} />
-                                    </Card.Body>
-                                    <Card.Footer className='text-start'>
-                                        1 <MdFavoriteBorder /> 0 <FaRegBookmark /> 0 <LiaComment size={20} />
-                                    </Card.Footer>
-                                </Card>
-                            </Col>
-                            <Col>
-                                <Card>
-                                    <Card.Body>
-                                        <Card.Img src='/image/story7.jpg' width={200} height={200} />
-                                    </Card.Body>
-                                    <Card.Footer className='text-start'>
-                                        1 <MdFavoriteBorder /> 0 <FaRegBookmark /> 0 <LiaComment size={20} />
-                                    </Card.Footer>
-                                </Card>
-                            </Col>
-                            <Col>
-                                <Card>
-                                    <Card.Body>
-                                        <Card.Img src='/image/story8.jpg' width={200} height={200} />
-                                    </Card.Body>
-                                    <Card.Footer className='text-start'>
-                                        1 <MdFavoriteBorder /> 0 <FaRegBookmark /> 0 <LiaComment size={20} />
-                                    </Card.Footer>
-                                </Card>
-                            </Col>
-                        </Row>
-                    </Carousel.Item>
+                    {community.map(c =>
+                        <Carousel.Item>
+                            <Row>
+                                <Col key={c.post_id}>
+                                    <Card>
+                                        <Card.Body>
+                                            <Card.Img src='/image/story1.jpg' width={200} height={200} />
+                                            <Card.Body>
+                                                <div> 제목 : {c.title}</div>
+                                                <div> 닉네임 : {c.nickname}</div>
+                                            </Card.Body>
+                                        </Card.Body>
+                                        <Card.Footer className='text-start'>
+                                            {c.like_cnt} <MdFavoriteBorder /> {c.view_cnt} <FaRegBookmark /> {c.coment_cnt} <LiaComment size={20} />
+                                        </Card.Footer>
+                                    </Card>
+                                </Col>
+                            </Row>
+                        </Carousel.Item>
+                    )}
                 </Carousel>
                 <Row>
                     <Col>

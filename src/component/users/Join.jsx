@@ -6,7 +6,6 @@ const Join = () => {
     const img_ref = useRef(null);
     const img1_ref = useRef(null);
     const [loading, setLoading] = useState(false);
-
     const getJoin = () => {
         setLoading(true);
         setLoading(false);
