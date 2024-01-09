@@ -17,12 +17,12 @@ const Main = () => {
     const getMain = async () => {
         setLoading(true);
         const res = await axios.get(`/store/list.json`);
-        //const res1 = await axios.get(`/magazine/list.json`);
+        const res1 = await axios.get(`/magazine/list.json`);
         const res2 = await axios.get(`/comm/list.json`); //커뮤니티
         const res3 = await axios.get(`/plant/list.json`); // 플랜트
         setStore(res.data.list);
-        //setMagazine(res1.data.list);
-        //console.log(res1.data.list);
+        setMagazine(res1.data.list);
+        console.log(res1.data.list);
         setCommunity(res2.data.list);
         setPlants(res3.data.list);
         setLoading(false);
@@ -56,7 +56,7 @@ const Main = () => {
                         </div>
                     </Col>
                     <Col>
-                        <a className='main_more' href='/store/main'>
+                        <a className='main_more' href='/'>
                             더보기<CgChevronRight />
                         </a>
                     </Col>
@@ -86,7 +86,7 @@ const Main = () => {
                 <Row>
                     <Col>
                         <div className='main-title mb-4'>
-                            MBTI 추천
+                            식물 도감
                         </div>
                     </Col>
                     <Col>
@@ -170,58 +170,25 @@ const Main = () => {
                     </Col>
                 </Row>
                 <Carousel className='mb-5 mt-5'>
-                    <Carousel.Item>
-                        <Row>
-                            <Col>
-                                <Card>
-                                    <Card.Body>
-                                        <Card.Img src='/image/what1.jpg' width={200} height={200} />
-                                        <hr />
-                                        <div>제목 : 이 식물을 안키운다면 멍청이!</div>
-                                    </Card.Body>
-                                    <Card.Footer className='text-start'>
-                                        1 <MdFavoriteBorder /> 0 <FaRegBookmark /> 0 <LiaComment size={20} />
-                                    </Card.Footer>
-                                </Card>
-                            </Col>
-                            <Col>
-                                <Card>
-                                    <Card.Body>
-                                        <Card.Img src='/image/what2.jpg' width={200} height={200} />
-                                        <hr />
-                                        <div>제목 : 아기 있는 집안에 하나는 있어야하는것!</div>
-                                    </Card.Body>
-                                    <Card.Footer className='text-start'>
-                                        1 <MdFavoriteBorder /> 0 <FaRegBookmark /> 0 <LiaComment size={20} />
-                                    </Card.Footer>
-                                </Card>
-                            </Col>
-                            <Col>
-                                <Card>
-                                    <Card.Body>
-                                        <Card.Img src='/image/what3.jpg' width={200} height={200} />
-                                        <hr />
-                                        <div>제목 : 당신은 식물을 키워야한다!</div>
-                                    </Card.Body>
-                                    <Card.Footer className='text-start'>
-                                        1 <MdFavoriteBorder /> 0 <FaRegBookmark /> 0 <LiaComment size={20} />
-                                    </Card.Footer>
-                                </Card>
-                            </Col>
-                            <Col>
-                                <Card>
-                                    <Card.Body>
-                                        <Card.Img src='/image/what4.jpg' width={200} height={200} />
-                                        <hr />
-                                        <div>제목 : 당신은 식물을 키워야한다!</div>
-                                    </Card.Body>
-                                    <Card.Footer className='text-start'>
-                                        1 <MdFavoriteBorder /> 0 <FaRegBookmark /> 0 <LiaComment size={20} />
-                                    </Card.Footer>
-                                </Card>
-                            </Col>
-                        </Row>
-                    </Carousel.Item>
+                    {magazine.map(m =>
+                        <Carousel.Item>
+                            <Row>
+                                <Col key={m.user_id}>
+                                    <Card>
+                                        <Card.Body>
+                                            <Card.Img src='/image/what1.jpg' width={200} height={200} />
+                                            <hr />
+                                            <div>제목 : {m.title}</div>
+                                            <div>내용 : {m.contents}</div>
+                                        </Card.Body>
+                                        <Card.Footer className='text-start'>
+                                            {m.like_cnt} <MdFavoriteBorder /> {m.coment_cnt} <LiaComment size={20} />
+                                        </Card.Footer>
+                                    </Card>
+                                </Col>
+                            </Row>
+                        </Carousel.Item>
+                    )}
                 </Carousel>
             </div>
         </div>

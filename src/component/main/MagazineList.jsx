@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
+import axios from 'axios';
 import { Col, Form, InputGroup, Row, Button, Table, Spinner, Card } from 'react-bootstrap'
-import { NavLink,useLocation } from 'react-router-dom'
+import { NavLink, useLocation } from 'react-router-dom'
 import { AiOutlineEdit } from "react-icons/ai";
 import { useState } from 'react';
 import Pagination from 'react-js-pagination';
@@ -12,9 +13,13 @@ const MagazineList = () => {
     const search = new URLSearchParams(location.search);
     const [loading, setLoading] = useState(false);
     const page = search.get("page") ? parseInt(search.get("page")) : 1;
-    
-    const getMagazineList = () => {
+    const [magazine, setMagazine] = useState([]);
+
+    const getMagazineList = async () => {
         setLoading(true);
+        const res = await axios.get(`/magazine/list.json`);
+        setMagazine(res.data.list);
+        console.log(res.data);
         setLoading(false);
     }
 
@@ -41,20 +46,15 @@ const MagazineList = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td className='text-center'>1</td>
-                            <td><a href='/main/magazine'>얘는 무슨 식물이냐?</a></td>
-                            <td className='text-center'>관리자</td>
-                            <td className='text-center'>2023/12/29</td>
-                            <td className='text-center'>0</td>
-                        </tr>
-                        <tr>
-                            <td className='text-center'>2</td>
-                            <td><a href=''>우리 토마토가 어디가 아픈건가요?</a></td>
-                            <td className='text-center'>관리자</td>
-                            <td className='text-center'>2023/12/28</td>
-                            <td className='text-center'>0</td>
-                        </tr>
+                        {magazine.map(m =>
+                            <tr key={m.post_id}>
+                                <td className='text-center'>{m.post_id}</td>
+                                <td><a href='/main/magazine'>{m.title}</a></td>
+                                <td className='text-center'>{m.nickname}</td>
+                                <td className='text-center'>{m.reg_date}</td>
+                                <td className='text-center'>{m.view_cnt}</td>
+                            </tr>
+                        )}
                     </tbody>
                 </Table>
                 <Row>
