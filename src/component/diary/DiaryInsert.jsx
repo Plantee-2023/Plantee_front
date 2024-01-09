@@ -23,16 +23,23 @@ const DiaryInsert = () => {
                             </InputGroup>
                             <InputGroup className='diary-input'>
                                 <InputGroup.Text className='diary-text'>식물 종류</InputGroup.Text>
-
-                                <select className='select_box'>
+                                <Form.Select className='select_box'>
                                     <option>화분 선택 (*옵션)</option>
                                     <option>스투키</option>
                                     <option>알로에</option>
                                     <option>선인장</option>
-                                </select>
+                                </Form.Select>
+                            </InputGroup>
+                            <InputGroup className='diary-input'>
+                                <InputGroup.Text className='diary-text'>분류</InputGroup.Text>
+                                <Form.Control name='uname' type='text' />
+                                <InputGroup.Text className='diary-text'>난이도</InputGroup.Text>
+                                <Form.Control name='uname' type='text' />
                             </InputGroup>
                             <InputGroup className='diary-input'>
                                 <InputGroup.Text className='diary-text'>물 주기</InputGroup.Text>
+                                <Form.Control name='uname' type='text' />
+                                <InputGroup.Text className='diary-text'>햇빛 주기</InputGroup.Text>
                                 <Form.Control name='uname' type='text' />
                             </InputGroup>
                             <InputGroup className='diary-input'>

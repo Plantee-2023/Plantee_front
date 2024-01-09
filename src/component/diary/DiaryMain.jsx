@@ -76,8 +76,8 @@ const DiaryMain = () => {
                         </InputGroup>
                     </form>
                 </div>
-                <div className='text-end mt-3'>
-                    <Button className='diary-img-btn' onClick={() => { onClickInsert() }}>등록하기</Button>
+                <div className='text-end mt-3' onClick={() => { onClickInsert()}}>
+                    <img src='/image/icon-add.png' className='diary-img-insert'/><span className='diary-insert-size'><b><u>등록하기</u></b></span>
                 </div>
                 <div className='text-center'>
                     {list.map(d =>

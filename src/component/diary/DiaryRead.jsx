@@ -22,6 +22,9 @@ const DiaryRead = () => {
         setLoading(false);
 
     }
+    const onClickDelete = () => {
+
+    }
 
     useEffect(() => {
         getDiary();
