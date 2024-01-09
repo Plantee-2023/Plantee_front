@@ -23,8 +23,8 @@
 .plant_filter span {margin: 0 10px;}
 
 .plant_list {margin-top: 20px;}
-.plant_list_items {display: flex; padding-bottom: 2%;}
-.plant_list_item {margin: 0 6.4rem 0 -2rem;}
+.plant_list_items {display: flex; flex-wrap: wrap; padding-bottom: 2%;}
+.plant_list_item {margin: 0 5.1rem 0 -2rem;}
 .plant_list_item a {text-decoration: none; color: #000;}
 .plant_image {width: 200px; height: 200px; margin-bottom: 3%;}
 .plant_image img {width: 100%; height: 100%;}
