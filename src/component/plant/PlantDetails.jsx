@@ -1,11 +1,12 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { Spinner } from 'react-bootstrap';
-import { useParams } from 'react-router-dom';
+import { NavLink, useParams } from 'react-router-dom';
 
 const PlantDetails = () => {
 
   const [loading, setLoading] = useState(false);
+
   const { plant_id } = useParams();
 
   const [plant, setPlant] = useState({
@@ -68,14 +69,14 @@ const PlantDetails = () => {
               </section>
               <section className='details_simpleinfo_section'>
                 <ul className='plant_items'>
-                  {type && <li className='plant_item'>{type}</li>}
-                  {care_level && <li className='plant_item'>{getCareLevelText(care_level)}</li>}
-                  {indoor && <li className='plant_item'>{getIndoorText(indoor)}</li>}
-                  {leaf === 'y' && <li className='plant_item'>잎이 있는</li>}
-                  {flowers === 'y' && <li className='plant_item'>꽃이 있는</li>}
-                  {fruits === 'y' && <li className='plant_item'>열매가 있는</li>}
-                  {poisonous_pet === 'n' && <li className='plant_item'>반려안전</li>}
-                  {cuisine === 'y' && <li className='plant_item'>식용가능</li>}
+                  {type && <li className='plant_item'># {type}</li>}
+                  {care_level && <li className='plant_item'># {getCareLevelText(care_level)}</li>}
+                  {indoor && <li className='plant_item'># {getIndoorText(indoor)}</li>}
+                  {leaf === 'y' && <li className='plant_item'># 잎이 있는</li>}
+                  {flowers === 'y' && <li className='plant_item'># 꽃이 있는</li>}
+                  {fruits === 'y' && <li className='plant_item'># 열매가 있는</li>}
+                  {poisonous_pet === 'n' && <li className='plant_item'># 반려안전</li>}
+                  {cuisine === 'y' && <li className='plant_item'># 식용가능</li>}
                 </ul>
                 <section className='details_detailinfo_section'>
                   <div className='detailinfo_group'>
@@ -95,8 +96,17 @@ const PlantDetails = () => {
                 </section>
                 <p className='plant_info_text'>{contents}</p>
               </section>
+              {/* 관리자 */}
+                {sessionStorage.getItem('uid') === 'admin' &&
+                    <div className='update_btnarea'>
+                      <NavLink to={`/plant/update/${plant_id}`}>
+                        <button className='update_submit'>수정하기</button>
+                      </NavLink>
+                    </div>
+                }
             </section>
           </div>
+          
         </div>
       </div>
     </div>
