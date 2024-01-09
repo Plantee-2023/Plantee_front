@@ -18,6 +18,7 @@ import Market_list from './community/market/Market_list';
 import Market_read from './community/market/Market_read';
 import DiaryMain from './diary/DiaryMain';
 import DiaryInsert from './diary/DiaryInsert';
+import DiaryUpdate from './diary/DiaryUpdate';
 import DiaryRead from './diary/DiaryRead';
 import DiaryCalendar from './diary/DiaryCalendar';
 import DiaryList from './diary/DiaryList';
@@ -65,9 +66,10 @@ const RouterPage = () => {
             <Route path='/store/update/:store_id' element={<StoreUpdate />} />
 
             {/* 다이어리 */}
-            <Route path='/diary/main/:uid' element={<DiaryMain />} />
+            <Route path='/diary/main' element={<DiaryMain />} />
             <Route path='/diary/calendar' element={<DiaryCalendar />} />
             <Route path='/diary/main/insert' element={<DiaryInsert />} />
+            <Route path='/diary/main/update' element={<DiaryUpdate />} />
             <Route path='/diary/read/:diary_id' element={<DiaryRead />} />
             <Route path='/diary/list' element={<DiaryList />} />
         </Routes>

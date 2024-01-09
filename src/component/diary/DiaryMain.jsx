@@ -7,18 +7,27 @@ import { Link, useNavigate } from 'react-router-dom';
 
 const DiaryMain = () => {
     const [list, setList] = useState([]);
-    // const { uid } = useParams();
     const [loading, setLoading] = useState(false);
+    // const [query, setQuery] = useState("")
     const navi = useNavigate();
 
     const getList = async () => {
         setLoading(true);
-        const res = await axios.get(`/diary/list.json/${sessionStorage.getItem("uid")}`);
+        const res = await axios.get(`/diary/list.json/${sessionStorage.getItem("uid")}`);//?query=${query}
         console.log(res.data);
         setList(res.data);
         setLoading(false);
         // console.log(list);
     }
+
+    // const onSubmit=(e)=>{
+    //     e.preventDefault();
+    //     if(query===""){
+    //         alert("검색어를 입력하세요")
+    //     }else{
+    //         getList();
+    //     }
+    // }
 
     const onClickInsert = () => {
         navi(`/diary/main/insert`);
@@ -76,8 +85,8 @@ const DiaryMain = () => {
                         </InputGroup>
                     </form>
                 </div>
-                <div className='text-end mt-3'>
-                    <Button className='diary-img-btn' onClick={() => { onClickInsert() }}>등록하기</Button>
+                <div className='text-end mt-3' onClick={() => { onClickInsert() }}>
+                    <img src='/image/icon-add.png' className='diary-img-insert' /><span className='diary-insert-size'><b><u>등록하기</u></b></span>
                 </div>
                 <div className='text-center'>
                     {list.map(d =>
@@ -86,7 +95,7 @@ const DiaryMain = () => {
                                 <Row>
                                     <Col>
                                         <br />
-                                        <h1>D-10</h1>
+                                        <h1>D{d.date_water}</h1>
                                         <hr className='diary_dayline' />
                                         <p className='diary_icon_sun'>
                                             <p>{getSun(d.icon_sun)}</p>
@@ -109,7 +118,7 @@ const DiaryMain = () => {
                         </div>
                     )}
                     <div className='diarymain_cardgroup'>
-                        <Card style={{ width: '30rem' }} className='diarymain_card'>
+                        <Card style={{ width: '50rem' }} className='diarymain_card'>
                             <Card.Body>
                                 <Row>
                                     <Col md='5'>
@@ -118,7 +127,13 @@ const DiaryMain = () => {
                                         </div>
                                     </Col>
                                     <Col className='mt-2'>
-                                        오늘은 플랜티식물 물 주는 날 입니다.
+                                        오늘은
+                                        {list.map(d =>
+                                            <span>
+                                                [{d.plant_name}],
+                                            </span>
+                                        )}
+                                        물 주는 날 입니다.
                                     </Col>
                                 </Row>
                             </Card.Body>
