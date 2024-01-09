@@ -4,9 +4,9 @@ import Main from './Main';
 import Join from './users/Join';
 import LoginPage from './users/LoginPage';
 import MyPage from './users/MyPage';
-import Magazine from './main/Magazine';
-import MagazineList from './main/MagazineList';
-import MagazineInsert from './main/MagazineInsert';
+import Magazine from './magazine/Magazine';
+import MagazineList from './magazine/MagazineList';
+import MagazineInsert from './magazine/MagazineInsert';
 import StoreMain from './store/StoreMain';
 import StoreRead from './store/StoreRead';
 import StoreUpdate from './store/StoreUpdate';
@@ -32,9 +32,9 @@ const RouterPage = () => {
         <Routes>
             {/* 메인, 매거진 */}
             <Route path='/' element={<Main />} />
-            <Route path='/magazine/magazine' element={<Magazine />} />
+            <Route path='/magazine/read/:post_id' element={<Magazine />} />
             <Route path='/magazine/magazineList' element={<MagazineList />} />
-            <Route path='/magazine/magazineInsert' element={<MagazineInsert />} />
+            <Route path='/magazine/insert' element={<MagazineInsert />} />
             <Route path='/mypage/mypagefavorite' element={<MyPageFavorite/>} />
             <Route path='/mypage/mypagecomment' element={<MyPageComment/>} />
 

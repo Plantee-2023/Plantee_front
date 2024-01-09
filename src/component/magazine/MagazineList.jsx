@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import axios from 'axios';
 import { Col, Form, InputGroup, Row, Button, Table, Spinner, Card } from 'react-bootstrap'
-import { NavLink, useLocation } from 'react-router-dom'
+import { NavLink, useLocation, useNavigate, useParams } from 'react-router-dom'
 import { AiOutlineEdit } from "react-icons/ai";
 import { useState } from 'react';
 import Pagination from 'react-js-pagination';
@@ -9,20 +9,33 @@ import "../common/Pagination.css"
 import './Magazine.css'
 
 const MagazineList = () => {
+    const navi = useNavigate();
+    const size = 5;
+    const [total, setTotal] = useState(0);
     const location = useLocation();
     const search = new URLSearchParams(location.search);
+    const path = location.pathname;
     const [loading, setLoading] = useState(false);
     const page = search.get("page") ? parseInt(search.get("page")) : 1;
+    const [query, setQuery] = useState(search.get("query") ? search.get("query") : "");
     const [magazine, setMagazine] = useState([]);
 
     const getMagazineList = async () => {
         setLoading(true);
-        const res = await axios.get(`/magazine/list.json`);
+        const res = await axios.get(`/magazine/list.json?query=${query}&page=${page}&size=${size}`);
         setMagazine(res.data.list);
-        console.log(res.data);
+        setTotal(res.data.total);
+        console.log(res.data.list);
         setLoading(false);
     }
-
+    const onSubmit = (e) => {
+        e.preventDefault();
+        navi(`${path}?page=1&query=${query}&size=${size}`);
+        console.log();
+    }
+    const onChangePage = (page) => {
+        navi(`${path}?page=${page}&query=${query}&size=${size}`);
+    }
     useEffect(() => {
         getMagazineList();
     }, [location])
@@ -33,7 +46,7 @@ const MagazineList = () => {
             <div className="main_contents">
                 <div className='magazine-list-title'>매거진</div>
                 <Button className="magazine-write-btn">
-                    <NavLink className="magazine-insert" to="/main/magazineInsert"><AiOutlineEdit />글쓰기</NavLink>
+                    <NavLink className="magazine-insert" to="/magazine/insert"><AiOutlineEdit />글쓰기</NavLink>
                 </Button>
                 <Table className='list' bordered hover>
                     <thead className='text-center'>
@@ -49,7 +62,7 @@ const MagazineList = () => {
                         {magazine.map(m =>
                             <tr key={m.post_id}>
                                 <td className='text-center'>{m.post_id}</td>
-                                <td><a href='/main/magazine'>{m.title}</a></td>
+                                <td><NavLink to={`/magazine/read/${m.post_id}`}>{m.title}</NavLink></td>
                                 <td className='text-center'>{m.nickname}</td>
                                 <td className='text-center'>{m.red_date}</td>
                                 <td className='text-center'>{m.view_cnt}</td>
@@ -60,26 +73,30 @@ const MagazineList = () => {
                 <Row>
                     <Col lg={5}>
                         <Form.Select className='select'>
-                            <option>번호</option>
-                            <option>제목</option>
-                            <option>작성자</option>
+                            <option value='1'>번호</option>
+                            <option value='2'>제목</option>
+                            <option value='3'>작성자</option>
                         </Form.Select>
                     </Col>
                     <Col>
-                        <InputGroup className='search'>
-                            <Form.Control type='text' />
-                            <Button className='magazine-btn'>검색</Button>
-                        </InputGroup>
+                        <form onSubmit={onSubmit}>
+                            <InputGroup className='search'>
+                                <Form.Control value={query} onChange={(e) => setQuery(e.target.value)} />
+                                <Button className='magazine-btn'>검색</Button>
+                            </InputGroup>
+                        </form>
                     </Col>
                 </Row>
-                <Pagination
-                    activePage={1}
-                    itemsCountPerPage={8}
-                    totalItemsCount={88}
-                    pageRangeDisplayed={10}
-                    prevPageText={"‹"}
-                    nextPageText={"›"}
-                    onChange={(page) => { }} />
+                {total > size &&
+                    <Pagination
+                        activePage={page}
+                        itemsCountPerPage={size}
+                        totalItemsCount={total}
+                        pageRangeDisplayed={10}
+                        prevPageText={"‹"}
+                        nextPageText={"›"}
+                        onChange={onChangePage} />
+                }
             </div>
         </div>
     )

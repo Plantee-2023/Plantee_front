@@ -24,7 +24,7 @@ const MagazineInsert = () => {
 
     const getInsert = async () => {
         setLoading(true);
-        const res = await axios.get(`/magazine/list.json/${post_id}`);
+        const res = await axios.get(`/magazine/insert`);
         setMagazine(res.data.list);
         setLoading(false);
     }
