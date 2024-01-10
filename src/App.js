@@ -8,11 +8,13 @@ import { BoxContext } from './component/common/BoxContext'
 import BoxModal from './component/common/BoxModal'
 
 function App() {
+
 	const [box, setBox] = useState({
 		show: false,
 		message: "",
 		action: null
 	});
+
 	return (
 		<BoxContext.Provider value={{ box, setBox }}>
 			<Container>

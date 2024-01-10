@@ -4,7 +4,6 @@ import { useLocation, useParams, useNavigate } from 'react-router-dom';
 import { Spinner, Row, Col, Card, Form } from 'react-bootstrap'
 import "./Store.css";
 import { BoxContext } from '../common/BoxContext';
-import BtnToTop from '../common/BtnToTop';
 
 const StoreReview = ({ uid }) => {
     const navi = useNavigate();
@@ -129,7 +128,6 @@ const StoreReview = ({ uid }) => {
                 </div>
             </div>
 
-            <BtnToTop />
         </>
     )
 }

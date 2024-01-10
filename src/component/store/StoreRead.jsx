@@ -8,6 +8,7 @@ import { TiHeart } from "react-icons/ti";
 import StoreReview from "./StoreReview";
 import StoreQuestion from "./StoreQuestion";
 import DeliveryService from './DeliveryService';
+import BtnToTop from '../common/BtnToTop';
 
 const StoreRead = () => {
     const navi = useNavigate();
@@ -160,6 +161,8 @@ const StoreRead = () => {
 
                 </div>
             </div>
+
+            <BtnToTop />
         </>
     )
 }

@@ -4,7 +4,7 @@ import { Table, Form, Button } from 'react-bootstrap'
 const FavoriteList = () => {
     return (
         <div id="main_wrap">
-            <h1 className='all-title'>좋아요 리스트</h1>
+            <h1 className='all-title'>찜리스트</h1>
             <Button className='favorite-list-delete-btn'>삭제</Button>
             <Table className="all-table" hover striped bordered>
                 <thead className='text-center'>
@@ -24,7 +24,7 @@ const FavoriteList = () => {
                         <td>10</td>
                         <td>10</td>
                         <td>10</td>
-                        <td>구매???</td>
+                        <td>구매??/??</td>
                     </tr>
                 </tbody>
             </Table>

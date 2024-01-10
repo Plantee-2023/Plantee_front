@@ -12,6 +12,7 @@ import MagazineInsert from './magazine/MagazineInsert';
 import StoreMain from './store/StoreMain';
 import StoreRead from './store/StoreRead';
 import StoreUpdate from './store/StoreUpdate';
+import StoreInsert from './store/StoreInsert';
 import Comm_Read from './community/comm/Comm_Read';
 import Comm_write from './community/comm/Comm_write';
 import Comm_list from './community/comm/Comm_list';
@@ -66,9 +67,10 @@ const RouterPage = () => {
             <Route path="/comm/market/read/:post_id" element={<Market_read />} />
 
             {/* 스토어 */}
-            <Route path='/store/main' element={<StoreMain />} />
+            <Route path='/store' element={<StoreMain />} />
             <Route path='/store/read/:store_id' element={<StoreRead />} />
             <Route path='/store/update/:store_id' element={<StoreUpdate />} />
+            <Route path='/store/insert' element={<StoreInsert />} />
 
             {/* 다이어리 */}
             <Route path='/diary/main' element={<DiaryMain />} />

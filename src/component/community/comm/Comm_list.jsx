@@ -80,9 +80,9 @@ const onChangeSingle = (e, post_id) => {
 
 
 
-  useEffect(() => {
-    getPost();
-  }, []);
+  // useEffect(() => {
+  //   getPost();
+  // }, []);
 
   useEffect(()=>{
     let chk = 0;

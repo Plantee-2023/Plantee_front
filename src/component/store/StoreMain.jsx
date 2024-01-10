@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react'
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import { Container, Nav, Navbar, Spinner, Row, Col, Card, Badge, InputGroup } from 'react-bootstrap';
 import "./Store.css";
 import Pagination from 'react-js-pagination';
@@ -82,6 +82,11 @@ const StoreMain = () => {
                             </Container>
                         </Navbar>
                     </div>
+
+                    <div className='plant_insert'>
+                        <Link to="/store/insert" state={{ storedata: goods }}><button>추가하기</button></Link>
+                    </div>
+
                     <Row sm={1} md={3} lg={5} className="g-4">
                         {goods.map(g =>
                             <Col key={g.store_id} className="p-4">

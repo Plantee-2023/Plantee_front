@@ -40,7 +40,7 @@ const MyPage = () => {
                                         <Nav.Link className='mypage-disabled' disabled>관심 상품</Nav.Link>
                                     </Nav.Item>
                                     <Nav.Item>
-                                        <Nav.Link eventKey="4" className='mypage-item'>좋아요 리스트</Nav.Link>
+                                        <Nav.Link eventKey="4" className='mypage-item'>찜리스트</Nav.Link>
                                     </Nav.Item>
                                     <Nav.Item>
                                         <Nav.Link eventKey="5" className='mypage-item'>장바구니</Nav.Link>
