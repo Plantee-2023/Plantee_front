@@ -1,14 +1,14 @@
 import React from 'react'
-import {Table, Form, Button, Alert} from 'react-bootstrap'
+import { Table, Form, Button, Alert } from 'react-bootstrap'
 
 const Cart = () => {
     return (
-        <div>
+        <div id="main_wrap">
             <h1 className='all-title'>장바구니</h1>
-            <Table className='cart-table' hover striped bordered>
+            <Table hover striped bordered>
                 <thead className='text-center'>
                     <tr>
-                        <th><Form.Check/></th>
+                        <th><Form.Check /></th>
                         <th>상품명</th>
                         <th>수량</th>
                         <th>상품금액</th>
@@ -21,7 +21,7 @@ const Cart = () => {
                 </thead>
                 <tbody className='text-center'>
                     <tr>
-                        <td><Form.Check/></td>
+                        <td><Form.Check /></td>
                         <td>ㅇㄴㅁㅀㅁㅇㅎㄻㄴㅇㅎㄻㄴㅇㅎㅁㅇㄴ</td>
                         <td>2</td>
                         <td>100</td>

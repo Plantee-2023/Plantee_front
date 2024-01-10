@@ -4,9 +4,9 @@ import Main from './Main';
 import Join from './users/Join';
 import LoginPage from './users/LoginPage';
 import MyPage from './users/MyPage';
-import Magazine from './main/Magazine';
-import MagazineList from './main/MagazineList';
-import MagazineInsert from './main/MagazineInsert';
+import Magazine from './magazine/Magazine';
+import MagazineList from './magazine/MagazineList';
+import MagazineInsert from './magazine/MagazineInsert';
 import StoreMain from './store/StoreMain';
 import StoreRead from './store/StoreRead';
 import StoreUpdate from './store/StoreUpdate';
@@ -24,20 +24,20 @@ import DiaryCalendar from './diary/DiaryCalendar';
 import DiaryList from './diary/DiaryList';
 import PlantDictionary from './plant/PlantDictionary';
 import PlantDetails from './plant/PlantDetails';
-import PlantInsert from './plant/PlantInsert';
-import PlantUpdate from './plant/PlantUpdate';
-
+import MyPageFavorite from './mypage/MyPageFavorite'
+import MyPageComment from './mypage/MyPageComment'
+import PlantInsert from './plant/PlantInsert'
+import PlantUpdate from './plant/PlantUpdate'
 const RouterPage = () => {
     return (
         <Routes>
             {/* 메인, 매거진 */}
             <Route path='/' element={<Main />} />
-            <Route path='/main/magazine' element={<Magazine />} />
-            <Route path='/main/magazineList' element={<MagazineList />} />
-
-            {/* 로그인 */}
-            <Route path='/main/magazineList' element={<MagazineList />} />
-            <Route path='/main/magazineInsert' element={<MagazineInsert />} />
+            <Route path='/magazine/read/:post_id' element={<Magazine />} />
+            <Route path='/magazine/magazineList' element={<MagazineList />} />
+            <Route path='/magazine/insert' element={<MagazineInsert />} />
+            <Route path='/mypage/mypagefavorite' element={<MyPageFavorite/>} />
+            <Route path='/mypage/mypagecomment' element={<MyPageComment/>} />
 
             {/* 회원 */}
             <Route path='/users/loginPage' element={<LoginPage />} />
@@ -61,7 +61,7 @@ const RouterPage = () => {
             <Route path="/comm/market/read/:post_id" element={<Market_read />} />
 
             {/* 스토어 */}
-            <Route path='/store' element={<StoreMain />} />
+            <Route path='/store/main' element={<StoreMain />} />
             <Route path='/store/read/:store_id' element={<StoreRead />} />
             <Route path='/store/update/:store_id' element={<StoreUpdate />} />
 
