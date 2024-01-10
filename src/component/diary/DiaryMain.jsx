@@ -37,30 +37,30 @@ const DiaryMain = () => {
     const getSun = (icon_sun) => {
         switch (icon_sun) {
             case '1':
-                return '100';
+                return <img src='/image/icon_sun.png'/>;
             case '2':
-                return '2';
+                return <img src='/image/icon_sun2.jpg'/>;
             case '3':
-                return '5';
+                return <img src='/image/icon_sun3.jpg'/>;
             case '4':
-                return '2';
+                return <img src='/image/icon_sun3.jpg'/>;
             default:
-                return '1200';
+                return <img src='/image/icon_sun5.jpg'/>;
         }
     };
 
     const getWater = (icon_water) => {
         switch (icon_water) {
             case '1':
-                return '10110';
+                return <img src='/image/icon_water.png'/>;
             case '2':
-                return '1112';
+                return <img src='/image/icon_water2.jpg'/>;
             case '3':
-                return '5111';
+                return <img src='/image/icon_water3.jpg'/>;
             case '4':
-                return '21111';
+                return <img src='/image/icon_water3.jpg'/>;
             default:
-                return '1200';
+                return <img src='/image/icon_water5.jpg'/>;
         }
     };
 
@@ -100,7 +100,7 @@ const DiaryMain = () => {
                                         <p className='diary_icon_sun'>
                                             <p>{getSun(d.icon_sun)}</p>
                                         </p>
-                                        <p>
+                                        <p className='diary_icon_sun'>
                                             <p>{getWater(d.icon_water)}</p>
                                         </p>
                                     </Col>

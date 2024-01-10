@@ -3,6 +3,7 @@ import { Button, Card, CardBody, Col, Container, Row, Spinner } from 'react-boot
 import DiaryTag from './DiaryTag'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom';
+import BtnToTop from '../common/BtnToTop';
 
 const DiaryList = () => {
     const [list, setList] = useState([]);
@@ -44,7 +45,6 @@ const DiaryList = () => {
                 <div className='list_all'>
                     <div className='line_top1'>
                         <img src='/image/icon_water.png' width={'40px'} height={'40px'} />
-                        <span> 물 주기</span>
                     </div>
                     <div className='line_1'>
                         <h2 className='mb-5'>물 주기</h2>
@@ -138,6 +138,7 @@ const DiaryList = () => {
                     </div>
                 </div>
             </div>
+            <BtnToTop/>
         </div>
     )
 }
