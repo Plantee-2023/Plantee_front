@@ -4,16 +4,16 @@ import Main from './Main';
 import Join from './users/Join';
 import LoginPage from './users/LoginPage';
 import MyPage from './users/MyPage';
-import Magazine from './main/Magazine';
-import MagazineList from './main/MagazineList';
-import MagazineInsert from './main/MagazineInsert';
+import Magazine from './magazine/Magazine';
+import MagazineList from './magazine/MagazineList';
+import MagazineInsert from './magazine/MagazineInsert';
 import StoreMain from './store/StoreMain';
 import StoreRead from './store/StoreRead';
 import StoreUpdate from './store/StoreUpdate';
-import Community from './community/Community';
-import Comm_Read from './community/Comm_Read';
+ 
+ 
 import Comm_Read from './community/comm/Comm_Read';
-import Comm_Write from './community/Comm_Write';
+import Comm_update from './community/comm/Comm_update';
 import Comm_write from './community/comm/Comm_write';
 import Comm_list from './community/comm/Comm_list';
 import Market_write from './community/market/Market_write';
@@ -32,12 +32,12 @@ const RouterPage = () => {
         <Routes>
             {/* 메인, 매거진 */}
             <Route path='/' element={<Main />} />
-            <Route path='/main/magazine' element={<Magazine />} />
-            <Route path='/main/magazineList' element={<MagazineList />} />
+            <Route path='/magazine/magazine' element={<Magazine />} />
+            <Route path='/magazine/magazineList' element={<MagazineList />} />
 
             {/* 로그인 */}
-            <Route path='/main/magazineList' element={<MagazineList />} />
-            <Route path='/main/magazineInsert' element={<MagazineInsert />} />
+            <Route path='/magazine/magazineList' element={<MagazineList />} />
+            <Route path='/magazine/magazineInsert' element={<MagazineInsert />} />
 
             {/* 회원 */}
             <Route path='/users/loginPage' element={<LoginPage />} />
@@ -52,6 +52,7 @@ const RouterPage = () => {
             <Route path="/comm" element={<Comm_list />} />
             <Route path="/comm/write" element={<Comm_write />} />
             <Route path="/comm/read/:post_id" element={<Comm_Read />} />
+            <Route path="/comm/write/:post_id" element={<Comm_update />} />
 
             {/* 나눔 */}
             <Route path="comm/market" element={<Market_list/>} />

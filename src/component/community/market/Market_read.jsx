@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import { Col, Card,FormControl, Button,Pagination,ProgressBar, Row, NavLink, Image } from 'react-bootstrap'
-import Comm_coment from '../comm/Comm_coment'
+import Comm_coment from '../Comm_coment'
 import "../Community.css"
 import Comm_share from '../Comm_share'
 import { useParams } from 'react-router-dom'
@@ -30,7 +30,11 @@ const Market_read = () => {
     }, []);
 
  
-
+ // HTML 태그를 제거하는 함수
+ const stripHtmlTags = (htmlString) => {
+    const doc = new DOMParser().parseFromString(htmlString, 'text/html');
+    return doc.body.textContent || "";
+}
 
  
 
@@ -41,7 +45,7 @@ const Market_read = () => {
             <Row className='justify-content-center'>
                 <Col xs lg={15}>
                 <div className='text-start mb-2'>
-            <a className='btn btn-success' style={{color:"white" }} href='comm/market'   >목록</a>
+            <a className='btn btn-success' style={{color:"white" }} href='/comm/market'   >목록</a>
             
             </div>
 
@@ -98,7 +102,7 @@ const Market_read = () => {
                             <Col>
                             <hr/>
                             <div className='text-center'>
-                            {contents}
+                             {stripHtmlTags(contents)}
                             </div>
                             <br/>
                            
@@ -117,24 +121,34 @@ const Market_read = () => {
                     <div className='text-end mt-2'>
            
           
-            <Chat_modal  post={post} />
-            <Button className='ms-2 me-2' vaiant='success'>수정</Button>
+           
+
+          
             
+          
+             <Chat_modal  post={post} />
+             {sessionStorage.getItem("uid")===uid &&
+            <>
+            
+            <Button className='ms-2 me-2' vaiant='success'>수정</Button>
+            <Button className='ms-2 me-2' vaiant='success'>삭제</Button>
+            </>
+}
             </div>
                 </Col>
             </Row>
             <div className='text-start'>
-             <h4 style={{"font-weight":"bold"}}>댓글 <span>총 : x건</span></h4> 
+          
 
 
               
               
               </div>
-              <Comm_coment/>
+              <Comm_coment  post_id={ post_id} post={post}/>
               
-            
+           
         </div>
- 
+    
   )
 }
 

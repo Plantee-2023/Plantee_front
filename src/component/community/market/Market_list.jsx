@@ -16,7 +16,7 @@ const Market_list = () => {
   const navi = useNavigate();
   const location = useLocation();
   const search = new URLSearchParams(location.search);
-  const size = 5;
+  const size = 10;
   const [cnt,setCnt]=useState(0);
    
   const [total, setTotal] = useState(0);
@@ -30,7 +30,7 @@ const Market_list = () => {
     //const result1 = await axios.get('/posts/total');
     //console.log(result1.data.total);
 
-    let data = result.data.list.map(p => p && { ...p, checked:false });
+    let data = result.data.list.map(p => p && { ...p, checked:false ,show:true });
      
     setPosts(data);
  
@@ -82,7 +82,7 @@ const onChangeSingle = (e, post_id) => {
 
   useEffect(() => {
     getPost();
-  }, []);
+  }, [page]);
 
   useEffect(()=>{
     let chk = 0;
@@ -107,8 +107,8 @@ const onChangeSingle = (e, post_id) => {
           <ul className='filter_list'>
          
             <button className='filter_btn' type='button'  >무료나눔</button>
-            <button className='filter_btn' type='button'  >거래</button>
-            <button className='filter_btn' type='button'  >전체보기</button>
+            <button className='filter_btn' type='button'  >팝니다</button>
+            <button className='filter_btn' type='button'  >삽니다</button>
             
           </ul>
         </div>
