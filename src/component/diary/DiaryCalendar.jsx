@@ -3,10 +3,14 @@ import classNames from "classnames/bind";
 import Diary from "../diary/Diary.css";
 import { Container } from "react-bootstrap";
 import DiaryTag from "./DiaryTag";
+import { useNavigate } from 'react-router-dom';
+
 
 const cx = classNames.bind(Diary);
 
 const DiaryCalendar = () => {
+    const navi = useNavigate();
+
 
     const today = {
         year: new Date().getFullYear(), //오늘 연도
@@ -161,7 +165,11 @@ const DiaryCalendar = () => {
 
         return dayArr;
     }, [selectedYear, selectedMonth, dateTotalCount]);
+    
+    const onClickInsert = () => {
+        navi(`/diary/main/insert`);
 
+    }
     return (
         <div className="diary_wrap">
             <div className="diary_contents">
@@ -169,6 +177,9 @@ const DiaryCalendar = () => {
                     <Container>
                         <DiaryTag />
                     </Container>
+                </div>
+                <div className='text-end mt-3' onClick={() => { onClickInsert()}}>
+                    <img src='/image/icon-add.png' className='diary-img-insert'/><span className='diary-insert-size'><b><u>등록하기</u></b></span>
                 </div>
                 <div className="diary">
                     <div className="title">
