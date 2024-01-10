@@ -9,15 +9,16 @@ import { app } from '../../firebaseInit'
 import { getFirestore, setDoc, doc, getDoc } from 'firebase/firestore'
 import { getStorage, uploadBytes, ref, getDownloadURL } from 'firebase/storage'
 import "./Store.css";
-import StoreEditor from './StoreEditor';
 
 const StoreInsert = () => {
     const navi = useNavigate();
     const location = useLocation();
     const storedata = location.state;
-    
+
     const [loading, setLoading] = useState(false);
     const { box, setBox } = useContext(BoxContext);
+
+    const [store, setStore] = useState([]);
 
     const db = getStorage(app);
     const [file, setFile] = useState(null);
@@ -29,20 +30,15 @@ const StoreInsert = () => {
 
     const { user_id, title, price, stock, contents, image, level, tag, reg_date, mdfy_date, category } = form;
 
-    // const getStore = async () => {
-    //     setLoading(true);
-    //     const res = await axios.post(`/store/insert`);
-    //     setStore(res.data);
-    //     setLoading(false);
-    // }
-
-    // useEffect(() => { getStore(); }, [])
-
-    const [goods, setGoods] = useState([]);
-
-    
 
     const onChangeContents = (e) => {
+        setForm({
+            ...form,
+            contents: e
+        });
+    }
+
+    const onChangeForm = (e) => {
         setForm({
             ...form,
             [e.target.name]: e.target.value
@@ -56,19 +52,23 @@ const StoreInsert = () => {
             if (window.confirm("저장하시겠습니까?")) {
                 const data = {
                     ...form,
-                    title: form.title,
-                    contents: form.contents,
                     uid: sessionStorage.getItem("uid"),
-                    category: 5,
+                    category: 5
                 };
-                //console.log(data);
+
                 await axios.post("/store/insert", data);
-                alert("저장을 완료했습니다.");
+                //navi("/store");
+                window.location.href = `/store`;
+
             }
         }
     }
 
-    
+    const onCancel = () => {
+        navi("/store");
+    }
+
+
 
     if (loading) return <div className='text-center my-5'><Spinner animation="border" variant="success" /></div>
     return (
@@ -87,10 +87,9 @@ const StoreInsert = () => {
                                     <div className='insert_title'>
                                         <InputGroup>
                                             <InputGroup.Text className='insert_inputgrouptext'>제목</InputGroup.Text>
-                                            <Form.Control name='title'  placeholder="제목" />
+                                            <Form.Control name='title' onChange={onChangeForm} placeholder="제목" />
                                         </InputGroup>
                                     </div>
-
                                     {/* <div className='insert_info'>
                                         <InputGroup className='insert_inputgroup'>
                                             <InputGroup.Text className='insert_inputgrouptext'>가격</InputGroup.Text>
@@ -130,18 +129,18 @@ const StoreInsert = () => {
 
                                     <CKEditor config={{ ckfinder: { uploadUrl: '/store/ckupload' } }}
                                         editor={ClassicEditor}
-                                        data={form}
-                                        onChange={(event, editor) => { onChangeContents(editor.getData()); }} />
+                                        data=""
+                                        onChange={(event, editor) => { onChangeContents(editor.getData()); }}
+                                        onReady={(editor) => { }} />
 
                                     {/* <StoreEditor form={form} setForm={setForm}  /> */}
-
-                                    <div className='plantinsert_section'>
-                                        <div className='plantinsert_btngroup'>
-                                            <button className='insert_submit' onClick={onClickSave}>등록하기</button>
-                                            <button className='insert_cancel' >취소하기</button>
-                                        </div>
-                                    </div>
                                 </form>
+                                <div className='plantinsert_section'>
+                                    <div className='plantinsert_btngroup'>
+                                        <button className='insert_submit' onClick={onClickSave}>등록하기</button>
+                                        <button className='insert_cancel' onClick={onCancel}>취소하기</button>
+                                    </div>
+                                </div>
                             </section>
 
                         </section>
