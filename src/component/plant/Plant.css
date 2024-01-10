@@ -113,4 +113,18 @@
 .recipe_writer {width: 100%; margin-top: 0.4rem; text-align: center; overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
     font-size: 15px; line-height: 22px; letter-spacing: 0.25px;}
 
-.recipe_content_level {margin: 1rem 0; text-align: center; font-size: 14px; color: #acacac;}
+.recipe_content_level {width: 100%; margin: 1rem 0; text-align: center; font-size: 14px; color: #acacac;}
+.recipe_level {padding: 0 0.3rem; margin: 0 auto;}
+.recipe_level img{width: 11px; height: 11px; margin-bottom: 2px; margin-right: 3px;}
+.recipe_like {padding: 0 0.3rem; margin: 0 auto;}
+.recipe_like img{width: 11px; height: 11px; margin-bottom: 2px; margin-right: 3px;}
+
+/* RecipeReadPage */
+.recipe_contents_section {width: 100%; height: auto; margin-top: 2rem;}
+.recipe_readcontents_grid {width: 100%; display: grid; grid-template-columns: 1fr 2fr; column-gap: 30px; overflow-x: initial; background-color: #ddd; padding: 1rem; margin: 0; border: 1px solid red;}
+.recipe_image_section {width: 500px; height: 600px;}
+.recipe_image {width: 100%; height: 100%;}
+.recipe_title_section {border: 1px solid red;}
+
+
+

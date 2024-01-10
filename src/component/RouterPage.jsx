@@ -27,6 +27,7 @@ import PlantInsert from './plant/PlantInsert';
 import PlantUpdate from './plant/PlantUpdate';
 import PlantTestStart from './plant/PlantTestStart';
 import PlantRecipe from './plant/PlantRecipe';
+import PlantRecipeRead from './plant/PlantRecipeRead';
 
 const RouterPage = () => {
     return (
@@ -52,6 +53,7 @@ const RouterPage = () => {
             <Route path='/plant/update/:plant_id' element={<PlantUpdate />} />
             <Route path='/plant/test' element={<PlantTestStart/>} />
             <Route path='/plant/recipe' element={<PlantRecipe/>} />
+            <Route path='/plant/recipe/read' element={<PlantRecipeRead/>} />
 
             {/* 커뮤니티 */}
             <Route path="/comm" element={<Comm_list />} />

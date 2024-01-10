@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const PlantRecipe = () => {
   return (
@@ -17,19 +18,22 @@ const PlantRecipe = () => {
             </div>
           </div>
           <div className='recipe_btn'>
+            <Link to="/recipe/insert">
             <button className='recipe_insert'>글쓰기</button>
+            </Link>
           </div>
         </div>
 
         <div className='recipe_contents_section'>
           <div className='recipe_contents_grid'>
-            <a href=''>
+            <a href='/plant/recipe/read'>
               <div className='recipe_content_item'>
                 <img src='/image/recipe_01.jpg'/>
                 <p className='recipe_title'>레시피 타이틀</p>
                 <p className='recipe_writer'>작성자</p>
                   <div className='recipe_content_level'>
-                    <span className='recipe_leve'>초급</span>
+                    <span className='recipe_level'><img src='/image/recipe_level.png'/>초급</span>
+                    <span className='recipe_like'><img src='/image/like_icon.png'/> 4</span>
                 </div>
               </div>
             </a>
