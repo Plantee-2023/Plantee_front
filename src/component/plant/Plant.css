@@ -2,8 +2,8 @@
 .plant_wrap {width: 100%; margin: 0 auto;}
 .plant_contents {width: 99%; margin: 0 auto;}
 
-.first_filter_section {margin: 2rem 0 0 -2rem; padding: 0; border: 0; vertical-align: baseline;}
-.filter_list {display: flex; flex-wrap: wrap;}
+.first_filter_section {margin: 2rem 0 0 0; padding: 0; border: 0; vertical-align: baseline;}
+.filter_list {display: flex; flex-wrap: wrap; padding: 0;}
 .filter_reset_btn {background-color: #4cc67c; border: none; border-radius: 2rem; padding: 0.6rem 1.4rem 0.6rem 1.4rem; color: #fff; font-weight: 800; line-height: 2px; margin-right: 0.5rem;}
 .filter_reset_btn img {width: 14px; height: 14px; filter: invert(1); vertical-align: middle;}
 .filter_btn {background-color: #fff; border: 1px solid #adadad; border-radius: 2rem; margin-right: 0.5rem; padding: 0.6rem 2rem 0.6rem 2rem;}
@@ -11,7 +11,7 @@
 
 .filter_division {border: 1px dashed #f0f0f0; margin: 0 0 1rem 2rem;}
 
-.second_filter_section {margin: 0 0 0 -2rem; padding: 0; border: 0; vertical-align: baseline;}
+.second_filter_section {margin: 0; padding: 0; border: 0; vertical-align: baseline;}
 
 .filter_btn.active {background-color: #4cc67c; color: #fff; border: 1px solid #4cc67c;}
 
@@ -24,12 +24,12 @@
 
 .plant_list {margin-top: 20px;}
 .plant_list_items {display: flex; flex-wrap: wrap; padding-bottom: 2%;}
-.plant_list_item {margin: 0 5.1rem 0 -2rem;}
+.plant_list_item {margin: 1rem;}
 .plant_list_item a {text-decoration: none; color: #000;}
-.plant_image {width: 200px; height: 200px; margin-bottom: 3%;}
+.plant_image {width: 220px; height: 220px; margin-bottom: 3%;}
 .plant_image img {width: 100%; height: 100%;}
-.plant_title {display: flex; align-items: center; justify-content: center; text-align: center;}
-.plant_title h3 {overflow: hidden; text-overflow: ellipsis; font-size: 16px; color: #000; font-weight: 600; margin: 0; padding: 4%;}
+.plant_title {display: flex; align-items: center; justify-content: center; text-align: center; margin-bottom: 1.2rem;}
+.plant_title h3 {overflow: hidden; text-overflow: ellipsis; font-size: 16px; color: #000; font-weight: 600; margin: 0; padding: 5%;}
 
 /* DictionaryPage InsertBtn */
 .plant_insert {width: 100%; height: 40px; margin: 0;}
@@ -65,8 +65,9 @@
 .detailinfo_item p {margin: 0; text-align: center;}
 .detailinfo_item_content {font-weight: 800;}
 
-.update_btnarea {width: 19%; display: flex; margin: 0 auto;}
+.update_btnarea {width: 35%; display: flex; margin: 0 auto;}
 .update_submit {width: 120px; height: 40px; border: none; border-radius: 50px; background-color: #4cc67c; color: #fff; margin-right: 1rem; margin-top: 1rem;}
+.delete_submit {width: 120px; height: 40px; border: 1px solid #acacac; border-radius: 50px; background-color: #fff; color: #acacac; margin-top: 1rem;}
 
 /* PlantInsertPage */
 .insert_simpleinfo_section {width: 100%; padding: 0;}
@@ -82,5 +83,34 @@
 .plantinsert_section {width: 100%; margin: 1rem 0 0 0;}
 .plantinsert_btngroup {width: 35%; display: flex; margin: 0 auto;}
 .insert_submit {width: 120px; height: 40px; border: none; border-radius: 50px; background-color: #4cc67c; color: #fff; margin-right: 1rem;}
-.insert_cancel {width: 120px; height: 40px; border: 1px solid #4cc67c; border-radius: 50px; background-color: #fff; color: #4cc67c;}
+.insert_cancel {width: 120px; height: 40px; border: 1px solid #acacac; border-radius: 50px; background-color: #fff; color: #acacac;}
 
+/* RecipePage */
+.recipe_wrap {width: 100%; margin: 0 auto;}
+.recipe_contents {width: 99%; margin: 0 auto;}
+
+.recipe_select_section {width: 100%; display: flex; justify-content: space-between; margin-top: 2rem;}
+.recipe_filter {width: 100%; text-align: center; display: flex; flex-wrap: wrap;}
+.recipe_select {width: 5%; margin-top: 0.6rem;}
+.recipe_filter a {font-size: 14px; color: #ccc;}
+.recipe_filter a:hover {color: #333; font-weight: 600;}
+.recipe_division {border-right: 1px solid #ccc; margin: 0 0.4rem;}
+
+.recipe_btn {display: flex; justify-content: end;}
+.recipe_insert {width: 100px; height: 45px; border: none; background-color: #4cc67c; border-radius: 50px; color: #fff;}
+
+.recipe_contents_section {width: 100%; height: auto; margin-top: 2rem;}
+.recipe_contents_grid {width: 100%; display: grid; grid-template-columns: repeat(auto-fill, minmax(232px, 1fr)); gap: 56px 20px; overflow-x: initial; background-color: #eee; padding: 0; margin: 0;}
+
+.recipe_contents_grid a {margin: 0; padding: 0; border: 0; text-decoration: none;}
+
+.recipe_content_item {border: 1px solid red;}
+.recipe_content_item p {margin-bottom: 0;}
+
+.recipe_content_item img {width: 240px; height: 240px;}
+.recipe_title {width: 100%; margin-top: 1rem; text-align: center; overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical;
+    font-size: 15px; line-height: 20px; letter-spacing: 0.25px; font-weight: 600;}
+.recipe_writer {width: 100%; margin-top: 0.4rem; text-align: center; overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+    font-size: 15px; line-height: 22px; letter-spacing: 0.25px;}
+
+.recipe_content_level {margin: 1rem 0; text-align: center; font-size: 14px; color: #acacac;}

@@ -1,13 +1,16 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import { Spinner } from 'react-bootstrap';
-import { NavLink, useParams } from 'react-router-dom';
+import { NavLink, useNavigate, useParams } from 'react-router-dom';
+import { BoxContext } from '../common/BoxContext';
 
 const PlantDetails = () => {
 
   const [loading, setLoading] = useState(false);
 
   const { plant_id } = useParams();
+  const { box, setBox } = useContext(BoxContext);
+  const navi = useNavigate();
 
   const [plant, setPlant] = useState({
     plant_id: '', common_name: '', image: '', contents: '', watering: '', sunlight: '', care_level: '', leaf: '',
@@ -22,6 +25,18 @@ const PlantDetails = () => {
     setPlant(res.data);
     setLoading(false);
   };
+
+  const onDelete = () => {
+    setBox({
+        show: true,
+        message: `[${common_name}] 식물을 삭제하시겠습니까?`,
+        action: async () => {
+            await axios.get(`/plant/delete/${plant_id}`)
+            setBox({ show: true, message: "해당 식물을 삭제하였습니다." })
+            navi(`/plant`);
+        }
+    });
+  }
 
   {/* 텍스트 변환 */}
   const getCareLevelText = (care_level) => {
@@ -102,6 +117,7 @@ const PlantDetails = () => {
                       <NavLink to={`/plant/update/${plant_id}`}>
                         <button className='update_submit'>수정하기</button>
                       </NavLink>
+                      <button className='delete_submit' onClick={()=>onDelete()}>삭제하기</button>
                     </div>
                 }
             </section>

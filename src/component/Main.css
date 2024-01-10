@@ -28,13 +28,13 @@
         border-radius: 50px;
     }
 
-    /* menu_search */
-    .menu_header {
-        width: 1280px;
-        padding: 3rem 0 0;
-        display: flex;
-        justify-content: space-between;
-    }
+/* menu_search */
+.menu_header {
+    width: 99%;
+    padding: 1rem 0 0;
+    display: flex;
+    justify-content: space-between;
+}
 
 .menu_logo img {
     width: 140px;

@@ -4,6 +4,8 @@ import Main from './Main';
 import Join from './users/Join';
 import LoginPage from './users/LoginPage';
 import MyPage from './users/MyPage';
+import MyPageFavorite from './mypage/MyPageFavorite'
+import MyPageComment from './mypage/MyPageComment'
 import Magazine from './magazine/Magazine';
 import MagazineList from './magazine/MagazineList';
 import MagazineInsert from './magazine/MagazineInsert';
@@ -24,10 +26,11 @@ import DiaryCalendar from './diary/DiaryCalendar';
 import DiaryList from './diary/DiaryList';
 import PlantDictionary from './plant/PlantDictionary';
 import PlantDetails from './plant/PlantDetails';
-import MyPageFavorite from './mypage/MyPageFavorite'
-import MyPageComment from './mypage/MyPageComment'
-import PlantInsert from './plant/PlantInsert'
-import PlantUpdate from './plant/PlantUpdate'
+import PlantInsert from './plant/PlantInsert';
+import PlantUpdate from './plant/PlantUpdate';
+import PlantTestStart from './plant/PlantTestStart';
+import PlantRecipe from './plant/PlantRecipe';
+
 const RouterPage = () => {
     return (
         <Routes>
@@ -49,6 +52,8 @@ const RouterPage = () => {
             <Route path='/plant/insert' element={<PlantInsert />} />
             <Route path='/plant/read/:plant_id' element={<PlantDetails />} />
             <Route path='/plant/update/:plant_id' element={<PlantUpdate />} />
+            <Route path='/plant/test' element={<PlantTestStart/>} />
+            <Route path='/plant/recipe' element={<PlantRecipe/>} />
 
             {/* 커뮤니티 */}
             <Route path="/comm" element={<Comm_list />} />

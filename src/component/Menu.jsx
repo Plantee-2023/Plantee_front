@@ -110,8 +110,8 @@ const Menu = () => {
                         <PiUserListBold className='menu-icon' />
                         <NavDropdown className='menu-text-color' title="식물정보" id="basic-nav-dropdown">
                             <NavDropdown.Item href="/plant">식물백과</NavDropdown.Item>
-                            <NavDropdown.Item href="">식물 큐레이트</NavDropdown.Item>
-                            <NavDropdown.Item href="">레시피</NavDropdown.Item>
+                            <NavDropdown.Item href="/plant/test">식물 큐레이트</NavDropdown.Item>
+                            <NavDropdown.Item href="/plant/recipe">레시피</NavDropdown.Item>
                         </NavDropdown>
                         <GiTalk className='menu-icon' />
                         <NavDropdown className='menu-text-color' title="커뮤니티" id="basic-nav-dropdown">
