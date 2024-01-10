@@ -1,25 +1,39 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
-import { Card, CardBody, Col, Row, Spinner } from 'react-bootstrap'
-import { useParams } from 'react-router-dom';
+import { Button, Card, CardBody, Col, Row, Spinner } from 'react-bootstrap'
+import { useNavigate, useParams } from 'react-router-dom';
 
 const DiaryRead = () => {
     const [loading, setLoading] = useState(false);
     const { diary_id } = useParams();
+    const navi = useNavigate();
+
     const [diary, setDiary] = useState({
-        diary_id: "", user_id: "", image:"", contents:"", reg_date:"",category:"", fmtdate:""
+        diary_id: "", user_id: "", image: "", contents: "", reg_date: "", fmtdate: "", last_watering: "", watering: "", common_name: "", date_now:"", date_water:"", date_medicine:"", date_change:"",
     })
 
-    const { user_id, plant_name, image, contents, reg_date, category, fmtdate } = diary;
-
+    const { user_id, plant_name, image, contents, reg_date, fmtdate, waterdate, watering, common_name, date_now, date_water, date_medicine,date_change } = diary;
 
     const getDiary = async () => {
         setLoading(true);
         const res = await axios.get(`/diary/read/${diary_id}`);
-        console.log(res.data);
-        // setDiary(res.data);
+        // console.log(res.data);
+        setDiary(res.data);
+        // console.log(diary);
         setLoading(false);
 
+    }
+    const onClickDelete = async(plant_name, diary_id) => {
+        if(window.confirm(`${plant_name}을 삭제하시겠습니까?`)){
+            // console.log(diary_id);
+            await axios.post(`/diary/delete/${diary_id}`);
+            navi(`/diary/main/:`);
+
+        }
+    }
+
+    const onClickUpdate = () => {
+        navi(`/diary/main/update`);
     }
 
     useEffect(() => {
@@ -32,53 +46,71 @@ const DiaryRead = () => {
             <div className='plant_contents'>
                 <div className='text-center'>
                     <h1 className='mt-5'>상세보기</h1>
-                    <div className='mt-5'>
-                        <img src="http://via.placeholder.com/250x250" alt='plante' />
-                        <h2 className='mt-5'><b>식물이름</b></h2>
+                    <div className='text-end'>
+                        <span onClick={()=>onClickUpdate()}>
+                            <img src='/image/icon-update.png' className='diary-img-update' /><span className='diary-insert-size'><b><u>수정하기</u></b></span>
+                        </span>
+                        <span onClick={()=>onClickDelete(plant_name, diary_id)}>
+                            <img src='/image/icon-delete.png' className='diary-img-update' /><span className='diary-insert-size'><b><u>삭제</u></b></span>
+                        </span>
                     </div>
-                    <div className='mt-5 text-center'>
-                        <Card style={{ width: '40rem' }}>
+                    <div className='mt-5'>
+                        <img src={image} alt='plante' />
+                        <h2 className='mt-5'><b>{plant_name} ({common_name})</b></h2>
+                    </div>
+                    <div className='mt-5 diarymain_cardgroup'>
+                        <Card style={{ width: '40rem' }} className='diaryread_card'>
                             <Card.Body>
-                                <h5>함께한지 0 일이 지났어요</h5>
+                                <h5>함께한지 {date_now} 일이 지났어요</h5>
                                 <hr />
                                 <Row>
                                     <Col>
                                         <h5>물 주기</h5>
+                                        <p>{watering}일</p>
                                     </Col>
                                     <Col>
                                         <h5>마지막 물 준 날</h5>
+                                        <p>{waterdate}</p>
                                     </Col>
                                     <Col>
                                         <h5>처음 함께한 날</h5>
+                                        <p>{fmtdate}</p>
                                     </Col>
                                 </Row>
                             </Card.Body>
                         </Card>
-                        <Card style={{ width: '40rem' }} className='mt-2'>
-                            <h5>D-Day</h5>
-                            <Row>
-                                <Col>
-                                    <h5>D-5</h5>
-                                    <p>물</p>
-                                </Col>
-                                <Col>
-                                    <h5>D-5</h5>
-                                    <p>영양제</p>
-                                </Col>
-                                <Col>
-                                    <h5>D-7</h5>
-                                    <p>분갈이</p>
-                                </Col>
-                            </Row>
+                        <Card style={{ width: '40rem' }} className='mt-3 diaryread_card'>
+                            <Card.Body>
+                                <h5>D-Day</h5>
+                                <hr />
+                                <Row>
+                                    <Col>
+                                        <h5>D{date_water}</h5>
+                                        <p>물</p>
+                                    </Col>
+                                    <Col>
+                                        <h5>D{date_medicine}</h5>
+                                        <p>영양제</p>
+                                    </Col>
+                                    <Col>
+                                        <h5>D{date_change}</h5>
+                                        <p>분갈이</p>
+                                    </Col>
+                                </Row>
+                            </Card.Body>
                         </Card>
                     </div>
-                    <div className='mt-5'>
-                        <Card style={{ width: '40rem' }}>
+                    <div className='mt-3'>
+                        <Card style={{ width: '40rem' }} className='diaryread_card'>
                             <CardBody>
-                                <h5>메모</h5>
+                                <h5 className='text-start'>메모</h5>
+                                <div style={{ whiteSpace: "pre-line" }} className='text-start'>
+                                    <p>{contents}</p>
+                                </div>
                             </CardBody>
                         </Card>
                     </div>
+
                     <div className='mt-5'>
                         <Card>
                             <Card.Body>

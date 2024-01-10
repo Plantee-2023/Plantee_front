@@ -4,7 +4,7 @@ import './MyPage.css'
 
 const PasswordChange = () => {
     return (
-        <div>
+        <div id="main_wrap">
             <Card className='password-card'>
                 <h1 className='all-title'>비밀번호 변경</h1>
                 <form>

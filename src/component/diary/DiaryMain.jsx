@@ -1,30 +1,68 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Card, CardBody, Col, Container, Form, InputGroup, NavLink, Row, Spinner } from 'react-bootstrap';
+import { Button, Card, CardBody, Col, Container, Form, InputGroup, Row, Spinner } from 'react-bootstrap';
 import DiaryTag from './DiaryTag';
 import axios from 'axios'
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 
 const DiaryMain = () => {
     const [list, setList] = useState([]);
-    // const { uid } = useParams();
     const [loading, setLoading] = useState(false);
-
+    // const [query, setQuery] = useState("")
     const navi = useNavigate();
 
     const getList = async () => {
         setLoading(true);
-        const res = await axios.get(`/diary/list.json/${sessionStorage.getItem("uid")}`);
+        const res = await axios.get(`/diary/list.json/${sessionStorage.getItem("uid")}`);//?query=${query}
         console.log(res.data);
         setList(res.data);
         setLoading(false);
         // console.log(list);
     }
 
+    // const onSubmit=(e)=>{
+    //     e.preventDefault();
+    //     if(query===""){
+    //         alert("검색어를 입력하세요")
+    //     }else{
+    //         getList();
+    //     }
+    // }
+
     const onClickInsert = () => {
         navi(`/diary/main/insert`);
 
     }
+
+    const getSun = (icon_sun) => {
+        switch (icon_sun) {
+            case '1':
+                return '100';
+            case '2':
+                return '2';
+            case '3':
+                return '5';
+            case '4':
+                return '2';
+            default:
+                return '1200';
+        }
+    };
+
+    const getWater = (icon_water) => {
+        switch (icon_water) {
+            case '1':
+                return '10110';
+            case '2':
+                return '1112';
+            case '3':
+                return '5111';
+            case '4':
+                return '21111';
+            default:
+                return '1200';
+        }
+    };
 
     useEffect(() => {
         getList();
@@ -47,27 +85,23 @@ const DiaryMain = () => {
                         </InputGroup>
                     </form>
                 </div>
-                <div className='text-end mt-3'>
-                <Button className='diary-img-btn' onClick={() => { onClickInsert() }}>등록하기</Button>
+                <div className='text-end mt-3' onClick={() => { onClickInsert() }}>
+                    <img src='/image/icon-add.png' className='diary-img-insert' /><span className='diary-insert-size'><b><u>등록하기</u></b></span>
                 </div>
                 <div className='text-center'>
                     {list.map(d =>
                         <div className='diary_detail my-5'>
-                            <NavLink to={`/diary/main/read/`}>{/*${diary_id} */}
+                            <Link to={`/diary/read/${d.diary_id}`}>
                                 <Row>
                                     <Col>
                                         <br />
-                                        <h1>D-1</h1>
+                                        <h1>D{d.date_water}</h1>
                                         <hr className='diary_dayline' />
                                         <p className='diary_icon_sun'>
-                                            <img src='/image/icon_sun.png' width={'60px'} height={'60px'} />
-                                            <img src='/image/icon_sun.png' width={'60px'} height={'60px'} />
-                                            <img src='/image/icon_sun.png' width={'60px'} height={'60px'} />
-                                            <img src='/image/icon_sun.png' width={'60px'} height={'60px'} />
+                                            <p>{getSun(d.icon_sun)}</p>
                                         </p>
                                         <p>
-                                            <img src='/image/icon_water.png' width={'40px'} height={'40px'} />
-                                            <img src='/image/icon_water.png' width={'40px'} height={'40px'} />
+                                            <p>{getWater(d.icon_water)}</p>
                                         </p>
                                     </Col>
                                     <Col>
@@ -80,11 +114,11 @@ const DiaryMain = () => {
                                         <h1>{d.plant_name}</h1>
                                     </Col>
                                 </Row>
-                            </NavLink>
+                            </Link>
                         </div>
                     )}
                     <div className='diarymain_cardgroup'>
-                        <Card style={{ width: '30rem' }} className='diarymain_card'>
+                        <Card style={{ width: '50rem' }} className='diarymain_card'>
                             <Card.Body>
                                 <Row>
                                     <Col md='5'>
@@ -93,7 +127,13 @@ const DiaryMain = () => {
                                         </div>
                                     </Col>
                                     <Col className='mt-2'>
-                                        오늘은 플랜티식물 물 주는 날 입니다.
+                                        오늘은
+                                        {list.map(d =>
+                                            <span>
+                                                [{d.plant_name}],
+                                            </span>
+                                        )}
+                                        물 주는 날 입니다.
                                     </Col>
                                 </Row>
                             </Card.Body>
