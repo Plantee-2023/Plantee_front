@@ -30,7 +30,6 @@ const StoreInsert = () => {
 
     const { user_id, title, price, stock, contents, image, level, tag, reg_date, mdfy_date, category } = form;
 
-
     const onChangeContents = (e) => {
         setForm({
             ...form,
@@ -55,20 +54,16 @@ const StoreInsert = () => {
                     uid: sessionStorage.getItem("uid"),
                     category: 5
                 };
-
                 await axios.post("/store/insert", data);
                 //navi("/store");
                 window.location.href = `/store`;
-
             }
         }
     }
 
-    const onCancel = () => {
+    const onClickCancel = () => {
         navi("/store");
     }
-
-
 
     if (loading) return <div className='text-center my-5'><Spinner animation="border" variant="success" /></div>
     return (
@@ -135,12 +130,14 @@ const StoreInsert = () => {
 
                                     {/* <StoreEditor form={form} setForm={setForm}  /> */}
                                 </form>
+
                                 <div className='plantinsert_section'>
                                     <div className='plantinsert_btngroup'>
                                         <button className='insert_submit' onClick={onClickSave}>등록하기</button>
-                                        <button className='insert_cancel' onClick={onCancel}>취소하기</button>
+                                        <button className='insert_cancel' onClick={onClickCancel}>취소하기</button>
                                     </div>
                                 </div>
+                                
                             </section>
 
                         </section>

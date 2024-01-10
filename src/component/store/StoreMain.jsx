@@ -14,21 +14,20 @@ const StoreMain = () => {
 
     const [goods, setGoods] = useState([]);
     const [total, setTotal] = useState(0);
-    const [seller, setSeller] = useState("");
+    const [isSeller, setIsSeller] = useState('');
 
     const getList = async () => {
         setLoading(true)
         const res = await axios.get(`/store/list.json`);
-        // 판매자인지 확인하기
-        let seller = res.data;
-        for (let i = 0; i < seller.length; i++) {
-            seller.forEach(function (s) {
-                if (s.seller_yn === "y") {
-                    seller[i].seller_yn= s;
-                }
-            });
-            console.log("check")
-        }
+        // console.log(res.data.list[0].seller_yn);
+        // let isSeller = res.data.list;
+        // // 판매자인지 확인하기
+        // for (let i = 0; i < isSeller.length; i++) {
+        //     const s = isSeller[i];
+        //     if (s.seller_yn === "y") {
+        //         isSeller[i].seller_yn = s;
+        //     }
+        // }
         setGoods(res.data.list);
         setLoading(false);
     }
@@ -97,9 +96,7 @@ const StoreMain = () => {
                         </Navbar>
                     </div>
 
-                    <div className='plant_insert'>
-                        <Link to="/store/insertPage" ><button>추가하기</button></Link>
-                    </div>
+                    
 
                     <Row sm={1} md={3} lg={5} className="g-4">
                         {goods.map(g =>
@@ -130,6 +127,7 @@ const StoreMain = () => {
                     </Row>
                 </div>
             </div>
+
             <Pagination
                 activePage={1}
                 itemsCountPerPage={8}
