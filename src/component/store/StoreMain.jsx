@@ -18,8 +18,7 @@ const StoreMain = () => {
     const getList = async () => {
         setLoading(true)
         const res = await axios.get(`/store/list.json`);
-        //console.log(res.data)
-        setGoods(res.data.list)
+        setGoods(res.data.list);
         setLoading(false);
     }
 
@@ -30,7 +29,6 @@ const StoreMain = () => {
         <>
             <div className='store_wrap'>
                 <div className='store_contents'>
-
                     <div className='store_filterbtn_group'>
                         <button className='plant_filterbtn'>↺</button>
                         <button className='button_hide' onClick={() => { setClickPlant((e) => !e); }} >
@@ -44,7 +42,6 @@ const StoreMain = () => {
                             </div>
                         </button>
                     </div>
-
                     {isClickPlant && (
                         <>
                             <div className='store_filterbtn_group'>
@@ -63,7 +60,6 @@ const StoreMain = () => {
                             </div>
                         </>
                     )}
-
                     <div>
                         <Navbar bg="#ffffff" data-bs-theme="light" className='pt-3 pb-3'>
                             <div>총 {goods.length}건</div>
@@ -86,7 +82,6 @@ const StoreMain = () => {
                             </Container>
                         </Navbar>
                     </div>
-
                     <Row sm={1} md={3} lg={5} className="g-4">
                         {goods.map(g =>
                             <Col key={g.store_id} className="p-4">
@@ -114,10 +109,8 @@ const StoreMain = () => {
                             </Col>
                         )}
                     </Row>
-
                 </div>
             </div>
-
             <Pagination
                 activePage={1}
                 itemsCountPerPage={8}

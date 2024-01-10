@@ -1,16 +1,34 @@
-import React, { useContext, useState } from 'react'
-import './Main.css'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import { InputGroup, NavDropdown, Navbar, Nav, Toast, CloseButton, ToastContainer, Card } from 'react-bootstrap'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { LiaStoreAltSolid } from "react-icons/lia";
-import { PiUserListBold } from "react-icons/pi";
+import { PiUserListBold, PiCookingPot } from "react-icons/pi";
 import { GiTalk } from "react-icons/gi";
 import { FiBookOpen } from "react-icons/fi";
 import { SlNotebook } from "react-icons/sl";
+import { CiCalendar } from "react-icons/ci";
+import { MdFavoriteBorder } from "react-icons/md";
+import { TfiWrite } from "react-icons/tfi";
 import { BoxContext } from './common/BoxContext';
+import './Main.css'
+
+export const useScroll = () => {
+    const [state, setState] = useState({
+        x: 0,
+        y: 0
+    });
+    const onScroll = () => {
+        setState({ y: window.scrollY, x: window.screenX });
+    };
+    useEffect(() => {
+        window.addEventListener("scroll", onScroll);
+        return () => window.removeEventListener("scroll", onScroll);
+    }, []);
+    return state;
+};
 
 const Menu = () => {
-
+    const { y } = useScroll();
     const [showA, setShowA] = useState(false);
     const toggleShowA = () => setShowA(!showA);
     const { box, setBox } = useContext(BoxContext);
@@ -25,23 +43,14 @@ const Menu = () => {
             }
         });
     }
-    
     return (
-        <div className='menu_wrap'>
+        <div id='menu_wrap'>
             <div className='menu_contents'>
                 <div className='menu_header'>
                     <div className='menu_left'>
                         <h1 className='menu_logo'>
                             <a href='/'><img src='/image/logo.png' /></a>
                         </h1>
-                        <div className='menu_searchwrap'>
-                            <form>
-                                <InputGroup className='menu_searchinputwrap'>
-                                    <input type='search' className='menu_searchinput' placeholder='검색어를 입력해주세요.' />
-                                    <button className='menu_searchbtn' type='submit'><img src='/image/search_icon.png' /></button>
-                                </InputGroup>
-                            </form>
-                        </div>
                     </div>
                     <div className='menu_right'>
                         <ul className='menu_mymenu'>
@@ -60,10 +69,31 @@ const Menu = () => {
                                                     <CloseButton className='menu-close-btn' />
                                                     <Toast.Body>
                                                         <NavLink className='menu-btn btn' to="/users/mypage">내 정보</NavLink>
-                                                        <Card className='menu-card'><a href='/diary/calendar'>캘린더</a></Card>
-                                                        <Card className='menu-card'>나의 레시피</Card>
-                                                        <Card className='menu-card'>내가 등록한글</Card>
-                                                        <Card className='menu-card'>좋아요 목록</Card>
+                                                        <Card className='menu-card-card'>
+                                                            <div className="menu-card-text">마이페이지</div>
+                                                            <ul>
+                                                                <li>
+                                                                    <Card className='menu-card1'><a href='/diary/diarycalendar'>
+                                                                        <CiCalendar className='menu-toast-icon' /></a></Card>
+                                                                    <div className='menu-toast-text'>캘린더</div>
+                                                                </li>
+                                                                <li>
+                                                                    <Card className='menu-card2'><a href='/plant/recipe'>
+                                                                        <PiCookingPot className='menu-toast-icon' /></a></Card>
+                                                                    <div className='menu-toast-text'>레시피</div>
+                                                                </li>
+                                                                <li>
+                                                                    <Card className='menu-card3'><a href='/mypage/mypagecomment'>
+                                                                        <TfiWrite className='menu-toast-icon' /></a></Card>
+                                                                    <div className='menu-toast-text'>나의 글</div>
+                                                                </li>
+                                                                <li>
+                                                                    <Card className='menu-card4'><a href='/mypage/mypagefavorite'>
+                                                                        <MdFavoriteBorder className='menu-toast-icon' /></a></Card>
+                                                                    <div className='menu-toast-text'>좋아요</div>
+                                                                </li>
+                                                            </ul>
+                                                        </Card>
                                                     </Toast.Body>
                                                 </Toast>
                                             </ToastContainer>
@@ -75,7 +105,7 @@ const Menu = () => {
                         </ul>
                     </div>
                 </div>
-                <Navbar expand="lg" className="menu-back-color">
+                <Navbar className={y < 100 ? "menu-back-color" : "menu-fixed-back-color"}>
                     <Nav>
                         <PiUserListBold className='menu-icon' />
                         <NavDropdown className='menu-text-color' title="식물정보" id="basic-nav-dropdown">
@@ -91,7 +121,7 @@ const Menu = () => {
                         <LiaStoreAltSolid className='menu-icon' />
                         <NavLink className='menu-magazine' to='/store'>스토어</NavLink>
                         <FiBookOpen className='menu-icon' />
-                        <NavLink className='menu-magazine' to='/main/magazineList'>매거진</NavLink>
+                        <NavLink className='menu-magazine' to='/magazine/magazineList'>매거진</NavLink>
                     </Nav>
                 </Navbar>
             </div>

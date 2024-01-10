@@ -1,26 +1,39 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { Button, Card, CardBody, Col, Row, Spinner } from 'react-bootstrap'
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const DiaryRead = () => {
     const [loading, setLoading] = useState(false);
     const { diary_id } = useParams();
+    const navi = useNavigate();
 
     const [diary, setDiary] = useState({
-        diary_id: "", user_id: "", image: "", contents: "", reg_date: "", fmtdate: "", last_watering: "", watering: "", common_name: ""
+        diary_id: "", user_id: "", image: "", contents: "", reg_date: "", fmtdate: "", last_watering: "", watering: "", common_name: "", date_now:"", date_water:"", date_medicine:"", date_change:"",
     })
 
-    const { user_id, plant_name, image, contents, reg_date, fmtdate, waterdate, watering, common_name } = diary;
+    const { user_id, plant_name, image, contents, reg_date, fmtdate, waterdate, watering, common_name, date_now, date_water, date_medicine,date_change } = diary;
 
     const getDiary = async () => {
         setLoading(true);
         const res = await axios.get(`/diary/read/${diary_id}`);
-        console.log(res.data);
+        // console.log(res.data);
         setDiary(res.data);
-        console.log(diary);
+        // console.log(diary);
         setLoading(false);
 
+    }
+    const onClickDelete = async(plant_name, diary_id) => {
+        if(window.confirm(`${plant_name}을 삭제하시겠습니까?`)){
+            // console.log(diary_id);
+            await axios.post(`/diary/delete/${diary_id}`);
+            navi(`/diary/main/:`);
+
+        }
+    }
+
+    const onClickUpdate = () => {
+        navi(`/diary/main/update`);
     }
 
     useEffect(() => {
@@ -33,8 +46,14 @@ const DiaryRead = () => {
             <div className='plant_contents'>
                 <div className='text-center'>
                     <h1 className='mt-5'>상세보기</h1>
-                    <Button className='diary-update-btn'>수정하기</Button>
-                    <Button className='diary-delete-btn'>삭제</Button>
+                    <div className='text-end'>
+                        <span onClick={()=>onClickUpdate()}>
+                            <img src='/image/icon-update.png' className='diary-img-update' /><span className='diary-insert-size'><b><u>수정하기</u></b></span>
+                        </span>
+                        <span onClick={()=>onClickDelete(plant_name, diary_id)}>
+                            <img src='/image/icon-delete.png' className='diary-img-update' /><span className='diary-insert-size'><b><u>삭제</u></b></span>
+                        </span>
+                    </div>
                     <div className='mt-5'>
                         <img src={image} alt='plante' />
                         <h2 className='mt-5'><b>{plant_name} ({common_name})</b></h2>
@@ -42,7 +61,7 @@ const DiaryRead = () => {
                     <div className='mt-5 diarymain_cardgroup'>
                         <Card style={{ width: '40rem' }} className='diaryread_card'>
                             <Card.Body>
-                                <h5>함께한지 0 일이 지났어요</h5>
+                                <h5>함께한지 {date_now} 일이 지났어요</h5>
                                 <hr />
                                 <Row>
                                     <Col>
@@ -66,15 +85,15 @@ const DiaryRead = () => {
                                 <hr />
                                 <Row>
                                     <Col>
-                                        <h5>D-5</h5>
+                                        <h5>D{date_water}</h5>
                                         <p>물</p>
                                     </Col>
                                     <Col>
-                                        <h5>D-5</h5>
+                                        <h5>D{date_medicine}</h5>
                                         <p>영양제</p>
                                     </Col>
                                     <Col>
-                                        <h5>D-7</h5>
+                                        <h5>D{date_change}</h5>
                                         <p>분갈이</p>
                                     </Col>
                                 </Row>

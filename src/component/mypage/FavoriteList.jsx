@@ -3,10 +3,10 @@ import { Table, Form, Button } from 'react-bootstrap'
 
 const FavoriteList = () => {
     return (
-        <div>
+        <div id="main_wrap">
             <h1 className='all-title'>좋아요 리스트</h1>
             <Button className='favorite-list-delete-btn'>삭제</Button>
-            <Table className='favorite-list-table' hover striped bordered>
+            <Table className="all-table" hover striped bordered>
                 <thead className='text-center'>
                     <tr>
                         <th><Form.Check /></th>
