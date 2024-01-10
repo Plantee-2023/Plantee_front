@@ -8,10 +8,10 @@ const PlantInsert = () => {
   const navi = useNavigate();
   const [insertPlant, setinsertPlant] = useState({
     plant_id: '', common_name: '', image: '', contents: '', watering: '', sunlight: '', care_level: '', leaf: '',
-    flowers: '', fruits: '', type: '', indoor: '', poisonous_pet: '', cuisine: '', category: '1'
+    flowers: '', fruits: '', type: '', indoor: '', poisonous_pet: '', cuisine: ''
   });
 
-  const { common_name, image, contents, watering, sunlight, care_level, leaf, flowers, fruits, type, indoor, poisonous_pet, cuisine, category } = insertPlant;
+  const { common_name, image, contents, watering, sunlight, care_level, leaf, flowers, fruits, type, indoor, poisonous_pet, cuisine} = insertPlant;
 
   const onChange = (e) => {
     setinsertPlant({
@@ -24,7 +24,6 @@ const PlantInsert = () => {
     e.preventDefault();
     if(window.confirm("새로운 식물을 등록하시겠습니까?")){
       const res = await axios.post('/plant/insert', insertPlant);
-      res.data.category = '1';
       if(res.data === 0) {
         alert("등록 실패!");
       }else{

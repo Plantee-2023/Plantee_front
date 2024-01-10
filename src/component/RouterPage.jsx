@@ -30,6 +30,8 @@ import PlantInsert from './plant/PlantInsert';
 import PlantUpdate from './plant/PlantUpdate';
 import PlantTestStart from './plant/PlantTestStart';
 import PlantRecipe from './plant/PlantRecipe';
+import PlantRecipeRead from './plant/PlantRecipeRead';
+import PlantRecipeInsert from './plant/PlantRecipeInsert';
 
 const RouterPage = () => {
     return (
@@ -53,7 +55,9 @@ const RouterPage = () => {
             <Route path='/plant/read/:plant_id' element={<PlantDetails />} />
             <Route path='/plant/update/:plant_id' element={<PlantUpdate />} />
             <Route path='/plant/test' element={<PlantTestStart/>} />
-            <Route path='/plant/recipe' element={<PlantRecipe/>} />
+            <Route path='/recipe' element={<PlantRecipe/>} />
+            <Route path='/recipe/read/:recipe_id' element={<PlantRecipeRead/>} />
+            <Route path='/recipe/insert' element={<PlantRecipeInsert/>} />
 
             {/* 커뮤니티 */}
             <Route path="/comm" element={<Comm_list />} />
@@ -66,7 +70,7 @@ const RouterPage = () => {
             <Route path="/comm/market/read/:post_id" element={<Market_read />} />
 
             {/* 스토어 */}
-            <Route path='/store/main' element={<StoreMain />} />
+            <Route path='/store' element={<StoreMain />} />
             <Route path='/store/read/:store_id' element={<StoreRead />} />
             <Route path='/store/update/:store_id' element={<StoreUpdate />} />
 
