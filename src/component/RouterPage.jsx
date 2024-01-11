@@ -4,6 +4,8 @@ import Main from './Main';
 import Join from './users/Join';
 import LoginPage from './users/LoginPage';
 import MyPage from './users/MyPage';
+import MyPageFavorite from './mypage/MyPageFavorite'
+import MyPageComment from './mypage/MyPageComment'
 import Magazine from './magazine/Magazine';
 import MagazineList from './magazine/MagazineList';
 import MagazineInsert from './magazine/MagazineInsert';
@@ -24,10 +26,13 @@ import DiaryCalendar from './diary/DiaryCalendar';
 import DiaryList from './diary/DiaryList';
 import PlantDictionary from './plant/PlantDictionary';
 import PlantDetails from './plant/PlantDetails';
-import MyPageFavorite from './mypage/MyPageFavorite'
-import MyPageComment from './mypage/MyPageComment'
-import PlantInsert from './plant/PlantInsert'
-import PlantUpdate from './plant/PlantUpdate'
+import PlantInsert from './plant/PlantInsert';
+import PlantUpdate from './plant/PlantUpdate';
+import PlantTestStart from './plant/PlantTestStart';
+import PlantRecipe from './plant/PlantRecipe';
+import PlantRecipeRead from './plant/PlantRecipeRead';
+import PlantRecipeInsert from './plant/PlantRecipeInsert';
+
 const RouterPage = () => {
     return (
         <Routes>
@@ -49,6 +54,10 @@ const RouterPage = () => {
             <Route path='/plant/insert' element={<PlantInsert />} />
             <Route path='/plant/read/:plant_id' element={<PlantDetails />} />
             <Route path='/plant/update/:plant_id' element={<PlantUpdate />} />
+            <Route path='/plant/test' element={<PlantTestStart/>} />
+            <Route path='/recipe' element={<PlantRecipe/>} />
+            <Route path='/recipe/read/:recipe_id' element={<PlantRecipeRead/>} />
+            <Route path='/recipe/insert' element={<PlantRecipeInsert/>} />
 
             {/* 커뮤니티 */}
             <Route path="/comm" element={<Comm_list />} />
@@ -61,7 +70,7 @@ const RouterPage = () => {
             <Route path="/comm/market/read/:post_id" element={<Market_read />} />
 
             {/* 스토어 */}
-            <Route path='/store/main' element={<StoreMain />} />
+            <Route path='/store' element={<StoreMain />} />
             <Route path='/store/read/:store_id' element={<StoreRead />} />
             <Route path='/store/update/:store_id' element={<StoreUpdate />} />
 

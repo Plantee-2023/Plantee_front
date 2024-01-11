@@ -4,7 +4,7 @@ import axios from 'axios';
 import React, { useEffect, useRef, useState } from 'react'
  
 import { Col, Card, FormControl, Form, InputGroup,  Pagination,  ProgressBar, Row, NavLink, Image, Button } from 'react-bootstrap'
-
+import { useNavigate } from 'react-router-dom';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import Comm_plant from '../Comm_plant';
@@ -21,7 +21,7 @@ const Market_write = () => {
 
    
   const { title, price,  contents, category  } = form;
-
+  const navigate  = useNavigate();
 
   const handleDropdownChange = (event) => {
     const selectedOption = event.target.value;
@@ -53,6 +53,9 @@ const Market_write = () => {
 }
 
 
+const handleGoBack = () => {
+  navigate(-1); // 이전 페이지로 이동
+};
 
  
 const onClickSave = async () => {
@@ -66,12 +69,22 @@ const onClickSave = async () => {
           title:form.title, 
           price:form.price };
           console.log(data);
-          await axios.post("/comm/insert", data);
-          alert("저장을 완료했습니다.");
-           
+          try {
+            await axios.post("/comm/insert", data);
+            alert("저장을 완료했습니다.");
+            
+            // 데이터 저장이 성공하면 뒤로 가기
+            setTimeout(() => {
+              handleGoBack();
+            }, 10000);
+          } catch (error) {
+            console.error("Save failed:", error);
+            // 저장 실패 시 에러 처리
+            alert("저장에 실패했습니다.");
+          }
+        }
       }
-  }
-}
+    }
 
 
   return (

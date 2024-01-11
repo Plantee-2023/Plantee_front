@@ -86,7 +86,7 @@ const PlantDictionary = () => {
         }
         
         <div className='plant_list'>
-          <ul className='plant_list_items'>
+          <div className='plant_list_items'>
             {plants.map(p =>
               <div className='plant_list_item'>
                 <a href={`/plant/read/${p.plant_id}`}>
@@ -99,7 +99,7 @@ const PlantDictionary = () => {
                 </a>
               </div>
             )}
-          </ul>
+          </div>
         </div>
       </div>
     </div>
