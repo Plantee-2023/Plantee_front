@@ -51,7 +51,14 @@ const MagazineInsert = () => {
             }
         })
     }
-
+    
+    const onChangeFile = (e) => {
+        setForm({
+            ...form,
+            image: URL.createObjectURL(e.target.files[0]),
+            file:e.target.files[0]
+        })
+    }
     const onUpdatePhoto = async () => {
         if (!file) {
             setBox({
@@ -66,7 +73,7 @@ const MagazineInsert = () => {
                     const formData = new FormData();
                     formData.append("file", file);
                     formData.append("uid", uid);
-                    await axios.post('/users/update/photo', formData);
+                    await axios.post(`/magazine/update/image`, formData);
                 }
             })
         }
@@ -80,8 +87,8 @@ const MagazineInsert = () => {
                 <Card className='insert-card'>
                     <Form.Control onChange={onChange} name='title' placeholder='제목을 입력해주세요.' className='insert-text'/>
                     <div className='insert-img'>
-                        <img name='image' src='http://via.placeholder.com/150x150' onClick={() => img_ref.current.click()} width={300} height={300} style={{ cursor: 'pointer' }} />
-                        <input type='file' ref={img_ref} style={{ display: 'none' }} />
+                        <img name='image' src={image ||'http://via.placeholder.com/150x150'} onClick={() => img_ref.current.click()} width={300} height={300} style={{ cursor: 'pointer' }} />
+                        <input onChange={onChangeFile} type='file' ref={img_ref} style={{ display: 'none' }} />
                         <br />
                         <Button onClick={onUpdatePhoto} className='insert-img-btn'>이미지 등록</Button>
                     </div>

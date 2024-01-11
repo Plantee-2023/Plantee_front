@@ -1,11 +1,14 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useContext } from 'react'
 import axios from 'axios';
 import './Magazine.css'
 import { useState } from 'react';
-import { Spinner, Row, Col } from 'react-bootstrap';
-import { NavLink, useParams } from 'react-router-dom';
+import { Spinner, Row, Col, Button } from 'react-bootstrap';
+import { NavLink, useParams, useNavigate } from 'react-router-dom';
+import { BoxContext } from '../common/BoxContext'
 
 const Magazine = () => {
+    const navi = useNavigate();
+    const { box, setBox } = useContext(BoxContext);
     const { post_id } = useParams();
     const [loading, setLoading] = useState(false);
     const [post, setPost] = useState({
@@ -19,8 +22,21 @@ const Magazine = () => {
         setLoading(true);
         const res = await axios.get('/magazine/read/' + post_id);
         setPost(res.data);
-        console.log(res.data);
         setLoading(false);
+    }
+    const onDelete = () => {
+        setBox({
+            show: true,
+            message: `매거진을 삭제하시겠습니까?`,
+            action: async () => {
+                await axios.get(`/magazine/delete/${post_id}`);
+                setBox({
+                    show: true,
+                    message: "삭제 완료되었습니다."
+                })
+                navi(`/magazine/magazineList`);
+            }
+        })
     }
     useEffect(() => {
         getMagazine();
@@ -36,6 +52,7 @@ const Magazine = () => {
                     {sessionStorage.getItem("uid") === "admin" &&
                         <Col>
                             <NavLink to={`/magazine/update/${post_id}`} className='magazine-update-btn btn'>수정하기</NavLink>
+                            <Button onClick={onDelete} className='magazine-update-btn ms-2'>삭제하기</Button>
                         </Col>
                     }
                     <Col>
