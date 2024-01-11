@@ -3,7 +3,18 @@ import { Routes, Route } from 'react-router-dom'
 import Main from './Main';
 import Join from './users/Join';
 import LoginPage from './users/LoginPage';
-import MyPage from './users/MyPage';
+import MyPage from './mypage/MyPage';
+import UserUpdate from './mypage/detail/UserUpdate';
+import UserPassword from './mypage/detail/UserPassword';
+import UserWithdrawal from './mypage/detail/UserWithdrawal';
+import ProductLike from './mypage/detail/ProductLike';
+import ProductCart from './mypage/detail/ProductCart';
+import ProductPurchase from './mypage/detail/ProductPurchase';
+import ProductOrder from './mypage/detail/ProductOrder';
+import ProductCancel from './mypage/detail/ProductCancel';
+import ActivitiesPost from './mypage/detail/ActivitiesPost';
+import ActivitesComment from './mypage/detail/ActivitesComment';
+import ActivitiesLike from './mypage/detail/ActivitiesLike';
 import MyPageFavorite from './mypage/MyPageFavorite'
 import MyPageComment from './mypage/MyPageComment'
 import Magazine from './magazine/Magazine';
@@ -33,9 +44,28 @@ import PlantRecipe from './plant/PlantRecipe';
 import PlantRecipeRead from './plant/PlantRecipeRead';
 import PlantRecipeInsert from './plant/PlantRecipeInsert';
 
+
 const RouterPage = () => {
     return (
         <Routes>
+            {/* 마이페이지 */}
+            <Route path='/users/mypage' element={<MyPage/>}>
+                <Route path='' element={<UserUpdate/>}/>
+                <Route path='userupdate' element={<UserUpdate/>}/>
+                <Route path='userpassword' element={<UserPassword/>}/>
+                <Route path='userwithdrawal' element={<UserWithdrawal/>}/>
+
+                <Route path='productlike' element={<ProductLike/>}/>
+                <Route path='productcart' element={<ProductCart/>}/>
+                <Route path='productpurchase' element={<ProductPurchase/>}/>
+                <Route path='productorder' element={<ProductOrder/>}/>
+                <Route path='productcancel' element={<ProductCancel/>}/>
+
+                <Route path='activitiespost' element={<ActivitiesPost/>}/>
+                <Route path='activitiescomment' element={<ActivitesComment/>}/>
+                <Route path='activitieslike' element={<ActivitiesLike/>}/>
+            </Route>
+
             {/* 메인, 매거진 */}
             <Route path='/' element={<Main />} />
             <Route path='/magazine/read/:post_id' element={<Magazine />} />

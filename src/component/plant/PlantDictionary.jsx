@@ -85,19 +85,15 @@ const PlantDictionary = () => {
           </div>
         }
         
-        <div className='plant_list'>
-          <div className='plant_list_items'>
+        <div className='plantlist_contents_section'>
+          <div className='plantlist_contents_grid'>
             {plants.map(p =>
-              <div className='plant_list_item'>
                 <a href={`/plant/read/${p.plant_id}`}>
-                  <div className='plant_image'>
+                  <div className='plantlist_contents_item'>
                     <img src='/image/plant01.jpg'/>
-                  </div>
-                  <div className='plant_title'>
-                    <h3>{p.common_name}</h3>
+                    <p className='plantlist_commonname'>{p.common_name}</p>
                   </div>
                 </a>
-              </div>
             )}
           </div>
         </div>

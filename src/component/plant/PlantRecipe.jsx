@@ -35,6 +35,34 @@ const PlantRecipe = () => {
     getList();
   }, []);
 
+  {/* 텍스트 변환 */}
+  const getCareLevelText = (care_level) => {
+    switch(care_level) {
+      case 1:
+        return '초보자용';
+      case 2:
+        return '초보자용';
+      case 3:
+        return '중급자용';
+      case 4:
+        return '상급자용';
+      default:
+        return '상급자용';
+    }
+  };
+
+  const onDelete = async () => {
+    setBox({
+      show: true,
+      message: `[${title}] 레시피를 삭제하시겠습니까?`,
+      action: async () => {
+        //await axios.get(`/plant/delete/${recipe_id}`)
+        setBox({show: true, message: "해당 레시피를 삭제하였습니다."})
+        navi('/recipe')
+      }
+    })
+  }
+
   if (loading) return <div className='text-center my-5'><Spinner animation="border" variant="success" /></div>
 
   return (
@@ -53,7 +81,7 @@ const PlantRecipe = () => {
             </div>
           </div>
           <div className='recipe_btn'>
-            <button className='recipe_insert' onClick={()=>onClickInsertRecipe()}>글쓰기</button>
+            <button className='recipe_insert' onClick={() => onClickInsertRecipe()}>글쓰기</button>
           </div>
         </div>
 
@@ -68,9 +96,9 @@ const PlantRecipe = () => {
                 <div className='recipe_content_item'>
                   <img src='/image/recipe_01.jpg'/>
                   <p className='recipe_title'>{r.title}</p>
-                  <p className='recipe_writer'>작성자</p>
+                  <p className='recipe_writer'>{r.nickname}</p>
                     <div className='recipe_content_level'>
-                      <span className='recipe_level'><img src='/image/recipe_level.png'/>초급</span>
+                      <span className='recipe_level'><img src='/image/recipe_level.png'/>{getCareLevelText(r.level)}</span>
                       <span className='recipe_like'><img src='/image/like_icon.png'/> 4</span>
                   </div>
                 </div>

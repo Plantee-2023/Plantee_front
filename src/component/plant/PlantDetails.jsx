@@ -122,7 +122,6 @@ const PlantDetails = () => {
                 }
             </section>
           </div>
-          
         </div>
       </div>
     </div>
