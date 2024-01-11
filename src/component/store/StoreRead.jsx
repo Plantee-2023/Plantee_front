@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useEffect, useState, useContext } from 'react'
 import { useParams, useNavigate, NavLink } from 'react-router-dom';
 import { Spinner, Row, Col, Button, Tabs, Tab, Alert, Card, Badge } from 'react-bootstrap';
+import Parser from 'html-react-parser';
 import { BoxContext } from '../common/BoxContext';
 import "./Store.css";
 import { TiHeart } from "react-icons/ti";
@@ -144,9 +145,8 @@ const StoreRead = () => {
                         id="fill-tab-example"
                         className="my-5 pt-5"
                         fill >
-
                         <Tab eventKey="info" title="상세정보">
-                            {contents}
+                            {Parser(contents)}
                         </Tab>
                         <Tab eventKey="review" title="상품리뷰">
                             <StoreReview uid={uid} />

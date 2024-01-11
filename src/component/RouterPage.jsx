@@ -70,7 +70,7 @@ const RouterPage = () => {
             <Route path='/store' element={<StoreMain />} />
             <Route path='/store/read/:store_id' element={<StoreRead />} />
             <Route path='/store/update/:store_id' element={<StoreUpdate />} />
-            <Route path='/store/insertPage' element={<StoreInsert />} />
+            <Route path='/store/insert' element={<StoreInsert />} />
 
             {/* 다이어리 */}
             <Route path='/diary/main' element={<DiaryMain />} />

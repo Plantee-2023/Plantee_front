@@ -21,7 +21,7 @@ const StoreQuestion = ({ uid }) => {
     const getQuestion = async () => {
         setLoading(true);
         const res = await axios.get(`/store/question/${store_id}`);
-        //console.log(res);
+        console.log(res);
         let question = res.data.questionList;
         let answer = res.data.answerList;
         for (let i = 0; i < question.length; i++) {
@@ -92,7 +92,7 @@ const StoreQuestion = ({ uid }) => {
                     <div className='comment_contents'>
                         {question.map(q =>
                             <>
-                                <div key={q.reg_date}>
+                                <div key={q.comment_id}>
                                     <Row>
                                         <Col>
                                             <Row className='mb-3'>
@@ -105,7 +105,7 @@ const StoreQuestion = ({ uid }) => {
                                     </Row>
                                 </div>
                                 {typeof (q.answer) != 'undefined' ?
-                                    <div key={q.answer.reg_date}>
+                                    <div key={q.answer.comment_id}>
                                         <Row>
                                             <Col>
                                                 <Row className='mb-3'>
@@ -123,9 +123,14 @@ const StoreQuestion = ({ uid }) => {
                                         </Row>
                                     </div>
                                     :
-                                    <div className='text-end'>
-                                        <button className='store_filterbtn_clicked'>답변하기</button>
-                                    </div>
+                                    <>
+                                        {sessionStorage.getItem("uid") != uid && sessionStorage.getItem("uid") != "admin" ?
+                                            <></> : 
+                                            <div className='text-end'>
+                                                <button className='store_filterbtn_clicked'>답변하기</button>
+                                            </div>
+                                        }
+                                    </>
                                 }
                             </>
                         )}

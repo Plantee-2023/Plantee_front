@@ -16,15 +16,15 @@ const Main = () => {
 
     const getMain = async () => {
         setLoading(true);
-        const res = await axios.get(`/store/list.json`);
+        // const res = await axios.get(`/store/list.json`);
         //const res1 = await axios.get(`/magazine/list.json`);
         //const res2 = await axios.get(`/comm/list.json`); //커뮤니티
-        const res3 = await axios.get(`/plant/list.json`); // 플랜트
-        setStore(res.data.list);
+        //const res3 = await axios.get(`/plant/list.json`); // 플랜트
+        // setStore(res.data.list);
         //setMagazine(res1.data.list);
         //console.log(res1.data.list);
         //setCommunity(res2.data.list);
-        setPlants(res3.data.list);
+        //setPlants(res3.data.list);
         setLoading(false);
     }
     useEffect(() => {
@@ -62,7 +62,7 @@ const Main = () => {
                     </Col>
                 </Row>
                 <Carousel className='mb-5 mt-5'>
-                    {store.map(s =>
+                    {/* {store.map(s =>
                         <Carousel.Item>
                             <Row>
                                 <Col key={s.store_id}>
@@ -81,7 +81,7 @@ const Main = () => {
                                 </Col>
                             </Row>
                         </Carousel.Item>
-                    )}
+                    )} */}
                 </Carousel>
                 <Row>
                     <Col>
@@ -102,7 +102,7 @@ const Main = () => {
                     <Button className='main_btn'>태그</Button>
                 </InputGroup>
                 <Carousel className='mb-5 mt-5'>
-                    {plants.map(p =>
+                    {/* {plants.map(p =>
                         <Carousel.Item>
                             <Row>
                                 <Col key={p.plant_id}>
@@ -120,7 +120,7 @@ const Main = () => {
                                 </Col>
                             </Row>
                         </Carousel.Item>
-                    )}
+                    )} */}
                 </Carousel>
                 <Row>
                     <Col>

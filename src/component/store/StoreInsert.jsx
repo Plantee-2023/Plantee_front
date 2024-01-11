@@ -9,6 +9,7 @@ import { app } from '../../firebaseInit'
 import { getFirestore, setDoc, doc, getDoc } from 'firebase/firestore'
 import { getStorage, uploadBytes, ref, getDownloadURL } from 'firebase/storage'
 import "./Store.css";
+import Parser from 'html-react-parser';
 
 const StoreInsert = () => {
     const navi = useNavigate();
@@ -55,8 +56,7 @@ const StoreInsert = () => {
                     category: 5
                 };
                 await axios.post("/store/insert", data);
-                //navi("/store");
-                window.location.href = `/store`;
+                navi("/store");
             }
         }
     }
@@ -64,6 +64,8 @@ const StoreInsert = () => {
     const onClickCancel = () => {
         navi("/store");
     }
+
+    
 
     if (loading) return <div className='text-center my-5'><Spinner animation="border" variant="success" /></div>
     return (
@@ -122,13 +124,12 @@ const StoreInsert = () => {
                                         </InputGroup>
                                     </div> */}
 
-                                    <CKEditor config={{ ckfinder: { uploadUrl: '/store/ckupload' } }}
+                                    <CKEditor config={{ placeholder: "내용을 입력하세요.", ckfinder: { uploadUrl: '/store/ckupload' } }}
                                         editor={ClassicEditor}
                                         data=""
                                         onChange={(event, editor) => { onChangeContents(editor.getData()); }}
                                         onReady={(editor) => { }} />
 
-                                    {/* <StoreEditor form={form} setForm={setForm}  /> */}
                                 </form>
 
                                 <div className='plantinsert_section'>
@@ -137,7 +138,7 @@ const StoreInsert = () => {
                                         <button className='insert_cancel' onClick={onClickCancel}>취소하기</button>
                                     </div>
                                 </div>
-                                
+
                             </section>
 
                         </section>

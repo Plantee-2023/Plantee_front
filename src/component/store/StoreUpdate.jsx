@@ -19,19 +19,18 @@ const StoreUpdate = ({ match, history }) => {
     const [img, setImg] = useState('');
 
     const { store_id } = useParams();
-    const [store, setStore] = useState({
-        title: "", price: "", stock: "", contents: "", image: "", level: "", tag: "", mdfy_date: "", file: null, text: ""
-    })
 
-    const { title, price, stock, contents, image, level, tag, uid, reg_date, mdfy_date, like_cnt, toggle, text } = store;
+
+    const { title, price, stock, contents, image, level, tag, uid, reg_date, mdfy_date, like_cnt, toggle, text } = form;
 
     const getStore = async () => {
         setLoading(true);
         const res = await axios.get(`/store/read/${store_id}`);
-        setForm({
-            ...res.data,
-            contents: res.data.contents
-        });
+        setForm(res.data)
+        // setForm({
+        //     ...res.data,
+        //     contents: res.data.contents
+        // });
         //setImg("/upload/plantee/" + res.data.image);
         setLoading(false);
     }
@@ -64,7 +63,7 @@ const StoreUpdate = ({ match, history }) => {
         if (window.confirm("글 수정을 완료하시겠습니까?")) {
             await axios.post(`/store/update`, form);
             alert("수정완료!");
-            navi("/store");
+            navi(`/store/read/${store_id}`);
         }
     }
 
@@ -74,7 +73,7 @@ const StoreUpdate = ({ match, history }) => {
     if (loading) return <div className='text-center my-5'><Spinner animation="border" variant="success" /></div>
     return (
         <>
-        
+
             <div className='store_wrap'>
                 <div className='store_contents'>
                     <div className='store_layout'>
@@ -87,6 +86,10 @@ const StoreUpdate = ({ match, history }) => {
                             <section className='insert_simpleinfo_section'>
                                 <form className='insert_textarea' onSubmit={onSubmit}>
                                     <div className='insert_title'>
+                                        <InputGroup className='mb-2'>
+                                            <InputGroup.Text>상품번호</InputGroup.Text>
+                                            <Form.Control value={store_id} readOnly />
+                                        </InputGroup>
                                         <InputGroup className='mb-3'>
                                             <InputGroup.Text>글제목</InputGroup.Text>
                                             <Form.Control name='title' value={title} onChange={onChange} />

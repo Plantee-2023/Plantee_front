@@ -95,8 +95,10 @@ const StoreMain = () => {
                             </Container>
                         </Navbar>
                     </div>
-
                     
+                    <div className='plant_insert'>
+                        <Link to="/store/insert" ><button>추가하기</button></Link>
+                    </div>
 
                     <Row sm={1} md={3} lg={5} className="g-4">
                         {goods.map(g =>
