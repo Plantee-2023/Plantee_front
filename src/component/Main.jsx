@@ -22,8 +22,8 @@ const Main = () => {
         const res3 = await axios.get(`/plant/list.json`); // 플랜트
         setStore(res.data.list);
         console.log(res.data.list);
-        setMagazine(res1.data.list);
-        console.log(res1.data);
+        // setMagazine(res1.data.list);
+        // console.log(res1.data);
         setCommunity(res2.data.list);
         console.log(res2.data.list);
         setPlants(res3.data.list);

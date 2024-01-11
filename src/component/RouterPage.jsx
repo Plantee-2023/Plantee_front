@@ -32,6 +32,7 @@ import PlantTestStart from './plant/PlantTestStart';
 import PlantRecipe from './plant/PlantRecipe';
 import PlantRecipeRead from './plant/PlantRecipeRead';
 import PlantRecipeInsert from './plant/PlantRecipeInsert';
+import MagazineUpdate from './magazine/MagazineUpdate';
 
 const RouterPage = () => {
     return (
@@ -40,7 +41,8 @@ const RouterPage = () => {
             <Route path='/' element={<Main />} />
             <Route path='/magazine/read/:post_id' element={<Magazine />} />
             <Route path='/magazine/magazineList' element={<MagazineList />} />
-            <Route path='/magazine/insert' element={<MagazineInsert />} />
+            <Route path='/magazine/magazineinsert' element={<MagazineInsert />} />
+            <Route path='/magazine/update/:post_id' element={<MagazineUpdate />} />
             <Route path='/mypage/mypagefavorite' element={<MyPageFavorite/>} />
             <Route path='/mypage/mypagecomment' element={<MyPageComment/>} />
 
