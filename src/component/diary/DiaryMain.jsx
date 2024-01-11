@@ -29,38 +29,33 @@ const DiaryMain = () => {
     //     }
     // }
 
-    const onClickInsert = () => {
-        navi(`/diary/main/insert`);
-
-    }
-
-    const getSun = (icon_sun) => {
-        switch (icon_sun) {
-            case '1':
-                return <img src='/image/icon_sun.png'/>;
-            case '2':
-                return <img src='/image/icon_sun2.jpg'/>;
-            case '3':
-                return <img src='/image/icon_sun3.jpg'/>;
-            case '4':
-                return <img src='/image/icon_sun3.jpg'/>;
+    const getSun = (sunlight) => {
+        switch (sunlight) {
+            case '2~3':
+                return <img src='/image/icon_sun.jpg' />;
+            case '6':
+                return <img src='/image/icon_sun2.jpg' />;
+            case '12':
+                return <img src='/image/icon_sun3.jpg' />;
+            case '18':
+                return <img src='/image/icon_sun3.jpg' />;
             default:
-                return <img src='/image/icon_sun5.jpg'/>;
+                return <img src='/image/icon_sun5.jpg' />;
         }
     };
 
-    const getWater = (icon_water) => {
-        switch (icon_water) {
-            case '1':
-                return <img src='/image/icon_water.png'/>;
-            case '2':
-                return <img src='/image/icon_water2.jpg'/>;
-            case '3':
-                return <img src='/image/icon_water3.jpg'/>;
-            case '4':
-                return <img src='/image/icon_water3.jpg'/>;
+    const getWater = (watering) => {
+        switch (watering) {
+            case 30:
+                return <img src='/image/icon_water.jpg' />;
+            case 21:
+                return <img src='/image/icon_water2.jpg' />;
+            case 14:
+                return <img src='/image/icon_water3.jpg' />;
+            case 7:
+                return <img src='/image/icon_water3.jpg' />;
             default:
-                return <img src='/image/icon_water5.jpg'/>;
+                return <img src='/image/icon_water5.jpg' />;
         }
     };
 
@@ -85,8 +80,10 @@ const DiaryMain = () => {
                         </InputGroup>
                     </form>
                 </div>
-                <div className='text-end mt-3' onClick={() => { onClickInsert() }}>
-                    <img src='/image/icon-add.png' className='diary-img-insert' /><span className='diary-insert-size'><b><u>등록하기</u></b></span>
+                <div className='text-end mt-3'>
+                    <Link to={`/diary/insert`}>
+                        <img src='/image/icon-add.png' className='diary-img-insert' /><span className='diary-insert-size'><b><u>등록하기</u></b></span>
+                    </Link>
                 </div>
                 <div className='text-center'>
                     {list.map(d =>
@@ -95,13 +92,13 @@ const DiaryMain = () => {
                                 <Row>
                                     <Col>
                                         <br />
-                                        <h1>D{d.date_water}</h1>
+                                        <h1>D-{d.date_water}</h1>
                                         <hr className='diary_dayline' />
                                         <p className='diary_icon_sun'>
-                                            <p>{getSun(d.icon_sun)}</p>
+                                            <p>{getSun(d.sunlight)}</p>
                                         </p>
                                         <p className='diary_icon_sun'>
-                                            <p>{getWater(d.icon_water)}</p>
+                                            <p>{getWater(d.watering)}</p>
                                         </p>
                                     </Col>
                                     <Col>

@@ -73,7 +73,7 @@ const Menu = () => {
                                                             <div className="menu-card-text">마이페이지</div>
                                                             <ul>
                                                                 <li>
-                                                                    <Card className='menu-card1'><a href='/diary/diarycalendar'>
+                                                                    <Card className='menu-card1'><a href='/diary/calendar'>
                                                                         <CiCalendar className='menu-toast-icon' /></a></Card>
                                                                     <div className='menu-toast-text'>캘린더</div>
                                                                 </li>

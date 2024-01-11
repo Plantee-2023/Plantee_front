@@ -77,8 +77,8 @@ const RouterPage = () => {
             {/* 다이어리 */}
             <Route path='/diary/main' element={<DiaryMain />} />
             <Route path='/diary/calendar' element={<DiaryCalendar />} />
-            <Route path='/diary/main/insert' element={<DiaryInsert />} />
-            <Route path='/diary/main/update' element={<DiaryUpdate />} />
+            <Route path='/diary/insert' element={<DiaryInsert />} />
+            <Route path='/diary/update/:diary_id' element={<DiaryUpdate />} />
             <Route path='/diary/read/:diary_id' element={<DiaryRead />} />
             <Route path='/diary/list' element={<DiaryList />} />
         </Routes>

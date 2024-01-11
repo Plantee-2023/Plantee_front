@@ -3,7 +3,7 @@ import classNames from "classnames/bind";
 import Diary from "../diary/Diary.css";
 import { Container } from "react-bootstrap";
 import DiaryTag from "./DiaryTag";
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 
 const cx = classNames.bind(Diary);
@@ -165,11 +165,7 @@ const DiaryCalendar = () => {
 
         return dayArr;
     }, [selectedYear, selectedMonth, dateTotalCount]);
-    
-    const onClickInsert = () => {
-        navi(`/diary/main/insert`);
 
-    }
     return (
         <div className="diary_wrap">
             <div className="diary_contents">
@@ -178,8 +174,13 @@ const DiaryCalendar = () => {
                         <DiaryTag />
                     </Container>
                 </div>
-                <div className='text-end mt-3' onClick={() => { onClickInsert()}}>
-                    <img src='/image/icon-add.png' className='diary-img-insert'/><span className='diary-insert-size'><b><u>등록하기</u></b></span>
+                <div className="text-center mt-5">
+                    <h1><b>스케줄</b></h1>
+                </div>
+                <div className='text-end mt-3'>
+                    <Link to={`/diary/insert`}>
+                        <img src='/image/icon-add.png' className='diary-img-insert' /><span className='diary-insert-size'><b><u>등록하기</u></b></span>
+                    </Link>
                 </div>
                 <div className="diary">
                     <div className="title">
