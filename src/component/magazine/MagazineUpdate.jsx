@@ -26,41 +26,28 @@ const MagazineUpdate = () => {
         });
     }
 
-    const onSubmit = async (e) => {
-        e.preventDefault();
-        //수정하기
-        const res = await axios.post('/magazine/update', update);
-        if (res.data === 0) {
-            setBox({
-                show: true,
-                message: "수정을 실패하였습니다."
-            })
-        } else {
-            setBox({
-                show: true,
-                message: "수정에 성공하였습니다."
-            })
-            navi(`/magazine/read/${post_id}`);
-        }
-    }
-
     const onUpdate = async (e) => {
         e.preventDefault();
-        if (window.confirm("정보를 수정 하시겠습니까?")) {
-            const res = await axios.post('/magazine/update', update);
-            if (res.data == 0) {
-                setBox({
-                    show:true,
-                    message:"수정에 실패했습니다."
-                }) 
-            } else {
-                setBox({
-                    show:true,
-                    message:"수정에 성공했습니다."
-                })
-                navi(`/magazine/read/${post_id}`);
+        setBox({
+            show: true,
+            message: "수정 하시겠습니까?",
+            action: async() => {
+                const res = await axios.post('/magazine/update', update);
+                if (res.data == 0) {
+                    setBox({
+                        show: true,
+                        message: "수정에 성공했습니다."
+                    })
+                    navi(`/magazine/read/${post_id}`);
+                } else {
+                    setBox({
+                        show: true,
+                        message: "수정에 실패했습니다."
+                    })
+                }
             }
-        }
+
+        })
     }
     const onUpdatePhoto = async () => {
         if (!file) {

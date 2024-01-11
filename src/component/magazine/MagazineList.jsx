@@ -10,11 +10,9 @@ import './Magazine.css'
 import { BoxContext } from '../common/BoxContext'
 
 const MagazineList = () => {
-    const post_id = useParams();
-
     const { box, setBox } = useContext(BoxContext);
     const navi = useNavigate();
-    const size = 3;
+    const size = 5;
     const [total, setTotal] = useState(0);
     const location = useLocation();
     const search = new URLSearchParams(location.search);
@@ -34,7 +32,7 @@ const MagazineList = () => {
     }
     const onSubmit = (e) => {
         e.preventDefault();
-        if (query == "") {
+        if (query == '') {
             setBox({
                 show: true,
                 message: "검색어를 입력하세요"
@@ -47,27 +45,6 @@ const MagazineList = () => {
         navi(`${path}?page=${page}&query=${query}&size=${size}`);
     }
 
-    const onDelete = async () => {
-        setBox({
-            show: true,
-            message: `도서를 삭제하시겠습니까?`
-        })
-        const res = await axios.post(`/magazine/delete`, { post_id });
-        if (res.data === 0) {
-
-            setBox({
-                show: true,
-                message: "삭제 실패"
-            })
-        } else {
-            //alert("삭제 성공");
-            setBox({
-                show: true,
-                message: "삭제 성공"
-            })
-            navi(`/magazine/magazineList`);
-        }
-    }
     useEffect(() => {
         getMagazineList();
     }, [location])
@@ -77,11 +54,23 @@ const MagazineList = () => {
         <div id="main_wrap">
             <div className="main_contents">
                 <div className='magazine-list-title'>매거진</div>
-                {sessionStorage.getItem('uid') === "admin" &&
-                    <Button className="magazine-write-btn">
-                        <NavLink className="magazine-insert" to="/magazine/magazineinsert"><AiOutlineEdit />글쓰기</NavLink>
-                    </Button>
-                }
+                <Row>
+                    <Col>
+                        <form onSubmit={onSubmit}>
+                            <InputGroup className='search'>
+                                <Form.Control type='search' value={query} onChange={(e) => setQuery(e.target.value)} placeholder='검색어' />
+                                <Button className='magazine-btn'>검색</Button>
+                            </InputGroup>
+                        </form>
+                    </Col>
+                    <Col>
+                        {sessionStorage.getItem('uid') === "admin" &&
+                            <Button className="magazine-write-btn">
+                                <NavLink className="magazine-insert" to="/magazine/magazineinsert"><AiOutlineEdit />글쓰기</NavLink>
+                            </Button>
+                        }
+                    </Col>
+                </Row>
                 <Table className='list' bordered hover>
                     <thead className='text-center'>
                         <tr>
@@ -95,22 +84,13 @@ const MagazineList = () => {
                         {magazine.map(m =>
                             <tr key={m.post_id}>
                                 <td><NavLink style={{ color: '#000000' }} to={`/magazine/read/${m.post_id}`}>{m.title}</NavLink></td>
-                                <td className='text-center'>{m.nickname}</td>
-                                <td className='text-center'>{m.red_date}</td>
-                                <td className='text-center'>{m.view_cnt}</td>
-                                <td>
-                                    <button onClick={onDelete} className='magazine-delete-btn' >삭제</button>
-                                </td>
+                                <td style={{ width: '100px' }} className='text-center'>{m.nickname}</td>
+                                <td style={{ width: '300px' }} className='text-center'>{m.red_date}</td>
+                                <td style={{ width: '100px' }} className='text-center'>{m.view_cnt}</td>
                             </tr>
                         )}
                     </tbody>
                 </Table>
-                <form onSubmit={onSubmit}>
-                    <InputGroup className='search'>
-                        <Form.Control type='search' value={query} onChange={(e) => setQuery(e.target.value)} placeholder='검색어'/>
-                        <Button className='magazine-btn'>검색</Button>
-                    </InputGroup>
-                </form>
                 {total > size &&
                     <Pagination
                         activePage={page}
