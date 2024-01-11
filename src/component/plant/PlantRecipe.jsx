@@ -18,7 +18,7 @@ const PlantRecipe = () => {
       navi('/recipe/insert');
     } else {
       setBox({ show: true, message: "로그인 사용자만 이용 가능한 서비스 입니다. 로그인 후 진행해주세요." })
-            sessionStorage.setItem("target", location.pathname);
+            // sessionStorage.setItem("target", location.pathname);
             navi("/users/loginPage");
     }
   }
