@@ -73,7 +73,8 @@ const MagazineInsert = () => {
                     const formData = new FormData();
                     formData.append("file", file);
                     formData.append("uid", uid);
-                    await axios.post(`/magazine/update/image`, formData);
+                    await axios.post(`/magazine/image`, formData);
+                    alert("사진 등록!")
                 }
             })
         }
@@ -84,12 +85,12 @@ const MagazineInsert = () => {
             <div className="main_contents">
                 <Card className='insert-card'>
                     <Form.Control onChange={onChange} name='title' placeholder='제목을 입력해주세요.' className='insert-text'/>
-                    <div className='insert-img'>
+                    <form encType='multipart/form-data' className='insert-img'>
                         <img name='image' src={image ||'http://via.placeholder.com/150x150'} onClick={() => img_ref.current.click()} width={300} height={300} style={{ cursor: 'pointer' }} />
                         <input  onChange={onChangeFile} type='file' ref={img_ref} style={{ display: 'none' }}/>
                         <br />
                         <Button onClick={onUpdatePhoto} className='insert-img-btn'>이미지 등록</Button>
-                    </div>
+                    </form>
                     <Form.Control onChange={onChange} name='contents' placeholder='내용을 입력해주세요.' as="textarea" rows={10} className='insert-text' />
                 </Card>
                 <Button onClick={onInsert} className='insert-btn1 btn-lg'>등록</Button>
