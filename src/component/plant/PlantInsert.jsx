@@ -11,7 +11,7 @@ const PlantInsert = () => {
     flowers: '', fruits: '', type: '', indoor: '', poisonous_pet: '', cuisine: ''
   });
 
-  const { common_name, image, contents, watering, sunlight, care_level, leaf, flowers, fruits, type, indoor, poisonous_pet, cuisine } = insertPlant;
+  const { common_name, image, contents, watering, sunlight, care_level, leaf, flowers, fruits, type, indoor, poisonous_pet, cuisine} = insertPlant;
 
   const onChange = (e) => {
     setinsertPlant({
