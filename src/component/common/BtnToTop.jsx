@@ -11,11 +11,9 @@ const BtnToTop = () => {
 
     useEffect(() => {
         const ShowBtnClick = () => {
-            if (window.scrollY > 10) {
-                setShowBtn(true)
-            } else {
-                setShowBtn(false)
-            }
+
+            setShowBtn(true)
+
         }
         window.addEventListener("scroll", ShowBtnClick)
         return () => {
