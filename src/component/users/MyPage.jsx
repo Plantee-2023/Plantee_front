@@ -16,13 +16,13 @@ const MyPage = () => {
     return (
         <div id="main_wrap">
             <div className="main_contents">
-                <Tab.Container id="left-tabs-example" defaultActiveKey="a">
+                <Tab.Container id="left-tabs-example" defaultActiveKey="1">
                     <Row>
                         <Col sm={2}>
                             <Card className='mypage-list'>
                                 <div className='mypage-title'>{sessionStorage.getItem("uid")}님</div>
                                 <img className='mypage-img' src='/image/logo.png' width={30} height={20} />
-                                <Nav className="flex-column">
+                                <Nav className="flex-column" >
                                     <Nav.Item>
                                         <Nav.Link className='mypage-disabled' disabled>회원정보</Nav.Link>
                                     </Nav.Item>

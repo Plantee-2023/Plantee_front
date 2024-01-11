@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useContext } from 'react'
 import axios from 'axios';
 import { Col, Form, InputGroup, Row, Button, Table, Spinner, Card } from 'react-bootstrap'
 import { NavLink, useLocation, useNavigate, useParams } from 'react-router-dom'
@@ -7,10 +7,14 @@ import { useState } from 'react';
 import Pagination from 'react-js-pagination';
 import "../common/Pagination.css"
 import './Magazine.css'
+import { BoxContext } from '../common/BoxContext'
 
 const MagazineList = () => {
+    const post_id = useParams();
+
+    const { box, setBox } = useContext(BoxContext);
     const navi = useNavigate();
-    const size = 5;
+    const size = 3;
     const [total, setTotal] = useState(0);
     const location = useLocation();
     const search = new URLSearchParams(location.search);
@@ -23,35 +27,64 @@ const MagazineList = () => {
     const getMagazineList = async () => {
         setLoading(true);
         const res = await axios.get(`/magazine/list.json?query=${query}&page=${page}&size=${size}`);
+        console.log(res.data)
         setMagazine(res.data.list);
         setTotal(res.data.total);
-        console.log(res.data.list);
         setLoading(false);
     }
     const onSubmit = (e) => {
         e.preventDefault();
-        navi(`${path}?page=1&query=${query}&size=${size}`);
-        console.log();
+        if (query == "") {
+            setBox({
+                show: true,
+                message: "검색어를 입력하세요"
+            })
+        } else {
+            navi(`${path}?query=${query}&page=1`)
+        }
     }
     const onChangePage = (page) => {
         navi(`${path}?page=${page}&query=${query}&size=${size}`);
+    }
+
+    const onDelete = async () => {
+        setBox({
+            show: true,
+            message: `도서를 삭제하시겠습니까?`
+        })
+        const res = await axios.post(`/magazine/delete`, { post_id });
+        if (res.data === 0) {
+
+            setBox({
+                show: true,
+                message: "삭제 실패"
+            })
+        } else {
+            //alert("삭제 성공");
+            setBox({
+                show: true,
+                message: "삭제 성공"
+            })
+            navi(`/magazine/magazineList`);
+        }
     }
     useEffect(() => {
         getMagazineList();
     }, [location])
 
-    if (loading) return <div className='text-center'><Spinner size='lg' /></div>
+    if (loading) return <div className='text-center my-5'><Spinner animation="border" variant="success" /></div>
     return (
         <div id="main_wrap">
             <div className="main_contents">
                 <div className='magazine-list-title'>매거진</div>
-                <Button className="magazine-write-btn">
-                    <NavLink className="magazine-insert" to="/magazine/insert"><AiOutlineEdit />글쓰기</NavLink>
-                </Button>
+                {sessionStorage.getItem('uid') === "admin" &&
+                    <Button className="magazine-write-btn">
+                        <NavLink className="magazine-insert" to="/magazine/magazineinsert"><AiOutlineEdit />글쓰기</NavLink>
+                    </Button>
+                }
                 <Table className='list' bordered hover>
                     <thead className='text-center'>
                         <tr>
-                            <th>번호</th>
                             <th>제목</th>
                             <th>작성자</th>
                             <th>등록일</th>
@@ -61,32 +94,23 @@ const MagazineList = () => {
                     <tbody>
                         {magazine.map(m =>
                             <tr key={m.post_id}>
-                                <td className='text-center'>{m.post_id}</td>
-                                <td><NavLink to={`/magazine/read/${m.post_id}`}>{m.title}</NavLink></td>
+                                <td><NavLink style={{ color: '#000000' }} to={`/magazine/read/${m.post_id}`}>{m.title}</NavLink></td>
                                 <td className='text-center'>{m.nickname}</td>
                                 <td className='text-center'>{m.red_date}</td>
                                 <td className='text-center'>{m.view_cnt}</td>
+                                <td>
+                                    <button onClick={onDelete} className='magazine-delete-btn' >삭제</button>
+                                </td>
                             </tr>
                         )}
                     </tbody>
                 </Table>
-                <Row>
-                    <Col lg={5}>
-                        <Form.Select className='select'>
-                            <option value='1'>번호</option>
-                            <option value='2'>제목</option>
-                            <option value='3'>작성자</option>
-                        </Form.Select>
-                    </Col>
-                    <Col>
-                        <form onSubmit={onSubmit}>
-                            <InputGroup className='search'>
-                                <Form.Control value={query} onChange={(e) => setQuery(e.target.value)} />
-                                <Button className='magazine-btn'>검색</Button>
-                            </InputGroup>
-                        </form>
-                    </Col>
-                </Row>
+                <form onSubmit={onSubmit}>
+                    <InputGroup className='search'>
+                        <Form.Control type='search' value={query} onChange={(e) => setQuery(e.target.value)} placeholder='검색어'/>
+                        <Button className='magazine-btn'>검색</Button>
+                    </InputGroup>
+                </form>
                 {total > size &&
                     <Pagination
                         activePage={page}

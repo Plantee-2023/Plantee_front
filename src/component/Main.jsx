@@ -21,9 +21,11 @@ const Main = () => {
         const res2 = await axios.get(`/comm/list.json`); //커뮤니티
         const res3 = await axios.get(`/plant/list.json`); // 플랜트
         setStore(res.data.list);
+        console.log(res.data.list);
         // setMagazine(res1.data.list);
-        // console.log(res1.data.list);
+        // console.log(res1.data);
         setCommunity(res2.data.list);
+        console.log(res2.data.list);
         setPlants(res3.data.list);
         setLoading(false);
     }
@@ -49,14 +51,14 @@ const Main = () => {
                         <img src='/image/4.jpg' width={1280} height={300} />
                     </Carousel.Item>
                 </Carousel>
-                <Row>
+                <Row className='mt-5'>
                     <Col>
                         <div className='main-title mb-3'>
                             이번달 식물 추천
                         </div>
                     </Col>
                     <Col>
-                        <a className='main_more' href='/'>
+                        <a className='main_more' href='/store/main'>
                             더보기<CgChevronRight />
                         </a>
                     </Col>
@@ -173,7 +175,7 @@ const Main = () => {
                     {/* {magazine.map(m =>
                         <Carousel.Item>
                             <Row>
-                                <Col key={m.user_id}>
+                                <Col key={m.post_id}>
                                     <Card>
                                         <Card.Body>
                                             <Card.Img src='/image/what1.jpg' width={200} height={200} />
