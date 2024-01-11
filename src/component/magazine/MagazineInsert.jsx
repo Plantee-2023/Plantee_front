@@ -1,18 +1,20 @@
 import axios from 'axios'
-import React, { useRef, useState, useLocation, useEffect } from 'react'
+import React, { useRef, useState, useContext, useEffect } from 'react'
 import { Button, Card, Form, Spinner } from 'react-bootstrap'
 import { useNavigate, useParams } from 'react-router-dom'
+import { BoxContext } from '../common/BoxContext'
 
 const MagazineInsert = () => {
+    const { box, setBox } = useContext(BoxContext);
     const post_id = useParams();
     const img_ref = useRef(null);
     const navi = useNavigate();
     const [loading, setLoading] = useState(false);
     const [magazine, setMagazine] = useState([]);
     const [form, setForm] = useState({
-        contents:'',
-        title:'',
-        image:''
+        contents: '',
+        title: '',
+        image: ''
     });
     const { contents, title, image } = form;
     const onChange = (e) => {
@@ -22,23 +24,32 @@ const MagazineInsert = () => {
         })
     }
 
-    const getInsert = async () => {
+    const getMagazine = async () => {
         setLoading(true);
-        const res = await axios.get(`/magazine/insert`);
-        setMagazine(res.data.list);
+        const res = await axios.get(`/magazine/read/` + post_id);
+        setMagazine(res.data);
         setLoading(false);
     }
 
-    const onSubmit = async (e) => {
+    const onInsert = async (e) => {
         e.preventDefault();
-        if (window.confirm("등록 하시겠습니까?")) {
-            alert("등록 성공.");
-            navi(`/main/magazineList`);
-        }
+        setBox({
+            show: true,
+            message: '새로운 매거진을 등록 하시겠습니까?',
+            action: async () => {
+                const res = await axios.post(`/magazine/insert`); 
+                if(res.data === 0){
+                    alert('등록 실패!');
+                }else{
+                    alert('등록 성공!');
+                    navi(`/main/magazineList`);
+                }
+            }
+        })
     }
-    useEffect(()=>{
-        getInsert();
-    },[])
+    useEffect(() => {
+        getMagazine();
+    }, [])
     if (loading) return <div className='text-center'><Spinner size='lg' /></div>
     return (
         <div id="main_wrap">
@@ -53,7 +64,7 @@ const MagazineInsert = () => {
                     </div>
                     <Form.Control name='contents' placeholder='내용을 입력해주세요.' as="textarea" rows={10} className='insert-text' />
                 </Card>
-                <Button onClick={onSubmit} className='insert-btn1 btn-lg'>등록</Button>
+                <Button onClick={onInsert} className='insert-btn1 btn-lg'>등록</Button>
                 <Button className='insert-btn2 btn-lg'>취소</Button>
             </div>
         </div>

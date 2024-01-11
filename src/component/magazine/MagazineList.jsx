@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect,useContext } from 'react'
 import axios from 'axios';
 import { Col, Form, InputGroup, Row, Button, Table, Spinner, Card } from 'react-bootstrap'
 import { NavLink, useLocation, useNavigate, useParams } from 'react-router-dom'
@@ -7,10 +7,12 @@ import { useState } from 'react';
 import Pagination from 'react-js-pagination';
 import "../common/Pagination.css"
 import './Magazine.css'
+import {BoxContext} from '../common/BoxContext'
 
 const MagazineList = () => {
+    const { box, setBox } = useContext(BoxContext);
     const navi = useNavigate();
-    const size = 5;
+    const size = 3;
     const [total, setTotal] = useState(0);
     const location = useLocation();
     const search = new URLSearchParams(location.search);
@@ -25,13 +27,18 @@ const MagazineList = () => {
         const res = await axios.get(`/magazine/list.json?query=${query}&page=${page}&size=${size}`);
         setMagazine(res.data.list);
         setTotal(res.data.total);
-        console.log(res.data.list);
         setLoading(false);
     }
     const onSubmit = (e) => {
         e.preventDefault();
-        navi(`${path}?page=1&query=${query}&size=${size}`);
-        console.log();
+        if (query == "") {
+            setBox({
+                show: true,
+                message: "검색어를 입력하세요"
+            })
+        } else {
+            navi(`${path}?query=${query}&page=1`)
+        }
     }
     const onChangePage = (page) => {
         navi(`${path}?page=${page}&query=${query}&size=${size}`);
