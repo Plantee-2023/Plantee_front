@@ -73,7 +73,7 @@ button {cursor: pointer;}
 .diary .week .weekday {width: calc(1000px / 7); text-align: center;}
 .diary .week .sunday {color: red;}
 .diary .week .saturday {color: blue;}
-.diary .date {margin-top: 40px;}
+.diary .date {margin-top: 40px; font-size: 15px;}
 .diary .date .weekday {width: calc(910px / 7); float: left; text-align: center; height: 140px; line-height: 50px;}
 .diary .date .sunday {color: red;}
 .diary .date .saturday {color: blue;}

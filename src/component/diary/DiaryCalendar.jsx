@@ -9,8 +9,6 @@ import { Link, useNavigate } from 'react-router-dom';
 const cx = classNames.bind(Diary);
 
 const DiaryCalendar = () => {
-    const navi = useNavigate();
-
 
     const today = {
         year: new Date().getFullYear(), //오늘 연도
@@ -115,7 +113,7 @@ const DiaryCalendar = () => {
     }, []);
 
     const returnDay = useCallback(() => {
-        //알짜 반화
+        //일짜 반화
         let dayArr = [];
 
         for (const nowDay of week) {
