@@ -78,8 +78,6 @@ const MagazineInsert = () => {
             })
         }
     }
-    useEffect(() => {
-    }, [])
     if (loading) return <div className='text-center my-5'><Spinner animation="border" variant="success" /></div>
     return (
         <div id="main_wrap">
@@ -88,7 +86,7 @@ const MagazineInsert = () => {
                     <Form.Control onChange={onChange} name='title' placeholder='제목을 입력해주세요.' className='insert-text'/>
                     <div className='insert-img'>
                         <img name='image' src={image ||'http://via.placeholder.com/150x150'} onClick={() => img_ref.current.click()} width={300} height={300} style={{ cursor: 'pointer' }} />
-                        <input onChange={onChangeFile} type='file' ref={img_ref} style={{ display: 'none' }} />
+                        <input  onChange={onChangeFile} type='file' ref={img_ref} style={{ display: 'none' }}/>
                         <br />
                         <Button onClick={onUpdatePhoto} className='insert-img-btn'>이미지 등록</Button>
                     </div>
