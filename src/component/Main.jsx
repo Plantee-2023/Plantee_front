@@ -23,8 +23,8 @@ const Main = () => {
         // setStore(res.data.list);
         // setMagazine(res1.data.list);
         // console.log(res1.data.list);
-        setCommunity(res2.data.list);
-        setPlants(res3.data.list);
+        // setCommunity(res2.data.list);
+        // setPlants(res3.data.list);
         setLoading(false);
     }
     useEffect(() => {

@@ -10,6 +10,8 @@
 
 /* 메인 상세페이지 */
 .diaryread_card{margin: 0 auto;}
+.storeread_card{margin: 0 auto;}
+.storeread_card img{width: 200px; height: 200px;}
 
 /* 검색창 */
 .diary_searchwrap {width: 600px; margin: 0 auto; padding: 2rem;}
