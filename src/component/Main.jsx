@@ -16,11 +16,11 @@ const Main = () => {
 
     const getMain = async () => {
         setLoading(true);
-        const res = await axios.get(`/store/list.json`);
+        // const res = await axios.get(`/store/list.json`);
         // const res1 = await axios.get(`/magazine/list.json`);
-        const res2 = await axios.get(`/comm/list.json`); //커뮤니티
-        const res3 = await axios.get(`/plant/list.json`); // 플랜트
-        setStore(res.data.list);
+        //const res2 = await axios.get(`/comm/list.json`); //커뮤니티
+        //const res3 = await axios.get(`/plant/list.json`); // 플랜트
+        // setStore(res.data.list);
         // setMagazine(res1.data.list);
         // console.log(res1.data.list);
         setCommunity(res2.data.list);
@@ -49,20 +49,20 @@ const Main = () => {
                         <img src='/image/4.jpg' width={1280} height={300} />
                     </Carousel.Item>
                 </Carousel>
-                <Row>
+                <Row className='mt-5'>
                     <Col>
                         <div className='main-title mb-3'>
                             이번달 식물 추천
                         </div>
                     </Col>
                     <Col>
-                        <a className='main_more' href='/'>
+                        <a className='main_more' href='/store/main'>
                             더보기<CgChevronRight />
                         </a>
                     </Col>
                 </Row>
                 <Carousel className='mb-5 mt-5'>
-                    {store.map(s =>
+                    {/* {store.map(s =>
                         <Carousel.Item>
                             <Row>
                                 <Col key={s.store_id}>
@@ -81,7 +81,7 @@ const Main = () => {
                                 </Col>
                             </Row>
                         </Carousel.Item>
-                    )}
+                    )} */}
                 </Carousel>
                 <Row>
                     <Col>
@@ -141,7 +141,7 @@ const Main = () => {
                     <Button className='main_btn'>태그</Button>
                 </InputGroup>
                 <Carousel className='mb-5 mt-5'>
-                    {community.map(c =>
+                    {/* {community.map(c =>
                         <Carousel.Item>
                             <Row>
                                 <Col key={c.post_id}>
@@ -160,7 +160,7 @@ const Main = () => {
                                 </Col>
                             </Row>
                         </Carousel.Item>
-                    )}
+                    )} */}
                 </Carousel>
                 <Row>
                     <Col>
@@ -173,7 +173,7 @@ const Main = () => {
                     {/* {magazine.map(m =>
                         <Carousel.Item>
                             <Row>
-                                <Col key={m.user_id}>
+                                <Col key={m.post_id}>
                                     <Card>
                                         <Card.Body>
                                             <Card.Img src='/image/what1.jpg' width={200} height={200} />

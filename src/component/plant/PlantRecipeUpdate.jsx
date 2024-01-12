@@ -1,19 +1,31 @@
 import React, { useState, useEffect } from 'react'
-import { Form, InputGroup } from 'react-bootstrap';
-import { useNavigate } from 'react-router-dom';
+import { Form, InputGroup, Spinner } from 'react-bootstrap';
+import { NavLink, useNavigate, useParams } from 'react-router-dom';
 import { FaStar } from 'react-icons/fa';
 import axios from 'axios';
 
-const PlantRecipeInsert = ({recipe_id}) => {
+const PlantRecipeInsert = () => {
 
+  const {recipe_id} = useParams();
   const navi = useNavigate();
   const array = [0, 1, 2, 3, 4];
   const [clicked, setClicked] = useState([false, false, false, false, false]);
+  const [loading, setLoading] = useState(false);
   
-  const [form, setForm] = useState({
-    recipe_id: '', title: '', description: '', image: '', level: '', reg_date: '', uid: sessionStorage.getItem('uid'), nickname: ''});
+  const [form, setForm] = useState("");
+
+  const getRecipeUpdate = async () => {
+    setLoading(true);
+    const res = await axios.get(`/recipe/read/${recipe_id}`);
+    setForm(res.data);
+    setLoading(false);
+  }
 
   const { title, description, image, level, uid, nickname } = form;
+
+  useEffect(()=> {
+    getRecipeUpdate();
+  }, []);
 
   const onChange = (e) => {
     setForm({
@@ -24,16 +36,10 @@ const PlantRecipeInsert = ({recipe_id}) => {
 
   const onSubmit = async(e) => {
     e.preventDefault();
-    if(window.confirm("레시피를 등록하시겠습니까?")){
-      form.level = clicked.filter(Boolean).length;
-      const res = {recipe_id, uid:sessionStorage.getItem('uid'), nickname, title, description, level}
-      await axios.post('/recipe/insert', form);
-      if(res.data === 0) {
-        alert("등록 실패!");
-      }else{
-        alert("등록 완료");
-        navi('/recipe');
-      }
+    if(window.confirm("수정하시겠습니까?")) {
+      await axios.post("/recipe/update", form);
+      alert("수정완료!");
+      navi(`/recipe/read/${recipe_id}`);
     }
   }
 
@@ -45,6 +51,8 @@ const PlantRecipeInsert = ({recipe_id}) => {
     setClicked(clickStates);
   };
   
+  if (loading) return <div className='text-center my-5'><Spinner animation="border" variant="success" /></div>
+
   return (
     <div className='recipe_wrap'>
       <div className='recipe_contents'>
@@ -80,7 +88,10 @@ const PlantRecipeInsert = ({recipe_id}) => {
                 </div>
                 <div className='recipe_insert_btnsection'>
                   <div className='recipe_insert_btn'>
-                    <button type='submit'>등록하기</button>
+                    <button type='submit' className='recipeupdate_submit'>저장하기</button>
+                    <NavLink to={`/recipe/read/${recipe_id}`}>
+                      <button className='recipeupdate_cancel' onClick={()=>getRecipeUpdate()}>취소하기</button>
+                    </NavLink>
                   </div>
                 </div>
               </form>

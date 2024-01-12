@@ -1,17 +1,37 @@
+/* Main */
+
+.allmypage_wrap {width: 100%; margin: 0 auto;}
+.allmypage_contents {width: 99%; margin: 0 auto;}
+
+.mypage_wrap {display: flex; max-width: 100%; flex-direction: row; justify-content: center; padding: 0 1.25rem; margin: 0 auto;}
+.mypage_contents {flex-grow: 1; padding-bottom: 40px; padding-left: 60px; margin-top: 48px;}
+
+
+/* SideMenu */
+.mypage_sidebar_wrap {margin-top: 3rem;}
+.mypage_sidebar_box {width: 16rem; height: 90%; border: 0.0625rem solid #d7e2eb; border-radius: 0.9375rem; margin-bottom: 6.0625rem; background-color: #fff;}/*height: 100%; 주면 사이드 박스 높이 채워서 가능*/
+.mypage_sidebar_ol {padding: 0 2.5rem;}
+.account_menagement {margin-bottom: 2.5rem; font-size: inherit; list-style-type: none;}
+.wish_menagement {margin-bottom: 2.5rem; font-size: inherit; list-style-type: none;}
+.activities_menagement {margin-bottom: 2.5rem; font-size: inherit; list-style-type: none;}
+
+.mypage_account {margin-top: 2.5rem; margin-bottom: 1.0625rem; color: #333; font-size: .9375rem; font-weight: 700; line-height: 1.375rem;}
+
+.account_menagement ol, .wish_menagement ol, .activities_menagement ol {padding-left: 0;}
+.account_menagement ol a, .wish_menagement ol a, .activities_menagement ol a {padding: 0.6875rem 1rem; border-radius: 0.25rem;  font-size: 1rem; line-height: 1.4375rem; display: flex; flex-direction: column; color: #333; text-decoration: none;}
+.account_menagement a:hover, .wish_menagement a:hover, .activities_menagement a:hover {background: #e8f5ed; font-weight: bold; color: #fff;}
+
+/* UserUpdatePage */
+.update-card {margin: 0 auto;}
+.all-title {text-align: center; font-weight: 600;}
+.update_img {margin: 0 auto; margin-top: 2rem;}
+
+/* UserPasswordUpdatePage */
+.password-card { margin: 0 auto;}
+
 #main_wrap {
     width: 100%;
     margin: 0 auto;
-
-    .main_contents {
-        width: 1280px;
-        margin: 0 auto;
-    }
-
-    /* 전체 */
-    .all-title {
-        text-align: center;
-        margin-top: 30px;
-        margin-bottom: 30px;
     }
 
     /* 회원 수정 */
@@ -24,16 +44,7 @@
         margin-bottom: 20px;
     }
 
-    .update-img {
-        margin: 0 auto;
-        margin-top: 50px;
-    }
-
-    .update-card {
-        width: 700px;
-        margin: 0 auto;
-        margin-top: 50px;
-    }
+    
 
     .update-text {
         width: 110px;
@@ -47,13 +58,6 @@
         font-weight: 500;
         font-size: large;
         width: 100px;
-    }
-
-    /* 비밀번호 변경 */
-    .password-card {
-        width: 600px;
-        margin: 0 auto;
-        margin-top: 100px;
     }
 
     .password-group {
@@ -82,7 +86,6 @@
 
     /* 좋아요 리스트 */
     .favorite-list-delete-btn {
-        margin-left: 880px;
         margin-bottom: 10px;
         background-color: #4cc67c;
         border: none;
@@ -117,7 +120,6 @@
         background-color: #4cc67c;
         margin-top: 10px;
         border: none;
-        margin-left: 900px;
         width: 100px;
         margin-right: 10px;
         font-weight: 600;
@@ -129,10 +131,11 @@
         font-weight: 600;
         margin-top: 10px;
     }
-}
 
 /* 주문 / 배송조회 */
 /* 취소 / 반품 / 교환 */
 /* 게시글 */
 /* 댓글 */
 /* 좋아요 */
+
+
