@@ -73,7 +73,7 @@ const Menu = () => {
                                                             <div className="menu-card-text">마이페이지</div>
                                                             <ul>
                                                                 <li>
-                                                                    <Card className='menu-card1'><a href='/diary/diarycalendar'>
+                                                                    <Card className='menu-card1'><a href='/diary/calendar'>
                                                                         <CiCalendar className='menu-toast-icon' /></a></Card>
                                                                     <div className='menu-toast-text'>캘린더</div>
                                                                 </li>
@@ -111,7 +111,7 @@ const Menu = () => {
                         <NavDropdown className='menu-text-color' title="식물정보" id="basic-nav-dropdown">
                             <NavDropdown.Item href="/plant">식물백과</NavDropdown.Item>
                             <NavDropdown.Item href="/plant/test">식물 큐레이트</NavDropdown.Item>
-                            <NavDropdown.Item href="/plant/recipe">레시피</NavDropdown.Item>
+                            <NavDropdown.Item href="/recipe">레시피</NavDropdown.Item>
                         </NavDropdown>
                         <GiTalk className='menu-icon' />
                         <NavDropdown className='menu-text-color' title="커뮤니티" id="basic-nav-dropdown">

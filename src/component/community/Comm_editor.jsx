@@ -28,17 +28,13 @@ const Comm_editor = ({form,setForm}) => {
                 //console.log(data);
                 await axios.post("/comm/insert", data);
                 alert("저장을 완료했습니다.");
+
                  
             }
         }
+        window.location.href=``;
     }
-
-    const onChangeHtml = (e) => {
-        setForm({
-            ...form,
-            html:e.target.value
-        });
-    }
+ 
 
 
     const onClickSaveHtml = async () => {

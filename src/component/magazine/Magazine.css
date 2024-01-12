@@ -35,7 +35,7 @@
 
     .magazine-write-btn {
         width: 100px;
-        margin-left: 92%;
+        margin-left: 84%;
         background-color: aliceblue !important;
         border: none !important;
     }
@@ -73,6 +73,23 @@
     .magazine-text {
         text-align: center;
         margin-top: 100px;
+    }
+
+    .magazine-update-btn{
+        background-color: #4cc67c !important;
+        border: none !important;
+        color: #ffffff;
+        padding: 5px;
+        border-radius: 5px;
+        font-weight: 600;
+    }
+    .magazine-delete-btn{
+        background-color: #4cc67c !important;
+        border: none !important;
+        color: #ffffff;
+        padding: 5px;
+        border-radius: 5px;
+        font-weight: 600;
     }
 
     /* 매거진 추가 */

@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { Button, Card, CardBody, Col, Row, Spinner } from 'react-bootstrap'
-import { useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 
 const DiaryRead = () => {
     const [loading, setLoading] = useState(false);
@@ -9,10 +9,10 @@ const DiaryRead = () => {
     const navi = useNavigate();
 
     const [diary, setDiary] = useState({
-        diary_id: "", user_id: "", image: "", contents: "", reg_date: "", fmtdate: "", last_watering: "", watering: "", common_name: "", date_now:"", date_water:"", date_medicine:"", date_change:"",
+        diary_id: "", user_id: "", image: "", contents: "", reg_date: "", fmtdate: "", last_watering: "", watering: "", common_name: "", date_now: "", date_water: "", date_medicine: "", date_change: "",
     })
 
-    const { user_id, plant_name, image, contents, reg_date, fmtdate, waterdate, watering, common_name, date_now, date_water, date_medicine,date_change } = diary;
+    const { user_id, plant_name, image, contents, reg_date, fmtdate, waterdate, watering, common_name, date_now, date_water, date_medicine, date_change } = diary;
 
     const getDiary = async () => {
         setLoading(true);
@@ -23,17 +23,13 @@ const DiaryRead = () => {
         setLoading(false);
 
     }
-    const onClickDelete = async(plant_name, diary_id) => {
-        if(window.confirm(`${plant_name}을 삭제하시겠습니까?`)){
+    const onClickDelete = async (plant_name, diary_id) => {
+        if (window.confirm(`${plant_name}을 삭제하시겠습니까?`)) {
             // console.log(diary_id);
             await axios.post(`/diary/delete/${diary_id}`);
-            navi(`/diary/main/:`);
+            navi(`/diary/main`);
 
         }
-    }
-
-    const onClickUpdate = () => {
-        navi(`/diary/main/update`);
     }
 
     useEffect(() => {
@@ -47,10 +43,10 @@ const DiaryRead = () => {
                 <div className='text-center'>
                     <h1 className='mt-5'>상세보기</h1>
                     <div className='text-end'>
-                        <span onClick={()=>onClickUpdate()}>
+                        <Link to={`/diary/update/${diary_id}`}>
                             <img src='/image/icon-update.png' className='diary-img-update' /><span className='diary-insert-size'><b><u>수정하기</u></b></span>
-                        </span>
-                        <span onClick={()=>onClickDelete(plant_name, diary_id)}>
+                        </Link>
+                        <span onClick={() => onClickDelete(plant_name, diary_id)}>
                             <img src='/image/icon-delete.png' className='diary-img-update' /><span className='diary-insert-size'><b><u>삭제</u></b></span>
                         </span>
                     </div>
@@ -85,15 +81,15 @@ const DiaryRead = () => {
                                 <hr />
                                 <Row>
                                     <Col>
-                                        <h5>D{date_water}</h5>
+                                        <h5>D-{date_water}</h5>
                                         <p>물</p>
                                     </Col>
                                     <Col>
-                                        <h5>D{date_medicine}</h5>
+                                        <h5>D-{date_medicine}</h5>
                                         <p>영양제</p>
                                     </Col>
                                     <Col>
-                                        <h5>D{date_change}</h5>
+                                        <h5>D-{date_change}</h5>
                                         <p>분갈이</p>
                                     </Col>
                                 </Row>

@@ -3,7 +3,18 @@ import { Routes, Route } from 'react-router-dom'
 import Main from './Main';
 import Join from './users/Join';
 import LoginPage from './users/LoginPage';
-import MyPage from './users/MyPage';
+import MyPage from './mypage/MyPage';
+import UserUpdate from './mypage/detail/UserUpdate';
+import UserPassword from './mypage/detail/UserPassword';
+import UserWithdrawal from './mypage/detail/UserWithdrawal';
+import ProductLike from './mypage/detail/ProductLike';
+import ProductCart from './mypage/detail/ProductCart';
+import ProductPurchase from './mypage/detail/ProductPurchase';
+import ProductOrder from './mypage/detail/ProductOrder';
+import ProductCancel from './mypage/detail/ProductCancel';
+import ActivitiesPost from './mypage/detail/ActivitiesPost';
+import ActivitesComment from './mypage/detail/ActivitesComment';
+import ActivitiesLike from './mypage/detail/ActivitiesLike';
 import MyPageFavorite from './mypage/MyPageFavorite'
 import MyPageComment from './mypage/MyPageComment'
 import Magazine from './magazine/Magazine';
@@ -31,15 +42,38 @@ import PlantInsert from './plant/PlantInsert';
 import PlantUpdate from './plant/PlantUpdate';
 import PlantTestStart from './plant/PlantTestStart';
 import PlantRecipe from './plant/PlantRecipe';
+import PlantRecipeRead from './plant/PlantRecipeRead';
+import PlantRecipeInsert from './plant/PlantRecipeInsert';
+import MagazineUpdate from './magazine/MagazineUpdate';
+
 
 const RouterPage = () => {
     return (
         <Routes>
+            {/* 마이페이지 */}
+            <Route path='/users/mypage' element={<MyPage/>}>
+                <Route path='' element={<UserUpdate/>}/>
+                <Route path='userupdate' element={<UserUpdate/>}/>
+                <Route path='userpassword' element={<UserPassword/>}/>
+                <Route path='userwithdrawal' element={<UserWithdrawal/>}/>
+
+                <Route path='productlike' element={<ProductLike/>}/>
+                <Route path='productcart' element={<ProductCart/>}/>
+                <Route path='productpurchase' element={<ProductPurchase/>}/>
+                <Route path='productorder' element={<ProductOrder/>}/>
+                <Route path='productcancel' element={<ProductCancel/>}/>
+
+                <Route path='activitiespost' element={<ActivitiesPost/>}/>
+                <Route path='activitiescomment' element={<ActivitesComment/>}/>
+                <Route path='activitieslike' element={<ActivitiesLike/>}/>
+            </Route>
+
             {/* 메인, 매거진 */}
             <Route path='/' element={<Main />} />
             <Route path='/magazine/read/:post_id' element={<Magazine />} />
             <Route path='/magazine/magazineList' element={<MagazineList />} />
-            <Route path='/magazine/insert' element={<MagazineInsert />} />
+            <Route path='/magazine/magazineinsert' element={<MagazineInsert />} />
+            <Route path='/magazine/update/:post_id' element={<MagazineUpdate />} />
             <Route path='/mypage/mypagefavorite' element={<MyPageFavorite/>} />
             <Route path='/mypage/mypagecomment' element={<MyPageComment/>} />
 
@@ -54,7 +88,9 @@ const RouterPage = () => {
             <Route path='/plant/read/:plant_id' element={<PlantDetails />} />
             <Route path='/plant/update/:plant_id' element={<PlantUpdate />} />
             <Route path='/plant/test' element={<PlantTestStart/>} />
-            <Route path='/plant/recipe' element={<PlantRecipe/>} />
+            <Route path='/recipe' element={<PlantRecipe/>} />
+            <Route path='/recipe/read/:recipe_id' element={<PlantRecipeRead/>} />
+            <Route path='/recipe/insert' element={<PlantRecipeInsert/>} />
 
             {/* 커뮤니티 */}
             <Route path="/comm" element={<Comm_list />} />
@@ -75,8 +111,8 @@ const RouterPage = () => {
             {/* 다이어리 */}
             <Route path='/diary/main' element={<DiaryMain />} />
             <Route path='/diary/calendar' element={<DiaryCalendar />} />
-            <Route path='/diary/main/insert' element={<DiaryInsert />} />
-            <Route path='/diary/main/update' element={<DiaryUpdate />} />
+            <Route path='/diary/insert' element={<DiaryInsert />} />
+            <Route path='/diary/update/:diary_id' element={<DiaryUpdate />} />
             <Route path='/diary/read/:diary_id' element={<DiaryRead />} />
             <Route path='/diary/list' element={<DiaryList />} />
         </Routes>
