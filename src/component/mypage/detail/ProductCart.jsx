@@ -1,9 +1,9 @@
 import React from 'react'
 import { Table, Form, Button, Alert } from 'react-bootstrap'
-
+import '../MyPage.css'
 const ProductCart = () => {
-  return (
-    <div id="main_wrap">
+    return (
+        <div id="main_wrap">
             <h1 className='all-title'>장바구니</h1>
             <Table hover striped bordered>
                 <thead className='text-center'>
@@ -42,7 +42,7 @@ const ProductCart = () => {
             <Button className='cart-order-btn'>주문하기</Button>
             <Button className='cart-cancel-btn'>삭제</Button>
         </div>
-  )
+    )
 }
 
 export default ProductCart

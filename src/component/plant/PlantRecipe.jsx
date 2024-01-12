@@ -54,7 +54,7 @@ const PlantRecipe = () => {
   const onDelete = async () => {
     setBox({
       show: true,
-      message: `[${title}] 레시피를 삭제하시겠습니까?`,
+      //message: `[${title}] 레시피를 삭제하시겠습니까?`,
       action: async () => {
         //await axios.get(`/plant/delete/${recipe_id}`)
         setBox({show: true, message: "해당 레시피를 삭제하였습니다."})

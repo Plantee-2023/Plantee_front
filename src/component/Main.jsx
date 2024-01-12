@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { useLocation } from 'react-router-dom';
 import axios from 'axios';
 import { Row, Col, InputGroup, Button, Card, Carousel, Spinner } from 'react-bootstrap';
 import { CgChevronRight } from "react-icons/cg";
@@ -16,14 +17,14 @@ const Main = () => {
 
     const getMain = async () => {
         setLoading(true);
-        // const res = await axios.get(`/store/list.json`);
-        // const res1 = await axios.get(`/magazine/list.json`);
+        const res = await axios.get(`/store/list.json`);
+        const res1 = await axios.get(`/magazine/list.json?query=''&page=1&size=8`);
         //const res2 = await axios.get(`/comm/list.json`); //커뮤니티
-        //const res3 = await axios.get(`/plant/list.json`); // 플랜트
-        // setStore(res.data.list);
-        // setMagazine(res1.data.list);
-        // console.log(res1.data.list);
-        setCommunity(res2.data.list);
+        const res3 = await axios.get(`/plant/list.json`); // 플랜트
+        setStore(res.data.list);
+        setMagazine(res1.data.list);
+        console.log(res1.data.list);
+        //setCommunity(res2.data.list);
         setPlants(res3.data.list);
         setLoading(false);
     }
@@ -62,13 +63,14 @@ const Main = () => {
                     </Col>
                 </Row>
                 <Carousel className='mb-5 mt-5'>
-                    {/* {store.map(s =>
+                    {store.map(s =>
                         <Carousel.Item>
                             <Row>
                                 <Col key={s.store_id}>
                                     <Card>
                                         <Card.Body >
-                                            <Card.Img width={200} height={200} >{s.image}</Card.Img>
+                                            <Card.Img src={s.image || 'http://via.placeholder.com/150x150'} width={200} height={200} >
+                                            </Card.Img>
                                             <Card.Body className='main_text'>
                                                 <div>이름 : {s.title}</div><br />
                                                 <div>가격 : {s.fmtprice}</div>
@@ -81,7 +83,7 @@ const Main = () => {
                                 </Col>
                             </Row>
                         </Carousel.Item>
-                    )} */}
+                    )}
                 </Carousel>
                 <Row>
                     <Col>
@@ -108,7 +110,7 @@ const Main = () => {
                                 <Col key={p.plant_id}>
                                     <Card>
                                         <Card.Body>
-                                            <Card.Img width={200} height={200} ></Card.Img>
+                                            <Card.Img src={p.image || 'http://via.placeholder.com/150x150'} width={200} height={200} ></Card.Img>
                                             <Card.Body>
                                                 <div>이름 : {p.common_name}</div>
                                                 <div>난이도 : {p.care_level}단계</div>
@@ -170,13 +172,13 @@ const Main = () => {
                     </Col>
                 </Row>
                 <Carousel className='mb-5 mt-5'>
-                    {/* {magazine.map(m =>
+                    {magazine.map(m =>
                         <Carousel.Item>
                             <Row>
                                 <Col key={m.post_id}>
                                     <Card>
                                         <Card.Body>
-                                            <Card.Img src='/image/what1.jpg' width={200} height={200} />
+                                            <Card.Img src={m.image || 'http://via.placeholder.com/150x150'} width={200} height={200} />
                                             <hr />
                                             <div>제목 : {m.title}</div>
                                             <div>내용 : {m.contents}</div>
@@ -188,7 +190,7 @@ const Main = () => {
                                 </Col>
                             </Row>
                         </Carousel.Item>
-                    )} */}
+                    )}
                 </Carousel>
             </div>
         </div>
