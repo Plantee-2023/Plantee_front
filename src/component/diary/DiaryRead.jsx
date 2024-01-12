@@ -7,6 +7,7 @@ const DiaryRead = () => {
     const [loading, setLoading] = useState(false);
     const { diary_id } = useParams();
     const navi = useNavigate();
+    const [list, setList] = useState([]);
 
     const [diary, setDiary] = useState({
         diary_id: "", user_id: "", image: "", contents: "", reg_date: "", fmtdate: "", last_watering: "", watering: "", common_name: "", date_now: "", date_water: "", date_medicine: "", date_change: "",
@@ -23,6 +24,17 @@ const DiaryRead = () => {
         setLoading(false);
 
     }
+
+    const getStore_Diary = async () => {
+        setLoading(true);
+        const res = await axios.get(`/diary/storelist.json/${diary_id}`);
+        console.log(res.data);
+        setList(res.data);
+        console.log(list);
+        setLoading(false);
+
+    }
+
     const onClickDelete = async (plant_name, diary_id) => {
         if (window.confirm(`${plant_name}을 삭제하시겠습니까?`)) {
             // console.log(diary_id);
@@ -34,6 +46,10 @@ const DiaryRead = () => {
 
     useEffect(() => {
         getDiary();
+    }, [])
+
+    useEffect(() => {
+        getStore_Diary();
     }, [])
 
     if (loading) return <div className='text-center my-5'><Spinner animation="border" variant="success" /></div>
@@ -110,7 +126,19 @@ const DiaryRead = () => {
                     <div className='mt-5'>
                         <Card>
                             <Card.Body>
-                                <h2>스토어연결</h2>
+                                <h2>{common_name} 난이도 관련식물</h2>
+                                {list.map(s =>
+
+                                    <Card style={{ width: '15rem' }} className='diaryread_card my-4 '>
+                                        <CardBody>
+                                            <div className='storeread_card'>
+                                                <img src='/image/plant01.jpg' alt='plante' />
+                                                <h3 className='mt-2'>{s.title}</h3>
+                                                <h5>{s.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원</h5>
+                                            </div>
+                                        </CardBody>
+                                    </Card>
+                                )}
                             </Card.Body>
                         </Card>
                     </div>
