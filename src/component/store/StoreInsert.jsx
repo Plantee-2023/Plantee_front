@@ -50,11 +50,7 @@ const StoreInsert = () => {
             alert("내용을 입력해주세요.");
         } else {
             if (window.confirm("저장하시겠습니까?")) {
-                const data = {
-                    ...form,
-                    uid: sessionStorage.getItem("uid"),
-                    category: 5
-                };
+                const data = { ...form,  uid: sessionStorage.getItem("uid"), category: 5 };
                 await axios.post("/store/insert", data);
                 navi("/store");
             }

@@ -6,8 +6,8 @@ import Parser from 'html-react-parser';
 import { BoxContext } from '../common/BoxContext';
 import "./Store.css";
 import { TiHeart } from "react-icons/ti";
-import StoreReview from "./StoreReview";
-import StoreQuestion from "./StoreQuestion";
+import StoreReviewList from "./StoreReviewList";
+import StoreQuestionList from "./StoreQuestionList";
 import DeliveryService from './DeliveryService';
 import BtnToTop from '../common/BtnToTop';
 
@@ -145,14 +145,15 @@ const StoreRead = () => {
                         id="fill-tab-example"
                         className="my-5 pt-5"
                         fill >
+                            {/* 여기서 보내는 props는 판매글쓴이에 대한 정보 */}
                         <Tab eventKey="info" title="상세정보">
                             {Parser(contents)}
                         </Tab>
                         <Tab eventKey="review" title="상품리뷰">
-                            <StoreReview uid={uid} />
+                            <StoreReviewList uid={uid} />
                         </Tab>
                         <Tab eventKey="qna" title="상품문의">
-                            <StoreQuestion uid={uid} />
+                            <StoreQuestionList uid={uid} />
                         </Tab>
                         <Tab eventKey="carry" title="배송/반품/교환">
                             <DeliveryService />

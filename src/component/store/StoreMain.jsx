@@ -40,7 +40,7 @@ const StoreMain = () => {
             <div className='store_wrap'>
                 <div className='store_contents'>
 
-                    <div className='store_filterbtn_group'>
+                    {/* <div className='store_filterbtn_group'>
                         <button className='plant_filterbtn'>↺</button>
                         <button className='button_hide' onClick={() => { setClickPlant((e) => !e); }} >
                             <div className={`${!isClickPlant ? 'store_filterbtn' : 'store_filterbtn_clicked'}`} >
@@ -71,7 +71,7 @@ const StoreMain = () => {
                                 <button className='store_filterbtn'>수분</button>
                             </div>
                         </>
-                    )}
+                    )} */}
 
                     <div>
                         <Navbar bg="#ffffff" data-bs-theme="light" className='pt-3 pb-3'>
