@@ -11,6 +11,7 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/autoplay';
 import './Main.css'
+
 const Main = () => {
     const [plants, setPlants] = useState([]); // 플랜트
     const [community, setCommunity] = useState([]); // 커뮤니티
@@ -22,11 +23,10 @@ const Main = () => {
         setLoading(true);
         const res = await axios.get(`/store/list.json`);
         const res1 = await axios.get(`/magazine/list.json?query=''&page=1&size=8`);
-        //const res2 = await axios.get(`/comm/list.json`); //커뮤니티
+        //const res2 = await axios.get(`/comm/list.json?category=3&page=1&size=10&query=''`); //커뮤니티
         const res3 = await axios.get(`/plant/list.json`); // 플랜트
         setStore(res.data.list);
         setMagazine(res1.data.list);
-        console.log(res1.data.list);
         //setCommunity(res2.data.list);
         setPlants(res3.data.list);
         setLoading(false);
@@ -44,7 +44,8 @@ const Main = () => {
                     spaceBetween={50}
                     slidesPerView={1}
                     autoplay={{ delay: 2000 }}
-                    navigation>
+                    navigation
+                    style={{"--swiper-navigation-color": "#ffffff"}}>
                     <SwiperSlide><img src='/image/1.jpg' width={1280} height={300} /></SwiperSlide>
                     <SwiperSlide><img src='/image/2.jpg' width={1280} height={300} /></SwiperSlide>
                     <SwiperSlide><img src='/image/3.jpg' width={1280} height={300} /></SwiperSlide>
@@ -67,7 +68,8 @@ const Main = () => {
                     spaceBetween={70}
                     slidesPerView={4}
                     autoplay={{ delay: 2000 }}
-                    navigation>
+                    navigation
+                    style={{"--swiper-navigation-color": "#ffffff"}}>
                     {store.map(s =>
                         <SwiperSlide>
                             <Card>
@@ -109,7 +111,8 @@ const Main = () => {
                     spaceBetween={70}
                     slidesPerView={4}
                     autoplay={{ delay: 2000 }}
-                    navigation>
+                    navigation
+                    style={{"--swiper-navigation-color": "#ffffff"}}>
                     {plants.map(p =>
                         <SwiperSlide>
                             <Card className='mt-5 mb-5'>
@@ -138,12 +141,6 @@ const Main = () => {
                         </a>
                     </Col>
                 </Row>
-                <InputGroup>
-                    <Button className='main_btn'>태그</Button>
-                    <Button className='main_btn'>태그</Button>
-                    <Button className='main_btn'>태그</Button>
-                    <Button className='main_btn'>태그</Button>
-                </InputGroup>
                 <Carousel className='mb-5 mt-5'>
                     {/* {community.map(c =>
                         <Carousel.Item>
@@ -158,7 +155,7 @@ const Main = () => {
                                             </Card.Body>
                                         </Card.Body>
                                         <Card.Footer className='text-start'>
-                                            {c.like_cnt} <MdFavoriteBorder /> {c.view_cnt} <FaRegBookmark /> {c.coment_cnt} <LiaComment size={20} />
+                                            {c.like_cnt} <MdFavoriteBorder /> {c.view_cnt} : {c.coment_cnt} <LiaComment size={20} />
                                         </Card.Footer>
                                     </Card>
                                 </Col>
@@ -174,12 +171,12 @@ const Main = () => {
                     </Col>
                 </Row>
                 <Swiper
-                    className="banner"
                     modules={[Navigation, Autoplay]}
                     spaceBetween={70}
                     slidesPerView={4}
                     autoplay={{ delay: 2000 }}
-                    navigation>
+                    navigation={true}
+                    style={{"--swiper-navigation-color": "#ffffff"}}>
                     {magazine.map(m =>
                         <SwiperSlide>
                             <Card>

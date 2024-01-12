@@ -15,7 +15,7 @@ const MagazineUpdate = () => {
         image: '',
         contents: '',
         file: null,
-        uid: ''
+        uid: 'admin'
     })
     const { title, image, contents, file, uid } = update;
 
@@ -23,6 +23,14 @@ const MagazineUpdate = () => {
         setUpdate({
             ...update,
             [e.target.name]: e.target.value
+        });
+    }
+
+    const onFileChange = (e) => {
+        setUpdate({
+            ...update,
+            image: URL.createObjectURL(e.target.files[0]),
+            file: e.target.files[0]
         });
     }
 
@@ -63,7 +71,11 @@ const MagazineUpdate = () => {
                     const formData = new FormData();
                     formData.append("file", file);
                     formData.append("uid", uid);
-                    await axios.post('/users/update/photo', formData);
+                    await axios.post('/magazine/image', formData);
+                    setBox({
+                        show: true,
+                        message: "사진이 저장되었습니다."
+                    })
                 }
             })
         }
@@ -87,8 +99,8 @@ const MagazineUpdate = () => {
                 <Card className='insert-card'>
                     <Form.Control onChange={onChange} value={title} name='title' placeholder='제목을 입력해주세요.' className='insert-text' />
                     <div className='insert-img'>
-                        <img name='image' src='http://via.placeholder.com/150x150' onClick={() => img_ref.current.click()} width={300} height={300} style={{ cursor: 'pointer' }} />
-                        <input type='file' ref={img_ref} style={{ display: 'none' }} />
+                        <img name='image' src={image || 'http://via.placeholder.com/150x150'} onClick={() => img_ref.current.click()} width={300} height={300} style={{ cursor: 'pointer' }} />
+                        <input type='file' onChange={onFileChange} ref={img_ref} style={{ display: 'none' }} />
                         <br />
                         <Button onClick={onUpdatePhoto} className='insert-img-btn'>이미지 등록</Button>
                     </div>
