@@ -3,9 +3,6 @@ import React, { useEffect, useState, useContext } from 'react'
 import { useLocation, useParams, useNavigate } from 'react-router-dom';
 import { Spinner, Row, Col, Card, Form } from 'react-bootstrap'
 import { BoxContext } from '../common/BoxContext';
-import { CKEditor } from "@ckeditor/ckeditor5-react";
-import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
-import { FaStar } from 'react-icons/fa';
 import { app } from '../../firebaseInit'
 import { getFirestore, setDoc, doc, getDoc } from 'firebase/firestore'
 import { getStorage, uploadBytes, ref, getDownloadURL } from 'firebase/storage'
@@ -62,12 +59,12 @@ const StoreReviewList = ({ uid }) => {
 
     // 상단 리뷰 작성하기 버튼은 로그인한 사용자만 사용 가능
     const onClickReviewWrite = () => {
-        if (sessionStorage.getItem("uid") === "") {
+        if (sessionStorage.getItem("uid") != "") {
             setBox({ show: true, message: "로그인 사용자만 이용 가능한 서비스 입니다. 로그인 후 진행해주세요." })
             sessionStorage.setItem("target", location.pathname);
             navi("/users/loginPage");
         }
-    }
+    } 
 
     // 리뷰 삭제
     const onDelete = (comment_id) => {
@@ -107,8 +104,7 @@ const StoreReviewList = ({ uid }) => {
                                 {total === 0 && <div className='select_box p-4 text-center' style={{ background: "#adadad2b" }}> 이 상품의 첫 리뷰어가 되어주세요! </div>}
                             </div>
                         </Row>
-                        {/* typeof (sessionStorage.getItem(uid)) != 'undefined' */}
-                        {sessionStorage.getItem(uid) != "" && <StoreReviewInsert store_id={store_id} />}
+                        {sessionStorage.getItem("uid") != null ? <StoreReviewInsert store_id={store_id} /> : <></>}
                     </Card>
 
                     {/* 하단 */}

@@ -1,7 +1,6 @@
 import axios from 'axios';
 import React, { useState, useContext } from 'react'
 import { useLocation, useParams, useNavigate } from 'react-router-dom';
-import { Spinner, Row, Col, Card, Form } from 'react-bootstrap'
 import { BoxContext } from '../common/BoxContext';
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
@@ -10,7 +9,6 @@ import { app } from '../../firebaseInit'
 import { getFirestore, setDoc, doc, getDoc } from 'firebase/firestore'
 import { getStorage, uploadBytes, ref, getDownloadURL } from 'firebase/storage'
 import "./Store.css";
-import Parser from 'html-react-parser';
 
 const StoreReviewInsert = ({ store_id }) => {
 
@@ -80,7 +78,7 @@ const StoreReviewInsert = ({ store_id }) => {
                 <div className='store_contents'>
                     <div className='m-4'>
 
-                        <hr/>
+                        <hr />
                         <div className='mb-3'>
                             <span>별점 : </span>
                             <span className='store_insert_stars'>

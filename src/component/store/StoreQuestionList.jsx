@@ -3,8 +3,6 @@ import React, { useEffect, useState, useContext } from 'react'
 import { useLocation, useParams, useNavigate } from 'react-router-dom';
 import { Spinner, Row, Col, Card, Form } from 'react-bootstrap'
 import { BoxContext } from '../common/BoxContext';
-import { CKEditor } from "@ckeditor/ckeditor5-react";
-import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { app } from '../../firebaseInit'
 import { getFirestore, setDoc, doc, getDoc } from 'firebase/firestore'
 import { getStorage, uploadBytes, ref, getDownloadURL } from 'firebase/storage'
@@ -50,7 +48,7 @@ const StoreQuestionList = ({ uid }) => {
 
     // 상단 문의하기 버튼은 로그인한 사용자만 사용 가능
     const onClickReviewWrite = () => {
-        if (sessionStorage.getItem("uid") === "") {
+        if (sessionStorage.getItem("uid") != "") {
             setBox({ show: true, message: "로그인 사용자만 이용 가능한 서비스 입니다. 로그인 후 진행해주세요." })
             sessionStorage.setItem("target", location.pathname);
             navi("/users/loginPage");
@@ -69,18 +67,6 @@ const StoreQuestionList = ({ uid }) => {
                 window.location.reload();
             }
         });
-    }
-
-    // 판매자 문의 답변 수정
-    const onUpdateAnswer = (comment_id) => {
-        const question = question.map(q => q.comment_id === comment_id ? { ...q, edit: true } : q);
-        setQuestion(question);
-    }
-
-    // 판매자 문의 답변 수정
-    const onCancelAnswer = (comment_id) => {
-        const question = question.map(q => q.comment_id === comment_id ? { ...q, edit: false } : q);
-        setQuestion(question);
     }
 
     useEffect(() => { getQuestion(); }, [])
@@ -105,7 +91,7 @@ const StoreQuestionList = ({ uid }) => {
                                 {total === 0 && <div className='select_box p-4 text-center' style={{ background: "#adadad2b" }}> 문의내역이 없습니다. </div>}
                             </div>
                         </Row>
-                        {sessionStorage.getItem(uid) != "" && <StoreQuestionInsert store_id={store_id} />}
+                        {sessionStorage.getItem(uid) != null || <StoreQuestionInsert store_id={store_id} />}
                     </Card>
 
                     {/* 하단 */}
@@ -143,24 +129,7 @@ const StoreQuestionList = ({ uid }) => {
                                                             <p className='small' style={{ color: "#adadad" }}><span style={{ color: "green" }}>판매자</span> | {q.answer.reg_date}</p>
                                                             <Row>{Parser(q.answer.contents)}</Row>
                                                             <div className='text-end'>
-                                                                {uid === sessionStorage.getItem("uid") &&
-                                                                    // <>
-                                                                    //     <button className='store_filterbtn_clean' onClick={() => onUpdateAnswer(q.answer.comment_id)}>수정하기</button>
-                                                                    //     {q.answer.edit ?
-                                                                    //         <>
-                                                                                <div>
-                                                                                    <Form.Control rows={3} as="textarea" value={q.answer.contents} />
-                                                                                    <div className='text-end'>
-                                                                                        <button className='store_filterbtn_clean me-3'>취소</button>
-                                                                                        <button className='store_filterbtn' onClick={() => onCancelAnswer(q.answer.comment_id)}>수정</button>
-                                                                                    </div>
-                                                                                </div>
-                                                                    //         </>
-                                                                    //         :
-                                                                    //         <></>
-                                                                    //     }
-                                                                    // </>
-                                                                }
+
                                                             </div>
                                                         </div>
                                                     </div>

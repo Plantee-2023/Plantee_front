@@ -1367,7 +1367,7 @@
   dependencies:
     ckeditor5 "40.2.0"
 
-"@ckeditor/ckeditor5-react@^6.2.0":
+"@ckeditor/ckeditor5-react@^6.0.2":
   version "6.2.0"
   resolved "https://registry.npmjs.org/@ckeditor/ckeditor5-react/-/ckeditor5-react-6.2.0.tgz"
   integrity sha512-i/6OdxJ3iOCU7eiZXS8KYhK645PEAMISs9eFz60c0AFXZX5NTMvNWM68ac/J5sfg+IQ9U6mJ3flSykbJVlf0kA==
