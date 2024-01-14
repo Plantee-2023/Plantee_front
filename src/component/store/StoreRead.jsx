@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState, useContext } from 'react'
-import { useParams, useNavigate, NavLink } from 'react-router-dom';
+import { useLocation, useParams, useNavigate, NavLink } from 'react-router-dom';
 import { Spinner, Row, Col, Button, Tabs, Tab, Alert, Card, Badge } from 'react-bootstrap';
 import Parser from 'html-react-parser';
 import { BoxContext } from '../common/BoxContext';
@@ -10,9 +10,12 @@ import StoreReviewList from "./StoreReviewList";
 import StoreQuestionList from "./StoreQuestionList";
 import DeliveryService from './DeliveryService';
 import BtnToTop from '../common/BtnToTop';
+import StoreBuyNow from './StoreBuyNow';
 
 const StoreRead = () => {
+
     const navi = useNavigate();
+    const location = useLocation();
     const [loading, setLoading] = useState(false);
     const { box, setBox } = useContext(BoxContext);
 
@@ -32,15 +35,36 @@ const StoreRead = () => {
         setLoading(false);
     }
 
+    // 장바구니 클릭
     const onClickCart = async () => {
-        await axios.post()
-        if (window.confirm("장바구니로 이동하시겠습니까?")) {
-            window.location.href = "/";
-        } else {
-            window.location.href = "/";
+        if (sessionStorage.getItem("uid") === null) {
+            setBox({ show: true, message: "로그인 사용자만 이용 가능한 서비스 입니다. 로그인 후 진행해주세요." })
+            sessionStorage.setItem("target", location.pathname);
+            navi("/users/loginPage");
+        } else if (sessionStorage.getItem("uid")) {
+            setBox({
+                show: true,
+                message: "장바구니로 이동하시겠습니까?",
+                action: async () => {
+                    navi("/users/mypage/productcart")
+                }
+            })
         }
     }
 
+    // 바로구매 클릭
+    const onClickBuyNow = () => {
+        if (sessionStorage.getItem("uid") === null) {
+            setBox({ show: true, message: "로그인 사용자만 이용 가능한 서비스 입니다. 로그인 후 진행해주세요." })
+            sessionStorage.setItem("target", location.pathname);
+            navi("/users/loginPage");
+        } else if (sessionStorage.getItem("uid")) {
+            navi("/store/buynow")
+        }
+    }
+
+
+    // 판매자의 판매글 삭제
     const onDelete = () => {
         setBox({
             show: true,
@@ -130,7 +154,7 @@ const StoreRead = () => {
                                         :
                                         <>
                                             <button className='store_filterbtn me-3' onClick={onClickCart}>장바구니</button>
-                                            <button className='store_filterbtn'>바로구매</button>
+                                            <button className='store_filterbtn' onClick={onClickBuyNow}>바로구매</button>
                                         </>
                                     }
 
@@ -145,15 +169,15 @@ const StoreRead = () => {
                         id="fill-tab-example"
                         className="my-5 pt-5"
                         fill >
-                            {/* 여기서 보내는 props는 판매글쓴이에 대한 정보 */}
+                        {/* 여기서 보내는 props는 판매글쓴이에 대한 정보 */}
                         <Tab eventKey="info" title="상세정보">
                             {Parser(contents)}
                         </Tab>
                         <Tab eventKey="review" title="상품리뷰">
-                            <StoreReviewList uid={uid} />
+                            {/* <StoreReviewList uid={uid} /> */}
                         </Tab>
                         <Tab eventKey="qna" title="상품문의">
-                            <StoreQuestionList uid={uid} />
+                            {/* <StoreQuestionList uid={uid} /> */}
                         </Tab>
                         <Tab eventKey="carry" title="배송/반품/교환">
                             <DeliveryService />

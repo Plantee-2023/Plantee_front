@@ -1,24 +1,29 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react'
-import { NavLink, Link } from 'react-router-dom';
+import { NavLink, Link, useLocation, useNavigate } from 'react-router-dom';
 import { Container, Nav, Navbar, Spinner, Row, Col, Card, Badge, InputGroup } from 'react-bootstrap';
 import "./Store.css";
 import Pagination from 'react-js-pagination';
 import "../common/Pagination.css"
 
 const StoreMain = () => {
+    const navi = useNavigate();
+    const location = useLocation();
     const [loading, setLoading] = useState(false);
-
-    const [isClickPlant, setClickPlant] = useState(false);
-    const [isClickGoods, setClickGoods] = useState(false);
 
     const [goods, setGoods] = useState([]);
     const [total, setTotal] = useState(0);
     const [isSeller, setIsSeller] = useState('');
 
+    const search = new URLSearchParams(location.search);
+    console.log(location.search);
+    const page = search.get("page") ? parseInt(search.get("page")) : 1;
+    const size = 20;
+    const [query, setQuery] = useState("");
+
     const getList = async () => {
         setLoading(true)
-        const res = await axios.get(`/store/list.json`);
+        const res = await axios.get(`/store/list.json?page=${page}&size=${size}&query=${query}`);
         // console.log(res.data.list[0].seller_yn);
         // let isSeller = res.data.list;
         // // 판매자인지 확인하기
@@ -32,7 +37,12 @@ const StoreMain = () => {
         setLoading(false);
     }
 
-    useEffect(() => { getList(); }, []);
+    const onSubmit = (e) => {
+        e.preventDefault();
+        navi(`/store/list.json?page=1&size=${size}&query=${query}`);
+    }
+
+    useEffect(() => { getList(); }, [location]);
 
     if (loading) return <div className='text-center my-5'><Spinner animation="border" variant="success" /></div>
     return (
@@ -76,6 +86,7 @@ const StoreMain = () => {
                     <div>
                         <Navbar bg="#ffffff" data-bs-theme="light" className='pt-3 pb-3'>
                             <div>총 {goods.length}건</div>
+
                             <Container fluid>
                                 <Navbar.Collapse id="navbarScroll">
                                     <Nav className="me-auto my-2 my-lg-0" style={{ maxHeight: '100px' }} navbarScroll >
@@ -85,17 +96,19 @@ const StoreMain = () => {
                                         <Nav.Link href="#home">낮은가격순</Nav.Link>
                                         <Nav.Link href="#home">높은가격순</Nav.Link>
                                     </Nav>
-                                    <form>
+                                    <form onSubmit={onSubmit}>
                                         <InputGroup className='store_searchinputwrap'>
-                                            <input type='search' className='store_searchinput' placeholder='검색어를 입력해주세요.' />
+                                            <input type='search' className='store_searchinput' placeholder='검색어를 입력해주세요.'
+                                                onChange={(e) => setQuery(e.target.value)} value={query} />
                                             <button className='store_searchbtn' type='submit'><img src='/image/search_icon.png' /></button>
                                         </InputGroup>
                                     </form>
                                 </Navbar.Collapse>
                             </Container>
+
                         </Navbar>
                     </div>
-                    
+
                     <div className='plant_insert'>
                         <Link to="/store/insert" ><button>추가하기</button></Link>
                     </div>
@@ -131,13 +144,13 @@ const StoreMain = () => {
             </div>
 
             <Pagination
-                activePage={1}
-                itemsCountPerPage={8}
-                totalItemsCount={88}
+                activePage={page}
+                itemsCountPerPage={size}
+                totalItemsCount={total}
                 pageRangeDisplayed={10}
                 prevPageText={"‹"}
                 nextPageText={"›"}
-                onChange={(page) => { }} />
+                onChange={(page) => { navi(`/store/list.json?page=${page}&size=${size}&query=${query}`) }} />
 
         </>
     )

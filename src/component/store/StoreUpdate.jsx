@@ -77,13 +77,21 @@ const StoreUpdate = ({ match, history }) => {
             <div className='store_wrap'>
                 <div className='store_contents'>
                     <div className='store_layout'>
-                        <section className='details_info_section'>
 
-                            <section className='details_title_section'>
-                                <div className='detail_logo'>Plantee<img src='/image/carelevel_icon.png' /></div>
-                            </section>
 
-                            <section className='insert_simpleinfo_section'>
+                        <section className='store_img_section'>
+                            <div className='store_img'>
+                                <img src='/image/plant01.jpg' />
+                            </div>
+                        </section>
+
+
+
+                        <div className='store_info_layout'>
+                            <section className='store_info_section'>
+                                <section className='details_title_section'>
+                                    <div className='detail_logo'>Plantee<img src='/image/carelevel_icon.png' /></div>
+                                </section>
                                 <form className='insert_textarea' onSubmit={onSubmit}>
                                     <div className='insert_title'>
                                         <InputGroup className='mb-2'>
@@ -111,26 +119,34 @@ const StoreUpdate = ({ match, history }) => {
                                             <Form.Control name='title' value={tag} onChange={onChange} />
                                         </InputGroup>
                                     </div>
-
-                                    <CKEditor config={{ ckfinder: { uploadUrl: '/store/ckupload' } }}
-                                        editor={ClassicEditor}
-                                        data=""
-                                        onChange={(event, editor) => { onChangeContents(editor.getData()); }}
-                                        onReady={(editor) => { }} />
-
-                                    {/* <StoreEditor form={form} setForm={setForm}  /> */}
-                                    <div className='plantinsert_section'>
-                                        <div className='plantinsert_btngroup'>
-                                            <button className='insert_submit' onClick={onClickSave}>등록하기</button>
-                                            <button className='insert_cancel' onClick={onClickCancel}>취소하기</button>
-                                        </div>
-                                    </div>
                                 </form>
-
-
                             </section>
+                        </div>
 
-                        </section>
+                        <form className='insert_textarea' onSubmit={onSubmit}>
+                            <CKEditor config={{ ckfinder: { uploadUrl: '/store/ckupload' } }}
+                                editor={ClassicEditor}
+                                data=""
+                                onChange={(event, editor) => { onChangeContents(editor.getData()); }}
+                                onReady={(editor) => { }} />
+                        </form>
+
+
+
+
+
+                        {/* <StoreEditor form={form} setForm={setForm}  /> */}
+                        <div className='plantinsert_section'>
+                            <div className='plantinsert_btngroup'>
+                                <button className='insert_submit' onClick={onClickSave}>등록하기</button>
+                                <button className='insert_cancel' onClick={onClickCancel}>취소하기</button>
+                            </div>
+                        </div>
+
+
+
+
+
 
                     </div>
                 </div>

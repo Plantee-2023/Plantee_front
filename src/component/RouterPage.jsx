@@ -45,6 +45,7 @@ import PlantRecipe from './plant/PlantRecipe';
 import PlantRecipeRead from './plant/PlantRecipeRead';
 import PlantRecipeInsert from './plant/PlantRecipeInsert';
 import MagazineUpdate from './magazine/MagazineUpdate';
+import StoreBuyNow from './store/StoreBuyNow';
 
 
 const RouterPage = () => {
@@ -107,6 +108,7 @@ const RouterPage = () => {
             <Route path='/store/read/:store_id' element={<StoreRead />} />
             <Route path='/store/update/:store_id' element={<StoreUpdate />} />
             <Route path='/store/insert' element={<StoreInsert />} />
+            <Route path='/store/buynow' element={<StoreBuyNow />} />
 
             {/* 다이어리 */}
             <Route path='/diary/main' element={<DiaryMain />} />

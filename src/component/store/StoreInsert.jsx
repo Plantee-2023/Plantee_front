@@ -50,7 +50,7 @@ const StoreInsert = () => {
             alert("내용을 입력해주세요.");
         } else {
             if (window.confirm("저장하시겠습니까?")) {
-                const data = { ...form,  uid: sessionStorage.getItem("uid"), category: 5 };
+                const data = { ...form, uid: sessionStorage.getItem("uid"), category: 5 };
                 await axios.post("/store/insert", data);
                 navi("/store");
             }
@@ -61,7 +61,7 @@ const StoreInsert = () => {
         navi("/store");
     }
 
-    
+
 
     if (loading) return <div className='text-center my-5'><Spinner animation="border" variant="success" /></div>
     return (
@@ -69,13 +69,20 @@ const StoreInsert = () => {
             <div className='store_wrap'>
                 <div className='store_contents'>
                     <div className='store_layout'>
-                        <section className='details_info_section'>
+
+                        <section className='store_img_section'>
+                            <div className='store_img'>
+                                <img src='/image/plant01.jpg' />
+                            </div>
+                        </section>
+
+                        <div className='store_info_layout'>
 
                             <section className='details_title_section'>
                                 <div className='detail_logo'>Plantee<img src='/image/carelevel_icon.png' /></div>
                             </section>
 
-                            <section className='insert_simpleinfo_section'>
+                            <section className='store_info_section'>
                                 <form className='insert_textarea'>
                                     <div className='insert_title'>
                                         <InputGroup>
@@ -137,7 +144,9 @@ const StoreInsert = () => {
 
                             </section>
 
-                        </section>
+                        </div>
+
+
 
                     </div>
                 </div>
