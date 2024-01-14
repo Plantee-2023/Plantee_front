@@ -44,9 +44,10 @@ const StoreRead = () => {
             sessionStorage.setItem("target", location.pathname);
             navi("/users/loginPage");
         } else if (sessionStorage.getItem("uid")) {
+            await axios.post("/cart/insert", { uid: sessionStorage.getItem("uid"), store_id })
             setBox({
                 show: true,
-                message: "장바구니로 이동하시겠습니까?",
+                message: "상품이 장바구니에 담겼습니다. 장바구니로 이동하시겠습니까?",
                 action: async () => {
                     navi("/users/mypage/productcart")
                 }
