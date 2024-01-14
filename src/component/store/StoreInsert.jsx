@@ -61,8 +61,6 @@ const StoreInsert = () => {
         navi("/store");
     }
 
-
-
     if (loading) return <div className='text-center my-5'><Spinner animation="border" variant="success" /></div>
     return (
         <>
@@ -78,11 +76,12 @@ const StoreInsert = () => {
 
                         <div className='store_info_layout'>
 
-                            <section className='details_title_section'>
-                                <div className='detail_logo'>Plantee<img src='/image/carelevel_icon.png' /></div>
-                            </section>
-
                             <section className='store_info_section'>
+
+                                <section className='details_title_section'>
+                                    <div className='detail_logo'>Plantee<img src='/image/carelevel_icon.png' /></div>
+                                </section>
+
                                 <form className='insert_textarea'>
                                     <div className='insert_title'>
                                         <InputGroup>
@@ -90,42 +89,19 @@ const StoreInsert = () => {
                                             <Form.Control name='title' onChange={onChangeForm} placeholder="제목" />
                                         </InputGroup>
                                     </div>
-                                    {/* <div className='insert_info'>
+                                    <div className='insert_info'>
                                         <InputGroup className='insert_inputgroup'>
                                             <InputGroup.Text className='insert_inputgrouptext'>가격</InputGroup.Text>
-                                            <Form.Control placeholder='*단위:(원)' name='watering' />
+                                            <Form.Control name='price' onChange={onChangeForm} placeholder='*단위:(원)' />
                                         </InputGroup>
                                     </div>
 
                                     <div className='insert_info'>
                                         <InputGroup className='insert_inputgroup'>
                                             <InputGroup.Text className='insert_inputgrouptext'>재고</InputGroup.Text>
-                                            <Form.Control placeholder='*단위:(개)' name='sunlight' />
+                                            <Form.Control name='stock' onChange={onChangeForm} placeholder='*단위:(개)' />
                                         </InputGroup>
                                     </div>
-
-                                    <div className='insert_info'>
-                                        <InputGroup className='insert_inputgroup'>
-                                            <InputGroup.Text className='insert_inputgrouptext'>난이도</InputGroup.Text>
-                                            <Form.Select name='care_level' >
-                                                <option value='1'>초급자용</option>
-                                                <option value='2'>중급자용</option>
-                                                <option value='3'>상급자용</option>
-                                            </Form.Select>
-                                        </InputGroup>
-                                    </div> */}
-
-                                    {/* <div className='insert_info'>
-                                        <InputGroup>
-                                            <InputGroup.Text className='insert_inputgrouptext'>타입</InputGroup.Text>
-                                            <Form.Select name='type' >
-                                                <option value='잎'>잎을 감상하는</option>
-                                                <option value='꽃'>꽃을 감상하는</option>
-                                                <option value='열매'>열매를 감상하는</option>
-                                                <option value='다육'>다육</option>
-                                            </Form.Select>
-                                        </InputGroup>
-                                    </div> */}
 
                                     <CKEditor config={{ placeholder: "내용을 입력하세요.", ckfinder: { uploadUrl: '/store/ckupload' } }}
                                         editor={ClassicEditor}

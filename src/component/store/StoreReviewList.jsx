@@ -74,7 +74,7 @@ const StoreReviewList = ({ uid }) => {
             message: "해당 리뷰를 삭제하시겠습니까?",
             action: async () => {
                 await axios.get(`/store/delete/comment/${comment_id}`)
-                setBox({ show: true, message: "해당 리뷰을 삭제하였습니다." })
+                setBox({ show: true, message: "해당 리뷰를 삭제하였습니다." })
                 window.location.reload();
             }
         });
@@ -110,7 +110,7 @@ const StoreReviewList = ({ uid }) => {
                     {/* 하단 */}
                     <div className='comment_contents'>
 
-                        {reviews.map(r =>
+                        {reviews.map(r => 
                             <div key={r.reg_date}>
                                 <Row className='p-2 mb-3'>
                                     <Col xs={2} lg={2} style={{ verticalAlign: "center" }}>

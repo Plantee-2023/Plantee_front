@@ -16,14 +16,13 @@ const StoreMain = () => {
     const [isSeller, setIsSeller] = useState('');
 
     const search = new URLSearchParams(location.search);
-    console.log(location.search);
-    const page = search.get("page") ? parseInt(search.get("page")) : 1;
+    const [page, setPage] = useState(1);
     const size = 20;
     const [query, setQuery] = useState("");
 
     const getList = async () => {
         setLoading(true)
-        const res = await axios.get(`/store/list.json?page=${page}&size=${size}&query=${query}`);
+        const res = await axios.get(`/store/list.json?page=${page}&size=20&query=${query}`);
         // console.log(res.data.list[0].seller_yn);
         // let isSeller = res.data.list;
         // // 판매자인지 확인하기
@@ -34,12 +33,37 @@ const StoreMain = () => {
         //     }
         // }
         setGoods(res.data.list);
+        setTotal(res.data.total);
         setLoading(false);
     }
 
-    const onSubmit = (e) => {
+    const setQueryStr = (queryStr) => {
+        // console.log(queryStr);
+        setQuery(queryStr);
+    }
+
+    const setQueryClean = () => {
+        setQuery("");
+        window.location.reload();
+    }
+
+    const onSubmit = async (e) => {
         e.preventDefault();
-        navi(`/store/list.json?page=1&size=${size}&query=${query}`);
+        setLoading(true);
+        setPage(1);
+        const res = await axios.get(`/store/list.json?page=${1}&size=20&query=${query}`);
+        setGoods(res.data.list);
+        setTotal(res.data.total);
+        setLoading(false);
+    }
+
+    const onChangePage = async (page) => {
+        setLoading(true);
+        setPage(page);
+        const res = await axios.get(`/store/list.json?page=${page}&size=20&query=${query}`);
+        setGoods(res.data.list);
+        setTotal(res.data.total);
+        setLoading(false);
     }
 
     useEffect(() => { getList(); }, [location]);
@@ -85,21 +109,23 @@ const StoreMain = () => {
 
                     <div>
                         <Navbar bg="#ffffff" data-bs-theme="light" className='pt-3 pb-3'>
-                            <div>총 {goods.length}건</div>
+                            <div>총 {total}건</div>
 
                             <Container fluid>
                                 <Navbar.Collapse id="navbarScroll">
-                                    <Nav className="me-auto my-2 my-lg-0" style={{ maxHeight: '100px' }} navbarScroll >
+                                    {/* <Nav className="me-auto my-2 my-lg-0" style={{ maxHeight: '100px' }} navbarScroll >
                                         <Nav.Link href="#home">최신순</Nav.Link>
-                                        <Nav.Link href="#home">인기순</Nav.Link>
                                         <Nav.Link href="#home">리뷰많은순</Nav.Link>
                                         <Nav.Link href="#home">낮은가격순</Nav.Link>
                                         <Nav.Link href="#home">높은가격순</Nav.Link>
-                                    </Nav>
+                                    </Nav> */}
+
+                                    <button className='filter_reset_btn' type='button'><img src='/image/reset_icon.png' onClick={setQueryClean} /></button>
+
                                     <form onSubmit={onSubmit}>
                                         <InputGroup className='store_searchinputwrap'>
                                             <input type='search' className='store_searchinput' placeholder='검색어를 입력해주세요.'
-                                                onChange={(e) => setQuery(e.target.value)} value={query} />
+                                                onChange={(e) => setQueryStr(e.target.value)} value={query} />
                                             <button className='store_searchbtn' type='submit'><img src='/image/search_icon.png' /></button>
                                         </InputGroup>
                                     </form>
@@ -108,6 +134,7 @@ const StoreMain = () => {
 
                         </Navbar>
                     </div>
+
 
                     <div className='plant_insert'>
                         <Link to="/store/insert" ><button>추가하기</button></Link>
@@ -133,7 +160,7 @@ const StoreMain = () => {
                                         <Card.Body>
                                             <Card.Title>{g.title}</Card.Title>
                                             <Card.Text>{g.fmtprice}원<br /></Card.Text>
-                                            <button className='store_tag_badge'>{g.tag}</button>
+                                            {/* <button className='store_tag_badge'>{g.tag}</button> */}
                                         </Card.Body>
                                     </NavLink>
                                 </Card>
@@ -150,7 +177,7 @@ const StoreMain = () => {
                 pageRangeDisplayed={10}
                 prevPageText={"‹"}
                 nextPageText={"›"}
-                onChange={(page) => { navi(`/store/list.json?page=${page}&size=${size}&query=${query}`) }} />
+                onChange={(newpage) => onChangePage(newpage)} />
 
         </>
     )

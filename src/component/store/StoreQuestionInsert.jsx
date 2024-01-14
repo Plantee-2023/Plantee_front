@@ -1,6 +1,7 @@
 import axios from 'axios';
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext } from 'react';
 import { useLocation, useParams, useNavigate } from 'react-router-dom';
+import { Form } from 'react-bootstrap';
 import { BoxContext } from '../common/BoxContext';
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
@@ -19,25 +20,25 @@ const StoreQuestionInsert = ({ store_id }) => {
 
     // 문의 내용
     let [form, setForm] = useState({ store_id: store_id, uid: sessionStorage.getItem('uid'), contents: '', category: 6 });
-    let { contents, stars } = form;
+    let { contents } = form;
 
 
     // 문의 내용 작성 이벤트리스너
     const onChangeContents = (e) => {
         setForm({
             ...form,
-            contents: e,
+            contents: e
         });
     }
 
     // 문의 작성 후 등록버튼 클릭
     const onClickRegister = async (e) => {
         e.preventDefault();
-        if (form.contents === "") {
+        if (contents === "") {
             alert("내용을 적어주세요.");
         } else {
             const res = { uid: sessionStorage.getItem("uid"), contents }
-            await axios.post("/store/comments/insert", form);
+            await axios.post("/store/comment/insert", form);
             setBox({ show: true, message: "문의 등록이 완료되었습니다.", action: async () => { window.location.reload(); } });
         }
     }
@@ -60,17 +61,12 @@ const StoreQuestionInsert = ({ store_id }) => {
                     <div className='m-4'>
 
                         <div className="store_editor">
-                            <CKEditor
-                                config={{ placeholder: "내용을 입력하세요.", ckfinder: { uploadUrl: '/store/ckupload' } }}
-                                editor={ClassicEditor}
-                                data=""
-                                onChange={(event, editor) => { onChangeContents(editor.getData()); }}
-                                onReady={(editor) => { }} />
-                        </div>
-
-                        <div className='text-end mt-4'>
-                            <button className='store_filterbtn_clean me-3' onClick={onClickCancel}>취소</button>
-                            <button className='store_filterbtn' onClick={onClickRegister}>등록</button>
+                            <Form.Control as="textarea" rows={5}
+                                value={contents} onChange={(e) => onChangeContents(e.target.value)} />
+                            <div className='text-end mt-4'>
+                                <button className='store_filterbtn_clean me-3' onClick={onClickCancel}>취소</button>
+                                <button className='store_filterbtn' onClick={onClickRegister}>등록</button>
+                            </div>
                         </div>
 
                     </div>

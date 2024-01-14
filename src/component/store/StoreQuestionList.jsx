@@ -55,15 +55,20 @@ const StoreQuestionList = ({ uid }) => {
         }
     }
 
+    const onClickAnswer = (comment_id) => {
+        const question = question.map(q => q && { ...q, edit: true });
+        setQuestion(question);
+    }
+
     // 문의 삭제
     const onDelete = (comment_id) => {
-        // console.log(comment_id)
+        // console.log(comment_id) 
         setBox({
             show: true,
-            message: "해당 리뷰를 삭제하시겠습니까?",
+            message: "해당 문의를 삭제하시겠습니까?",
             action: async () => {
                 await axios.get(`/store/delete/comment/${comment_id}`)
-                setBox({ show: true, message: "해당 리뷰을 삭제하였습니다." })
+                setBox({ show: true, message: "해당 문의를 삭제하였습니다." })
                 window.location.reload();
             }
         });
@@ -105,7 +110,7 @@ const StoreQuestionList = ({ uid }) => {
                                                 <hr />
                                                 <p className='small' style={{ color: "#adadad" }}><span style={{ color: "#000000" }}>{q.nickname}</span> | {q.reg_date}</p>
                                                 <Row>
-                                                    <div>{Parser(q.contents)}</div>
+                                                    <div>{q.contents}</div>
                                                     <div className='text-end'>
                                                         {sessionStorage.getItem("uid") === q.uid &&
                                                             <div xs={2} lg={2} className='text-end'>
@@ -127,7 +132,7 @@ const StoreQuestionList = ({ uid }) => {
                                                     <div className="p-3" style={{ background: "#adadad2b" }}>
                                                         <div className='ms-3'>
                                                             <p className='small' style={{ color: "#adadad" }}><span style={{ color: "green" }}>판매자</span> | {q.answer.reg_date}</p>
-                                                            <Row>{Parser(q.answer.contents)}</Row>
+                                                            <Row>{q.answer.contents}</Row>
                                                             <div className='text-end'>
 
                                                             </div>
@@ -142,7 +147,8 @@ const StoreQuestionList = ({ uid }) => {
                                         {sessionStorage.getItem("uid") != uid && sessionStorage.getItem("uid") != "admin" ?
                                             <></> :
                                             <div className='text-end'>
-                                                <button className='store_filterbtn_clicked'>답변하기</button>
+                                                
+                                                <button className='store_filterbtn_clicked' onClick={() => onClickAnswer(q.answer.comment_id)}>답변하기</button>
                                                 <div>
                                                     <Form.Control rows={3} as="textarea" />
                                                     <div className='text-end'>
@@ -151,6 +157,7 @@ const StoreQuestionList = ({ uid }) => {
                                                     </div>
                                                 </div>
                                             </div>
+                                            
                                         }
                                     </>
                                 }

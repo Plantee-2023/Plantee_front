@@ -42,7 +42,7 @@ const StoreReviewInsert = ({ store_id }) => {
             clickStates[i] = i <= index ? true : false;
         }
         setClicked(clickStates);
-    };
+    }; 
 
     // 리뷰 작성 후 등록버튼 클릭
     const onClickRegister = async (e) => {
@@ -55,7 +55,7 @@ const StoreReviewInsert = ({ store_id }) => {
             } else {
                 form.stars = clicked.filter(Boolean).length;
                 const res = { uid: sessionStorage.getItem("uid"), contents, stars }
-                await axios.post("/store/comments/insert", form);
+                await axios.post("/store/comment/insert", form);
                 setBox({ show: true, message: "리뷰 등록이 완료되었습니다.", action: async () => { window.location.reload(); } });
             }
         }

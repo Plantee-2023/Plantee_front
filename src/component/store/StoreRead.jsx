@@ -26,11 +26,13 @@ const StoreRead = () => {
         reg_date: "", mdfy_date: "", nickname: "", like_cnt: "", plant_id: "", recipe_id: "", post_id: ""
     })
 
-    const { title, price, stock, contents, image, level, tag, uid, reg_date, mdfy_date, like_cnt } = store;
+    const { title, fmtprice, stock, contents, image, level, tag, uid, reg_date, mdfy_date, like_cnt,
+        type, care_level, leaf, flowers, fruits, indoor, poisonous_pet, cuisine } = store;
 
     const getStore = async () => {
         setLoading(true);
         const res = await axios.get(`/store/read/${store_id}`);
+        // console.log(res.data)
         setStore(res.data);
         setLoading(false);
     }
@@ -77,6 +79,27 @@ const StoreRead = () => {
         });
     }
 
+    {/* 텍스트 변환 */ }
+    const getCareLevelText = (care_level) => {
+        switch (care_level) {
+            case '1':
+                return '초보자용';
+            case '2':
+                return '중급자용';
+            default:
+                return '상급자용';
+        }
+    };
+
+    const getIndoorText = (indoor) => {
+        switch (indoor) {
+            case 'y':
+                return '실내용';
+            default:
+                return '실외용';
+        }
+    }
+
     useEffect(() => { getStore(); }, [])
 
     if (loading) return <div className='text-center my-5'><Spinner animation="border" variant="success" /></div>
@@ -105,13 +128,22 @@ const StoreRead = () => {
                             <section className='store_info_section'>
                                 <section className='store_title_section'>
                                     <div className='store_title'>
-                                        <button className='store_tag_badge mb-2'>{tag}</button>
+                                        <ul className='store_items'>
+                                            {type && <li className='store_item'># {type}</li>}
+                                            {care_level && <li className='store_item'># {getCareLevelText(care_level)}</li>}
+                                            {indoor && <li className='store_item'># {getIndoorText(indoor)}</li>}
+                                            {leaf === 'y' && <li className='store_item'># 잎이 있는</li>}
+                                            {flowers === 'y' && <li className='store_item'># 꽃이 있는</li>}
+                                            {fruits === 'y' && <li className='store_item'># 열매가 있는</li>}
+                                            {poisonous_pet === 'n' && <li className='store_item'># 반려안전</li>}
+                                            {cuisine === 'y' && <li className='store_item'># 식용가능</li>}
+                                        </ul>
                                         <h1 className='store_maintitle'>{title}</h1>
                                     </div>
                                 </section>
                                 <section className='store_simpleinfo_section'>
                                     <Row className='plant_items'>
-                                        <Col className='store_subtitle ms-2'>{price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원</Col>
+                                        <Col className='store_subtitle ms-2'>{fmtprice}원</Col>
                                         <Col className='text-end'><TiHeart color="#ff0000" size="2rem" />{like_cnt}</Col>
                                     </Row>
                                     <hr />
@@ -174,10 +206,10 @@ const StoreRead = () => {
                             {Parser(contents)}
                         </Tab>
                         <Tab eventKey="review" title="상품리뷰">
-                            {/* <StoreReviewList uid={uid} /> */}
+                            <StoreReviewList uid={uid} />
                         </Tab>
                         <Tab eventKey="qna" title="상품문의">
-                            {/* <StoreQuestionList uid={uid} /> */}
+                            <StoreQuestionList uid={uid} />
                         </Tab>
                         <Tab eventKey="carry" title="배송/반품/교환">
                             <DeliveryService />

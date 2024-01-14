@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useEffect, useState, useContext } from 'react'
+import React, { useEffect, useState, useContext, useRef } from 'react'
 import { useParams, useNavigate, NavLink, useLocation } from 'react-router-dom';
 import { Spinner, InputGroup, Form } from 'react-bootstrap';
 import { BoxContext } from '../common/BoxContext';
@@ -10,45 +10,35 @@ import { getFirestore, setDoc, doc, getDoc } from 'firebase/firestore'
 import { getStorage, uploadBytes, ref, getDownloadURL } from 'firebase/storage'
 import "./Store.css";
 
-
 const StoreUpdate = ({ match, history }) => {
     const navi = useNavigate();
+
     const [loading, setLoading] = useState(false);
     const { box, setBox } = useContext(BoxContext);
-    const [form, setForm] = useState("");
+
+    const db = getStorage(app);
+    const ref_file = useRef(null);
+    const [src, setSrc] = useState("http://via.placeholder.com/200x200")
+    const [file, setFile] = useState(null);
+
     const [img, setImg] = useState('');
+    const [form, setForm] = useState("");
 
     const { store_id } = useParams();
-
-
-    const { title, price, stock, contents, image, level, tag, uid, reg_date, mdfy_date, like_cnt, toggle, text } = form;
+    const { title, price, stock, contents, image, level, tag, uid, reg_date, mdfy_date, like_cnt } = form;
 
     const getStore = async () => {
         setLoading(true);
         const res = await axios.get(`/store/read/${store_id}`);
         setForm(res.data)
-        // setForm({
-        //     ...res.data,
-        //     contents: res.data.contents
-        // });
-        //setImg("/upload/plantee/" + res.data.image);
         setLoading(false);
-    }
-
-    const onClickSave = () => {
-        setForm({ ...form, contents: text })
-    }
-
-    const onClickCancel = () => {
-        setForm({ ...form, text: contents })
-        navi("/store");
     }
 
     const onChange = (e) => {
         setForm({
             ...form,
             [e.target.name]: e.target.value
-        })
+        });
     }
 
     const onChangeContents = (e) => {
@@ -58,13 +48,54 @@ const StoreUpdate = ({ match, history }) => {
         });
     }
 
-    const onSubmit = async (e) => {
+    const onChangeFile = (e) => {
+        // setSrc(URL.createObjectURL(e.target.files[0]));
+        // setFile(e.target.files[0]);
+
+        setForm({
+            ...form,
+            image: URL.createObjectURL(e.target.files[0])
+        });
+    }
+
+    const onSaveImage = async () => {
+        if (!file) {
+            alert("변경할 이미지 선택하세요.");
+        } else {
+            if (window.confirm("썸네일을 변경하시겠습니까?")) {
+                //이미지저장 url호출
+                const formData = new FormData();
+                formData.append("file", file);
+                formData.append("store_id", store_id);
+                await axios.post("/store/ckupload", formData);
+                alert("변경완료!");
+                getStore();
+                setSrc('http://via.placeholder.com/200x200');
+                setFile(null);
+            }
+        }
+    }
+
+    // const onSubmit = async (e) => {
+    //     e.preventDefault();
+    //     if (window.confirm("글 수정을 완료하시겠습니까?")) {
+    //         await axios.post(`/store/update`, form);
+    //         alert("글 수정이 완료되었습니다.");
+    //         navi(`/store/read/${store_id}`);
+    //     }
+    // }
+
+    const onClickSave = async (e) => {
         e.preventDefault();
         if (window.confirm("글 수정을 완료하시겠습니까?")) {
             await axios.post(`/store/update`, form);
-            alert("수정완료!");
+            alert("글 수정이 완료되었습니다.");
             navi(`/store/read/${store_id}`);
         }
+    }
+
+    const onClickCancel = () => {
+        setBox({ show: true, message: "글 수정을 취소하시겠습니까?", action: async () => { navi("/store"); } })
     }
 
 
@@ -78,13 +109,14 @@ const StoreUpdate = ({ match, history }) => {
                 <div className='store_contents'>
                     <div className='store_layout'>
 
-
                         <section className='store_img_section'>
                             <div className='store_img'>
-                                <img src='/image/plant01.jpg' />
+                                <img onClick={() => ref_file.current.click()}
+                                    src={src} style={{ cursor: "pointer" }} />
+                                <input ref={ref_file} type='file' onClick={onChangeFile} style={{ display: 'none' }} />
+                                <button className='my-5 w-100' onClick={onSaveImage}>이미지 저장</button>
                             </div>
                         </section>
-
 
 
                         <div className='store_info_layout'>
@@ -92,11 +124,11 @@ const StoreUpdate = ({ match, history }) => {
                                 <section className='details_title_section'>
                                     <div className='detail_logo'>Plantee<img src='/image/carelevel_icon.png' /></div>
                                 </section>
-                                <form className='insert_textarea' onSubmit={onSubmit}>
+                                <form className='insert_textarea'>
                                     <div className='insert_title'>
                                         <InputGroup className='mb-2'>
                                             <InputGroup.Text>상품번호</InputGroup.Text>
-                                            <Form.Control value={store_id} readOnly />
+                                            <Form.Control name='store_id' value={store_id} readOnly />
                                         </InputGroup>
                                         <InputGroup className='mb-3'>
                                             <InputGroup.Text>글제목</InputGroup.Text>
@@ -104,48 +136,40 @@ const StoreUpdate = ({ match, history }) => {
                                         </InputGroup>
                                         <InputGroup className='mb-3'>
                                             <InputGroup.Text>가격</InputGroup.Text>
-                                            <Form.Control name='title' value={price} type='number' onChange={onChange} />
+                                            <Form.Control name='price' value={price} type='number' onChange={onChange} />
                                         </InputGroup>
                                         <InputGroup className='mb-3'>
                                             <InputGroup.Text>재고</InputGroup.Text>
-                                            <Form.Control name='title' value={stock} type='number' onChange={onChange} />
+                                            <Form.Control name='stock' value={stock} type='number' onChange={onChange} />
                                         </InputGroup>
                                         <InputGroup className='mb-3'>
                                             <InputGroup.Text>난이도</InputGroup.Text>
-                                            <Form.Control name='title' value={level} type='number' onChange={onChange} />
+                                            <Form.Control name='level' value={level} type='number' onChange={onChange} />
                                         </InputGroup>
                                         <InputGroup className='mb-3'>
                                             <InputGroup.Text>태그</InputGroup.Text>
-                                            <Form.Control name='title' value={tag} onChange={onChange} />
+                                            <Form.Control name='tag' value={tag} onChange={onChange} />
                                         </InputGroup>
                                     </div>
+
+
                                 </form>
                             </section>
-                        </div>
 
-                        <form className='insert_textarea' onSubmit={onSubmit}>
-                            <CKEditor config={{ ckfinder: { uploadUrl: '/store/ckupload' } }}
+                            <CKEditor
+                                config={{ ckfinder: { uploadUrl: '/store/ckupload' } }}
                                 editor={ClassicEditor}
-                                data=""
+                                data={contents}
                                 onChange={(event, editor) => { onChangeContents(editor.getData()); }}
                                 onReady={(editor) => { }} />
-                        </form>
 
-
-
-
-
-                        {/* <StoreEditor form={form} setForm={setForm}  /> */}
-                        <div className='plantinsert_section'>
-                            <div className='plantinsert_btngroup'>
-                                <button className='insert_submit' onClick={onClickSave}>등록하기</button>
-                                <button className='insert_cancel' onClick={onClickCancel}>취소하기</button>
+                            <div className='plantinsert_section'>
+                                <div className='plantinsert_btngroup'>
+                                    <button className='insert_submit' onClick={onClickSave}>등록하기</button>
+                                    <button className='insert_cancel' onClick={onClickCancel}>취소하기</button>
+                                </div>
                             </div>
                         </div>
-
-
-
-
 
 
                     </div>
