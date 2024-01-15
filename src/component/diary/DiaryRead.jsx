@@ -1,9 +1,11 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
-import { Button, Card, CardBody, Col, Row, Spinner } from 'react-bootstrap'
+import { Button, Card, CardBody, Col, Container, Row, Spinner } from 'react-bootstrap'
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { Navigation, Pagination } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import DiaryTag from './DiaryTag';
+
 
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -63,6 +65,11 @@ const DiaryRead = () => {
     return (
         <div className='plant_wrap'>
             <div className='plant_contents'>
+                <div className='mt-3'>
+                    <Container>
+                        <DiaryTag />
+                    </Container>
+                </div>
                 <div className='text-center'>
                     <h1 className='mt-5'>상세보기</h1>
                     <div className='text-end'>
@@ -74,7 +81,11 @@ const DiaryRead = () => {
                         </span>
                     </div>
                     <div className='mt-5'>
-                        <img src={image} alt='plante' />
+                        {image ? (
+                            <img src={image} alt={`${plant_name} 이미지`} />
+                        ) : (
+                            <img src='http://via.placeholder.com/300x300' alt='대체 이미지' />
+                        )}
                         <h2 className='mt-5'><b>{plant_name} ({common_name})</b></h2>
                     </div>
                     <div className='mt-5 diarymain_cardgroup'>
@@ -131,7 +142,6 @@ const DiaryRead = () => {
                     </div>
 
                     <div className='mt-5'>
-
                         <Card>
                             <Card.Body>
                                 {/* <Swiper
@@ -142,24 +152,24 @@ const DiaryRead = () => {
                                     pagination={{ clickable: true }}
                                     scrollbar={{ draggable: true }}
                                 > */}
-                                    <h2>{common_name} 난이도 관련식물</h2>
-                                    {/* <SwiperSlide> */}
-                                        <Row>
-                                            {list.map(s =>
-                                                <Card style={{ width: '15rem' }} className='diaryread_card my-4 '>
-                                                    <CardBody>
-                                                        <Col>
-                                                            <div className='storeread_card'>
-                                                                <img src='/image/plant01.jpg' alt='plante' />
-                                                                <h3 className='mt-2'>{s.title}</h3>
-                                                                <h5>{s.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원</h5>
-                                                            </div>
-                                                        </Col>
-                                                    </CardBody>
-                                                </Card>
-                                            )}
-                                        </Row>
-                                    {/* </SwiperSlide>
+                                <h2>{common_name} 난이도 관련식물</h2>
+                                {/* <SwiperSlide> */}
+                                <Row>
+                                    {list.slice(0, 5).map(s =>
+                                        <Card style={{ width: '15rem' }} className='diary_read_store_card my-4 '>
+                                            <CardBody>
+                                                <Col>
+                                                    <div className='storeread_card'>
+                                                        <img src='/image/plant01.jpg' alt='plante' />
+                                                        <h3 className='mt-2'>{s.title}</h3>
+                                                        <h5>{s.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원</h5>
+                                                    </div>
+                                                </Col>
+                                            </CardBody>
+                                        </Card>
+                                    )}
+                                </Row>
+                                {/* </SwiperSlide>
                                 </Swiper> */}
 
                             </Card.Body>
