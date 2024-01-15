@@ -133,12 +133,12 @@ const StoreMain = () => {
 
                             <Container fluid>
                                 <Navbar.Collapse id="navbarScroll">
-                                    <Nav className="me-auto my-2 my-lg-0" style={{ maxHeight: '100px' }} navbarScroll >
+                                    {/* <Nav className="me-auto my-2 my-lg-0" style={{ maxHeight: '100px' }} navbarScroll >
                                         <Nav.Link href="#home">최신순</Nav.Link>
                                         <Nav.Link href="#home">리뷰많은순</Nav.Link>
                                         <Nav.Link href="#home">낮은가격순</Nav.Link>
                                         <Nav.Link href="#home">높은가격순</Nav.Link>
-                                    </Nav>
+                                    </Nav> */}
 
                                     <button className='filter_reset_btn' type='button'><img src='/image/reset_icon.png' onClick={setQueryClean} /></button>
 
