@@ -25,6 +25,8 @@ const StoreQuestionList = ({ uid }) => {
     // const [answer, setAnswer]= useState("");
     const [total, setTotal] = useState(0);
 
+    const [answerTarget, setAnswerTarget] = useState(0);
+
     const getQuestion = async () => {
         setLoading(true);
         const res = await axios.get(`/store/question/${store_id}`);
@@ -38,8 +40,7 @@ const StoreQuestionList = ({ uid }) => {
                 }
             });
         }
-        question = question.map(q => q && { ...q, edit: false });
-        // answer = answer.map(a => a && { ...a, edit: false });
+        
         let total = res.data.questionCount;
         setQuestion(question);
         setTotal(total);
@@ -56,8 +57,10 @@ const StoreQuestionList = ({ uid }) => {
     }
 
     const onClickAnswer = (comment_id) => {
-        const question = question.map(q => q && { ...q, edit: true });
-        setQuestion(question);
+        console.log(comment_id);
+        setAnswerTarget(comment_id);
+        // const question = question.map(q => q && { ...q, edit: true });
+        // setQuestion(question);
     }
 
     // 문의 삭제
@@ -72,6 +75,34 @@ const StoreQuestionList = ({ uid }) => {
                 window.location.reload();
             }
         });
+    }
+    
+    const onClickCancel = () => {
+        setAnswerTarget(0);
+    }
+
+    // 리뷰 내용
+    let [form, setForm] = useState({ store_id: store_id, uid: sessionStorage.getItem('uid'), contents: '', stars: 0, category: 6 });
+    let { contents, stars } = form;
+
+    const onChangeContents = (e) => {
+        setForm({
+            ...form,
+            contents: e.target.value,
+        });
+    }
+
+    const onClickRegister = async (e) => {
+        
+        e.preventDefault();
+        
+        if (form.contents === "") {
+            alert("내용을 적어주세요.");
+        } else {
+            const data = { ...form, upper_id: answerTarget};
+            await axios.post("/store/comment/insert", data);
+            setBox({ show: true, message: "문의답변 등록이 완료되었습니다.", action: async () => { window.location.reload(); } });
+        }
     }
 
     useEffect(() => { getQuestion(); }, [])
@@ -146,18 +177,35 @@ const StoreQuestionList = ({ uid }) => {
                                     <>
                                         {sessionStorage.getItem("uid") != uid && sessionStorage.getItem("uid") != "admin" ?
                                             <></> :
-                                            <div className='text-end'>
-
-                                                <button className='store_filterbtn_clicked' onClick={() => onClickAnswer(q.answer.comment_id)}>답변하기</button>
-                                                <div>
-                                                    <Form.Control rows={3} as="textarea" />
+                                                q.comment_id == answerTarget ? 
+                                                <Row>
+                                                    <Col>
+                                                        <Row className='mb-3'>
+                                                            <div className="p-3" style={{ background: "#adadad2b" }}>
+                                                                <div className='ms-3'>
+                                                                    <div className="store_editor">
+                                                                        <Form.Control as="textarea" rows={3} onChange={onChangeContents} />
+                                                                        {/* <Form.Control as="textarea" rows={3}/> */}
+                                                                        <div className='text-end mt-4'>
+                                                                            <button className='store_filterbtn_clean me-3' onClick={onClickCancel}>취소</button>
+                                                                            <button className='store_filterbtn' onClick={onClickRegister}>등록</button>
+                                                                        </div>
+                                                                    </div>
+                                                                    
+                                                                </div>
+                                                            </div>
+                                                        </Row>
+                                                    </Col>
+                                                </Row> 
+                                                :
+                                                <>
                                                     <div className='text-end'>
-                                                        <button className='store_filterbtn_clean me-3'>취소</button>
-                                                        <button className='store_filterbtn'>등록</button>
-                                                    </div>
-                                                </div>
-                                            </div>
 
+                                                        <button className='store_filterbtn_clicked' onClick={() => onClickAnswer(q.comment_id)}>답변하기</button>
+                                                        
+                                                    </div>
+                                                    
+                                                </>
                                         }
                                     </>
                                 }

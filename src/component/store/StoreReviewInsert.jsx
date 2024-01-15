@@ -25,7 +25,7 @@ const StoreReviewInsert = ({ store_id }) => {
     const [starIdx, setStarIdx] = useState(0);
 
     // 리뷰 내용
-    let [form, setForm] = useState({ store_id: store_id, uid: sessionStorage.getItem('uid'), contents: '', stars: '', category: 5 });
+    let [form, setForm] = useState({ store_id: store_id, uid: sessionStorage.getItem('uid'), contents: '', stars: '', category: 5, upper_id: 0 });
     let { contents, stars } = form;
 
 
