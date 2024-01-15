@@ -19,9 +19,9 @@ function App() {
 				<div className='main_wrap'>
 					<Menu />
 					<RouterPage />
-					<Footer />
 					{box.show && <BoxModal />}
 				</div>
+				<Footer />
 			</Container>
 		</BoxContext.Provider>
 	);

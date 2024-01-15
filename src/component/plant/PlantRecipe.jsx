@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { BoxContext } from '../common/BoxContext';
 import { useNavigate } from 'react-router-dom';
-import { Spinner } from 'react-bootstrap';
+import { InputGroup, Spinner } from 'react-bootstrap';
 import axios from 'axios';
 
 const PlantRecipe = () => {
@@ -11,6 +11,8 @@ const PlantRecipe = () => {
   const { box, setBox } = useContext(BoxContext);
   const [recipe, setrecipe] = useState([]);
   const [total, setTotal] = useState(0);
+  const [searchTerm, setSearchTerm] = useState('');
+
 
   // 레시피 글쓰기 버튼 클릭 시
   const onClickInsertRecipe = () => {
@@ -24,12 +26,31 @@ const PlantRecipe = () => {
   }
 
   const getList = async () => {
-    setLoading(true)
-    const res = await axios.get(`/recipe/list.json`);
-    setrecipe(res.data.list)
-    setTotal(res.data.total)
-    setLoading(false);
-  }
+    setLoading(true);
+    try {
+      const res = await axios.get(`/recipe/list.json`);
+  
+      // 'admin' 사용자의 게시물을 맨 위로 올리기 위한 정렬
+      const sortedList = res.data.list.sort((a, b) => {
+        if (a.uid === 'admin' && b.uid !== 'admin') return -1; // admin의 게시물은 먼저 정렬
+        if (a.uid !== 'admin' && b.uid === 'admin') return 1;  // admin의 게시물은 먼저 정렬
+        return 0; // 다른 경우에는 순서를 변경하지 않음
+      });
+  
+      setrecipe(sortedList);
+      setTotal(res.data.total);
+    } catch (error) {
+      console.error('에러 : ', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleSearchChange = (event) => {
+    setSearchTerm(event.target.value);
+  };
+
+  const filteredList = recipe.filter((item) => item.title.toLowerCase().includes(searchTerm.toLowerCase()));
 
   useEffect(() =>{
     getList();
@@ -51,23 +72,19 @@ const PlantRecipe = () => {
     }
   };
 
-  const onDelete = async () => {
-    setBox({
-      show: true,
-      message: `[${title}] 레시피를 삭제하시겠습니까?`,
-      action: async () => {
-        //await axios.get(`/plant/delete/${recipe_id}`)
-        setBox({show: true, message: "해당 레시피를 삭제하였습니다."})
-        navi('/recipe')
-      }
-    })
-  }
-
   if (loading) return <div className='text-center my-5'><Spinner animation="border" variant="success" /></div>
 
   return (
     <div className='recipe_wrap'>
       <div className='recipe_contents'>
+      <div className='diary_searchwrap'>
+          <form>
+            <InputGroup className='diary_searchinputwrap'>
+              <input type='search' className='diary_searchinput' placeholder='검색어를 입력해주세요.' value={searchTerm} onChange={handleSearchChange}/>
+              <button className='diary_searchbtn' type='submit'><img src='/image/search_icon.png' /></button>
+            </InputGroup>
+          </form>
+        </div>
         <div className='recipe_select_section'>
           <div className='recipe_filter'>
             <div className='recipe_select'>
@@ -91,7 +108,7 @@ const PlantRecipe = () => {
 
         <div className='recipe_contents_section'>
           <div className='recipe_contents_grid'>
-            {recipe.map(r => 
+            {filteredList.map(r => 
               <a href={`/recipe/read/${r.recipe_id}`}>
                 <div className='recipe_content_item'>
                   <img src='/image/recipe_01.jpg'/>

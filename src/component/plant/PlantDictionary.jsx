@@ -1,56 +1,43 @@
 import React, { useEffect, useState } from 'react';
 import './Plant.css';
-import { Spinner } from 'react-bootstrap';
+import { InputGroup, Spinner } from 'react-bootstrap';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
 const PlantDictionary = () => {
 
   const [loading, setLoading] = useState(false);
-  const [activeBtn, setActiveBtn] = useState(null);
   const [plants, setplants] = useState([]);
   const [total, setTotal] = useState(0);
-
-  const toggleSection = (btnName) => {
-    setActiveBtn(activeBtn === btnName ? null : btnName);
-  };
-
-  const resetFilters = () => {
-    setActiveBtn(null);
-  };
+  const [searchTerm, setSearchTerm] = useState('');
+  const [selectedCareLevel, setSelectedCareLevel] = useState(null);
 
   const getList = async () => {
-      setLoading(true)
+    setLoading(true)
       const res = await axios.get(`/plant/list.json`);
+      console.log('API Response:', res.data);
       setplants(res.data.list)
       setTotal(res.data.total)
       setLoading(false);
-  }
+    }
+
+  const handleSearchChange = (event) => {
+    setSearchTerm(event.target.value);
+  };
+
+  const handleCareLevelFilter = (careLevel) => {
+    setSelectedCareLevel(careLevel);
+  };
+
+  const filteredList = plants.filter((item) => {
+    const nameMatches = item.common_name.toLowerCase().includes(searchTerm.toLowerCase());
+    const careLevelMatches = selectedCareLevel ? item.care_level == selectedCareLevel : true;
+    return nameMatches && careLevelMatches;
+  });
 
   useEffect(() =>{
     getList();
   }, []);
-
-  const renderFilterSection = (btnName) => {
-    if (activeBtn === btnName) {
-      return (
-        <div className='second_filter_section'>
-          <div className='filter_division'></div>
-          <ul className='filter_list'>
-            <button className='filter_btn' type='button'>잎</button>
-            <button className='filter_btn' type='button'>꽃</button>
-            <button className='filter_btn' type='button'>열매</button>
-            <button className='filter_btn' type='button'>다육</button>
-            <button className='filter_btn' type='button'>실내</button>
-            <button className='filter_btn' type='button'>실외</button>
-            <button className='filter_btn' type='button'>반려안전</button>
-            <button className='filter_btn' type='button'>식용</button>
-          </ul>
-        </div>
-      );
-    }
-    return null;
-  };
 
   if (loading) return <div className='text-center my-5'><Spinner animation="border" variant="success" /></div>
 
@@ -59,16 +46,29 @@ const PlantDictionary = () => {
       <div className='plant_contents'>
         <div className='first_filter_section'>
           <ul className='filter_list'>
-            <button className='filter_reset_btn' type='button'><img src='/image/reset_icon.png' onClick={resetFilters} /></button>
-            <button className={`filter_btn ${activeBtn === '초보자용' ? 'active' : ''}`} type='button' onClick={() => toggleSection('초보자용')}>초보자용</button>
-            <button className={`filter_btn ${activeBtn === '중급자용' ? 'active' : ''}`} type='button' onClick={() => toggleSection('중급자용')}>중급자용</button>
-            <button className={`filter_btn ${activeBtn === '상급자용' ? 'active' : ''}`} type='button' onClick={() => toggleSection('상급자용')}>상급자용</button>
+          <button className={`filter_reset_btn ${selectedCareLevel === null ? 'active' : ''}`} type='button' onClick={() => handleCareLevelFilter(null)}>
+              <img src='/image/reset_icon.png' alt='reset icon' />
+            </button>
+            <button className={`filter_btn ${selectedCareLevel === 1 ? 'active' : ''}`} type='button' onClick={() => handleCareLevelFilter(1)}>
+              초보자용
+            </button>
+            <button className={`filter_btn ${selectedCareLevel === 2 ? 'active' : ''}`} type='button' onClick={() => handleCareLevelFilter(2)}>
+              중급자용
+            </button>
+            <button className={`filter_btn ${selectedCareLevel === 3 ? 'active' : ''}`} type='button' onClick={() => handleCareLevelFilter(3)}>
+              상급자용
+            </button>
           </ul>
         </div>
 
-        {renderFilterSection('초보자용')}
-        {renderFilterSection('중급자용')}
-        {renderFilterSection('상급자용')}
+        <div className='search_input_wrap'>
+          <form>
+            <InputGroup className='search_input_inputgroup'>
+              <input type='search' className='search_input_textinput' placeholder='검색어를 입력해주세요.' value={searchTerm} onChange={handleSearchChange}/>
+              <button className='search_input_searchbtn' type='submit'><img src='/image/search_icon.png' /></button>
+            </InputGroup>
+          </form>
+        </div>
 
         <div className='plant_data'>
           <div className='plant_layout'>
@@ -87,7 +87,7 @@ const PlantDictionary = () => {
         
         <div className='plantlist_contents_section'>
           <div className='plantlist_contents_grid'>
-            {plants.map(p =>
+            {filteredList.map(p =>
                 <a href={`/plant/read/${p.plant_id}`}>
                   <div className='plantlist_contents_item'>
                     <img src='/image/plant01.jpg'/>
