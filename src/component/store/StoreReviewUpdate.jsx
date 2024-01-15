@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import { useLocation, useParams, useNavigate } from 'react-router-dom';
 import { BoxContext } from '../common/BoxContext';
 import { CKEditor } from "@ckeditor/ckeditor5-react";
@@ -10,19 +10,24 @@ import { getFirestore, setDoc, doc, getDoc } from 'firebase/firestore'
 import { getStorage, uploadBytes, ref, getDownloadURL } from 'firebase/storage'
 import "./Store.css";
 
-const StoreReviewInsert = ({ store_id }) => {
+const StoreReviewUpdate = ({ store_id, comment_id }) => {
+    //console.log(contents);
+    //const { store_id, comment_id } = props;
 
     const navi = useNavigate();
     const location = useLocation();
     const db = getStorage(app);
 
     const { box, setBox } = useContext(BoxContext);
+    const [loading, setLoading] = useState(false);
 
     // 별점
     const array = [0, 1, 2, 3, 4];
     const [clicked, setClicked] = useState([false, false, false, false, false]);
 
     const [starIdx, setStarIdx] = useState(0);
+
+    const [org_contents, setOrgContents] = useState("");
 
     // 리뷰 내용
     let [form, setForm] = useState({ store_id: store_id, uid: sessionStorage.getItem('uid'), contents: '', stars: '', category: 5 });
@@ -39,17 +44,17 @@ const StoreReviewInsert = ({ store_id }) => {
 
     // 리뷰 작성 중 별점 
     const handleStarClick = index => {
-        setStarIdx(index+1); 
+        setStarIdx(index + 1);
         let clickStates = [...clicked];
         for (let i = 0; i < 5; i++) {
             clickStates[i] = i <= index ? true : false;
         }
         setClicked(clickStates);
-    }; 
+    };
 
     // 리뷰 작성 후 등록버튼 클릭
     const onClickRegister = async (e) => {
-        
+
         e.preventDefault();
         if (starIdx === 0) {
             setBox({ show: true, message: "별점을 주셔야 리뷰 등록이 가능합니다." })
@@ -58,8 +63,8 @@ const StoreReviewInsert = ({ store_id }) => {
                 alert("내용을 적어주세요.");
             } else {
                 form.stars = clicked.filter(Boolean).length;
-                const data = { ...form}
-                await axios.post("/store/comment/insert", data);
+                const data = { ...form, comment_id: comment_id };
+                await axios.post("/store/comment/update", data);
                 setBox({ show: true, message: "리뷰 등록이 완료되었습니다.", action: async () => { window.location.reload(); } });
             }
         }
@@ -75,6 +80,18 @@ const StoreReviewInsert = ({ store_id }) => {
             }
         })
     }
+
+    const getReviewOne = async () => {
+        setLoading(true);
+        const data = { store_id: store_id, comment_id: comment_id };
+        const res = await axios.post(`/store/reviewOne`, data);
+        setOrgContents(res.data.contents);
+        onChangeContents(res.data.contents);
+        handleStarClick(Number(res.data.stars) - 1);
+        setLoading(false);
+    }
+
+    useEffect(() => { getReviewOne(); }, []);
 
     return (
         <>
@@ -97,7 +114,7 @@ const StoreReviewInsert = ({ store_id }) => {
                             <CKEditor
                                 config={{ placeholder: "내용을 입력하세요.", ckfinder: { uploadUrl: '/store/ckupload' } }}
                                 editor={ClassicEditor}
-                                data=""
+                                data={org_contents}
                                 onChange={(event, editor) => { onChangeContents(editor.getData()); }}
                                 onReady={(editor) => { }} />
                         </div>
@@ -115,4 +132,4 @@ const StoreReviewInsert = ({ store_id }) => {
     )
 }
 
-export default StoreReviewInsert
+export default StoreReviewUpdate

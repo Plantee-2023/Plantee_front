@@ -9,6 +9,7 @@ import { getStorage, uploadBytes, ref, getDownloadURL } from 'firebase/storage'
 import "./Store.css";
 import Parser from 'html-react-parser';
 import StoreReviewInsert from './StoreReviewInsert';
+import StoreReviewUpdate from './StoreReviewUpdate';
 
 const StoreReviewList = ({ uid }) => {
     // 여기서 uid는 글쓴이
@@ -25,6 +26,8 @@ const StoreReviewList = ({ uid }) => {
     const [total, setTotal] = useState(0);
     const [stars, setStars] = useState("");
     const [starAvg, setStarAvg] = useState(0);
+    const [starAvgImg, setStarAvgImg] = useState("");
+    const [editReviewId, setEditReviewId] = useState(0);
 
     const getReview = async () => {
         setLoading(true);
@@ -47,6 +50,12 @@ const StoreReviewList = ({ uid }) => {
         // console.log(list)
         setReviews(list);
         setTotal(total);
+
+        let starAvgImgStr = "";
+        for(let i = 0 ; i < starAvg; i++) {
+            starAvgImgStr+=starOne;
+        }
+        setStarAvgImg(starAvgImgStr);
         setStarAvg(starAvg);
         setLoading(false);
     }
@@ -80,6 +89,10 @@ const StoreReviewList = ({ uid }) => {
         });
     }
 
+    const editReviewView = (comment_id) => {
+        setEditReviewId(comment_id);
+    }
+
     useEffect(() => { getReview(); }, [])
 
     if (loading) return <div className='text-center my-5'><Spinner animation="border" variant="success" /></div>
@@ -94,11 +107,17 @@ const StoreReviewList = ({ uid }) => {
                             <Col>
                                 <Row>총 {total}건의 평점</Row>
                                 <Row>
-                                    <div>{starAvg} | 5</div>
+                                    {/* <div>{starAvg} | 5</div> */}
+                                    <div>{starAvgImg} | {starAvg}</div>
                                 </Row>
                             </Col>
                             <Col rowSpan="2" className='text-end'>
-                                <button className='btn_common' onClick={() => onClickReviewWrite(store_id)}>리뷰 작성하기</button>
+                                {sessionStorage.getItem("uid") != null ? 
+                                    <></>
+                                    :
+                                    <button className='btn_common' onClick={() => onClickReviewWrite(store_id)}>리뷰 작성하기</button>
+                                }
+                                
                             </Col>
                             <div className='mt-4'>
                                 {total === 0 && <div className='select_box p-4 text-center' style={{ background: "#adadad2b" }}> 이 상품의 첫 리뷰어가 되어주세요! </div>}
@@ -112,6 +131,19 @@ const StoreReviewList = ({ uid }) => {
 
                         {reviews.map(r => 
                             <div key={r.reg_date}>
+                                {editReviewId == r.comment_id ? 
+                                <><StoreReviewUpdate comment_id={r.comment_id} store_id={store_id}/>
+                                    {/* <div className="store_editor">
+                                        <CKEditor
+                                            config={{ placeholder: "내용을 입력하세요.", ckfinder: { uploadUrl: '/store/ckupload' } }}
+                                            editor={ClassicEditor}
+                                            data={r.content}
+                                            onChange={(event, editor) => { onChangeContents(editor.getData()); }}
+                                            onReady={(editor) => { }} />
+                                    </div> */}
+                                </>
+                                :
+                                <>
                                 <Row className='p-2 mb-3'>
                                     <Col xs={2} lg={2} style={{ verticalAlign: "center" }}>
                                         <Row style={{ fontWeight: "600" }}>{r.nickname}</Row>
@@ -124,7 +156,7 @@ const StoreReviewList = ({ uid }) => {
                                     </Col>
                                     {sessionStorage.getItem("uid") === r.uid &&
                                         <Col xs={2} lg={2} className='text-end'>
-                                            <button className='store_btn_clean_sm me-2'>수정</button>
+                                            <button className='store_btn_clean_sm me-2' onClick={() => editReviewView(r.comment_id)}>수정</button>
                                             <button className='store_btn_clicked_sm' onClick={() => onDelete(r.comment_id)}>삭제</button>
                                         </Col>
                                     }
@@ -137,6 +169,8 @@ const StoreReviewList = ({ uid }) => {
                                     </div> */}
 
                                 </Row>
+                                </>
+                                }
                             </div>
                         )}
 
