@@ -29,6 +29,19 @@ const DiaryMain = () => {
     //     }
     // }
 
+    const handleWateringCanClick = (diaryId) => {
+        // 클릭한 다이어리 항목의 last_watering 데이터를 업데이트
+        const updatedList = list.map((d) => {
+            if (d.diary_id === diaryId) {
+                return { ...d, last_watering: new Date().toISOString() }; // 현재 날짜로 업데이트
+            }
+            return d;
+        });
+        
+        setList(updatedList);
+        console.log(updatedList)
+    };
+
     const getSun = (sunlight) => {
         switch (sunlight) {
             case '2~3':
@@ -90,17 +103,37 @@ const DiaryMain = () => {
                         <div className='diary_detail my-5'>
                             <Link to={`/diary/read/${d.diary_id}`}>
                                 <Row>
-                                    <Col>
-                                        <br />
-                                        <h1>D-{d.date_water}</h1>
-                                        <hr className='diary_dayline' />
-                                        <p className='diary_icon_sun'>
-                                            <p>{getSun(d.sunlight)}</p>
-                                        </p>
-                                        <p className='diary_icon_sun'>
-                                            <p>{getWater(d.watering)}</p>
-                                        </p>
-                                    </Col>
+                                    {d.date_water > 7 ?
+                                        <>
+                                            <Col>
+                                                <br />
+                                                <h1>D-{d.date_water}</h1>
+                                                <hr className='diary_dayline' />
+                                                <p className='diary_icon_sun'>
+                                                    <p>{getSun(d.sunlight)}</p>
+                                                </p>
+                                                <p className='diary_icon_sun'>
+                                                    <p>{getWater(d.watering)}</p>
+                                                </p>
+                                            </Col>
+                                        </>
+                                        :
+                                        <>
+                                            <Col>
+                                                <div className='mt-5'>
+                                                    <h3>{d.plant_name}의 물 주는 날이</h3><h4>{d.date_water}일 남았어요!</h4>
+                                                    <div className='mt-5'>
+                                                        <img
+                                                            src='/image/icon-watering-can.png'
+                                                            width={'100px'}
+                                                            height={'100px'}
+                                                            onClick={() => handleWateringCanClick(d.diary_id)}
+                                                        />
+                                                    </div>
+                                                </div>
+                                            </Col>
+                                        </>
+                                    }
                                     <Col>
                                         <div>
                                             <img src={d.image} width={300} height={300} />
@@ -115,7 +148,7 @@ const DiaryMain = () => {
                         </div>
                     )}
                     <div className='diarymain_cardgroup'>
-                        <Card style={{ width: '50rem' }} className='diarymain_card'>
+                        <Card className='diary_plant_card'>
                             <Card.Body>
                                 <Row>
                                     <Col md='5'>
@@ -124,13 +157,21 @@ const DiaryMain = () => {
                                         </div>
                                     </Col>
                                     <Col className='mt-2'>
-                                        오늘은
-                                        {list.map(d =>
-                                            <span>
-                                                [{d.plant_name}],
-                                            </span>
-                                        )}
-                                        물 주는 날 입니다.
+                                        {(() => {
+                                            const wateringDay = list.find(d => d.date_water < 7);
+                                            if (wateringDay) {
+                                                return (
+                                                    <>
+                                                        오늘은{' '}
+                                                        <span>
+                                                            [{wateringDay.plant_name}]
+                                                        </span>
+                                                        {' '} 물 주는 날입니다.
+                                                    </>
+                                                );
+                                            }
+                                            return '나의 반려식물 키우기'; // 아무것도 렌더링하지 않음
+                                        })()}
                                     </Col>
                                 </Row>
                             </Card.Body>

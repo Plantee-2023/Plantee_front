@@ -49,7 +49,7 @@ const DiaryList = () => {
                         <div className='diarylist_cardgroup'>
                             {list.map(d =>
                                 <div>
-                                    {d.date_water > -3 && (
+                                    {d.date_water < 7 && (
                                         <Card style={{ width: '40rem' }} className='diarylist_card'>
                                             <CardBody>
                                                 <Row>
@@ -80,7 +80,7 @@ const DiaryList = () => {
                         <div className='diarylist_cardgroup'>
                             {list.map(d =>
                                 <div>
-                                    {d.date_medicine > -3 && (
+                                    {d.date_medicine <= 20 && (
                                         <Card style={{ width: '40rem' }} className='diarylist_card'>
                                             <CardBody>
                                                 <Row>
@@ -111,7 +111,7 @@ const DiaryList = () => {
                         <div className='diarylist_cardgroup'>
                             {list.map(d =>
                                 <div>
-                                    {d.date_change > -3 && (
+                                    {d.date_change < 30 && (
                                         <Card style={{ width: '40rem' }} className='diarylist_card'>
                                             <CardBody>
                                                 <Row>
