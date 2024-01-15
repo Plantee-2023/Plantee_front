@@ -28,15 +28,20 @@ const StoreRead = () => {
     })
 
     const { title, fmtprice, stock, contents, image, level, tag, uid, reg_date, mdfy_date, like_cnt,
-        type, care_level, leaf, flowers, fruits, indoor, poisonous_pet, cuisine } = store;
+        type, care_level, leaf, flowers, fruits, indoor, poisonous_pet, cuisine, price } = store;
 
     let [form, setForm] = useState({ store_id: store_id, uid: sessionStorage.getItem('uid') });
+
+
+    const [fmtTotalPrice , setFmtTotalPrice] = useState("");
+    const [qnt, setQnt] = useState(1);
 
     const getStore = async () => {
         setLoading(true);
         const res = await axios.get(`/store/read/${store_id}`);
         // console.log(res.data)
         setStore(res.data);
+        setFmtTotalPrice(res.data.fmtprice);
         setLoading(false);
     }
 
@@ -47,7 +52,7 @@ const StoreRead = () => {
             sessionStorage.setItem("target", location.pathname);
             navi("/users/loginPage");
         } else if (sessionStorage.getItem("uid")) {
-            const res = { uid: sessionStorage.getItem("uid"), store_id: store_id }
+            const res = { uid: sessionStorage.getItem("uid"), store_id: store_id, qnt: qnt }
             await axios.post("/cart/insert", res)
             setBox({
                 show: true,
@@ -123,6 +128,11 @@ const StoreRead = () => {
             default:
                 return '실외용';
         }
+    }
+
+    const onChangeQnt = (e) => {
+        setQnt(Number(e.target.value));
+        setFmtTotalPrice((Number(price)*Number(e.target.value)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
     }
 
     useEffect(() => { getStore(); }, [])
@@ -207,8 +217,8 @@ const StoreRead = () => {
                                     <Alert style={{ background: "#adadad2b", border: 'none' }}>
                                         <div className='details_subtitle pb-3'>수량선택</div>
                                         <Row>
-                                            <Col><input type='number' defaultValue={1} /></Col>
-                                            <Col className='text-end me-2'>총 ###,###원</Col>
+                                            <Col><input type='number' defaultValue={1} onChange={onChangeQnt}/></Col>
+                                            <Col className='text-end me-2'>총 {fmtTotalPrice}원</Col>
                                         </Row>
                                     </Alert>
                                 </section>

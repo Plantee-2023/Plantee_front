@@ -20,6 +20,8 @@ const StoreMain = () => {
     const size = 20;
     const [query, setQuery] = useState("");
 
+    const [sellerYn, setSellerYn] = useState("");
+
     const getList = async () => {
         setLoading(true);
         const res = await axios.get(`/store/list.json?page=${page}&size=20&query=${query}`);
@@ -37,10 +39,21 @@ const StoreMain = () => {
         setLoading(false);
     }
 
-    const getCount = async () => {
+    const getUserInfo = async () => {
         setLoading(true);
-        // const res = await axios.get("/store/count")
-        // console.log(res);
+        // setForm(sessionStorage.getItem("uid"));
+        const uid = sessionStorage.getItem("uid");
+        const res = await axios.get(`/store/getUserInfoAct?query=${uid}`);
+        let sellerYnStr = "";
+        if(res.data == null) {
+            sellerYnStr = "n";
+        } else {
+            sellerYnStr = res.data.seller_yn;
+            if(uid == 'admin') {
+                sellerYnStr = 'y';
+            }
+        }
+        setSellerYn(sellerYnStr);
         setLoading(false);
     }
 
@@ -73,7 +86,7 @@ const StoreMain = () => {
         setLoading(false);
     }
 
-    useEffect(() => { getList(); getCount(); }, [location]);
+    useEffect(() => { getList(); getUserInfo(); }, [location]);
 
     if (loading) return <div className='text-center my-5'><Spinner animation="border" variant="success" /></div>
     return (
@@ -120,12 +133,12 @@ const StoreMain = () => {
 
                             <Container fluid>
                                 <Navbar.Collapse id="navbarScroll">
-                                    {/* <Nav className="me-auto my-2 my-lg-0" style={{ maxHeight: '100px' }} navbarScroll >
+                                    <Nav className="me-auto my-2 my-lg-0" style={{ maxHeight: '100px' }} navbarScroll >
                                         <Nav.Link href="#home">최신순</Nav.Link>
                                         <Nav.Link href="#home">리뷰많은순</Nav.Link>
                                         <Nav.Link href="#home">낮은가격순</Nav.Link>
                                         <Nav.Link href="#home">높은가격순</Nav.Link>
-                                    </Nav> */}
+                                    </Nav>
 
                                     <button className='filter_reset_btn' type='button'><img src='/image/reset_icon.png' onClick={setQueryClean} /></button>
 
@@ -140,7 +153,11 @@ const StoreMain = () => {
                             </Container>
 
                             <div className='plant_insert'>
-                                <Link to="/store/insert" ><button>추가하기</button></Link>
+                                {sellerYn === 'y' ?
+                                    <Link to="/store/insert" ><button id='insertButton'>추가하기</button></Link>
+                                    :
+                                    <></>
+                                }
                             </div>
 
                         </Navbar>
