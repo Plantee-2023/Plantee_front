@@ -8,6 +8,7 @@ import axios from "axios";
 import DiaryTag from "./DiaryTag";
 import { Link } from 'react-router-dom';
 import Diary from "../diary/Diary.css";
+import BtnToTop from "../common/BtnToTop";
 
 const cx = classNames.bind(Diary);
 const localizer = momentLocalizer(moment);
@@ -146,12 +147,13 @@ const DiaryCalendar = () => {
                                 ))}
                             </div>
                             {eventsOnDay.length > 0 && (
-                                <button
+                                <img src="/image/icon-sprout.png"
                                     className={cx('date-button')}
                                     onClick={() => handleDateButtonClick(currentDate)}
+                                    width={30} 
+                                    height={30}
                                 >
-                                    <img src="/image/icon-sprout.png" width={30} height={30} />
-                                </button>
+                                </img>
                             )}
                         </div>
                     );
@@ -218,32 +220,37 @@ const DiaryCalendar = () => {
                             {list
                                 .filter(d => moment(d.reg_date).isSame(selectedDate, 'day'))
                                 .map((d, index) => (
-                                    <Card className="calendar_card" key={index}>
-                                        <div>
-                                            <Card.Body>
-                                                <Row>
-                                                    <Col md={4}>
-                                                        <img src={d.image} width={150} height={150} />
-                                                    </Col>
-                                                    <Col className="mt-3">
-                                                        <h3><span style={{ color: "green" }}>✔</span> {d.plant_name}</h3>
-                                                        <h5>
-                                                            {' '}{' '}
-                                                            함께 한 날 {d.date_now}일
-                                                        </h5>
-                                                        <p>
-                                                            물 주는 날 D-{d.date_water}일 남았습니다!
-                                                        </p>
-                                                    </Col>
-                                                </Row>
-                                            </Card.Body>
-                                        </div>
-                                    </Card>
+                                    <div className="diary_detail">
+                                        <Link to={`/diary/read/${d.diary_id}`}>
+                                            <Card className="calendar_card" key={index}>
+                                                <div>
+                                                    <Card.Body>
+                                                        <Row>
+                                                            <Col md={4}>
+                                                                <img src={d.image} width={150} height={150} />
+                                                            </Col>
+                                                            <Col className="mt-3">
+                                                                <h3><span style={{ color: "green" }}>✔</span> {d.plant_name}</h3>
+                                                                <h5>
+                                                                    {' '}{' '}
+                                                                    함께 한 날 {d.date_now}일
+                                                                </h5>
+                                                                <p>
+                                                                    물 주는 날 D-{d.date_water}일 남았습니다!
+                                                                </p>
+                                                            </Col>
+                                                        </Row>
+                                                    </Card.Body>
+                                                </div>
+                                            </Card>
+                                        </Link>
+                                    </div>
                                 ))}
                         </div>
                     ))}
                 </div>
             )}
+            <BtnToTop/>
         </div>
     );
 };
