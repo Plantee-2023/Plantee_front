@@ -175,7 +175,7 @@ const StoreQuestionList = ({ uid }) => {
                                     </div>
                                     :
                                     <>
-                                        {sessionStorage.getItem("uid") != uid && sessionStorage.getItem("uid") != "admin" ?
+                                        {sessionStorage.getItem("uid") != uid ?
                                             <></> :
                                                 q.comment_id == answerTarget ? 
                                                 <Row>
