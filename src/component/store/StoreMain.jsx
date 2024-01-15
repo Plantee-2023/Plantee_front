@@ -21,7 +21,7 @@ const StoreMain = () => {
     const [query, setQuery] = useState("");
 
     const getList = async () => {
-        setLoading(true)
+        setLoading(true);
         const res = await axios.get(`/store/list.json?page=${page}&size=20&query=${query}`);
         // console.log(res.data.list[0].seller_yn);
         // let isSeller = res.data.list;
@@ -34,6 +34,13 @@ const StoreMain = () => {
         // }
         setGoods(res.data.list);
         setTotal(res.data.total);
+        setLoading(false);
+    }
+
+    const getCount = async () => {
+        setLoading(true);
+        // const res = await axios.get("/store/count")
+        // console.log(res);
         setLoading(false);
     }
 
@@ -66,7 +73,7 @@ const StoreMain = () => {
         setLoading(false);
     }
 
-    useEffect(() => { getList(); }, [location]);
+    useEffect(() => { getList(); getCount(); }, [location]);
 
     if (loading) return <div className='text-center my-5'><Spinner animation="border" variant="success" /></div>
     return (
@@ -132,13 +139,14 @@ const StoreMain = () => {
                                 </Navbar.Collapse>
                             </Container>
 
+                            <div className='plant_insert'>
+                                <Link to="/store/insert" ><button>추가하기</button></Link>
+                            </div>
+
                         </Navbar>
                     </div>
 
 
-                    <div className='plant_insert'>
-                        <Link to="/store/insert" ><button>추가하기</button></Link>
-                    </div>
 
                     <Row sm={1} md={3} lg={5} className="g-4">
                         {goods.map(g =>

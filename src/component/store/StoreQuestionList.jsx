@@ -96,7 +96,7 @@ const StoreQuestionList = ({ uid }) => {
                                 {total === 0 && <div className='select_box p-4 text-center' style={{ background: "#adadad2b" }}> 문의내역이 없습니다. </div>}
                             </div>
                         </Row>
-                        {sessionStorage.getItem(uid) != null || <StoreQuestionInsert store_id={store_id} />}
+                        {sessionStorage.getItem("uid") != null ? <StoreQuestionInsert store_id={store_id} /> : <></>}
                     </Card>
 
                     {/* 하단 */}
@@ -147,7 +147,7 @@ const StoreQuestionList = ({ uid }) => {
                                         {sessionStorage.getItem("uid") != uid && sessionStorage.getItem("uid") != "admin" ?
                                             <></> :
                                             <div className='text-end'>
-                                                
+
                                                 <button className='store_filterbtn_clicked' onClick={() => onClickAnswer(q.answer.comment_id)}>답변하기</button>
                                                 <div>
                                                     <Form.Control rows={3} as="textarea" />
@@ -157,7 +157,7 @@ const StoreQuestionList = ({ uid }) => {
                                                     </div>
                                                 </div>
                                             </div>
-                                            
+
                                         }
                                     </>
                                 }

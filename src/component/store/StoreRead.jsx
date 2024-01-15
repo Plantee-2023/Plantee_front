@@ -5,7 +5,8 @@ import { Spinner, Row, Col, Button, Tabs, Tab, Alert, Card, Badge } from 'react-
 import Parser from 'html-react-parser';
 import { BoxContext } from '../common/BoxContext';
 import "./Store.css";
-import { TiHeart } from "react-icons/ti";
+import { FaHeart } from "react-icons/fa";
+import { FaRegHeart } from "react-icons/fa";
 import StoreReviewList from "./StoreReviewList";
 import StoreQuestionList from "./StoreQuestionList";
 import DeliveryService from './DeliveryService';
@@ -29,6 +30,8 @@ const StoreRead = () => {
     const { title, fmtprice, stock, contents, image, level, tag, uid, reg_date, mdfy_date, like_cnt,
         type, care_level, leaf, flowers, fruits, indoor, poisonous_pet, cuisine } = store;
 
+    let [form, setForm] = useState({ store_id: store_id, uid: sessionStorage.getItem('uid') });
+
     const getStore = async () => {
         setLoading(true);
         const res = await axios.get(`/store/read/${store_id}`);
@@ -44,11 +47,12 @@ const StoreRead = () => {
             sessionStorage.setItem("target", location.pathname);
             navi("/users/loginPage");
         } else if (sessionStorage.getItem("uid")) {
-            await axios.post("/cart/insert", { uid: sessionStorage.getItem("uid"), store_id })
+            const res = { uid: sessionStorage.getItem("uid"), store_id: store_id }
+            await axios.post("/cart/insert", res)
             setBox({
                 show: true,
                 message: "상품이 장바구니에 담겼습니다. 장바구니로 이동하시겠습니까?",
-                action: async () => {
+                action: () => {
                     navi("/users/mypage/productcart")
                 }
             })
@@ -62,10 +66,9 @@ const StoreRead = () => {
             sessionStorage.setItem("target", location.pathname);
             navi("/users/loginPage");
         } else if (sessionStorage.getItem("uid")) {
-            navi("/store/buynow")
+            navi("/users/mypage/productcart?show=order")
         }
     }
-
 
     // 판매자의 판매글 삭제
     const onDelete = () => {
@@ -78,6 +81,27 @@ const StoreRead = () => {
                 navi(`/store`);
             }
         });
+    }
+
+    // 좋아용 추가
+    const onClickHeart = async () => {
+        if (!sessionStorage.getItem("uid")) {
+            setBox({ show: true, message: "로그인 사용자만 이용 가능한 서비스 입니다. 로그인 후 진행해주세요." })
+            sessionStorage.setItem("target", location.pathname);
+            navi("/users/loginPage");
+        } else {
+            const res = { uid: sessionStorage.getItem("uid"), store_id }
+            await axios(`/store/insert/like`, res);
+            alert("조아용 추가!")
+            getStore();
+        }
+    }
+
+    // 좋아요 삭제
+    const onClickHeartDelete = async () => {
+        await axios(`/store/delete/like?store_id=${store_id}&uid=${sessionStorage.getItem("uid")}`);
+        alert("조아용 취소!")
+        getStore();
     }
 
     {/* 텍스트 변환 */ }
@@ -127,6 +151,7 @@ const StoreRead = () => {
 
                         <div className='store_info_layout'>
                             <section className='store_info_section'>
+
                                 <section className='store_title_section'>
                                     <div className='store_title'>
                                         <ul className='store_items'>
@@ -142,10 +167,21 @@ const StoreRead = () => {
                                         <h1 className='store_maintitle'>{title}</h1>
                                     </div>
                                 </section>
+                                
                                 <section className='store_simpleinfo_section'>
                                     <Row className='plant_items'>
                                         <Col className='store_subtitle ms-2'>{fmtprice}원</Col>
-                                        <Col className='text-end'><TiHeart color="#ff0000" size="2rem" />{like_cnt}</Col>
+                                        <Col className='text-end'>
+                                            {/* <FaHeart color="#ff0000" size="2rem" />{like_cnt} FaRegHeart */}
+                                            <span>
+                                                {like_cnt === 0 ?
+                                                    <FaRegHeart onClick={onClickHeart} />
+                                                    :
+                                                    <FaHeart  color="#ff0000" onClick={onClickHeartDelete} />
+                                                }
+                                                <small>{like_cnt}</small>
+                                            </span>
+                                        </Col>
                                     </Row>
                                     <hr />
                                     <div className='p-3'>
