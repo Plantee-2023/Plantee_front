@@ -16,7 +16,7 @@ const Join = () => {
         uid: '', upass: '', uname: '', image: '', nickname: '', phone: '', address1: '', address2: '', seller_yn: ''
     });
 
-    const { uid, upass, uname, phone, address1, address2, fmtdate, fmtmodi, photo, seller_yn } = user;
+    const { uid, upass, uname, phone, address1, address2, image, seller_yn, nickname } = user;
 
 
     const onChange = (e) => {
