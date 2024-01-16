@@ -452,4 +452,16 @@
         margin-left: 90%;
         margin-top: 3%;
     }
+
+    .ellipsis {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box ;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+    }
+
+    .banner{
+        --swiper-theme-color:#ffffff !important;
+    }
 }

@@ -52,15 +52,15 @@ const PlantRecipe = () => {
   };
 
   const onDelete = async () => {
-    // setBox({
-    //   show: true,
-    //   message: `[${title}] 레시피를 삭제하시겠습니까?`,
-    //   action: async () => {
-    //     //await axios.get(`/plant/delete/${recipe_id}`)
-    //     setBox({show: true, message: "해당 레시피를 삭제하였습니다."})
-    //     navi('/recipe')
-    //   }
-    // })
+    setBox({
+      show: true,
+      //message: `[${title}] 레시피를 삭제하시겠습니까?`,
+      action: async () => {
+        //await axios.get(`/plant/delete/${recipe_id}`)
+        setBox({show: true, message: "해당 레시피를 삭제하였습니다."})
+        navi('/recipe')
+      }
+    })
   }
 
   if (loading) return <div className='text-center my-5'><Spinner animation="border" variant="success" /></div>
