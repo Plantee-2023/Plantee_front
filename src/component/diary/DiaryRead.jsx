@@ -1,12 +1,23 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
-import { Button, Card, CardBody, Col, Row, Spinner } from 'react-bootstrap'
+import { Button, Card, CardBody, Col, Container, Row, Spinner } from 'react-bootstrap'
 import { Link, useNavigate, useParams } from 'react-router-dom';
+import { Navigation, Pagination } from 'swiper';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import DiaryTag from './DiaryTag';
+
+
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import 'swiper/css/scrollbar';
+import '../Main.css'
 
 const DiaryRead = () => {
     const [loading, setLoading] = useState(false);
     const { diary_id } = useParams();
     const navi = useNavigate();
+    const [list, setList] = useState([]);
 
     const [diary, setDiary] = useState({
         diary_id: "", user_id: "", image: "", contents: "", reg_date: "", fmtdate: "", last_watering: "", watering: "", common_name: "", date_now: "", date_water: "", date_medicine: "", date_change: "",
@@ -17,12 +28,22 @@ const DiaryRead = () => {
     const getDiary = async () => {
         setLoading(true);
         const res = await axios.get(`/diary/read/${diary_id}`);
-        // console.log(res.data);
+        console.log(res.data);
         setDiary(res.data);
         // console.log(diary);
         setLoading(false);
 
     }
+
+    const getStore_Diary = async () => {
+        setLoading(true);
+        const res = await axios.get(`/diary/storelist.json/${diary_id}`);
+        // console.log(res.data);
+        setList(res.data);
+        // console.log(list);
+        setLoading(false);
+    }
+
     const onClickDelete = async (plant_name, diary_id) => {
         if (window.confirm(`${plant_name}을 삭제하시겠습니까?`)) {
             // console.log(diary_id);
@@ -36,10 +57,19 @@ const DiaryRead = () => {
         getDiary();
     }, [])
 
+    useEffect(() => {
+        getStore_Diary();
+    }, [])
+
     if (loading) return <div className='text-center my-5'><Spinner animation="border" variant="success" /></div>
     return (
         <div className='plant_wrap'>
             <div className='plant_contents'>
+                <div className='mt-3'>
+                    <Container>
+                        <DiaryTag />
+                    </Container>
+                </div>
                 <div className='text-center'>
                     <h1 className='mt-5'>상세보기</h1>
                     <div className='text-end'>
@@ -51,7 +81,11 @@ const DiaryRead = () => {
                         </span>
                     </div>
                     <div className='mt-5'>
-                        <img src={image} alt='plante' />
+                        {image ? (
+                            <img src={image} alt={`${plant_name} 이미지`} />
+                        ) : (
+                            <img src='http://via.placeholder.com/300x300' alt='대체 이미지' />
+                        )}
                         <h2 className='mt-5'><b>{plant_name} ({common_name})</b></h2>
                     </div>
                     <div className='mt-5 diarymain_cardgroup'>
@@ -110,7 +144,34 @@ const DiaryRead = () => {
                     <div className='mt-5'>
                         <Card>
                             <Card.Body>
-                                <h2>스토어연결</h2>
+                                {/* <Swiper
+                                    modules={[Navigation, Pagination]}
+                                    spaceBetween={50}
+                                    slidesPerView={3}
+                                    navigation
+                                    pagination={{ clickable: true }}
+                                    scrollbar={{ draggable: true }}
+                                > */}
+                                <h2>{common_name} 난이도 관련식물</h2>
+                                {/* <SwiperSlide> */}
+                                <Row>
+                                    {list.slice(0, 5).map(s =>
+                                        <Card style={{ width: '15rem' }} className='diary_read_store_card my-4 '>
+                                            <CardBody>
+                                                <Col>
+                                                    <div className='storeread_card'>
+                                                        <img src='/image/plant01.jpg' alt='plante' />
+                                                        <h3 className='mt-2'>{s.title}</h3>
+                                                        <h5>{s.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원</h5>
+                                                    </div>
+                                                </Col>
+                                            </CardBody>
+                                        </Card>
+                                    )}
+                                </Row>
+                                {/* </SwiperSlide>
+                                </Swiper> */}
+
                             </Card.Body>
                         </Card>
                     </div>
