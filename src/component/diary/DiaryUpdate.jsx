@@ -56,8 +56,8 @@ const DiaryInsert = () => {
     const getDiary = async () => {
         const res = await axios.get(`/diary/read/${diary_id}`);
         console.log(res.data)
-        // setinsertDiary(res.data);
-        // console.log(insertDiary);     
+        setinsertDiary(res.data);
+        console.log(insertDiary);     
     }
 
     const handleChange = (event) => {
@@ -93,7 +93,7 @@ const DiaryInsert = () => {
                     <h1 className='mt-5'>나의 식물 수정하기</h1>
                     <div className='mt-5'>
                         <img src="http://via.placeholder.com/250x250" onClick={() => img_ref.current.click()} style={{ cursor: 'pointer' }} onChange={onChange} name='image' value={image} />
-                        <input type='file' ref={img_ref} style={{ display: 'none' }} onChange={onChange} name='image' value={image} />
+                        <input type='file' ref={img_ref} style={{ display: 'none' }}  />
                         <br />
                         <Button className='diary-img-btn'>이미지 수정</Button>
                         <div>

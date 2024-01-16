@@ -11,9 +11,7 @@ const BtnToTop = () => {
 
     useEffect(() => {
         const ShowBtnClick = () => {
-
             setShowBtn(true)
-
         }
         window.addEventListener("scroll", ShowBtnClick)
         return () => {
