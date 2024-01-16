@@ -2,8 +2,8 @@
 .plant_wrap {width: 100%; margin: 0 auto;}
 .plant_contents {width: 99%; margin: 0 auto;}
 
-.first_filter_section {margin: 2rem 0 0 0; padding: 0; border: 0; vertical-align: baseline;}
-.filter_list {display: flex; flex-wrap: wrap; padding: 0;}
+.first_filter_section {margin: 2rem 0 0 0; padding: 0; border: 0; vertical-align: baseline; display: flex; justify-content: space-between;}
+.filter_list {display: flex; flex-wrap: wrap; padding: 1rem 0;}
 .filter_reset_btn {background-color: #4cc67c; border: none; border-radius: 2rem; padding: 0.6rem 1.4rem 0.6rem 1.4rem; color: #fff; font-weight: 800; line-height: 2px; margin-right: 0.5rem;}
 .filter_reset_btn img {width: 14px; height: 14px; filter: invert(1); vertical-align: middle;}
 .filter_btn {background-color: #fff; border: 1px solid #adadad; border-radius: 2rem; margin-right: 0.5rem; padding: 0.6rem 2rem 0.6rem 2rem;}
@@ -12,12 +12,15 @@
 .filter_division {border: 1px dashed #f0f0f0; margin: 0 0 1rem 2rem;}
 
 .second_filter_section {margin: 0; padding: 0; border: 0; vertical-align: baseline;}
+.search_input_searchbtn {border: none; background: none;}
+.search_input_searchbtn img {width: 26px; height: 26px;}
+.plant_admin_insert {margin-top: 17px;}
 
 .filter_btn.active {background-color: #4cc67c; color: #fff; border: 1px solid #4cc67c;}
 
-.plant_data {width: 100%; height: 2rem; margin-top: 3%;}
-.plant_layout {width: 100%; height: 100%; justify-content: center; display: flex; }
-.plant_total {width: 100%; display: flex; justify-content: center; height: 100%; justify-content: space-between;}
+.plant_data {width: 100%; height: 2rem;}
+.plant_layout {justify-content: space-between; display: flex; }
+.plant_total {display: flex; margin-top: 10px;}
 .plant_filter {display: flex; align-items: center;}
 .plant_filter button {border: none; background-color: #fff;}
 .plant_filter span {margin: 0 10px;}
@@ -30,9 +33,17 @@
 .plantlist_commonname {width: 100%; margin-top: 1rem; text-align: center; overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical;
     font-size: 15px; line-height: 20px; letter-spacing: 0.25px; font-weight: 600;}
 
+/* searchbox */
+.search_input_inputgroup {border-bottom: 1px solid #ddd; padding: 1.5%;}
+.search_input_textinput {width: 85%; border: none;}
+input:focus {outline:none;}
+
+.recipe_total_search {display: flex; justify-content: space-between;}
+
 /* DictionaryPage InsertBtn */
 .plant_insert {width: 100%; height: 40px; margin: 0;}
 .plant_insert button {width: 100px; height: 100%; border: none; background-color: #4cc67c; border-radius: 100px; color: #fff; float: right;}
+
 
 /* PlantDetailPage */
 .details_wrap {width: 100%; margin: 0 auto;}
@@ -96,11 +107,10 @@
 
 .recipe_btn {display: flex; justify-content: end;}
 .recipe_admin_btn {display: flex;}
-.recipe_insert {width: 100px; height: 45px; border: none; background-color: #4cc67c; border-radius: 50px; color: #fff;}
+.recipe_insert {width: 100px; height: 45px; border: none; background-color: #4cc67c; border-radius: 50px; color: #fff; margin-bottom: 1rem;}
 .recipe_delete {width: 100px; height: 45px; border: 1px solid #acacac; background-color: #fff; border-radius: 50px; color: #acacac; margin-left: 1rem;}
 
-.recipe_total_section {width: 100%; font-size: 14px; margin: 1rem 0;}
-
+.recipe_total_search {margin-top: 1rem;}
 .recipe_contents_section {width: 100%; height: auto; margin-top: 2rem;}
 .recipe_contents_grid {width: 100%; display: grid; grid-template-columns: repeat(auto-fill, minmax(232px, 1fr)); gap: 56px 20px; overflow-x: initial; padding: 0; margin: 0;}
 
@@ -139,11 +149,19 @@
 .recipe_mainlevel {width: 100%; padding: 0.6rem 0;}
 .recipe_mainlevel_level {margin: 0; color: #333;}
 
-.recipe_maindescription {width: 100%; padding: 0.6rem 0; margin-top: 3rem;}
+.recipe_maindescription {width: 100%; padding: 0.6rem 0; margin-top: 1.6rem;}
 
-.recipeupdate_btnarea {width: 100%; display: flex; justify-content: center; padding: 1rem 0;}
+.recipeupdate_btnarea {width: 100%; display: flex; justify-content: center; padding: 1.6rem 0;}
 .recipeupdate_submit {width: 100px; height: 40px; border: none; border-radius: 50px; background-color: #4cc67c; color: #fff; margin-right: 1rem;}
 .recipedelete_submit {width: 100px; height: 40px; border: 1px solid #acacac; border-radius: 50px; background-color: #fff; color: #acacac; margin-right: 1rem;}
+
+.recipe_mainleveltext {margin-right: 8px;}
+
+& svg {color: #ddd; cursor: pointer;}
+.recipe_insert_stars & svg:hover ~ svg {color: #ddd;}
+.yellowStar {color: #fcc419;}
+.yellowStar {margin-bottom: 5px;}
+.grayStar {margin-bottom: 5px;}
 
 /* RecipeInsertPage */
 .recipe_insert_area {width: 100%;}
@@ -152,12 +170,40 @@
 .recipe_insert_level {width: 100%; display: flex;}
 .recipe_insert_leveltext_area {margin-right: 0.4rem;}
 .recipe_insert_description {width: 100%;}
-.recipe_insertdescription_text {width: 100%; height: 380px;}
+.recipe_insertdescription_text {width: 100%; height: 380px; white-space: pre}
 
 .recipe_insert_btnsection {width: 100%; margin: 1rem 0;}
 .recipe_insert_btn {width: 20%; display: flex; margin: 0 auto; height: 40px;}
 .recipe_insert_btn button {width: 100%; height: 100%; border: none; background-color: #4cc67c; color: #fff; border-radius: 50px; font-weight: 600;}
 
-& svg {color: #ddd; cursor: pointer;}
-.recipe_insert_stars & svg:hover ~ svg {color: #ddd;}
-.yellowStar {color: #fcc419;}
+/* RecipeUpdatePage */
+.recipe_updateinsert_btn {width: 100%; margin: 1rem 0;}
+.recipe_updateinsert_btn {display: flex; justify-content: center; height: 40px;}
+.recipeupdate_cancel {width: 100px; height: 40px; border: 1px solid #acacac; border-radius: 50px; background-color: #fff; color: #acacac; margin-right: 1rem;}
+
+/* RecipeCommentPage */
+.plantrecipe_comment_wrap {width: 100%; margin-top: 2rem;}
+.plantrecipe_comment_contents {width: 100%; margin: 0 auto;}
+.plantrecipe_comment_section {border: 1px solid #ddd; border-radius: 15px; padding: 3rem; margin-bottom: 1rem;}
+.plantrecipe_comment_info {width: 100%; display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.8rem;}
+.plantrecipe_comment_user {display: flex;}
+.plantrecipe_comment_userimage {width: 30px; height: 30px; }
+.plantrecipe_comment_img {width: 100%; height: 100%; border-radius: 50%; border: 0.8px solid #ddd;}
+
+.plantrecipe_comment_usernickname p {margin: 0.2rem 0 0 0.6rem; font-weight: 600;}
+.plantrecipe_comment_date p {margin: 0.1rem 0 0 0; color: #acacac; font-size: 14px;}
+.plantrecipe_comment_comment {width: 100%; margin-bottom: 1.2rem;}
+
+.plantrecipe_comment_iconbtn {width: 100%; display: flex; justify-content: space-between;}
+.plantrecipe_comment_icon {display: flex; color: #acacac; margin-top: 0.8rem;}
+.plantrecipe_comment_btn {font-size: 12px; }
+.plantrecipe_comment_update {width: 60px; margin-right: 0.4rem; padding: 0.3rem 0; border: none; border-radius: 20px; background-color: #4cc67c; color: #fff;}
+.plantrecipe_comment_delete {width: 60px; border: none; padding: 0.3rem 0; border: 1px solid #acacac; border-radius: 20px; background-color: #fff; color: #acacac;}
+
+.plantrecipe_nocomment_section {width: 100%; border: 1px solid #ddd; border-radius: 15px; padding: 2rem; margin-bottom: 1rem;}
+.plantrecipe_comment_map {width: 94%; padding-bottom: 2rem; margin: 0 auto;}
+.plantrecipe_comment_map:last-child {padding-bottom: 0; margin-bottom: 0;}
+.plantrecipe_comment_count {width: 100%; margin-bottom: 1rem;}
+
+.plantrecipe_comment_comment {display: flex; justify-content: space-between; margin-top: 1rem; margin-bottom: 2rem;}
+.plantrecipe_comment_comment button {width: 80px; margin-left: 10px; border: none; border-radius: 5px; background-color: #4cc67c; color: #fff;}
