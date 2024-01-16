@@ -12,18 +12,21 @@ const Magazine = () => {
     const { post_id } = useParams();
     const [loading, setLoading] = useState(false);
     const [post, setPost] = useState({
-        title: '',
-        image: '',
-        view_cnt: '',
-        contents: ''
+        title:'',
+        contents:'',
+        image:'',
+        view_cnt:''
     });
-    const { title, image, view_cnt, contents } = post;
+    const {title,view_cnt,image,contents } = post;
+
     const getMagazine = async () => {
         setLoading(true);
-        const res = await axios.get('/magazine/read/' + post_id);
+        const res = await axios(`/magazine/read/${post_id}`);
+        console.log(res.data);
         setPost(res.data);
         setLoading(false);
     }
+    
     const onDelete = () => {
         setBox({
             show: true,
@@ -38,6 +41,7 @@ const Magazine = () => {
             }
         })
     }
+
     useEffect(() => {
         getMagazine();
     }, [])
@@ -60,7 +64,7 @@ const Magazine = () => {
                     </Col>
                 </Row>
                 <div className='magazine-img'>
-                    <img src={image ||'http://via.placeholder.com/150x150'} width={300} height={300}></img>
+                    <img src={image || 'http://via.placeholder.com/150x150'} width={300} height={300}></img>
                 </div>
                 <h5 className='magazine-text'>{contents}</h5>
             </div>
