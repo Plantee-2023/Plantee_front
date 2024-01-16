@@ -12,12 +12,14 @@ const DiaryInsert = () => {
     const { box, setBox } = useContext(BoxContext);
     const { diary_id } = useParams();
 
-    const [insertDiary, setinsertDiary] = useState({
-        diary_id: "",plant_name:"", image: "", contents: "", reg_date: "", fmtdate: "", last_watering: "", watering: "",
-        common_name: "", date_now: "", date_water: "", date_medicine: "", date_change: "", plant_id: ""
-    });
+    const [insertDiary, setinsertDiary] = useState("");
 
-    const { plant_name, image, contents, reg_date, fmtdate, waterdate, watering, common_name, date_now, date_water, date_medicine, date_change, plant_id } = insertDiary;
+    // const [insertDiary, setinsertDiary] = useState({
+    //     diary_id: "",plant_name:"", image: "", contents: "", reg_date: "", fmtdate: "", last_watering: "", watering: "",
+    //     common_name: "", date_now: "", date_water: "", date_medicine: "", date_change: "", plant_id: ""
+    // });
+
+    const { plant_name, image, contents, reg_date, fmtdate, watering, common_name, date_now, date_water, date_medicine, date_change, plant_id } = insertDiary;
 
     const onChange = (e) => {
         setinsertDiary({
@@ -46,12 +48,14 @@ const DiaryInsert = () => {
 
     const getList = async () => {
         const res = await axios.get(`/plant/list.json`);
+        console.log(res.data.list)
         setplants(res.data.list);
-        console.log(plants);     
+        // console.log(plants);     
     }
 
     const getDiary = async () => {
         const res = await axios.get(`/diary/read/${diary_id}`);
+        console.log(res.data)
         setinsertDiary(res.data);
         console.log(insertDiary);     
     }
@@ -60,7 +64,6 @@ const DiaryInsert = () => {
         const selectedOption = event.target.value;
         console.log(selectedOption); // 선택한 값 가져오기
         setSelectedValue(selectedOption);
-
     };
 
     const getLevel = (care_level) => {
@@ -90,7 +93,7 @@ const DiaryInsert = () => {
                     <h1 className='mt-5'>나의 식물 수정하기</h1>
                     <div className='mt-5'>
                         <img src="http://via.placeholder.com/250x250" onClick={() => img_ref.current.click()} style={{ cursor: 'pointer' }} onChange={onChange} name='image' value={image} />
-                        <input type='file' ref={img_ref} style={{ display: 'none' }} onChange={onChange} name='image' value={image} />
+                        <input type='file' ref={img_ref} style={{ display: 'none' }}  />
                         <br />
                         <Button className='diary-img-btn'>이미지 수정</Button>
                         <div>

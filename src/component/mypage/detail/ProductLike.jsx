@@ -1,6 +1,6 @@
 import React from 'react'
 import { Form, Table } from 'react-bootstrap'
-
+import '../MyPage.css'
 const ProductLike = () => {
   return (
     <div id="main_wrap">

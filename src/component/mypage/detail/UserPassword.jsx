@@ -1,5 +1,6 @@
 import React from 'react'
 import { Card, Form, InputGroup, Button } from 'react-bootstrap'
+import '../MyPage.css'
 
 const UserPassword = () => {
   return (

@@ -1,7 +1,7 @@
 import React, { useEffect, useContext } from 'react'
 import axios from 'axios';
 import { Col, Form, InputGroup, Row, Button, Table, Spinner, Card } from 'react-bootstrap'
-import { NavLink, useLocation, useNavigate, useParams } from 'react-router-dom'
+import { NavLink, useLocation, useNavigate } from 'react-router-dom'
 import { AiOutlineEdit } from "react-icons/ai";
 import { useState } from 'react';
 import Pagination from 'react-js-pagination';
@@ -10,6 +10,7 @@ import './Magazine.css'
 import { BoxContext } from '../common/BoxContext'
 
 const MagazineList = () => {
+    const [searchTerm, setSearchTerm] = useState('');
     const { box, setBox } = useContext(BoxContext);
     const navi = useNavigate();
     const size = 5;
@@ -24,7 +25,7 @@ const MagazineList = () => {
 
     const getMagazineList = async () => {
         setLoading(true);
-        const res = await axios.get(`/magazine/list.json?query=${query}&page=${page}&size=${size}`);
+        const res = await axios.get(`/magazine/list.json?query=${searchTerm}&page=${page}&size=${size}`);
         console.log(res.data)
         setMagazine(res.data.list);
         setTotal(res.data.total);
@@ -32,18 +33,24 @@ const MagazineList = () => {
     }
     const onSubmit = (e) => {
         e.preventDefault();
-        if (query == '') {
+        if (searchTerm == '') {
             setBox({
                 show: true,
                 message: "검색어를 입력하세요"
             })
         } else {
-            navi(`${path}?query=${query}&page=1`)
+            navi(`${path}?query=${searchTerm}&page=1&size=${size}`)
         }
     }
     const onChangePage = (page) => {
-        navi(`${path}?page=${page}&query=${query}&size=${size}`);
+        navi(`${path}?page=${page}&query=${searchTerm}&size=${size}`);
     }
+
+    const handleSearchChange = (event) => {
+        setSearchTerm(event.target.value);
+    };
+
+    const filteredList = magazine.filter((item) => item.title.toLowerCase().includes(searchTerm.toLowerCase()));
 
     useEffect(() => {
         getMagazineList();
@@ -58,7 +65,7 @@ const MagazineList = () => {
                     <Col>
                         <form onSubmit={onSubmit}>
                             <InputGroup className='search'>
-                                <Form.Control type='search' value={query} onChange={(e) => setQuery(e.target.value)} placeholder='검색어' />
+                                <Form.Control type='search' value={searchTerm} onChange={handleSearchChange} placeholder='검색어' />
                                 <Button className='magazine-btn'>검색</Button>
                             </InputGroup>
                         </form>
@@ -81,7 +88,7 @@ const MagazineList = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {magazine.map(m =>
+                        {filteredList.map(m =>
                             <tr key={m.post_id}>
                                 <td><NavLink style={{ color: '#000000' }} to={`/magazine/read/${m.post_id}`}>{m.title}</NavLink></td>
                                 <td style={{ width: '100px' }} className='text-center'>{m.nickname}</td>

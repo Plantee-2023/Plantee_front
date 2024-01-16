@@ -48,26 +48,32 @@ const DiaryList = () => {
                         <h2 className='mb-5'>물 주기</h2>
                         <div className='diarylist_cardgroup'>
                             {list.map(d =>
-                                <div>
-                                    {d.date_water > -3 && (
-                                        <Card style={{ width: '40rem' }} className='diarylist_card'>
-                                            <CardBody>
-                                                <Row>
-                                                    <Col md={4}>
-                                                        <img src={d.image} width={150} height={150} />
-                                                    </Col>
-                                                    <Col className='list_col'>
-                                                        <h3>
-                                                            {d.plant_name}
-                                                        </h3>
-                                                        <form>
-                                                            {d.fmtdate}
-                                                        </form>
-                                                    </Col>
-                                                </Row>
-                                            </CardBody>
-                                        </Card>
-                                    )}
+                                <div className="diary_detail">
+                                    <Link to={`/diary/read/${d.diary_id}`}>
+                                        {d.date_water < 7 && (
+                                            <Card style={{ width: '40rem' }} className='diarylist_card'>
+                                                <CardBody>
+                                                    <Row>
+                                                        <Col md={4}>
+                                                            {d.image ? (
+                                                                <img src={d.image} width={150} height={150} />
+                                                            ) : (
+                                                                <img src='http://via.placeholder.com/150x150' alt='대체 이미지' />
+                                                            )}
+                                                        </Col>
+                                                        <Col className='list_col'>
+                                                            <h3>
+                                                                {d.plant_name}
+                                                            </h3>
+                                                            <form>
+                                                                {d.fmtdate}
+                                                            </form>
+                                                        </Col>
+                                                    </Row>
+                                                </CardBody>
+                                            </Card>
+                                        )}
+                                    </Link>
                                 </div>
                             )}
                         </div>
@@ -79,26 +85,32 @@ const DiaryList = () => {
                         <h2 className='mb-5'>분갈이 해주기</h2>
                         <div className='diarylist_cardgroup'>
                             {list.map(d =>
-                                <div>
-                                    {d.date_medicine > -3 && (
-                                        <Card style={{ width: '40rem' }} className='diarylist_card'>
-                                            <CardBody>
-                                                <Row>
-                                                    <Col md={4}>
-                                                        <img src={d.image} width={150} height={150} />
-                                                    </Col>
-                                                    <Col className='list_col'>
-                                                        <h3>
-                                                            {d.plant_name}
-                                                        </h3>
-                                                        <form>
-                                                            {d.fmtdate}
-                                                        </form>
-                                                    </Col>
-                                                </Row>
-                                            </CardBody>
-                                        </Card>
-                                    )}
+                                <div className="diary_detail">
+                                    <Link to={`/diary/read/${d.diary_id}`}>
+                                        {d.date_medicine <= 20 && (
+                                            <Card style={{ width: '40rem' }} className='diarylist_card'>
+                                                <CardBody>
+                                                    <Row>
+                                                        <Col md={4}>
+                                                            {d.image ? (
+                                                                <img src={d.image} width={150} height={150} />
+                                                            ) : (
+                                                                <img src='http://via.placeholder.com/150x150' alt='대체 이미지' />
+                                                            )}
+                                                        </Col>
+                                                        <Col className='list_col'>
+                                                            <h3>
+                                                                {d.plant_name}
+                                                            </h3>
+                                                            <form>
+                                                                {d.fmtdate}
+                                                            </form>
+                                                        </Col>
+                                                    </Row>
+                                                </CardBody>
+                                            </Card>
+                                        )}
+                                    </Link>
                                 </div>
                             )}
                         </div>
@@ -110,34 +122,41 @@ const DiaryList = () => {
                         <h2 className='mb-5'>영양제 주기</h2>
                         <div className='diarylist_cardgroup'>
                             {list.map(d =>
-                                <div>
-                                    {d.date_change > -3 && (
-                                        <Card style={{ width: '40rem' }} className='diarylist_card'>
-                                            <CardBody>
-                                                <Row>
-                                                    <Col md={4}>
-                                                        <img src={d.image} width={150} height={150} />
-                                                    </Col>
-                                                    <Col className='list_col'>
-                                                        <h3>
-                                                            {d.plant_name}
-                                                        </h3>
-                                                        <form>
-                                                            {d.fmtdate}
-                                                        </form>
-                                                    </Col>
-                                                </Row>
-                                            </CardBody>
-                                        </Card>
-                                    )}
+                                <div className="diary_detail">
+                                    <Link to={`/diary/read/${d.diary_id}`}>
+                                        {d.date_change < 30 && (
+                                            <Card style={{ width: '40rem' }} className='diarylist_card'>
+                                                <CardBody>
+                                                    <Row>
+                                                        <Col md={4}>
+                                                            {/* <img src={d.image} width={150} height={150} /> */}
+                                                            {d.image ? (
+                                                                <img src={d.image} width={150} height={150} />
+                                                            ) : (
+                                                                <img src='http://via.placeholder.com/150x150' alt='대체 이미지' />
+                                                            )}
+                                                        </Col>
+                                                        <Col className='list_col'>
+                                                            <h3>
+                                                                {d.plant_name}
+                                                            </h3>
+                                                            <form>
+                                                                {d.fmtdate}
+                                                            </form>
+                                                        </Col>
+                                                    </Row>
+                                                </CardBody>
+                                            </Card>
+                                        )}
+                                    </Link>
                                 </div>
                             )}
                         </div>
                     </div>
                 </div>
+                <BtnToTop/>
             </div>
-            <BtnToTop />
-        </div>
+        </div >
     )
 }
 
