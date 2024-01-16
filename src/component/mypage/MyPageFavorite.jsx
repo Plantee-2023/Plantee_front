@@ -17,7 +17,7 @@ const MyPageFavorite = () => {
                     </thead>
                     <tbody className='text-center'>
                         <tr>
-                            <td>캐논</td>
+                            <td>메롱</td>
                             <td>10</td>
                             <td>10</td>
                             <td>10</td>

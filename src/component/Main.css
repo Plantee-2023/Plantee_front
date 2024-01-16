@@ -11,8 +11,8 @@
     .main_btn {
         margin-right: 10px;
         margin-top: 10px;
-        background-color: #4cc67c;
-        border-color: #4cc67c;
+        background-color: #07955C;
+        border-color: #07955C;
     }
 
     /* Button to Top */
@@ -28,18 +28,18 @@
         border-radius: 50px;
     }
 
-/* menu_search */
-.menu_header {
-    width: 99%;
-    padding: 1rem 0 0;
-    display: flex;
-    justify-content: space-between;
-}
+    /* menu_search */
+    .menu_header {
+        width: 99%;
+        padding: 1rem 0 0;
+        display: flex;
+        justify-content: space-between;
+    }
 
-.menu_logo img {
-    width: 140px;
-    margin-bottom: 0.6rem;
-}
+    .menu_logo img {
+        width: 140px;
+        margin-bottom: 0.6rem;
+    }
 
     .menu_left {
         display: flex;
@@ -125,9 +125,9 @@
         font-weight: 900;
         text-align: start;
         font-size: 35px;
-    }  
+    }
 
-    
+
 
     /* 회원 가입 */
     .join-card {
