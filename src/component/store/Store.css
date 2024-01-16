@@ -7,6 +7,12 @@
 .store_tag_badge{background-color: #fff; border: 1px solid #adadad; border-radius: 30px; color: #333333; padding-left: 0.5rem; padding-right: 0.5rem; justify-content: center; align-items: center;}
 .btn_common{background-color: #4cc67c; border: none; border-radius: 30px; color: #fff; padding: 0 25px 0 25px; height: 100%; justify-content: center; align-items: center;}
 
+.ellipsis1 { overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; }
+.ellipsis2 { overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+
+/* Button to Top */
+.btn_top {position: fixed; bottom: 10%; right: 3rem; background-color: #4cc37c; color: white; border: #4cc37c; width: 50px; height: 50px; border-radius: 50px;}
+
 /* 검색바 */
 .button_hide {background-color: #ffffff; border: #ffffff;}
 .store_filterbtn_group {margin-top: 2%;}
@@ -28,6 +34,7 @@ input:focus {outline:none;}
 .store_contents a {text-decoration: none; color: #000;}
 
 /* 스토어 상품 상세페이지 */
+
 .store_layout {display: flex; flex-wrap: wrap; padding-top: 3rem; width: 1000px; margin: 0 auto;}
 .store_img_section {width: 425px; margin: 0 56px 0 0; position: relative;}
 .store_img_section img {width: 500px; height: 500px;}
@@ -39,6 +46,9 @@ input:focus {outline:none;}
 .store_maintitle {font-size: 28px; font-weight: 600;}
 .store_subtitle {font-size: 20px; font-weight: 600;}
 
+.store_items {margin-bottom: 0.7rem; display: flex; flex-wrap: wrap; list-style: none; margin-left: -2rem;}
+.store_item {margin-bottom: 0.5rem; width: 90px; height: 30px; line-height: 30px; text-align: center; border-radius: 15px; border: 1px solid #ddd; font-size: 14px; margin-right: 10px;}
+
 .store_simpleinfo_section {width: 100%; padding: 0;}
 
 .select_box {background-color: #fff; border: 1px solid #adadad; border-radius: 10px; color: #333333; padding: 7px;}
@@ -48,3 +58,24 @@ input:focus {outline:none;}
 
 /* 스토어 댓글 관련 */
 .comment_contents {padding-top: 10px;}
+.store_editor .ck .ck-editor__editable:not(.ck-editor__nested-editable) { min-height: 200px; margin-bottom: 20px; }
+
+& svg {color: #ddd; cursor: pointer;}
+.store_insert_stars & svg:hover ~ svg {color: #ddd;}
+.yellowStar {color: #fcc419;}
+
+/* PlantInsertPage */
+.insert_simpleinfo_section {width: 100%; padding: 0;}
+.insert_textarea {width: 100%; margin: 1rem 0 0 0; display: flex; flex-wrap: wrap;}
+.insert_title {width: 100%; margin-bottom: 0.5rem;}
+.insert_info {width: 32.6%; margin-bottom: 0.6rem; margin-right: 0.5rem;}
+.insert_info:nth-child(4) {margin-right: 0;}
+.insert_info:nth-child(7) {margin-right: 0;}
+.insert_info:nth-child(10) {margin-right: 0;}
+.insert_inputgrouptext {width: 108px;}
+.insert_contents {width: 100%;}
+.insert_contents_form {width: 100%; height: 200px;}
+.plantinsert_section {width: 100%; margin: 1rem 0 0 0;}
+.plantinsert_btngroup {width: 35%; display: flex; margin: 0 auto;}
+.insert_submit {width: 120px; height: 40px; border: none; border-radius: 50px; background-color: #4cc67c; color: #fff; margin-right: 1rem;}
+.insert_cancel {width: 120px; height: 40px; border: 1px solid #acacac; border-radius: 50px; background-color: #fff; color: #acacac;}

@@ -3,7 +3,6 @@ import { Card, Form, InputGroup, Button, Spinner } from 'react-bootstrap'
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 
-
 const UserPassword = () => {
   const { uid } = useParams();
   const [user, setUser] = useState([]);

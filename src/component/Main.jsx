@@ -3,8 +3,13 @@ import axios from 'axios';
 import { Row, Col, InputGroup, Button, Card, Carousel, Spinner } from 'react-bootstrap';
 import { CgChevronRight } from "react-icons/cg";
 import { MdFavoriteBorder } from "react-icons/md";
-import { FaRegBookmark } from "react-icons/fa6";
 import { LiaComment } from "react-icons/lia";
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css/bundle';
+import { Navigation, Pagination, Autoplay } from 'swiper/modules';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import 'swiper/css/autoplay';
 import './Main.css'
 
 const Main = () => {
@@ -16,15 +21,14 @@ const Main = () => {
 
     const getMain = async () => {
         setLoading(true);
-        // const res = await axios.get(`/store/list.json`);
-        // const res1 = await axios.get(`/magazine/list.json`);
-        //const res2 = await axios.get(`/comm/list.json`); //커뮤니티
-        //const res3 = await axios.get(`/plant/list.json`); // 플랜트
-        // setStore(res.data.list);
-        // setMagazine(res1.data.list);
-        // console.log(res1.data.list);
-        // setCommunity(res2.data.list);
-        // setPlants(res3.data.list);
+        const res = await axios.get(`/store/list.json`);
+        const res1 = await axios.get(`/magazine/list.json?query=''&page=1&size=8`);
+        //const res2 = await axios.get(`/comm/list.json?category=3&page=1&size=10&query=''`); //커뮤니티
+        const res3 = await axios.get(`/plant/list.json`); // 플랜트
+        setStore(res.data.list);
+        setMagazine(res1.data.list);
+        //setCommunity(res2.data.list);
+        setPlants(res3.data.list);
         setLoading(false);
     }
     useEffect(() => {
@@ -35,20 +39,18 @@ const Main = () => {
     return (
         <div id="main_wrap">
             <div className='main_contents'>
-                <Carousel className='main-carousel'>
-                    <Carousel.Item>
-                        <img src='/image/1.jpg' width={1280} height={300} />
-                    </Carousel.Item>
-                    <Carousel.Item>
-                        <img src='/image/2.jpg' width={1280} height={300} />
-                    </Carousel.Item>
-                    <Carousel.Item>
-                        <img src='/image/3.jpg' width={1280} height={300} />
-                    </Carousel.Item>
-                    <Carousel.Item>
-                        <img src='/image/4.jpg' width={1280} height={300} />
-                    </Carousel.Item>
-                </Carousel>
+                <Swiper
+                    modules={[Navigation, Autoplay]}
+                    spaceBetween={50}
+                    slidesPerView={1}
+                    autoplay={{ delay: 2000 }}
+                    navigation
+                    style={{"--swiper-navigation-color": "#ffffff"}}>
+                    <SwiperSlide><img src='/image/1.jpg' width={1280} height={300} /></SwiperSlide>
+                    <SwiperSlide><img src='/image/2.jpg' width={1280} height={300} /></SwiperSlide>
+                    <SwiperSlide><img src='/image/3.jpg' width={1280} height={300} /></SwiperSlide>
+                    <SwiperSlide><img src='/image/4.jpg' width={1280} height={300} /></SwiperSlide>
+                </Swiper>
                 <Row className='mt-5'>
                     <Col>
                         <div className='main-title mb-3'>
@@ -61,28 +63,31 @@ const Main = () => {
                         </a>
                     </Col>
                 </Row>
-                <Carousel className='mb-5 mt-5'>
-                    {/* {store.map(s =>
-                        <Carousel.Item>
-                            <Row>
-                                <Col key={s.store_id}>
-                                    <Card>
-                                        <Card.Body >
-                                            <Card.Img width={200} height={200} >{s.image}</Card.Img>
-                                            <Card.Body className='main_text'>
-                                                <div>이름 : {s.title}</div><br />
-                                                <div>가격 : {s.fmtprice}</div>
-                                            </Card.Body>
-                                        </Card.Body>
-                                        <Card.Footer className='text-start'>
-                                            {s.like_cnt} <MdFavoriteBorder /> {s.review_cnt} <LiaComment size={20} />
-                                        </Card.Footer>
-                                    </Card>
-                                </Col>
-                            </Row>
-                        </Carousel.Item>
-                    )} */}
-                </Carousel>
+                <Swiper
+                    modules={[Navigation, Autoplay]}
+                    spaceBetween={70}
+                    slidesPerView={4}
+                    autoplay={{ delay: 2000 }}
+                    navigation
+                    style={{"--swiper-navigation-color": "#ffffff"}}>
+                    {store.map(s =>
+                        <SwiperSlide>
+                            <Card>
+                                <Card.Body >
+                                    <Card.Img src={s.image || 'http://via.placeholder.com/150x150'} width={200} height={200} >
+                                    </Card.Img>
+                                    <Card.Body className='main_text'>
+                                        <div>이름 : {s.title}</div><br />
+                                        <div>가격 : {s.fmtprice}</div>
+                                    </Card.Body>
+                                </Card.Body>
+                                <Card.Footer className='text-start'>
+                                    {s.like_cnt} <MdFavoriteBorder /> {s.review_cnt} <LiaComment size={20} />
+                                </Card.Footer>
+                            </Card>
+                        </SwiperSlide>
+                    )}
+                </Swiper>
                 <Row>
                     <Col>
                         <div className='main-title mb-4'>
@@ -101,27 +106,29 @@ const Main = () => {
                     <Button className='main_btn'>태그</Button>
                     <Button className='main_btn'>태그</Button>
                 </InputGroup>
-                <Carousel className='mb-5 mt-5'>
+                <Swiper
+                    modules={[Navigation, Pagination, Autoplay]}
+                    spaceBetween={70}
+                    slidesPerView={4}
+                    autoplay={{ delay: 2000 }}
+                    navigation
+                    style={{"--swiper-navigation-color": "#ffffff"}}>
                     {plants.map(p =>
-                        <Carousel.Item>
-                            <Row>
-                                <Col key={p.plant_id}>
-                                    <Card>
-                                        <Card.Body>
-                                            <Card.Img width={200} height={200} ></Card.Img>
-                                            <Card.Body>
-                                                <div>이름 : {p.common_name}</div>
-                                                <div>난이도 : {p.care_level}단계</div>
-                                                <div>햇빛 : {p.sunlight}</div>
-                                                <div>물주기 : {p.watering}</div>
-                                            </Card.Body>
-                                        </Card.Body>
-                                    </Card>
-                                </Col>
-                            </Row>
-                        </Carousel.Item>
+                        <SwiperSlide>
+                            <Card className='mt-5 mb-5'>
+                                <Card.Body>
+                                    <Card.Img src={p.image || 'http://via.placeholder.com/150x150'} width={200} height={200} ></Card.Img>
+                                    <Card.Body>
+                                        <div>이름 : {p.common_name}</div>
+                                        <div>난이도 : {p.care_level}단계</div>
+                                        <div>햇빛 : {p.sunlight}</div>
+                                        <div>물주기 : {p.watering}</div>
+                                    </Card.Body>
+                                </Card.Body>
+                            </Card>
+                        </SwiperSlide>
                     )}
-                </Carousel>
+                </Swiper>
                 <Row>
                     <Col>
                         <div className='main-title mb-3'>
@@ -134,12 +141,6 @@ const Main = () => {
                         </a>
                     </Col>
                 </Row>
-                <InputGroup>
-                    <Button className='main_btn'>태그</Button>
-                    <Button className='main_btn'>태그</Button>
-                    <Button className='main_btn'>태그</Button>
-                    <Button className='main_btn'>태그</Button>
-                </InputGroup>
                 <Carousel className='mb-5 mt-5'>
                     {/* {community.map(c =>
                         <Carousel.Item>
@@ -154,7 +155,7 @@ const Main = () => {
                                             </Card.Body>
                                         </Card.Body>
                                         <Card.Footer className='text-start'>
-                                            {c.like_cnt} <MdFavoriteBorder /> {c.view_cnt} <FaRegBookmark /> {c.coment_cnt} <LiaComment size={20} />
+                                            {c.like_cnt} <MdFavoriteBorder /> {c.view_cnt} : {c.coment_cnt} <LiaComment size={20} />
                                         </Card.Footer>
                                     </Card>
                                 </Col>
@@ -169,27 +170,27 @@ const Main = () => {
                         </h2>
                     </Col>
                 </Row>
-                <Carousel className='mb-5 mt-5'>
-                    {/* {magazine.map(m =>
-                        <Carousel.Item>
-                            <Row>
-                                <Col key={m.post_id}>
-                                    <Card>
-                                        <Card.Body>
-                                            <Card.Img src='/image/what1.jpg' width={200} height={200} />
-                                            <hr />
-                                            <div>제목 : {m.title}</div>
-                                            <div>내용 : {m.contents}</div>
-                                        </Card.Body>
-                                        <Card.Footer className='text-start'>
-                                            {m.like_cnt} <MdFavoriteBorder /> {m.coment_cnt} <LiaComment size={20} />
-                                        </Card.Footer>
-                                    </Card>
-                                </Col>
-                            </Row>
-                        </Carousel.Item>
-                    )} */}
-                </Carousel>
+                <Swiper
+                    modules={[Navigation, Autoplay]}
+                    spaceBetween={70}
+                    slidesPerView={4}
+                    autoplay={{ delay: 2000 }}
+                    navigation={true}
+                    style={{"--swiper-navigation-color": "#ffffff"}}>
+                    {magazine.map(m =>
+                        <SwiperSlide>
+                            <Card>
+                                <Card.Body>
+                                    <Card.Img src={m.image || 'http://via.placeholder.com/150x150'} width={200} height={200} />
+                                    <hr />
+                                    <div>제목 : {m.title}</div>
+                                    <hr />
+                                    <div>내용 : {m.contents}</div>
+                                </Card.Body>
+                            </Card>
+                        </SwiperSlide>
+                    )}
+                </Swiper>
             </div>
         </div>
     )

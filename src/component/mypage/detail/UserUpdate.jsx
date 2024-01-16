@@ -60,6 +60,7 @@ const UserUpdate = () => {
         getList();
     }, []);
 
+
     if (loading) return <div className='text-center'><Spinner /></div>
 
     return (
@@ -90,6 +91,7 @@ const UserUpdate = () => {
                     <Form.Check label="꽃집 사장님"></Form.Check>
                 </Form>
                 <InputGroup className='join-input'>
+
                     <InputGroup.Text className='update-text'>사업자 등록증</InputGroup.Text>
                     <Form.Control />
                     <button className='update-btn'>파일 검색</button>
@@ -98,6 +100,7 @@ const UserUpdate = () => {
             <div className='text-center'>
                 <Button className='mt-4 join-add' onClick={() => onSubmit()}>정보수정</Button>
                 <Button className='mt-4 join-add' type='reset'>취소</Button>
+
             </div>
         </div>
     )
