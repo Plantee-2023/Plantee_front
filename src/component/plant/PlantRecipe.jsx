@@ -12,7 +12,7 @@ const PlantRecipe = () => {
   const [recipe, setrecipe] = useState([]);
   const [total, setTotal] = useState(0);
   const [searchTerm, setSearchTerm] = useState('');
-
+  const [selectedCareLevel, setSelectedCareLevel] = useState(null);
 
   // 레시피 글쓰기 버튼 클릭 시
   const onClickInsertRecipe = () => {
@@ -50,6 +50,10 @@ const PlantRecipe = () => {
     setSearchTerm(event.target.value);
   };
 
+  const handleCareLevelFilter = (careLevel) => {
+    setSelectedCareLevel((prevCareLevel) => (prevCareLevel === careLevel ? null : careLevel));
+  };
+
   const filteredList = recipe.filter((item) => item.title.toLowerCase().includes(searchTerm.toLowerCase()));
 
   useEffect(() =>{
@@ -77,14 +81,6 @@ const PlantRecipe = () => {
   return (
     <div className='recipe_wrap'>
       <div className='recipe_contents'>
-      <div className='diary_searchwrap'>
-          <form>
-            <InputGroup className='diary_searchinputwrap'>
-              <input type='search' className='diary_searchinput' placeholder='검색어를 입력해주세요.' value={searchTerm} onChange={handleSearchChange}/>
-              <button className='diary_searchbtn' type='submit'><img src='/image/search_icon.png' /></button>
-            </InputGroup>
-          </form>
-        </div>
         <div className='recipe_select_section'>
           <div className='recipe_filter'>
             <div className='recipe_select'>
@@ -94,18 +90,28 @@ const PlantRecipe = () => {
               <a>인기순</a>
             </div>
             <div className='recipe_select'>
-              <a>난이도순</a>
+              <a type='button' onClick={() => handleCareLevelFilter(1)}>난이도순</a>
             </div>
           </div>
           <div className='recipe_btn'>
             <button className='recipe_insert' onClick={() => onClickInsertRecipe()}>글쓰기</button>
           </div>
         </div>
-
-        <div className='recipe_total_section'>
-          <span>총 레시피 수 : <strong>{total}</strong></span>
+        <div className='plant_data'>
+          <div className='plant_layout'>
+            <div className='plant_total'>
+              <span>총 레시피 수 : <strong>{total}</strong></span>
+            </div>
+            <div className='search_input_wrap'>
+              <form>
+                <InputGroup className='search_input_inputgroup'>
+                  <input type='search' className='search_input_textinput' placeholder='검색어를 입력해주세요.' value={searchTerm} onChange={handleSearchChange}/>
+                  <button className='search_input_searchbtn' type='submit'><img src='/image/search_icon.png' /></button>
+                </InputGroup>
+              </form>
+            </div>
+          </div>
         </div>
-
         <div className='recipe_contents_section'>
           <div className='recipe_contents_grid'>
             {filteredList.map(r => 
