@@ -72,10 +72,10 @@ const RouterPage = () => {
 
             {/* 메인, 매거진 */}
             <Route path='/' element={<Main />} />
-            <Route path='/magazine/read/:post_id' element={<Magazine />} />
+            <Route path='/magazine/read/:magazine_num' element={<Magazine />} />
             <Route path='/magazine/magazineList' element={<MagazineList />} />
             <Route path='/magazine/magazineinsert' element={<MagazineInsert />} />
-            <Route path='/magazine/update/:post_id' element={<MagazineUpdate />} />
+            <Route path='/magazine/update/:magazine_num' element={<MagazineUpdate />} />
             <Route path='/mypage/mypagefavorite' element={<MyPageFavorite/>} />
             <Route path='/mypage/mypagecomment' element={<MyPageComment/>} />
 

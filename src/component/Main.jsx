@@ -22,9 +22,9 @@ const Main = () => {
     const getMain = async () => {
         setLoading(true);
 
-        const res = await axios.get(`/store/list.json`);
+        const res = await axios.get(`/store/list.json?page=1&size=20&query=""`);
         const res1 = await axios.get(`/magazine/list.json?query=''&page=1&size=8`);
-        //const res2 = await axios.get(`/comm/list.json?category=3&page=1&size=10&query=''`); //커뮤니티
+        //const res2 = await axios.get(`/comm/list.json?category=3&page=1&size=5&query=""`); //커뮤니티
         const res3 = await axios.get(`/plant/list.json`); // 플랜트
         setStore(res.data.list);
         setMagazine(res1.data.list);
@@ -101,12 +101,6 @@ const Main = () => {
                         </a>
                     </Col>
                 </Row>
-                <InputGroup>
-                    <Button className='main_btn'>태그</Button>
-                    <Button className='main_btn'>태그</Button>
-                    <Button className='main_btn'>태그</Button>
-                    <Button className='main_btn'>태그</Button>
-                </InputGroup>
                 <Swiper
                     modules={[Navigation, Pagination, Autoplay]}
                     spaceBetween={70}

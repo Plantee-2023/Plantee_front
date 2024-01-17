@@ -20,7 +20,6 @@ const MagazineList = () => {
     const path = location.pathname;
     const [loading, setLoading] = useState(false);
     const page = search.get("page") ? parseInt(search.get("page")) : 1;
-    const [query, setQuery] = useState(search.get("query") ? search.get("query") : "");
     const [magazine, setMagazine] = useState([]);
 
     const getMagazineList = async () => {
@@ -89,8 +88,8 @@ const MagazineList = () => {
                     </thead>
                     <tbody>
                         {filteredList.map(m =>
-                            <tr key={m.post_id}>
-                                <td><NavLink style={{ color: '#000000' }} to={`/magazine/read/${m.post_id}`}>{m.title}</NavLink></td>
+                            <tr key={m.magazine_num}>
+                                <td><NavLink style={{ color: '#000000' }} to={`/magazine/read/${m.magazine_num}`}>{m.title}</NavLink></td>
                                 <td style={{ width: '100px' }} className='text-center'>{m.nickname}</td>
                                 <td style={{ width: '300px' }} className='text-center'>{m.red_date}</td>
                                 <td style={{ width: '100px' }} className='text-center'>{m.view_cnt}</td>

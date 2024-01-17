@@ -5,71 +5,85 @@ import { useState } from 'react';
 import { Spinner, Row, Col, Button } from 'react-bootstrap';
 import { NavLink, useParams, useNavigate } from 'react-router-dom';
 import { BoxContext } from '../common/BoxContext'
+import { app } from '../../firebaseInit'
+import { getFirestore, setDoc, doc, getDoc } from 'firebase/firestore'
+import { getStorage, uploadBytes, ref, getDownloadURL } from 'firebase/storage'
 
 const Magazine = () => {
+    const db = getFirestore(app);
+    const storage = getStorage(app);
+    const [filename, setFileName] = useState('https:via.placeholder.com/200x200');
+
     const navi = useNavigate();
     const { box, setBox } = useContext(BoxContext);
-    const { post_id } = useParams();
+    const { magazine_num } = useParams();
     const [loading, setLoading] = useState(false);
     const [post, setPost] = useState({
-        title:'',
-        contents:'',
-        image:'',
-        view_cnt:''
+        title: '',
+        contents: '',
+        image: '',
+        view_cnt: '',
+        uid:'admin'
     });
-    const {title,view_cnt,image,contents } = post;
+    const { title, view_cnt, image, contents, uid } = post;
 
     const getMagazine = async () => {
         setLoading(true);
-        const res = await axios(`/magazine/read/${post_id}`);
-        console.log(res.data);
-        setPost(res.data);
-        setLoading(false);
-    }
-    
-    const onDelete = () => {
-        setBox({
-            show: true,
-            message: `매거진을 삭제하시겠습니까?`,
-            action: async () => {
-                await axios.get(`/magazine/delete/${post_id}`);
-                setBox({
-                    show: true,
-                    message: "삭제 완료되었습니다."
-                })
-                navi(`/magazine/magazineList`);
-            }
-        })
+        try {
+            const res = await axios(`/magazine/read/${magazine_num}`);
+            setPost(res.data);
+            const result = await getDoc(doc(db, 'user', uid));
+            setPost(result.data());
+            setFileName(result.data().image ? result.data().image : 'https://via.placeholder.com/200x200');
+            setLoading(false);
+        } catch (error) {
+            alert(error.message);
+        }
     }
 
-    useEffect(() => {
-        getMagazine();
-    }, [])
+        const onDelete = () => {
+            setBox({
+                show: true,
+                message: `매거진을 삭제하시겠습니까?`,
+                action: async () => {
+                    await axios.get(`/magazine/delete/${magazine_num}`);
+                    setBox({
+                        show: true,
+                        message: "삭제 완료되었습니다."
+                    })
+                    navi(`/magazine/magazineList`);
+                }
+            })
+        }
 
-    if (loading) return <div className='text-center my-5'><Spinner animation="border" variant="success" /></div>
-    return (
-        <div id="main_wrap">
-            <div className="main_contents">
-                <h1 className='magazine-title'>{title}</h1>
-                <hr />
-                <Row>
-                    {sessionStorage.getItem("uid") === "admin" &&
+        useEffect(() => {
+            getMagazine();
+        }, [])
+
+        if (loading) return <div className='text-center my-5'><Spinner animation="border" variant="success" /></div>
+        return (
+            <div id="main_wrap">
+                <div className="main_contents">
+                    <h1 className='magazine-title'>{title}</h1>
+                    <hr />
+                    <Row>
+                        {sessionStorage.getItem("uid") === "admin" &&
+                            <Col>
+                                <NavLink to={`/magazine/update/${magazine_num}`} className='magazine-update-btn btn'>수정하기</NavLink>
+                                <Button onClick={onDelete} className='magazine-update-btn ms-2'>삭제하기</Button>
+                            </Col>
+                        }
                         <Col>
-                            <NavLink to={`/magazine/update/${post_id}`} className='magazine-update-btn btn'>수정하기</NavLink>
-                            <Button onClick={onDelete} className='magazine-update-btn ms-2'>삭제하기</Button>
+                            <div className='magazine-count'>조회수 : {view_cnt}</div>
                         </Col>
-                    }
-                    <Col>
-                        <div className='magazine-count'>조회수 : {view_cnt}</div>
-                    </Col>
-                </Row>
-                <div className='magazine-img'>
-                    <img src={image || 'http://via.placeholder.com/150x150'} width={300} height={300}></img>
+                    </Row>
+                    <div className='magazine-img'>
+                        <img src={image || 'http://via.placeholder.com/150x150'} width={300} height={300}></img>
+                    </div>
+                    <h5 className='magazine-text'>{contents}</h5>
                 </div>
-                <h5 className='magazine-text'>{contents}</h5>
             </div>
-        </div>
-    )
-}
+        )
+    }
 
-export default Magazine
+    export default Magazine

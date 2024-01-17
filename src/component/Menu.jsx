@@ -74,22 +74,22 @@ const Menu = () => {
                                                             <ul>
                                                                 <li>
                                                                     <Card className='menu-card1'><a href='/diary/calendar'>
-                                                                        <CiCalendar className='menu-toast-icon' /></a></Card>
+                                                                        <CiCalendar className='menu-toast-icon' style={{color:'black'}} /></a></Card>
                                                                     <div className='menu-toast-text'>캘린더</div>
                                                                 </li>
                                                                 <li>
-                                                                    <Card className='menu-card2'><a href='/plant/recipe'>
-                                                                        <PiCookingPot className='menu-toast-icon' /></a></Card>
+                                                                    <Card className='menu-card2'><a href='/recipe'>
+                                                                        <PiCookingPot className='menu-toast-icon' style={{color:'black'}} /></a></Card>
                                                                     <div className='menu-toast-text'>레시피</div>
                                                                 </li>
                                                                 <li>
                                                                     <Card className='menu-card3'><a href='/mypage/mypagecomment'>
-                                                                        <TfiWrite className='menu-toast-icon' /></a></Card>
+                                                                        <TfiWrite className='menu-toast-icon' style={{color:'black'}}/></a></Card>
                                                                     <div className='menu-toast-text'>나의 글</div>
                                                                 </li>
                                                                 <li>
                                                                     <Card className='menu-card4'><a href='/mypage/mypagefavorite'>
-                                                                        <MdFavoriteBorder className='menu-toast-icon' /></a></Card>
+                                                                        <MdFavoriteBorder className='menu-toast-icon' style={{color:'black'}} /></a></Card>
                                                                     <div className='menu-toast-text'>좋아요</div>
                                                                 </li>
                                                             </ul>
