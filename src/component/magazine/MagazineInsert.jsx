@@ -1,7 +1,7 @@
 import axios from 'axios'
 import React, { useRef, useState, useContext, useEffect } from 'react'
 import { Button, Card, Form, Spinner } from 'react-bootstrap'
-import { useNavigate} from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { BoxContext } from '../common/BoxContext'
 import { app } from '../../firebaseInit'
 import { getFirestore, setDoc, doc, getDoc } from 'firebase/firestore'
@@ -22,17 +22,15 @@ const MagazineInsert = () => {
         contents: '',
         title: '',
         image: '',
-        category: 7,
-        user_id: 1,
-        nickname: 'admin',
-        uid: 'admin'
+        uid: 'admin',
+        magazine_num : ''
     });
-    
-    const { contents, title, image, category, user_id, nickname, uid } = form;
 
-    useEffect(()=>{
+    const { contents, title, image, uid, magazine_num } = form;
+
+    useEffect(() => {
         getMagazine();
-    },[])
+    }, [])
 
     const onUpdate = async () => {
         if (!window.confirm('사진을 등록하시겠습니까?')) return;
@@ -42,7 +40,7 @@ const MagazineInsert = () => {
                 const url = await getDownloadURL(snapshot.ref);
                 await setDoc(doc(db, 'user', uid), { ...form, image: url });
             } else {
-                await setDoc(doc(db, 'user', uid), { ...form }); 
+                await setDoc(doc(db, 'user', uid), { ...form });
             }
         } catch (error) {
             alert(error.message);
@@ -50,13 +48,14 @@ const MagazineInsert = () => {
     }
 
     const getMagazine = async () => {
-        setLoading(true);  
+        setLoading(true);
         try {
-            const result = await getDoc(doc(db, 'user', uid)); 
+            const result = await getDoc(doc(db, 'user', uid));
             setForm(result.data());
+            setFileName(result.data().image ? result.data().image : 'https:via.placeholder.com/200x200');
             setLoading(false);
         } catch (error) {
-            alert(error.message); 
+            alert(error.message);
         }
     }
 
@@ -77,7 +76,7 @@ const MagazineInsert = () => {
             show: true,
             message: '새로운 매거진을 등록 하시겠습니까?',
             action: async () => {
-                const data = { ...form }
+                const data = { ...form, user_id: 1, category: 7, nickname: 'admin' }
                 const res = await axios.post(`/magazine/insert`, data);
                 if (res.data === 0) {
                     setBox({
@@ -127,9 +126,10 @@ const MagazineInsert = () => {
         <div id="main_wrap">
             <div className="main_contents">
                 <Card className='insert-card'>
+                    <Form.Control onChange={onChange} name='magazine_num' placeholder='번호' className='insert-text' style={{width:100}} />
                     <Form.Control onChange={onChange} name='title' placeholder='제목을 입력해주세요.' className='insert-text' />
                     <form encType='multipart/form-data' className='insert-img'>
-                        <img name='image' src={image || 'http://via.placeholder.com/150x150'} onClick={() => img_ref.current.click()} width={300} height={300} style={{ cursor: 'pointer' }} />
+                        <img name='image' src={filename || 'http://via.placeholder.com/150x150'} onClick={() => img_ref.current.click()} width={300} height={300} style={{ cursor: 'pointer' }} />
                         <input onChange={onChangeFile} type='file' ref={img_ref} style={{ display: 'none' }} />
                         <br />
                         <Button onClick={onUpdate} className='insert-img-btn'>이미지 등록</Button>
