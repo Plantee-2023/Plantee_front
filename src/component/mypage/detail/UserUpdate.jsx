@@ -73,33 +73,32 @@ const UserUpdate = () => {
                     <br />
                     <Button className='update-img-btn'>이미지 수정</Button>
                 </div>
-                <InputGroup className='join-input'>
+                <InputGroup className='update-input'>
                     <InputGroup.Text className='update-text'>닉네임</InputGroup.Text>
                     <Form.Control value={nickname} name='nickname' type='text' onChange={onChange} />
                 </InputGroup>
-                <InputGroup className='join-input'>
+                <InputGroup className='update-input'>
                     <InputGroup.Text className='update-text'>연락처</InputGroup.Text>
                     <Form.Control value={phone} name='phone' type='text' onChange={onChange} />
                 </InputGroup>
-                <InputGroup className='join-address'>
+                <InputGroup className='update-address'>
                     <InputGroup.Text className='update-text'>주소</InputGroup.Text>
                     <Form.Control value={address1} name='address1' type='text' onChange={onChange} />
                     <button className='update-btn'>검색</button>
                 </InputGroup>
                 <Form.Control value={address2} name='address2' className='join-input' type='text' placeholder='상세주소' onChange={onChange} />
-                <Form className='join-check'>
+                <Form className='update-check'>
                     <Form.Check label="꽃집 사장님"></Form.Check>
                 </Form>
-                <InputGroup className='join-input'>
-
+                <InputGroup className='update-input'>
                     <InputGroup.Text className='update-text'>사업자 등록증</InputGroup.Text>
                     <Form.Control />
                     <button className='update-btn'>파일 검색</button>
                 </InputGroup>
             </Card>
             <div className='text-center'>
-                <Button className='mt-4 join-add' onClick={() => onSubmit()}>정보수정</Button>
-                <Button className='mt-4 join-add' type='reset'>취소</Button>
+                <Button className='mt-4 update-btn' onClick={() => onSubmit()}>정보수정</Button>
+                <Button className='mt-4 ms-3 update-btn' type='reset'>취소</Button>
 
             </div>
         </div>
