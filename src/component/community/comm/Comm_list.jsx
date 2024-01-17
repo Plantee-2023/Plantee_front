@@ -7,6 +7,8 @@ import Pagination from 'react-js-pagination';
 import "../../common/Pagination.css"
 import "../Community.css"
 
+import Comm_reply from './Comm_reply';
+
 
 
 const Comm_list = () => {
@@ -15,7 +17,7 @@ const Comm_list = () => {
   const [loading, setLoading] = useState(false);
   const navi = useNavigate();
   const location = useLocation();
-  const [filter, setfilter] = useState(0);
+  const [filter, setfilter] = useState('');
   const search = new URLSearchParams(location.search);
   const size = 5;
   const [cnt, setCnt] = useState(0);
@@ -23,18 +25,21 @@ const Comm_list = () => {
   const [total, setTotal] = useState(0);
   const page = search.get("page") ? parseInt(search.get("page")) : 1;
   const [query, setQuery] = useState("");
-
+  const key = 10;
+  const [post_id, setPost_id] = useState(0);
 
   const getPost = async () => {
     setLoading(true);
-    const result = await axios.get(`/comm/list.json?category=${category}&page=${page}&size=${size}&query=${query}`);
+    const result = await axios.get(`/comm/filter_list.json?category=3&page=1&size=${size}&query=${query}&filter=${filter}`);
     // const resultTotal = await axios.get('/comm/list_total',category);
     console.log(query, page, size);
     console.log(result);
     //     setTotal(resultTotal.data);
 
 
-    let data = result.data.list.map(p => p && { ...p, checked: false  });
+
+
+    let data = result.data.list.map(p => p && { ...p, checked: false });
 
     setPosts(data);
     setTotal(result.data.total);
@@ -54,44 +59,56 @@ const Comm_list = () => {
       // await axios.get(`/deleteFile?file=${shop.image}`);
       alert("게시글이 삭제되었습니다.");
       //  navi(`/shop/list?page=1&siez=${size}&query=${query}`);
+
     }
   }
 
   const onClickDelete = async () => {
     let count = 0;
+
     for (const post of posts) {
-      if (post.checked) {
-        const res = await axios.post('/comm/delete', { post_id: post.post_id });
-        if (res.data === 1)
-          count++;
+      if (post.uid === sessionStorage.getItem("uid")) {
 
 
+        if (post.checked) {
+          const res = await axios.post('/comm/delete', { post_id: post.post_id });
+          if (res.data === 1)
+            count++;
+        }
 
+        alert("게시글이 삭제되었습니다.");
+        getPost();
+      } if (post.uid != sessionStorage.getItem("uid")) {
+        alert("본인 게시글만 삭제할 수 있습니다. ");
       }
-
     }
-    alert("게시글이 삭제되었습니다.");
-    getPost();
+
 
   }
+
 
   const onChangeAll = (e) => {
     const data = posts.map(item => item && { ...item, checked: e.target.checked });
     setPosts(data);
   }
 
-  const onChangeFilter = (e, filter) => {
-    e.preventDefault();
-     
-    const data = posts.filter(item=>item.filter===filter);
-    setTotal(data.length);
+  const onChangeFilter = async (e, filter) => {
+
+    console.log(filter, category)
+    const res = await axios.get(`/comm/filter_list.json?category=3&page=1&size=${size}&query=${query}&filter=${filter}`);
+    let data = res.data.list.map(p => p && { ...p, checked: false });
+    console.log(data)
     setPosts(data);
-    
-    
+    setTotal(res.data.total);
+    setQuery("");
+
+    //navi(`/comm?page=1&size=${size}&query=${query}$filter=${filter}`);
+
+
   }
 
   const onChangeSingle = (e, post_id) => {
-   
+
     const data = posts.map(item => item.post_id === post_id ? { ...item, checked: e.target.checked } : item);
     setPosts(data);
   }
@@ -103,7 +120,7 @@ const Comm_list = () => {
   }, [location]);
 
 
- 
+
 
   useEffect(() => {
     let chk = 0;
@@ -116,9 +133,23 @@ const Comm_list = () => {
 
 
   const onSubmit = (e) => {
+
     e.preventDefault();
-    navi(`/comm?page=1&size=${size}&query=${query}`);
+    if (query === "") {
+      alert("검색어를 입력하세요!");
+    } else {
+      getPost();
+    }
   }
+
+
+
+
+
+
+  // e.preventDefault();
+  // navi(`/comm?category=3&page=1&size=${size}&query=${query}${filter ? `&filter=${filter}` : ''}`);
+  // }
   //navi(`/comm?page=${cpage}&size=${size}&query=${query}`)
 
 
@@ -135,9 +166,10 @@ const Comm_list = () => {
               <div className='first_filter_section'>
                 <ul className='filter_list'>
 
-                  <button className='filter_btn' type='button' onClick={(e)=>onChangeFilter(e,0)} >식물자랑</button>
-                  <button className='filter_btn' type='button' onClick={(e)=>onChangeFilter(e,1)} >Q&A</button>
-                  <button className='filter_btn' type='button'  >전체보기</button>
+                  <button className='filter_btn' type='button' onClick={(e) => onChangeFilter(e, '')} >전체보기</button>
+                  <button className='filter_btn' type='button' onClick={(e) => onChangeFilter(e, 0)} >식물자랑</button>
+                  <button className='filter_btn' type='button' onClick={(e) => onChangeFilter(e, 1)} >Q&A</button>
+
 
                 </ul>
               </div>
@@ -166,9 +198,15 @@ const Comm_list = () => {
 
             </tr>
           </thead>
-          <tbody>
-            {posts.map(post =>
+          {posts.map(post =>
+            <tbody>
+
+
+
+
+
               <tr key={post.post_id}>
+
                 <td><input onChange={(e) => onChangeSingle(e, post.post_id)} type='checkbox' checked={post.checked} /></td>
                 <td>{post.post_id}</td>
                 <td>
@@ -187,8 +225,8 @@ const Comm_list = () => {
 
                   </div>
                 </td>
-                <td>{post.address}</td>
-                <td>{post.nickname}({post.uid})</td>
+                <td>{post.user_address}</td>
+                <td>{post.user_nickname}({post.uid})</td>
                 <td>{post.like_cnt}</td>
                 <td>{post.view_cnt}</td>
                 <td>{post.red_date}</td>
@@ -196,14 +234,21 @@ const Comm_list = () => {
 
 
 
+
               </tr>
 
+              {post.post_id === 185 &&
+                <>
+                  <Comm_reply post_id={post.post_id} />
+                </>
+              }
 
 
 
-            )}
-          </tbody>
 
+
+            </tbody>
+          )}
 
         </Table>
         <div className='text-end mb-2' >  <a className='btn btn-success' href="http://localhost:3000/comm/write">글쓰기</a> </div>
@@ -234,7 +279,7 @@ const Comm_list = () => {
           pageRangeDisplayed={10}
           prevPageText={"‹"}
           nextPageText={"›"}
-          onChange={(cpage) => { navi(`/comm?page=${cpage}&size=${size}&query=${query}`) }} />
+          onChange={(cpage) => { navi(`/comm?page=${cpage}&size=${size}&query=${query}&filter=${filter}`) }} />
       }
     </div>
   )
