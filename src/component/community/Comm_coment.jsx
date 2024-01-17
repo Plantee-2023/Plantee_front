@@ -16,16 +16,16 @@ const Comm_coment = ({post_id,post}) => {
 
   const getComent = async() => {
     
-    const res=await axios(`/coment/c_list.json?page=${page}&size=${size}&post_id=${post_id}`);
-    const user_id=await axios(`/coment/read_id?uid=${sessionStorage.getItem("uid")}`);
+    const res=await axios(`/comments/c_list.json?page=${page}&size=${size}&post_id=${post_id}`);
+    const user_id=await axios(`/comments/read_id?uid=${sessionStorage.getItem("uid")}`);
     setMyuid(user_id.data);
 
-    console.log("coments",res.data);
+    console.log("comments",res);
     console.log("uid",user_id.data);
-    let data=res.data.c_list.map(r=>r && {...r, ellipsis:true, view:true, text:r.contents});
+    let data=res.data.list.map(r=>r && {...r, ellipsis:true, view:true, text:r.contents});
   setList(data);
     
-   setTotal(res.data.c_total);
+   setTotal(res.data.total);
 
     
   }
@@ -43,11 +43,15 @@ const Comm_coment = ({post_id,post}) => {
             alert("리뷰내용을 작성하세요!");
         }else{
             
-            const data={post_id,user_id:myUid, uid:sessionStorage.getItem("uid"), contents}
-            await axios.post("/coment/insert", data);
+            const data={post_id, uid:sessionStorage.getItem("uid"), contents}
+            
+            await axios.post("/comments/insert_comments", data);
             setContents("");
+            alert("등록완료 ")
              getComent();
         }
+
+     
     }
  
     const onClickLogin = () => {
@@ -62,9 +66,9 @@ const Comm_coment = ({post_id,post}) => {
 
     const onDelete = async(comment_id)=> {
         if(window.confirm(`${comment_id}번 댓글을 삭제하실래요?`)) {
-            await axios.post(`/coment/delete/`, {comment_id});
+            await axios.post(`/comments/delete_comments/${comment_id}`);
             getComent();
-        }
+        }  
     }
 
     const onClickUpdate = (comment_id)=> {
@@ -113,6 +117,7 @@ const Comm_coment = ({post_id,post}) => {
                             className='btn-sm px-5'>등록</Button>
                     </div>    
                 </div>
+
                 :    
                 <div className='mb-5'>
                     <Button className='w-100' onClick={onClickLogin}>로그인</Button>
