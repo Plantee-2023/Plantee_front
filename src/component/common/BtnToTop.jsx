@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import "../Main.css"
 
 const BtnToTop = () => {
 

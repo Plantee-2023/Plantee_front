@@ -3,7 +3,6 @@ import { Button, Card, Form, InputGroup, Spinner } from 'react-bootstrap'
 import { BoxContext } from '../common/BoxContext';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios'
-import '../Main.css'
 
 const Join = () => {
     const img_ref = useRef(null);
