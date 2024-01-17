@@ -1,32 +1,31 @@
-import Menu from './component/Menu';
 import RouterPage from './component/RouterPage';
-import Footer from './component/Footer';
+import FooterPage from './component/FooterPage';
 import './App.css';
 import { useState } from 'react';
-import { Container } from 'react-bootstrap';
 import { BoxContext } from './component/common/BoxContext'
 import BoxModal from './component/common/BoxModal'
+import HeaderPage from './component/HeaderPage';
+import { Container } from 'react-bootstrap';
+import MainBannerPage from './component/MainBannerPage';
 
 function App() {
 
-	const [box, setBox] = useState({
-		show: false,
-		message: "",
-		action: null
-	});
+  const [box, setBox] = useState({
+    show: false,
+    message: "",
+    action: null
+  });
 
-	return (
-		<BoxContext.Provider value={{ box, setBox }}>
-			<Container>
-				<div className='main_wrap'>
-					<Menu />
-					<RouterPage />
-					{box.show && <BoxModal />}
-				</div>
-				<Footer />
-			</Container>
-		</BoxContext.Provider>
-	);
+  return (
+    <BoxContext.Provider value={{ box, setBox }}>
+      <Container>
+        <HeaderPage />
+        <RouterPage />
+        {box.show && <BoxModal />}
+      </Container>
+      <FooterPage />
+    </BoxContext.Provider>
+  );
 }
 
 export default App;

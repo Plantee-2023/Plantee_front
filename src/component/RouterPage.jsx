@@ -1,6 +1,5 @@
 import React from 'react'
 import { Routes, Route } from 'react-router-dom'
-import Main from './Main';
 import Join from './users/Join';
 import LoginPage from './users/LoginPage';
 import MyPage from './mypage/MyPage';
@@ -47,6 +46,8 @@ import PlantRecipeInsert from './plant/PlantRecipeInsert';
 import PlantRecipeUpdate from './plant/PlantRecipeUpdate';
 import MagazineUpdate from './magazine/MagazineUpdate';
 import StoreBuyNow from './store/StoreBuyNow';
+import HomePage from './HomePage';
+import MainBannerPage from './MainBannerPage';
 
 
 const RouterPage = () => {
@@ -71,7 +72,7 @@ const RouterPage = () => {
             </Route>
 
             {/* 메인, 매거진 */}
-            <Route path='/' element={<Main />} />
+            <Route path='/' element={<HomePage />} />
             <Route path='/magazine/read/:magazine_num' element={<Magazine />} />
             <Route path='/magazine/magazineList' element={<MagazineList />} />
             <Route path='/magazine/magazineinsert' element={<MagazineInsert />} />

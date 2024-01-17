@@ -4,34 +4,32 @@ import { Row, Col, InputGroup, Button, Card, Carousel, Spinner } from 'react-boo
 import { CgChevronRight } from "react-icons/cg";
 import { MdFavoriteBorder } from "react-icons/md";
 import { LiaComment } from "react-icons/lia";
+import { Navigation, Pagination, Autoplay } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css/bundle';
-import { Navigation, Pagination, Autoplay } from 'swiper/modules';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/autoplay';
-import './Main.css'
+import MainBannerPage from './MainBannerPage';
 
-const Main = () => {
+const HomePage = () => {
     const [plants, setPlants] = useState([]); // 플랜트
     const [community, setCommunity] = useState([]); // 커뮤니티
     const [magazine, setMagazine] = useState([]);
     const [store, setStore] = useState([]); //스토어
     const [loading, setLoading] = useState(false);
 
-    const [page, setPage] = useState(1);
-    const [query, setQuery] = useState("");
     const getMain = async () => {
         setLoading(true);
 
-        const res = await axios.get(`/store/list.json?page=${page}&size=20&query=${query}`);
-        const res1 = await axios.get(`/plant/list.json`); // 플랜트
-        //const res2 = await axios.get(`/comm/list.json?category=3&page=1&size=5&query=""`); //커뮤니티
-        const res3 = await axios.get(`/magazine/list.json?query=''&page=1&size=8`);
+        const res = await axios.get(`/store/list.json`);
+        const res1 = await axios.get(`/magazine/list.json?query=''&page=1&size=8`);
+        //const res2 = await axios.get(`/comm/list.json?category=3&page=1&size=10&query=''`); //커뮤니티
+        const res3 = await axios.get(`/plant/list.json`); // 플랜트
         setStore(res.data.list);
-        setPlants(res1.data.list);
+        setMagazine(res1.data.list);
         //setCommunity(res2.data.list);
-        setMagazine(res3.data.list);
+        setPlants(res3.data.list);
         setLoading(false);
     }
     useEffect(() => {
@@ -40,29 +38,18 @@ const Main = () => {
 
     if (loading) return <div className='main-spinner'><Spinner /></div>
     return (
-        <div id="main_wrap">
-            <div className='main_contents'>
-                <Swiper
-                    modules={[Navigation, Autoplay]}
-                    spaceBetween={50}
-                    slidesPerView={1}
-                    autoplay={{ delay: 2000 }}
-                    navigation
-                    style={{"--swiper-navigation-color": "#ffffff"}}>
-                    <SwiperSlide><img src='/image/1.jpg' width={1280} height={300} /></SwiperSlide>
-                    <SwiperSlide><img src='/image/2.jpg' width={1280} height={300} /></SwiperSlide>
-                    <SwiperSlide><img src='/image/3.jpg' width={1280} height={300} /></SwiperSlide>
-                    <SwiperSlide><img src='/image/4.jpg' width={1280} height={300} /></SwiperSlide>
-                </Swiper>
+        <div className='homepage_wrap'>
+            <MainBannerPage/>
+            <div className='homepage_contents'>
                 <Row className='mt-5'>
                     <Col>
-                        <div className='main-title mb-3'>
-                            스토어
+                        <div className='homepage_maintitle'>
+                            이번달 식물 추천
                         </div>
                     </Col>
                     <Col>
-                        <a className='main_more' href='/store/main'>
-                            더보기<CgChevronRight />
+                        <a className='homepage_more' href='/store/main'>
+                            더보기<CgChevronRight className='homepage_more_icon'/>
                         </a>
                     </Col>
                 </Row>
@@ -93,16 +80,22 @@ const Main = () => {
                 </Swiper>
                 <Row>
                     <Col>
-                        <div className='main-title mb-4'>
+                        <div className='homepage_maintitle'>
                             식물 도감
                         </div>
                     </Col>
                     <Col>
-                        <a className='main_more' href='/plant'>
-                            더보기<CgChevronRight />
+                        <a className='homepage_more' href='/plant'>
+                            더보기<CgChevronRight className='homepage_more_icon'/>
                         </a>
                     </Col>
                 </Row>
+                <div className='homepage_tagbtn'>
+                    <button className='homepage_btn'>태그</button>
+                    <button className='homepage_btn'>태그</button>
+                    <button className='homepage_btn'>태그</button>
+                    <button className='homepage_btn'>태그</button>
+                </div>
                 <Swiper
                     modules={[Navigation, Pagination, Autoplay]}
                     spaceBetween={70}
@@ -128,13 +121,13 @@ const Main = () => {
                 </Swiper>
                 <Row>
                     <Col>
-                        <div className='main-title mb-3'>
+                        <div className='homepage_maintitle'>
                             스토리
                         </div>
                     </Col>
                     <Col>
-                        <a className='main_more' href='/comm'>
-                            더보기<CgChevronRight />
+                        <a className='homepage_more' href='/comm'>
+                            더보기<CgChevronRight className='homepage_more_icon' />
                         </a>
                     </Col>
                 </Row>
@@ -162,7 +155,7 @@ const Main = () => {
                 </Carousel>
                 <Row>
                     <Col>
-                        <h2 className='main-title mb-3'>
+                        <h2 className='homepage_maintitle'>
                             매거진
                         </h2>
                     </Col>
@@ -193,4 +186,4 @@ const Main = () => {
     )
 }
 
-export default Main
+export default HomePage

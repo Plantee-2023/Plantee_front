@@ -3,17 +3,38 @@ import { Form, InputGroup } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { FaStar } from 'react-icons/fa';
 import axios from 'axios';
+import { ref, getDownloadURL, uploadBytes, getStorage, uploadString} from "firebase/storage";
+import { v4 as uuidv4 } from 'uuid'; //랜덤 식별자를 생성해주는 라이브러리
 
 const PlantRecipeInsert = ({recipe_id}) => {
 
   const navi = useNavigate();
   const array = [0, 1, 2, 3, 4];
   const [clicked, setClicked] = useState([false, false, false, false, false]);
+  const [attachment, setAttachment] = useState();
   
   const [form, setForm] = useState({
     recipe_id: '', title: '', description: '', image: '', level: '', reg_date: '', uid: sessionStorage.getItem('uid'), nickname: ''});
 
   const { title, description, image, level, uid, nickname } = form;
+
+  const onFileChange = (evt) => {
+    // 업로드 된 file
+    const files = evt.target.files;
+    const theFile = files[0];
+
+    // FileReader 생성
+    const reader = new FileReader();
+
+    // file 업로드가 완료되면 실행
+    reader.onloadend = (finishedEvent) => {
+      // 업로드한 이미지 URL 저장
+      const result = finishedEvent.currentTarget.result;
+      setAttachment(result);
+    };
+    // 파일 정보를 읽기
+    reader.readAsDataURL(theFile);
+  };
 
   const onChange = (e) => {
     setForm({
@@ -24,10 +45,25 @@ const PlantRecipeInsert = ({recipe_id}) => {
 
   const onSubmit = async(e) => {
     e.preventDefault();
+    const storage = getStorage();
+    const fileRef = ref(storage, uuidv4());
+
+    // 이미지를 firebase storage에 업로드
+    const response = await uploadString(fileRef, attachment, 'data_url');
+
+    // 업로드한 이미지 url 가져오기
+    const downloadURL = await getDownloadURL(fileRef);
+
     if(window.confirm("레시피를 등록하시겠습니까?")){
       form.level = clicked.filter(Boolean).length;
+      setForm({
+        ...form,
+        image : downloadURL,
+      });
+
       const res = {recipe_id, uid:sessionStorage.getItem('uid'), nickname, title, description, level}
       await axios.post('/recipe/insert', form);
+
       if(res.data === 0) {
         alert("등록 실패!");
       }else{
@@ -44,6 +80,10 @@ const PlantRecipeInsert = ({recipe_id}) => {
     }
     setClicked(clickStates);
   };
+
+  useEffect(()=> {
+    
+  }, []);
   
   return (
     <div className='recipe_wrap'>
@@ -51,7 +91,11 @@ const PlantRecipeInsert = ({recipe_id}) => {
         <div className='recipe_contentitem_section'>
           <div className='recipe_readcontents_grid'>
             <div className='recipe_image_section'>
-              <img className='recipe_image' src='/image/recipe_01.jpg'/>
+              <form onSubmit={onSubmit}>
+                <img className='recipe_image' src={attachment} style={{cursor:'pointer'}}/>
+                <input accept="image/*" type="file" onChange={onFileChange}/>
+                {/* <button type='submit' value='upload'>저장</button> */}
+              </form>
             </div>
             <div className='recipe_title_section'>
               <form className='recipe_insert_area' onSubmit={onSubmit}>
