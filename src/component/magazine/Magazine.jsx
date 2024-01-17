@@ -31,9 +31,9 @@ const Magazine = () => {
         setLoading(true);
         try {
             const res = await axios(`/magazine/read/${magazine_num}`);
-            setPost(res.data);
             const result = await getDoc(doc(db, 'user', uid));
             setPost(result.data());
+            setPost(res.data);
             setFileName(result.data().image ? result.data().image : 'https://via.placeholder.com/200x200');
             setLoading(false);
         } catch (error) {

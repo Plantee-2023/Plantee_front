@@ -80,6 +80,7 @@ const MagazineList = () => {
                 <Table className='list' bordered hover>
                     <thead className='text-center'>
                         <tr>
+                            <th>번호</th>
                             <th>제목</th>
                             <th>작성자</th>
                             <th>등록일</th>
@@ -89,10 +90,11 @@ const MagazineList = () => {
                     <tbody>
                         {filteredList.map(m =>
                             <tr key={m.magazine_num}>
+                                <td style={{width:50}} className='text-center'>{m.magazine_num}</td>
                                 <td><NavLink style={{ color: '#000000' }} to={`/magazine/read/${m.magazine_num}`}>{m.title}</NavLink></td>
                                 <td style={{ width: '100px' }} className='text-center'>{m.nickname}</td>
                                 <td style={{ width: '300px' }} className='text-center'>{m.red_date}</td>
-                                <td style={{ width: '100px' }} className='text-center'>{m.view_cnt}</td>
+                                <td style={{ width: '100px' }} className='text-center'>{m.view_cnt}회</td>
                             </tr>
                         )}
                     </tbody>

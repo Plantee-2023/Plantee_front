@@ -19,17 +19,19 @@ const Main = () => {
     const [store, setStore] = useState([]); //스토어
     const [loading, setLoading] = useState(false);
 
+    const [page, setPage] = useState(1);
+    const [query, setQuery] = useState("");
     const getMain = async () => {
         setLoading(true);
 
-        const res = await axios.get(`/store/list.json?page=1&size=20&query=""`);
-        const res1 = await axios.get(`/magazine/list.json?query=''&page=1&size=8`);
+        const res = await axios.get(`/store/list.json?page=${page}&size=20&query=${query}`);
+        const res1 = await axios.get(`/plant/list.json`); // 플랜트
         //const res2 = await axios.get(`/comm/list.json?category=3&page=1&size=5&query=""`); //커뮤니티
-        const res3 = await axios.get(`/plant/list.json`); // 플랜트
+        const res3 = await axios.get(`/magazine/list.json?query=''&page=1&size=8`);
         setStore(res.data.list);
-        setMagazine(res1.data.list);
+        setPlants(res1.data.list);
         //setCommunity(res2.data.list);
-        setPlants(res3.data.list);
+        setMagazine(res3.data.list);
         setLoading(false);
     }
     useEffect(() => {
@@ -55,7 +57,7 @@ const Main = () => {
                 <Row className='mt-5'>
                     <Col>
                         <div className='main-title mb-3'>
-                            이번달 식물 추천
+                            스토어
                         </div>
                     </Col>
                     <Col>
