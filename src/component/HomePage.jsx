@@ -26,7 +26,6 @@ const HomePage = () => {
 
     const getMain = async () => {
         setLoading(true);
-
         const res = await axios.get(`/store/list.json?page=${page}&size=20&query=${query}`);
         const res1 = await axios.get(`/magazine/list.json?query=''&page=1&size=8`);
         //const res2 = await axios.get(`/comm/list.json?category=3&page=1&size=10&query=''`); //커뮤니티
