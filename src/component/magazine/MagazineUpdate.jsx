@@ -3,7 +3,7 @@ import axios from 'axios'
 import { useParams, useNavigate } from 'react-router-dom'
 import { BoxContext } from '../common/BoxContext';
 import { Spinner, Card, Form, Button } from 'react-bootstrap'
-import { app } from '../../firebaseInit'
+import { app } from '../../firebaseConfig'
 import { getFirestore, setDoc, doc, getDoc } from 'firebase/firestore'
 import { getStorage, uploadBytes, ref, getDownloadURL } from 'firebase/storage'
 
@@ -62,7 +62,7 @@ const MagazineUpdate = () => {
         if (!window.confirm('사진을 등록하시겠습니까?')) return;
         try {
             if (file) {
-                const snapshot = await uploadBytes(ref(storage, `/photo/${Date.now()}.jpg`), file);
+                const snapshot = await uploadBytes(ref(storage, `/magazine/${Date.now()}.jpg`), file);
                 const url = await getDownloadURL(snapshot.ref);
                 await setDoc(doc(db, 'user', uid), { ...update, image: url });
             } else {
