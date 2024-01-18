@@ -81,7 +81,7 @@ const MagazineUpdate = () => {
             action: async () => {
                 const result = await getDoc(doc(db, 'user', uid)); 
                 setUpdate(result.data()); 
-                setFileName(result.data().photo ? result.data().photo : 'https://via.placeholder.com/200x200');
+                setFileName(result.data().image ? result.data().image : 'https://via.placeholder.com/200x200');
                 const data = { ...update, user_id: 1, category: 7, nickname: 'admin'}
                 const res = await axios.post('/magazine/update', data);
                 if (res.data === 0) {
