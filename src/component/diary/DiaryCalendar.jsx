@@ -150,7 +150,7 @@ const DiaryCalendar = () => {
                                 <img src="/image/icon-sprout.png"
                                     className={cx('date-button')}
                                     onClick={() => handleDateButtonClick(currentDate)}
-                                    width={30} 
+                                    width={30}
                                     height={30}
                                 >
                                 </img>
@@ -213,7 +213,8 @@ const DiaryCalendar = () => {
             </div>
             {selectedDate && (
                 <div className="selected-date-events">
-                    <h4>Selected Date: {moment(selectedDate).format("YYYY-MM-DD")}</h4>
+                    {/* <h4>Selected Date: {moment(selectedDate).format("YYYY-MM-DD")}</h4> */}
+                    <h4 className="text-center mb-4">{moment(selectedDate).format("YYYY-MM-DD")} 날짜에 함께 한 반려식물</h4>
                     {selectedDateEvents.map((event, index) => (
                         <div key={index} className={cx('selected-event')}>
                             {event.title}
@@ -226,7 +227,7 @@ const DiaryCalendar = () => {
                                                 <div>
                                                     <Card.Body>
                                                         <Row>
-                                                            <Col md={4}>
+                                                            <Col md={3}>
                                                                 <img src={d.image} width={150} height={150} />
                                                             </Col>
                                                             <Col className="mt-3">
@@ -250,7 +251,7 @@ const DiaryCalendar = () => {
                     ))}
                 </div>
             )}
-            <BtnToTop/>
+            <BtnToTop />
         </div>
     );
 };

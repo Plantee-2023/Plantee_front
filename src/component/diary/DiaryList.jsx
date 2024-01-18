@@ -87,7 +87,7 @@ const DiaryList = () => {
                             {list.map(d =>
                                 <div className="diary_detail">
                                     <Link to={`/diary/read/${d.diary_id}`}>
-                                        {d.date_medicine <= 20 && (
+                                        {d.date_change < 30 && (
                                             <Card style={{ width: '40rem' }} className='diarylist_card'>
                                                 <CardBody>
                                                     <Row>
@@ -124,7 +124,7 @@ const DiaryList = () => {
                             {list.map(d =>
                                 <div className="diary_detail">
                                     <Link to={`/diary/read/${d.diary_id}`}>
-                                        {d.date_change < 30 && (
+                                        {d.date_medicine <= 20 && (
                                             <Card style={{ width: '40rem' }} className='diarylist_card'>
                                                 <CardBody>
                                                     <Row>

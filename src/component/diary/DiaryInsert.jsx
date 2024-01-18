@@ -41,16 +41,51 @@ const DiaryInsert = () => {
         reader.readAsDataURL(theFile);
     };
 
-    const onChange = (e) => {
-        setinsertDiary({
-            ...insertDiary,
-            [e.target.name]: e.target.value,
-            plant_id: selectedValue,
-            uid: sessionStorage.getItem('uid')
+    const onSubmit = async () => {
+        setBox({
+            show: true,
+            message: "새로운 식물을 등록하시겠습니까?",
+            action: async () => {
+
+                const res = await axios.post('/diary/insert', insertDiary);
+                if (res.data === 0) {
+                    alert("등록 실패!");
+                } else {
+                    alert("등록 완료");
+                    navi('/diary/main');
+                }
+            }
         });
-        console.log(insertDiary);
     }
 
+    const onChange = async(e) => {
+        const storage = getStorage();
+        const fileRef = ref(storage, 'diary/' + uuidv4());
+
+        try {
+            // 이미지를 Firebase Storage에 업로드
+            await uploadString(fileRef, attachment, 'data_url');
+
+            // 업로드한 이미지 URL 가져오기
+            const downloadURL = await getDownloadURL(fileRef);
+            console.log(downloadURL);
+
+            // 이미지 URL을 insertDiary에 설정
+            setinsertDiary({
+                ...insertDiary,
+                [e.target.name]: e.target.value,
+                plant_id: selectedValue,
+                uid: sessionStorage.getItem('uid'),
+                image: downloadURL
+                
+            });
+            console.log(insertDiary);
+        } catch (error) {
+            console.error("이미지 업로드 중 오류:", error);
+            alert("이미지 업로드 중 오류가 발생했습니다.");
+        }
+
+    }
     const getList = async () => {
         const res = await axios.get(`/plant/list.json`);
         setplants(res.data.list);
@@ -115,56 +150,54 @@ const DiaryInsert = () => {
                 <div className='text-center'>
                     <h1 className='mt-5'>나의 식물 등록하기</h1>
                     <div className='mt-5'>
-                        <form onSubmit={onSubmit}>
-                            <img src={attachment || "http://via.placeholder.com/250x250"} onClick={() => img_ref.current.click()} style={{ cursor: 'pointer' }} value={image} />
-                            <input type='file' ref={img_ref} style={{ display: 'none' }} onChange={onFileChange} />
-                            <br />
-                            <div>
-                                <InputGroup className='diary-input'>
-                                    <InputGroup.Text className='diary-text'>식물 이름</InputGroup.Text>
-                                    <Form.Control type='text' name='plant_name' value={plant_name} onChange={onChange} />
-                                </InputGroup>
-                                <InputGroup className='diary-input'>
-                                    <InputGroup.Text className='diary-text'>식물 종류</InputGroup.Text>
-                                    <Form.Select className='select_box' name="location" onChange={handleChange} value={selectedValue}>
-                                        {plants.map(p =>
-                                            <option key={p.plant_id} value={p.plant_id} className='text-center'>{p.common_name}</option>
-                                        )}
-                                    </Form.Select>
-                                    <Form.Control name="plant_id" value={selectedValue} placeholder={selectedValue} hidden />
-                                </InputGroup>
-                                {plants.map(p => {
-                                    // p.plant_id와 selectedValue가 같은지 확인하고 같을 때만 해당 정보를 표시합니다.
-                                    if (p.plant_id == selectedValue) {
-                                        return (
-                                            <div key={p.plant_id}>
-                                                <InputGroup className='diary-input'>
-                                                    <InputGroup.Text className='diary-text'>분류</InputGroup.Text>
-                                                    <Form.Control type='text' readOnly placeholder={p.type} className='text-center' />
-                                                    <InputGroup.Text className='diary-text'>난이도</InputGroup.Text>
-                                                    <Form.Control type='text' readOnly placeholder={getLevel(p.care_level)} className='text-center' />
-                                                </InputGroup>
-                                                <InputGroup className='diary-input'>
-                                                    <InputGroup.Text className='diary-text'>물 주기</InputGroup.Text>
-                                                    <Form.Control type='text' readOnly placeholder={p.watering} className='text-center' />
-                                                    <InputGroup.Text className='diary-text'>햇빛 주기</InputGroup.Text>
-                                                    <Form.Control type='text' readOnly placeholder={p.sunlight} className='text-center' />
-                                                </InputGroup>
-                                            </div>
-                                        );
-                                    } else {
-                                        return null; // p.plant_id와 selectedValue가 다를 때는 아무것도 렌더링하지 않습니다.
-                                    }
-                                })}
-                                <InputGroup className='diary-input-memo'>
-                                    <Form.Control placeholder='메모장' name='contents' value={contents} onChange={onChange} />
-                                </InputGroup>
-                            </div>
-                            <div className='text-center'>
-                                <button className='mt-4 diary-add' type='submit'>등록</button>
-                                <button className='mx-2 diary-add' >취소</button>
-                            </div>
-                        </form>
+                        <img width={450} height={450} src={attachment || "http://via.placeholder.com/250x250"} onClick={() => img_ref.current.click()} style={{ cursor: 'pointer' }} value={image} />
+                        <input type='file' ref={img_ref} style={{ display: 'none' }} onChange={onFileChange} />
+                        <br />
+                        <div className='mt-5'>
+                            <InputGroup className='diary-input'>
+                                <InputGroup.Text className='diary-text'>식물 이름</InputGroup.Text>
+                                <Form.Control type='text' name='plant_name' value={plant_name} onChange={onChange} />
+                            </InputGroup>
+                            <InputGroup className='diary-input'>
+                                <InputGroup.Text className='diary-text'>식물 종류</InputGroup.Text>
+                                <Form.Select className='select_box' name="location" onChange={handleChange} value={selectedValue}>
+                                    {plants.map(p =>
+                                        <option key={p.plant_id} value={p.plant_id} className='text-center'>{p.common_name}</option>
+                                    )}
+                                </Form.Select>
+                                <Form.Control name="plant_id" value={selectedValue} placeholder={selectedValue} hidden />
+                            </InputGroup>
+                            {plants.map(p => {
+                                // p.plant_id와 selectedValue가 같은지 확인하고 같을 때만 해당 정보를 표시합니다.
+                                if (p.plant_id == selectedValue) {
+                                    return (
+                                        <div key={p.plant_id}>
+                                            <InputGroup className='diary-input'>
+                                                <InputGroup.Text className='diary-text'>분류</InputGroup.Text>
+                                                <Form.Control type='text' readOnly placeholder={p.type} className='text-center' />
+                                                <InputGroup.Text className='diary-text'>난이도</InputGroup.Text>
+                                                <Form.Control type='text' readOnly placeholder={getLevel(p.care_level)} className='text-center' />
+                                            </InputGroup>
+                                            <InputGroup className='diary-input'>
+                                                <InputGroup.Text className='diary-text'>물 주기</InputGroup.Text>
+                                                <Form.Control type='text' readOnly placeholder={p.watering} className='text-center' />
+                                                <InputGroup.Text className='diary-text'>햇빛 주기</InputGroup.Text>
+                                                <Form.Control type='text' readOnly placeholder={p.sunlight} className='text-center' />
+                                            </InputGroup>
+                                        </div>
+                                    );
+                                } else {
+                                    return null; // p.plant_id와 selectedValue가 다를 때는 아무것도 렌더링하지 않습니다.
+                                }
+                            })}
+                            <InputGroup className='diary-input-memo'>
+                                <Form.Control placeholder='메모장' name='contents' value={contents} onChange={onChange}  type='text' as='textarea'/>
+                            </InputGroup>
+                        </div>
+                        <div className='text-center'>
+                            <button className='mt-4 diary-add' onClick={() => onSubmit()}>등록</button>
+                            <button className='mx-2 diary-add' onClick={() => navi("/diary/calendar")}>취소</button>
+                        </div>
                     </div>
                 </div>
             </div>
