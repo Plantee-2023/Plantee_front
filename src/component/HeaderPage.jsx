@@ -91,7 +91,7 @@ const HeaderPage = () => {
                               <ul>
                                 <li>
                                   <Card className='menu-card1'><a href='/diary/calendar'>
-                                    <CiCalendar className='menu-toast-icon' /></a></Card>
+                                    <img className='mypage_calander' src='/image/mypage_calendar_icon.png'/></a></Card>
                                   <div className='menu-toast-text'>캘린더</div>
                                 </li>
                                 <li>

@@ -5,10 +5,9 @@ import { Spinner, InputGroup, Form } from 'react-bootstrap';
 import { BoxContext } from '../common/BoxContext';
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
-import { app } from '../../firebaseInit'
-import { getFirestore, setDoc, doc, getDoc } from 'firebase/firestore'
-import { getStorage, uploadBytes, ref, getDownloadURL } from 'firebase/storage'
 import "./Store.css";
+import { ref, getDownloadURL, uploadBytes, getStorage, uploadString} from "firebase/storage";
+import { v4 as uuidv4 } from 'uuid'; //랜덤 식별자를 생성해주는 라이브러리
 
 const StoreUpdate = ({ match, history }) => {
     const navi = useNavigate();
@@ -16,12 +15,8 @@ const StoreUpdate = ({ match, history }) => {
     const [loading, setLoading] = useState(false);
     const { box, setBox } = useContext(BoxContext);
 
-    const db = getStorage(app);
-    const ref_file = useRef(null);
-    const [src, setSrc] = useState("http://via.placeholder.com/200x200")
-    const [file, setFile] = useState(null);
-
-    const [img, setImg] = useState('');
+    const img_ref = useRef(null);
+    const [attachment, setAttachment] = useState();
     const [form, setForm] = useState("");
 
     const { store_id } = useParams();
@@ -37,46 +32,74 @@ const StoreUpdate = ({ match, history }) => {
     const onChange = (e) => {
         setForm({
             ...form,
-            [e.target.name]: e.target.value
+            [e.target.name]: e.target.value,
+            contents: e
         });
     }
 
     const onChangeContents = (e) => {
         setForm({
             ...form,
-            contents: e
+            
         });
     }
 
     const onChangeFile = (e) => {
-        // setSrc(URL.createObjectURL(e.target.files[0]));
-        // setFile(e.target.files[0]);
+         // 업로드 된 file
+        const files = e.target.files;
+        const theFile = files[0];
 
-        setForm({
-            ...form,
-            image: URL.createObjectURL(e.target.files[0])
-        });
+        // FileReader 생성
+        const reader = new FileReader();
+
+        // file 업로드가 완료되면 실행
+        reader.onloadend = (finishedEvent) => {
+        // 업로드한 이미지 URL 저장
+        const result = finishedEvent.currentTarget.result;
+        setAttachment(result);
+        };
+        // 파일 정보를 읽기
+        reader.readAsDataURL(theFile);
     }
 
-    const onSaveImage = async () => {
-        if (!file) {
-            alert("변경할 이미지 선택하세요.");
-        } else {
-            if (window.confirm("썸네일을 변경하시겠습니까?")) {
-                //이미지저장 url호출
-                const formData = new FormData();
-                formData.append("file", file);
-                formData.append("store_id", store_id);
-                await axios.post("/store/ckupload", formData);
-                alert("변경완료!");
-                getStore();
-                setSrc('http://via.placeholder.com/200x200');
-                setFile(null);
+    const onSubmit = async (e) => {
+        e.preventDefault();
+        const storage = getStorage();
+        const fileRef = ref(storage, 'store/' + uuidv4());
+
+        // 이미지를 firebase storage에 업로드
+        const response = await uploadString(fileRef, attachment, 'data_url');
+
+        // 업로드한 이미지 url 가져오기
+        const downloadURL = await getDownloadURL(fileRef);
+        //console.log(downloadURL)
+        
+        if (window.confirm("글 수정을 완료하시겠습니까?")) {
+            //이미지저장 url호출
+            const updateForm = {
+                ...form,
+                store_id,
+                image:downloadURL
+            };
+
+            try {
+                const res = await axios.post(`/store/update`, updateForm);
+
+                if(res.data === 0){
+                    alert("글 수정이 실패하였습니다.");
+                }else {
+                    alert("글 수정이 완료되었습니다.");
+                    navi(`/store/read/${store_id}`)
+                }
+            } catch(error) {
+                console.error("등록 에러 : ", error);
+                alert("등록 중 오류가 발생했습니다.");
             }
-        }
+        }    
     }
+    
 
-    // const onSubmit = async (e) => {
+    // const onClickSave = async (e) => {
     //     e.preventDefault();
     //     if (window.confirm("글 수정을 완료하시겠습니까?")) {
     //         await axios.post(`/store/update`, form);
@@ -84,15 +107,6 @@ const StoreUpdate = ({ match, history }) => {
     //         navi(`/store/read/${store_id}`);
     //     }
     // }
-
-    const onClickSave = async (e) => {
-        e.preventDefault();
-        if (window.confirm("글 수정을 완료하시겠습니까?")) {
-            await axios.post(`/store/update`, form);
-            alert("글 수정이 완료되었습니다.");
-            navi(`/store/read/${store_id}`);
-        }
-    }
 
     const onClickCancel = () => {
         setBox({ show: true, message: "글 수정을 취소하시겠습니까?", action: async () => { navi("/store"); } })
@@ -110,12 +124,10 @@ const StoreUpdate = ({ match, history }) => {
                     <div className='store_layout'>
 
                         <section className='store_img_section'>
-                            <div className='store_img'>
-                                <img onClick={() => ref_file.current.click()}
-                                    src={src} style={{ cursor: "pointer" }} />
-                                <input ref={ref_file} type='file' onClick={onChangeFile} style={{ display: 'none' }} />
-                                <button className='my-5 w-100' onClick={onSaveImage}>이미지 저장</button>
-                            </div>
+                        <form className='store_img' onSubmit={onSubmit}>
+                            <img src={attachment || image} style={{cursor:'pointer'}} value={image} onClick={() => img_ref.current.click()}/>
+                            <input accept="image/*" type="file" onChange={onChangeFile} style={{display:'none'}} ref={img_ref}/>
+                        </form>
                         </section>
 
 
@@ -124,7 +136,7 @@ const StoreUpdate = ({ match, history }) => {
                                 <section className='details_title_section'>
                                     <div className='detail_logo'>Plantee<img src='/image/carelevel_icon.png' /></div>
                                 </section>
-                                <form className='insert_textarea'>
+                                <form className='insert_textarea' onSubmit={onSubmit}>
                                     <div className='insert_title'>
                                         <InputGroup className='mb-2'>
                                             <InputGroup.Text>상품번호</InputGroup.Text>
@@ -152,23 +164,23 @@ const StoreUpdate = ({ match, history }) => {
                                         </InputGroup>
                                     </div>
 
+                                    <CKEditor
+                                    config={{ ckfinder: { uploadUrl: '/store/ckupload' } }}
+                                    editor={ClassicEditor}
+                                    data={contents}
+                                    onChange={(event, editor) => { onChangeContents(editor.getData()); }}
+                                    onReady={(editor) => { }} />
 
+                                    <div className='plantinsert_section'>
+                                        <div className='plantinsert_btngroup'>
+                                            <button className='insert_submit' type='submit'>등록하기</button>
+                                            <button className='insert_cancel' onClick={onClickCancel}>취소하기</button>
+                                        </div>
+                                    </div>
                                 </form>
                             </section>
 
-                            <CKEditor
-                                config={{ ckfinder: { uploadUrl: '/store/ckupload' } }}
-                                editor={ClassicEditor}
-                                data={contents}
-                                onChange={(event, editor) => { onChangeContents(editor.getData()); }}
-                                onReady={(editor) => { }} />
-
-                            <div className='plantinsert_section'>
-                                <div className='plantinsert_btngroup'>
-                                    <button className='insert_submit' onClick={onClickSave}>등록하기</button>
-                                    <button className='insert_cancel' onClick={onClickCancel}>취소하기</button>
-                                </div>
-                            </div>
+                            
                         </div>
 
 
@@ -179,5 +191,6 @@ const StoreUpdate = ({ match, history }) => {
         </>
     )
 }
+
 
 export default StoreUpdate

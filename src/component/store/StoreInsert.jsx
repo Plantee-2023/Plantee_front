@@ -1,15 +1,15 @@
 import axios from 'axios';
-import React, { useEffect, useState, useContext } from 'react'
+import React, { useEffect, useState, useContext, useRef } from 'react'
 import { useParams, useNavigate, NavLink, useLocation } from 'react-router-dom';
 import { Spinner, InputGroup, Form } from 'react-bootstrap';
 import { BoxContext } from '../common/BoxContext';
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
-import { app } from '../../firebaseInit'
 import { getFirestore, setDoc, doc, getDoc } from 'firebase/firestore'
-import { getStorage, uploadBytes, ref, getDownloadURL } from 'firebase/storage'
 import "./Store.css";
 import Parser from 'html-react-parser';
+import { ref, getDownloadURL, uploadBytes, getStorage, uploadString} from "firebase/storage";
+import { v4 as uuidv4 } from 'uuid'; //랜덤 식별자를 생성해주는 라이브러리
 
 const StoreInsert = () => {
     const navi = useNavigate();
@@ -21,15 +21,35 @@ const StoreInsert = () => {
 
     const [store, setStore] = useState([]);
 
-    const db = getStorage(app);
     const [file, setFile] = useState(null);
     const navigate = useNavigate();
+
+    const [attachment, setAttachment] = useState();
+    const img_ref = useRef(null);
 
     const [form, setForm] = useState({
         title: "", price: "", stock: "", contents: "", image: "", level: "", tag: "", mdfy_date: ""
     })
 
     const { user_id, title, price, stock, contents, image, level, tag, reg_date, mdfy_date, category } = form;
+
+    const onFileChange = (evt) => {
+        // 업로드 된 file
+        const files = evt.target.files;
+        const theFile = files[0];
+    
+        // FileReader 생성
+        const reader = new FileReader();
+    
+        // file 업로드가 완료되면 실행
+        reader.onloadend = (finishedEvent) => {
+        // 업로드한 이미지 URL 저장
+        const result = finishedEvent.currentTarget.result;
+        setAttachment(result);
+        };
+        // 파일 정보를 읽기
+        reader.readAsDataURL(theFile);
+    };
 
     const onChangeContents = (e) => {
         setForm({
@@ -45,20 +65,48 @@ const StoreInsert = () => {
         });
     }
 
-    const onClickSave = async () => {
+    const onClickCancel = () => {
+        navi("/store");
+    }
+
+    const onClickSave = async (e) => {
+        e.preventDefault();
+        const storage = getStorage();
+        const fileRef = ref(storage, 'recipe/' + uuidv4());
+
+         // 이미지를 firebase storage에 업로드
+        const response = await uploadString(fileRef, attachment, 'data_url');
+
+        // 업로드한 이미지 url 가져오기
+        const downloadURL = await getDownloadURL(fileRef);
+        //console.log(downloadURL)
+
         if (form.contents === "") {
             alert("내용을 입력해주세요.");
         } else {
             if (window.confirm("저장하시겠습니까?")) {
-                const data = { ...form, uid: sessionStorage.getItem("uid"), category: 5 };
-                await axios.post("/store/insert", data);
-                navi("/store");
-            }
+                const updateForm = {
+                    ...form,
+                    uid: sessionStorage.getItem("uid"),
+                    category: 5,
+                    image:downloadURL
+                };
+                try {
+                    // 서버에 업데이트된 form 을 전송
+                    const res = await axios.post(`/store/insert`, updateForm);
+    
+                    if(res.data === 0) {
+                        alert('등록 실패');
+                    }else {
+                        alert("등록 완료!");
+                        navi("/store");
+                    }
+                }catch(error) {
+                    console.error("등록 에러 : ", error);
+                    alert("등록 중 오류가 발생했습니다.");
+                };
+            };
         }
-    }
-
-    const onClickCancel = () => {
-        navi("/store");
     }
 
     if (loading) return <div className='text-center my-5'><Spinner animation="border" variant="success" /></div>
@@ -70,7 +118,10 @@ const StoreInsert = () => {
 
                         <section className='store_img_section'>
                             <div className='store_img'>
-                                <img src='/image/plant01.jpg' />
+                            <form onSubmit={onClickSave}>
+                                <img className='recipe_image' src={attachment} style={{cursor:'pointer'}} value={image} onClick={() => img_ref.current.click()}/>
+                                <input accept="image/*" type="file" onChange={onFileChange} style={{display:'none'}} ref={img_ref}/>
+                            </form>
                             </div>
                         </section>
 

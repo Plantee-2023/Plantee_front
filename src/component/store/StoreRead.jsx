@@ -148,7 +148,7 @@ const StoreRead = () => {
                             <div className='store_img'>
                                 {sessionStorage.getItem("uid") === uid ?
                                     <>
-                                        <Card.Img variant="top" src="http://via.placeholder.com/200x200" />
+                                        <Card.Img variant="top" src={image} />
                                         <Card.ImgOverlay>
                                             <h5><Badge bg="success">내가 쓴 글</Badge></h5>
                                         </Card.ImgOverlay>
