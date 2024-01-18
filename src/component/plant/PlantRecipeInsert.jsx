@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { Form, InputGroup } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { FaStar } from 'react-icons/fa';
@@ -12,6 +12,7 @@ const PlantRecipeInsert = ({recipe_id}) => {
   const array = [0, 1, 2, 3, 4];
   const [clicked, setClicked] = useState([false, false, false, false, false]);
   const [attachment, setAttachment] = useState();
+  const img_ref = useRef(null);
   
   const [form, setForm] = useState({
     recipe_id: '', title: '', description: '', image: '', level: '', reg_date: '', uid: sessionStorage.getItem('uid'), nickname: ''});
@@ -46,29 +47,39 @@ const PlantRecipeInsert = ({recipe_id}) => {
   const onSubmit = async(e) => {
     e.preventDefault();
     const storage = getStorage();
-    const fileRef = ref(storage, uuidv4());
+    const fileRef = ref(storage, 'recipe/' + uuidv4());
 
     // 이미지를 firebase storage에 업로드
     const response = await uploadString(fileRef, attachment, 'data_url');
 
     // 업로드한 이미지 url 가져오기
     const downloadURL = await getDownloadURL(fileRef);
+    //console.log(downloadURL)
 
     if(window.confirm("레시피를 등록하시겠습니까?")){
-      form.level = clicked.filter(Boolean).length;
-      setForm({
-        ...form,
-        image : downloadURL,
-      });
+      const updateForm = {
+        recipe_id,
+        uid : sessionStorage.getItem('uid'),
+        nickname,
+        title,
+        description,
+        level:clicked.filter(Boolean).length,
+        image:downloadURL
+      };
 
-      const res = {recipe_id, uid:sessionStorage.getItem('uid'), nickname, title, description, level}
-      await axios.post('/recipe/insert', form);
+      try {
+        // 서버에 업데이트된 form을 전송
+        const res = await axios.post('/recipe/insert', updateForm);
 
-      if(res.data === 0) {
-        alert("등록 실패!");
-      }else{
-        alert("등록 완료");
-        navi('/recipe');
+        if(res.data === 0) {
+          alert("등록 실패!");
+        }else{
+          alert("등록 완료");
+          navi('/recipe');
+        }
+      } catch(error) {
+        console.error("등록 에러 : ", error);
+        alert("등록 중 오류가 발생했습니다.");
       }
     }
   }
@@ -92,9 +103,8 @@ const PlantRecipeInsert = ({recipe_id}) => {
           <div className='recipe_readcontents_grid'>
             <div className='recipe_image_section'>
               <form onSubmit={onSubmit}>
-                <img className='recipe_image' src={attachment} style={{cursor:'pointer'}}/>
-                <input accept="image/*" type="file" onChange={onFileChange}/>
-                {/* <button type='submit' value='upload'>저장</button> */}
+                <img className='recipe_image' src={attachment} style={{cursor:'pointer'}} value={image} onClick={() => img_ref.current.click()}/>
+                <input accept="image/*" type="file" onChange={onFileChange} style={{display:'none'}} ref={img_ref}/>
               </form>
             </div>
             <div className='recipe_title_section'>
