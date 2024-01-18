@@ -85,7 +85,6 @@ const HeaderPage = () => {
                         <Toast show={showA}>
                           <CloseButton className='menu-close-btn' />
                           <Toast.Body>
-                            <NavLink className='menu-btn btn' to="/users/mypage">내 정보</NavLink>
                             <Card className='menu-card-card'>
                               <div className="menu-card-text">마이페이지</div>
                               <ul>
@@ -96,17 +95,17 @@ const HeaderPage = () => {
                                 </li>
                                 <li>
                                   <Card className='menu-card2'><a href='/plant/recipe'>
-                                    <PiCookingPot className='menu-toast-icon' /></a></Card>
+                                    <PiCookingPot className='menu-toast-icon' style={{ color: '#000000' }} /></a></Card>
                                   <div className='menu-toast-text'>레시피</div>
                                 </li>
                                 <li>
                                   <Card className='menu-card3'><a href='/mypage/mypagecomment'>
-                                    <TfiWrite className='menu-toast-icon' /></a></Card>
+                                    <TfiWrite className='menu-toast-icon' style={{ color: '#000000' }} /></a></Card>
                                   <div className='menu-toast-text'>나의 글</div>
                                 </li>
                                 <li>
                                   <Card className='menu-card4'><a href='/mypage/mypagefavorite'>
-                                    <MdFavoriteBorder className='menu-toast-icon' /></a></Card>
+                                    <MdFavoriteBorder className='menu-toast-icon' style={{ color: '#000000' }} /></a></Card>
                                   <div className='menu-toast-text'>좋아요</div>
                                 </li>
                               </ul>

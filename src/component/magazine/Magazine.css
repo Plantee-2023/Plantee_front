@@ -97,14 +97,7 @@
     .insert-btn1 {
         background-color: #4cc67c !important;
         border: none !important;
-        margin-top: 20px;
-        margin-right: 15px;
-        margin-left: 45%;
-    }
-
-    .insert-btn2 {
-        background-color: #4cc67c !important;
-        border: none !important;
+        margin: 0 auto;
         margin-top: 20px;
     }
 

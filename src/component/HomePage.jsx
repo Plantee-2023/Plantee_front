@@ -26,7 +26,6 @@ const HomePage = () => {
 
     const getMain = async () => {
         setLoading(true);
-
         const res = await axios.get(`/store/list.json?page=${page}&size=20&query=${query}`);
         const res1 = await axios.get(`/magazine/list.json?query=''&page=1&size=8`);
         //const res2 = await axios.get(`/comm/list.json?category=3&page=1&size=10&query=''`); //커뮤니티
@@ -67,7 +66,7 @@ const HomePage = () => {
                     style={{"--swiper-navigation-color": "#ffffff"}}>
                     {store.map(s =>
                         <SwiperSlide>
-                            <Card>
+                            <Card className='homepage-line'>
                                 <Card.Body >
                                     <Card.Img src={s.image || 'http://via.placeholder.com/150x150'} width={200} height={200} >
                                     </Card.Img>
@@ -174,7 +173,7 @@ const HomePage = () => {
                     style={{"--swiper-navigation-color": "#ffffff"}}>
                     {magazine.map(m =>
                         <SwiperSlide>
-                            <Card>
+                            <Card className='homepage-line'>
                                 <Card.Body>
                                     <Card.Img src={m.image || 'http://via.placeholder.com/150x150'} width={200} height={200} />
                                     <hr />

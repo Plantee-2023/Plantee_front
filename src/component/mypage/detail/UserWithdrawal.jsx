@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useContext, useEffect, useState } from 'react'
-import { Button, Spinner } from 'react-bootstrap'
+import { Button, Card, Spinner } from 'react-bootstrap'
 import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { BoxContext } from '../../common/BoxContext';
@@ -46,10 +46,12 @@ const UserWithdrawal = () => {
 
   return (
     <div id="main_wrap">
-      <h1 className="all-title">회원 탈퇴</h1>
-      <div className="text-center">
-        <Button className='delete-btn' type="submit" onClick={() => onClickDelete(uid)}>탈퇴 신청</Button>
-      </div>
+      <Card className='delete-card'>
+        <h1 className="all-title mt-5">회원 탈퇴</h1>
+        <div className="text-center mt-3 mb-3">
+          <Button className='delete-btn' type="submit" onClick={() => onClickDelete(uid)}>탈퇴 신청</Button>
+        </div>
+      </Card>
     </div>
   )
 }

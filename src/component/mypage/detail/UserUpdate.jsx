@@ -86,7 +86,7 @@ const UserUpdate = () => {
                     <Form.Control value={address1} name='address1' type='text' onChange={onChange} />
                     <button className='update-btn'>검색</button>
                 </InputGroup>
-                <Form.Control value={address2} name='address2' className='join-input' type='text' placeholder='상세주소' onChange={onChange} />
+                <Form.Control value={address2} name='address2' className='update-address' type='text' placeholder='상세주소' onChange={onChange} />
                 <Form className='update-check'>
                     <Form.Check label="꽃집 사장님"></Form.Check>
                 </Form>
