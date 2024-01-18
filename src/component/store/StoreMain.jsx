@@ -128,8 +128,8 @@ const StoreMain = () => {
                     )} */}
 
                     <div>
-                        <Navbar bg="#ffffff" data-bs-theme="light" className='pt-3 pb-3'>
-                            <div>총 {total}건</div>
+                        <Navbar bg="#ffffff" data-bs-theme="light" className='pt-5 pb-4'>
+                            <div className='store_total'>총 {total}건</div>
 
                             <Container fluid>
                                 <Navbar.Collapse id="navbarScroll">
@@ -170,17 +170,11 @@ const StoreMain = () => {
                             <Col key={g.store_id} className="p-4">
                                 <Card style={{ border: 'none' }}>
                                     <NavLink to={`/store/read/${g.store_id}`} style={{ color: "black" }}>
-                                        {sessionStorage.getItem("uid") === g.uid ?
-                                            <>
-                                                <Card.Img variant="top" src="http://via.placeholder.com/10x10" />
+                                        <Card.Img width={220} height={220} variant="top" src={g.image || 'http://via.placeholder.com/10x10'} />
+                                        {sessionStorage.getItem("uid") === g.uid &&
                                                 <Card.ImgOverlay>
                                                     <h5><Badge bg="success">내가 쓴 글</Badge></h5>
                                                 </Card.ImgOverlay>
-                                            </>
-                                            :
-                                            <>
-                                                <Card.Img variant="top" src="http://via.placeholder.com/10x10" />
-                                            </>
                                         }
                                         <Card.Body>
                                             <Card.Title>{g.title}</Card.Title>
