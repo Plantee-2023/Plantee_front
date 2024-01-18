@@ -93,7 +93,7 @@ const PlantDictionary = () => {
             {filteredList.map(p =>
                 <a href={`/plant/read/${p.plant_id}`}>
                   <div className='plantlist_contents_item'>
-                    <img src='/image/plant01.jpg'/>
+                    <img src={p.image}/>
                     <p className='plantlist_commonname'>{p.common_name}</p>
                   </div>
                 </a>

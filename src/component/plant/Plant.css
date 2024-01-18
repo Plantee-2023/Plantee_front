@@ -29,7 +29,7 @@
 .plantlist_contents_grid {width: 100%; display: grid; grid-template-columns: repeat(auto-fill, minmax(232px, 1fr)); gap: 56px 20px; overflow-x: initial; padding: 0; margin: 0;}
 .plantlist_contents_grid a {margin: 0; padding: 0; border: 0; text-decoration: none; color: #333;}
 .plantlist_contents_item p {margin-bottom: 0;}
-.plantlist_contents_item img {width: 240px; height: 240px;}
+.plantlist_contents_item img {width: 240px; height: 240px; border-radius: 15px; border: 1PX solid #f0f0f0;}
 .plantlist_commonname {width: 100%; margin-top: 1rem; text-align: center; overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical;
     font-size: 15px; line-height: 20px; letter-spacing: 0.25px; font-weight: 600;}
 
