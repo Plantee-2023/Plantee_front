@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { Spinner, Row, Col, Button } from 'react-bootstrap';
 import { NavLink, useParams, useNavigate } from 'react-router-dom';
 import { BoxContext } from '../common/BoxContext'
-import { app } from '../../firebaseInit'
+import { app } from '../../firebaseConfig'
 import { getFirestore, setDoc, doc, getDoc } from 'firebase/firestore'
 import { getStorage, uploadBytes, ref, getDownloadURL } from 'firebase/storage'
 
@@ -78,7 +78,7 @@ const Magazine = () => {
                         </Col>
                     </Row>
                     <div className='magazine-img'>
-                        <img src={image || 'http://via.placeholder.com/150x150'} width={300} height={300}></img>
+                        <img src={filename || 'http://via.placeholder.com/150x150'} width={300} height={300}></img>
                     </div>
                     <h5 className='magazine-text'>{contents}</h5>
                 </div>

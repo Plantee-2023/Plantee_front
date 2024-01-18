@@ -13,8 +13,7 @@ const MagazineList = () => {
     const [searchTerm, setSearchTerm] = useState('');
     const { box, setBox } = useContext(BoxContext);
     const navi = useNavigate();
-    const size = 5;
-    const [total, setTotal] = useState(0);
+    const size = 10;
     const location = useLocation();
     const search = new URLSearchParams(location.search);
     const path = location.pathname;
@@ -27,7 +26,6 @@ const MagazineList = () => {
         const res = await axios.get(`/magazine/list.json?query=${searchTerm}&page=${page}&size=${size}`);
         console.log(res.data)
         setMagazine(res.data.list);
-        setTotal(res.data.total);
         setLoading(false);
     }
     const onSubmit = (e) => {
@@ -40,9 +38,6 @@ const MagazineList = () => {
         } else {
             navi(`${path}?query=${searchTerm}&page=1&size=${size}`)
         }
-    }
-    const onChangePage = (page) => {
-        navi(`${path}?page=${page}&query=${searchTerm}&size=${size}`);
     }
 
     const handleSearchChange = (event) => {
@@ -99,16 +94,6 @@ const MagazineList = () => {
                         )}
                     </tbody>
                 </Table>
-                {total > size &&
-                    <Pagination
-                        activePage={page}
-                        itemsCountPerPage={size}
-                        totalItemsCount={total}
-                        pageRangeDisplayed={10}
-                        prevPageText={"‹"}
-                        nextPageText={"›"}
-                        onChange={onChangePage} />
-                }
             </div>
         </div>
     )

@@ -19,38 +19,11 @@ const Comm_editor = ({form,setForm}) => {
         });
     }
     
-      const onClickSave = async () => {
-        if (form.contents === "") {
-            alert("내용을 입력해주세요.");
-        } else {
-            if (window.confirm("저장하시겠습니까?")) {
-                const data = {  contents: form.contents };
-                //console.log(data);
-                await axios.post("/comm/insert", data);
-                alert("저장을 완료했습니다.");
 
-                 
-            }
-        }
-        window.location.href=``;
-    }
  
 
 
-    const onClickSaveHtml = async () => {
-        if (form.html === "") {
-            alert("내용을 입력해주세요.");
-        } else {
-            if (window.confirm("저장하시겠습니까?")) {
-                const data = {   contents: form.html };
-                //console.log(data);
-                await axios.post("/comm/insert", data);
-                alert("저장을 완료했습니다.");
-                 
-            }
-        }
-    }
-
+  
 
 
   return (
@@ -59,6 +32,7 @@ const Comm_editor = ({form,setForm}) => {
             
                  
                     <CKEditor config={{ ckfinder: { uploadUrl: '/comm/ckupload'  } }}
+
                     editor={ClassicEditor}
                     data={form.contents}
                     onChange={(event, editor) => { onChangeContent(editor.getData()); }} />

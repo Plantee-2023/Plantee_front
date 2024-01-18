@@ -3,7 +3,7 @@ import React, { useRef, useState, useContext, useEffect } from 'react'
 import { Button, Card, Form, Spinner } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
 import { BoxContext } from '../common/BoxContext'
-import { app } from '../../firebaseInit'
+import { app } from '../../firebaseConfig'
 import { getFirestore, setDoc, doc, getDoc } from 'firebase/firestore'
 import { getStorage, uploadBytes, ref, getDownloadURL } from 'firebase/storage'
 
@@ -23,20 +23,15 @@ const MagazineInsert = () => {
         title: '',
         image: '',
         uid: 'admin',
-        magazine_num : ''
+        magazine_num: ''
     });
-
     const { contents, title, image, uid, magazine_num } = form;
-
-    useEffect(() => {
-        getMagazine();
-    }, [])
 
     const onUpdate = async () => {
         if (!window.confirm('사진을 등록하시겠습니까?')) return;
         try {
             if (file) {
-                const snapshot = await uploadBytes(ref(storage, `/photo/${Date.now()}.jpg`), file);
+                const snapshot = await uploadBytes(ref(storage, `/magazine/${Date.now()}.jpg`), file);
                 const url = await getDownloadURL(snapshot.ref);
                 await setDoc(doc(db, 'user', uid), { ...form, image: url });
             } else {
@@ -45,6 +40,11 @@ const MagazineInsert = () => {
         } catch (error) {
             alert(error.message);
         }
+    }
+
+    const onChangeFile = (e) => {
+        setFileName(URL.createObjectURL(e.target.files[0]));
+        setFile(e.target.files[0]);
     }
 
     const getMagazine = async () => {
@@ -59,10 +59,7 @@ const MagazineInsert = () => {
         }
     }
 
-    const onChangeFile = (e) => {
-        setFileName(URL.createObjectURL(e.target.files[0]));
-        setFile(e.target.files[0]);
-    }
+
 
     const onChange = (e) => {
         setForm({
@@ -93,6 +90,10 @@ const MagazineInsert = () => {
             }
         })
     }
+
+    useEffect(() => {
+        getMagazine();
+    }, [])
 
     // const onChangeFile = (e) => {
     //     setForm({
@@ -126,7 +127,7 @@ const MagazineInsert = () => {
         <div id="main_wrap">
             <div className="main_contents">
                 <Card className='insert-card'>
-                    <Form.Control onChange={onChange} name='magazine_num' placeholder='번호' className='insert-text' style={{width:100}} />
+                    <Form.Control onChange={onChange} name='magazine_num' placeholder='번호' className='insert-text' style={{ width: 100 }} />
                     <Form.Control onChange={onChange} name='title' placeholder='제목을 입력해주세요.' className='insert-text' />
                     <form encType='multipart/form-data' className='insert-img'>
                         <img name='image' src={filename || 'http://via.placeholder.com/150x150'} onClick={() => img_ref.current.click()} width={300} height={300} style={{ cursor: 'pointer' }} />

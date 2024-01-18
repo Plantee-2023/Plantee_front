@@ -71,7 +71,7 @@ const PlantDetails = () => {
         <div className='details_layout'>
           <section className='details_img_section'>
             <div className='details_img'>
-              <img src='/image/plant01.jpg'/>
+              <img src={image}/>
             </div>
           </section>
           <div className='details_info_layout'>
