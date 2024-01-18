@@ -12,22 +12,23 @@ import Comm_editor from '../Comm_editor';
 
 const Market_write = () => {
  
-  const [selectedValue, setSelectedValue] = useState('');
+  const [selectedValue, setSelectedValue] = useState('5');
+  const [selectedValue2, setSelectedValue2] = useState('7');
   const [form, setForm] = useState("");
   const priceRef = useRef(null);
   const ref_file = useRef(null);
   const [src, setSrc] = useState('http://via.placeholder.com/200x200');
   const [file, setFile] = useState(null);
 
-   
-  const { title, price,  contents, category  } = form;
+ 
+  const { title, price,  contents, category,filter  } = form;
   const navigate  = useNavigate();
 
   const handleDropdownChange = (event) => {
     const selectedOption = event.target.value;
     
     // '무료나눔'이 선택되었을 때
-    if (selectedOption === "0") {
+    if (selectedOption === "5") {
       // price 알림상자 표시
       alert('무료나눔을 선택하셨습니다.');
       
@@ -37,6 +38,14 @@ const Market_write = () => {
     
     // 선택된 값을 상태에 저장
     setSelectedValue(selectedOption);
+  };
+
+  const handleDropdownChange2 = (event) => {
+    const selectedOption2 = event.target.value;
+ 
+    
+    // 선택된 값을 상태에 저장
+    setSelectedValue2(selectedOption2);
   };
 
 
@@ -63,9 +72,11 @@ const onClickSave = async () => {
       alert("내용을 입력해주세요.");
   } else {
       if (window.confirm("저장하시겠습니까?")) {
+
+          const value=(selectedValue ==='6' || selectedValue===null) ? selectedValue2 : selectedValue ;
           const data = 
           {  contents: form.contents ,  uid: sessionStorage.getItem("uid"),
-            category: 4,
+            category: 4,  filter:value,
           title:form.title, 
           price:form.price };
           console.log(data);
@@ -74,9 +85,9 @@ const onClickSave = async () => {
             alert("저장을 완료했습니다.");
             
             // 데이터 저장이 성공하면 뒤로 가기
-            setTimeout(() => {
-              handleGoBack();
-            }, 10000);
+           // setTimeout(() => {
+           handleGoBack();
+           // }, 10000);
           } catch (error) {
             console.error("Save failed:", error);
             // 저장 실패 시 에러 처리
@@ -104,16 +115,16 @@ const onClickSave = async () => {
               <form name="frm">
 
               <InputGroup className="mb-2">
-              <Form.Select name="trade" value={selectedValue}  onChange={handleDropdownChange}>
-                  <option value="0">무료나눔</option>
-                  <option value="1">거래</option>
+              <Form.Select name="trade" value={selectedValue} disabled={selectedValue != '5'}  onChange={handleDropdownChange}>
+                  <option value="5">무료나눔</option>
+                  <option value="6">거래</option>
                  
 
                   </Form.Select  >
 
-                  <Form.Select name="tradeoption" value={selectedValue} disabled={selectedValue === '0'} >
-                  <option value="0">삽니다</option>
-                  <option value="1">팝니다</option>
+                  <Form.Select name="tradeoption" value={selectedValue2} disabled={selectedValue === '5'} onChange={handleDropdownChange2}>
+                  <option value="7">삽니다</option>
+                  <option value="8">팝니다</option>
                  
 
                   </Form.Select  >
@@ -130,7 +141,7 @@ const onClickSave = async () => {
 
               <InputGroup className="mb-2">
               <InputGroup.Text>가격</InputGroup.Text>
-                <FormControl type="number" name="price" ref={priceRef}  onChange={onChange}
+                <FormControl type="number" name="price" ref={priceRef}  onChange={onChange} disabled={selectedValue === '5'}
                 
                   placeholder="가격"
 
