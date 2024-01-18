@@ -5,6 +5,8 @@ import { BoxContext } from '../common/BoxContext';
 import axios from 'axios';
 import { ref, getDownloadURL, uploadBytes, getStorage, uploadString } from "firebase/storage";
 import { v4 as uuidv4 } from 'uuid'; //랜덤 식별자를 생성해주는 라이브러리
+import { app } from '../../firebaseConfig'
+
 
 const DiaryInsert = () => {
     const [attachment, setAttachment] = useState();
@@ -40,6 +42,8 @@ const DiaryInsert = () => {
         // 파일 정보를 읽기
         reader.readAsDataURL(theFile);
     };
+
+    
 
     const onSubmit = async () => {
         setBox({
@@ -86,14 +90,20 @@ const DiaryInsert = () => {
         }
 
     }
+
     const getList = async () => {
         const res = await axios.get(`/plant/list.json`);
         setplants(res.data.list);
         console.log(plants);
+
     }
-    useEffect(() => {
-        getList();
-    }, []);
+
+    const handleChange = (event) => {
+        const selectedOption = event.target.value;
+        console.log(selectedOption); // 선택한 값 가져오기
+        setSelectedValue(selectedOption);
+
+    };
 
     const getLevel = (care_level) => {
         switch (care_level) {
@@ -106,44 +116,10 @@ const DiaryInsert = () => {
         }
     };
 
+    useEffect(() => {
+        getList();
+    }, []);
 
-    const handleChange = (event) => {
-        const selectedOption = event.target.value;
-        console.log(selectedOption); // 선택한 값 가져오기
-        setSelectedValue(selectedOption);
-    };
-    
-    const onSubmit = async () => {
-        const storage = getStorage();
-        const fileRef = ref(storage, 'diary/' + uuidv4());
-
-        // 이미지를 firebase storage에 업로드
-        const response = await uploadString(fileRef, attachment, 'data_url');
-
-        // 업로드한 이미지 url 가져오기
-        const downloadURL = await getDownloadURL(fileRef);
-        //console.log(downloadURL)
-
-        if (window.confirm("레시피를 등록하시겠습니까?")) {
-            const updateForm = {
-                ...insertDiary,
-                image: downloadURL
-            };
-            try {
-                // 서버에 업데이트된 form을 전송
-                const res = await axios.post('/diary/insert', updateForm);
-                if (res.data === 0) {
-                    alert("등록 실패!");
-                } else {
-                    alert("등록 완료");
-                    navi('/diary/main');
-                }
-            } catch (error) {
-                console.error("등록 에러 : ", error);
-                alert("등록 중 오류가 발생했습니다.");
-            }
-        }
-    }
     return (
         <div className='plant_wrap'>
             <div className='plant_contents'>
@@ -204,4 +180,5 @@ const DiaryInsert = () => {
         </div>
     )
 }
+
 export default DiaryInsert
