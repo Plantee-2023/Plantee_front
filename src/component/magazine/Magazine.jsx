@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { Spinner, Row, Col, Button } from 'react-bootstrap';
 import { NavLink, useParams, useNavigate } from 'react-router-dom';
 import { BoxContext } from '../common/BoxContext'
-import { app } from '../../firebaseInit'
+import { app } from '../../firebaseConfig'
 import { getFirestore, setDoc, doc, getDoc } from 'firebase/firestore'
 import { getStorage, uploadBytes, ref, getDownloadURL } from 'firebase/storage'
 

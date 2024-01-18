@@ -3,7 +3,7 @@ import axios from 'axios'
 import { useParams, useNavigate } from 'react-router-dom'
 import { BoxContext } from '../common/BoxContext';
 import { Spinner, Card, Form, Button } from 'react-bootstrap'
-import { app } from '../../firebaseInit'
+import { app } from '../../firebaseConfig'
 import { getFirestore, setDoc, doc, getDoc } from 'firebase/firestore'
 import { getStorage, uploadBytes, ref, getDownloadURL } from 'firebase/storage'
 
