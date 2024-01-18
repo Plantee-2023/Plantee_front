@@ -116,6 +116,7 @@ input:focus {outline:none;}
 
 .recipe_contents_grid a {margin: 0; padding: 0; border: 0; text-decoration: none; color: #333;}
 
+.recipe_content_item img {border-radius: 15px;}
 .recipe_content_item p {margin-bottom: 0;}
 
 .recipe_content_item img {width: 250px; height: 250px;}
