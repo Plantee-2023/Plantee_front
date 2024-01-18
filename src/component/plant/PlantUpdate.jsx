@@ -1,7 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { NavLink, useNavigate, useParams } from 'react-router-dom';
 import { Form, InputGroup, Spinner } from 'react-bootstrap';
 import axios from 'axios';
+import { ref, getDownloadURL, uploadBytes, getStorage, uploadString} from "firebase/storage";
+import { v4 as uuidv4 } from 'uuid'; //랜덤 식별자를 생성해주는 라이브러리
 
 const PlantUpdate = () => {
 
@@ -9,6 +11,8 @@ const PlantUpdate = () => {
   const [form, setForm] = useState("");
   const [loading, setLoading] = useState(false);
   const navi = useNavigate();
+  const [attachment, setAttachment] = useState();
+  const img_ref = useRef(null);
   
   const getPlant = async () => {
     setLoading(true);
@@ -19,9 +23,23 @@ const PlantUpdate = () => {
 
   const { common_name, image, contents, watering, sunlight, care_level, leaf, flowers, fruits, type, indoor, poisonous_pet, cuisine } = form;
 
-  useEffect(() => {
-    getPlant();
-  }, []);
+  const onFileChange = (evt) => {
+    // 업로드 된 file
+    const files = evt.target.files;
+    const theFile = files[0];
+
+    // FileReader 생성
+    const reader = new FileReader();
+
+    // file 업로드가 완료되면 실행
+    reader.onloadend = (finishedEvent) => {
+      // 업로드한 이미지 URL 저장
+      const result = finishedEvent.currentTarget.result;
+      setAttachment(result);
+    };
+    // 파일 정보를 읽기
+    reader.readAsDataURL(theFile);
+  };
 
   const onChange = (e) => {
     setForm({
@@ -32,12 +50,40 @@ const PlantUpdate = () => {
 
   const onSubmit = async(e) => {
     e.preventDefault();
+    const storage = getStorage();
+    const fileRef = ref(storage, 'plant/' + uuidv4());
+
+    // 이미지를 firebase storage에 업로드
+    const response = await uploadString(fileRef, attachment, 'data_url');
+
+    // 업로드한 이미지 url 가져오기
+    const downloadURL = await getDownloadURL(fileRef);
+    //console.log(downloadURL)
+
     if(window.confirm("수정하시겠습니까?")) {
-      await axios.post("/plant/update", form);
-      alert("수정완료!")
-      navi(`/plant/read/${plant_id}`);
+      const updateForm = {
+        ...form,
+        image:downloadURL
+      };
+      try {
+        const res = await axios.post("/plant/update", updateForm);
+
+        if(res.data === 0) {
+          alert("등록 실패!");
+        }else{
+          alert("수정 완료");
+          navi(`/plant/read/${plant_id}`);
+        }
+      } catch(error) {
+        console.error("등록 에러 : ", error);
+        alert("등록 중 오류가 발생했습니다.")
+      }
     }
   }
+
+  useEffect(() => {
+    getPlant();
+  }, []);
 
   if (loading) return <div className='text-center my-5'><Spinner animation="border" variant="success" /></div>
 
@@ -47,7 +93,10 @@ const PlantUpdate = () => {
         <div className='details_layout'>
           <section className='details_img_section'>
             <div className='details_img'>
-              <img src='/image/plant01.jpg'/>
+            <form onSubmit={onSubmit}>
+                <img className='plant_image' src={attachment} style={{cursor:'pointer'}} value={image} onClick={() => img_ref.current.click()}/>
+                <input accept="image/*" type="file" onChange={onFileChange} style={{display:'none'}} ref={img_ref}/>
+              </form>
             </div>
           </section>
           <div className='details_info_layout'>
