@@ -78,7 +78,7 @@ const Magazine = () => {
                         </Col>
                     </Row>
                     <div className='magazine-img'>
-                        <img src={image || 'http://via.placeholder.com/150x150'} width={300} height={300}></img>
+                        <img src={filename || 'http://via.placeholder.com/150x150'} width={300} height={300}></img>
                     </div>
                     <h5 className='magazine-text'>{contents}</h5>
                 </div>

@@ -23,7 +23,7 @@ const MagazineInsert = () => {
         title: '',
         image: '',
         uid: 'admin',
-        magazine_num : ''
+        magazine_num: ''
     });
     const { contents, title, image, uid, magazine_num } = form;
 
@@ -59,7 +59,7 @@ const MagazineInsert = () => {
         }
     }
 
-    
+
 
     const onChange = (e) => {
         setForm({
@@ -127,7 +127,7 @@ const MagazineInsert = () => {
         <div id="main_wrap">
             <div className="main_contents">
                 <Card className='insert-card'>
-                    <Form.Control onChange={onChange} name='magazine_num' placeholder='번호' className='insert-text' style={{width:100}} />
+                    <Form.Control onChange={onChange} name='magazine_num' placeholder='번호' className='insert-text' style={{ width: 100 }} />
                     <Form.Control onChange={onChange} name='title' placeholder='제목을 입력해주세요.' className='insert-text' />
                     <form encType='multipart/form-data' className='insert-img'>
                         <img name='image' src={filename || 'http://via.placeholder.com/150x150'} onClick={() => img_ref.current.click()} width={300} height={300} style={{ cursor: 'pointer' }} />

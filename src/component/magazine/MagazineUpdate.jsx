@@ -62,7 +62,7 @@ const MagazineUpdate = () => {
         if (!window.confirm('사진을 등록하시겠습니까?')) return;
         try {
             if (file) {
-                const snapshot = await uploadBytes(ref(storage, `/photo/${Date.now()}.jpg`), file);
+                const snapshot = await uploadBytes(ref(storage, `/magazine/${Date.now()}.jpg`), file);
                 const url = await getDownloadURL(snapshot.ref);
                 await setDoc(doc(db, 'user', uid), { ...update, image: url });
             } else {
