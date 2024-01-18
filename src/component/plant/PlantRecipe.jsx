@@ -117,7 +117,7 @@ const PlantRecipe = () => {
             {filteredList.map(r => 
               <a href={`/recipe/read/${r.recipe_id}`}>
                 <div className='recipe_content_item'>
-                  <img src='/image/recipe_01.jpg'/>
+                  <img src={r.image}/>
                   <p className='recipe_title'>{r.title}</p>
                   <p className='recipe_writer'>{r.nickname}</p>
                     <div className='recipe_content_level'>

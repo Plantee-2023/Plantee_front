@@ -69,7 +69,7 @@ const PlantRecipeRead = () => {
         <div className='recipe_contentitem_section'>
           <div className='recipe_readcontents_grid'>
             <div className='recipe_image_section'>
-              <img className='recipe_image' src='/image/recipe_01.jpg'/>
+              <img className='recipe_image' src={image}/>
             </div>
             <div className='recipe_title_section'>
               <div className='recipe_title_group'>
