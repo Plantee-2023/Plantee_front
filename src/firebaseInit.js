@@ -15,12 +15,6 @@
 // };
 
 
-// // Initialize Firebase
-
-
-
-// export const app = initializeApp(firebaseConfig);
-
 // export const auth = getAuth(app); // 인증
 // export const db = getFirestore(app); // DB
 // export const storage = getStorage(app); // 사진
