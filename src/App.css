@@ -18,17 +18,18 @@
 .menu_mymenu>li { align-items: center; margin-left: 2rem;}
 .menu_mymenu a {font-size: 17px; text-decoration: none; color: #333333;}
 .menu-icon { font-size: 25px; margin-top: 10px; margin-right: 10px; margin-left: 30px;}
-.menu-card1 { margin-right: 16px; margin-left: 10px; margin-bottom: 10px; border: none; background-color: #BA55D3; padding: 3px;}
-.menu-card2 { margin-right: 16px; margin-left: 10px; margin-bottom: 10px; border: none; background-color: #1E90FF; padding: 3px;}
-.menu-card3 { margin-right: 16px; margin-left: 10px; margin-bottom: 10px; border: none; background-color: #90EE90; padding: 3px;}
-.menu-card4 { margin-right: 16px; margin-left: 10px; margin-bottom: 10px; border: none; background-color: #CD5C5C; padding: 3px;}
+.menu-card1 { margin-right: 16px; margin-left: 22px; margin-bottom: 10px; border: none; background-color: #BA55D3 !important; padding: 3px;}
+.menu-card2 { margin-right: 16px;  margin-bottom: 10px; border: none; background-color: #1E90FF !important; padding: 3px;}
+.menu-card3 { margin-right: 16px;  margin-bottom: 10px; border: none; background-color: #90EE90 !important; padding: 3px;}
+.menu-card4 { margin-right: 16px;  margin-bottom: 10px; border: none; background-color: #CD5C5C !important; padding: 3px;}
 .menu-card-card { margin-top: 10px;}
-ul,li {list-style: none; padding: 0px;}
+ul,li {list-style: none; padding: 0px !important;}
 .menu-toast-icon { font-size: 50px;}
-.menu-btn { background-color: #4cc67c; border: none; color: #ffffff !important; font-weight: 600; margin-left: 78%;}
-.menu-toast { margin-right: 22%; margin-top: 6%;}
-.menu-toast-text { margin-left: 19px; margin-bottom: 7px; font-weight: 600; font-size: 15px;}
-.menu-card-text { font-weight: 600; margin-left: 13px; margin-top: 13px;}
+.menu-btn { background-color: #4cc67c !important; border: none !important; color: #ffffff !important; font-weight: 600; margin-left: 78%;}
+.menu-toast { margin-right: 6%; margin-top: 3%;}
+.menu-toast-text {margin-bottom: 7px; margin-left: 10px; font-weight: 600; font-size: 15px;}
+.menu-toast-text1 {margin-bottom: 7px; margin-left: 30px; font-weight: 600; font-size: 15px;}
+.menu-card-text { font-weight: 600; margin-left: 10px; margin-top: 13px;}
 .menu-close-btn { margin-left: 90%; margin-top: 3%;}
 .ellipsis { overflow: hidden; text-overflow: ellipsis; display: -webkit-box ; -webkit-line-clamp: 1; -webkit-box-orient: vertical;}
 .banner{ --swiper-theme-color:#ffffff !important;}
@@ -41,7 +42,7 @@ ul,li {list-style: none; padding: 0px;}
 .homepage_more_icon {margin-top: 3px;}
 
 .homepage_tagbtn button {width: 100px; height: 40px; border-radius: 50px; margin-right: 10px; margin-top: 10px; background-color: #07955C; border: none; color: #fff;}
-
+.homepage-line {height: 400px !important;}
 /* Button to Top */
 .btn_top { position: fixed; bottom: 10%; right: 3rem; background-color: #4cc37c; color: white; border: #4cc37c; width: 50px; height: 50px; border-radius: 50px;}
 
@@ -52,9 +53,8 @@ ul,li {list-style: none; padding: 0px;}
 .join-check {margin-left: 24px; margin-bottom: 15px;}
 .join-input {max-width: 650px; margin: 0 auto; margin-bottom: 15px;}
 .join-address {max-width: 650px; margin: 0 auto; margin-bottom: 5px;}
-.join-btn {background-color: #4cc67c; color: #ffffff; border: none; border-radius: 5px; font-weight: 900; font-size: large;}
-.join-add {background-color: #4cc67c; color: #ffffff; border: none; border-radius: 5px; font-weight: 900; font-size: large; padding: 10px; width: 12%;}
-.join-img-btn {background-color: #4cc67c; font-weight: 900; border: none; margin-top: 15px; margin-left: 18%;}
+.join-add {background-color: #4cc67c !important; color: #ffffff; border: none !important; border-radius: 5px; font-weight: 900; font-size: large; padding: 10px; width: 12%;}
+.join-img-btn {background-color: #4cc67c !important; font-weight: 900; border: none !important; margin-top: 15px; margin-left: 18%;}
 .join-title {text-align: center; font-size: 40px; margin-top: 50px; margin-bottom: 30px;}
 
 /* 로그인 페이지 */
