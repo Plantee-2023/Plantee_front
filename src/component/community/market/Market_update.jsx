@@ -1,7 +1,7 @@
 
 
 import axios from 'axios';
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { Col, Card, FormControl, Form, InputGroup, Pagination, ProgressBar, Row, NavLink, Image, Button } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom';
@@ -12,17 +12,37 @@ import Comm_plant from '../Comm_plant';
 const Market_update = () => {
   const navigate = useNavigate();
   const [selectedValue, setSelectedValue] = useState('');
+  const [selectedValue2, setSelectedValue2] = useState('');
   const [form, setForm] = useState("");
   const { post_id } = useParams();
   const [post, setPost] = useState('');
-
-  const getPost = async () => {
+  const priceRef = useRef(null);
+  
+  /*const getPost = async () => {
     const res = await axios(`/comm/read.json/${post_id}`)
     console.log(res.data)
     setForm(res.data);
-  }
+  }*/
 
   const { uid, title, contents, image, filter,post_origin} = form;
+
+
+  const getPost = async () => {
+  
+    const res = await axios(`/comm/info/${post_id}?uid=${sessionStorage.getItem("uid")}`);
+ console.log('res',res.data);
+
+  setForm(res.data.read);
+ 
+  console.log("레스",res)
+ 
+ 
+
+   
+}
+
+
+
 
 
   const onChangeContents = (data) => {
@@ -44,6 +64,14 @@ const Market_update = () => {
 
   const handleGoBack = () => {
     navigate(-1); // 이전 페이지로 이동
+  };
+
+  const handleDropdownChange2 = (event) => {
+    const selectedOption2 = event.target.value;
+ 
+    
+    // 선택된 값을 상태에 저장
+    setSelectedValue2(selectedOption2);
   };
 
 
@@ -98,36 +126,48 @@ const Market_update = () => {
       <Row className='justify-content-center'>
         <Col xs lg={15}>
           <Card className='p-5'>
-            <h4 className="text-center" style={{ "font-weight": "bold" }}>
+      <h4 className="text-center" style={{ "font-weight": "bold" }}>
 
-              <div className='text-start'>
-                <input type="checkbox" /> 투표
-              </div>
+           
 
+              <form name="frm">
 
               <InputGroup className="mb-2">
-                <InputGroup.Text>선택</InputGroup.Text>
-                <Form.Select name="filter" value={filter} onChange={handleDropdownChange} >
-                  <option value="0">식물자랑</option>
-                  <option value="1">Q&A</option>
+              <Form.Select name="trade" value={selectedValue} disabled={selectedValue != '5'}  onChange={handleDropdownChange}>
+                  <option value="5">무료나눔</option>
+                  <option value="6">거래</option>
+                 
 
+                  </Form.Select  >
 
+                  <Form.Select name="tradeoption" value={selectedValue2} disabled={selectedValue === '5'} onChange={handleDropdownChange2}>
+                  <option value="7">삽니다</option>
+                  <option value="8">팝니다</option>
+                 
 
-                </Form.Select  >
-              </InputGroup>
-              <InputGroup className="mb-2">
-                <InputGroup.Text>제목</InputGroup.Text>
-                <FormControl name='title'
-                  value={
-                    uid === sessionStorage.getItem("uid") ? title : title
-                  } onChange={onChange}
+                  </Form.Select  >
+
+                  </InputGroup>
+                  <InputGroup className="mb-2">
+                  <InputGroup.Text>상품</InputGroup.Text>
+                <FormControl name='title' value={form.title} onChange={onChange}
                   placeholder="제목"
 
                 />
 
               </InputGroup>
 
+              <InputGroup className="mb-2">
+              <InputGroup.Text>가격</InputGroup.Text>
+                <FormControl type="number" name="price" ref={priceRef} value={form.price} onChange={onChange} disabled={selectedValue === '5'}
+                
+                  placeholder="가격"
 
+                />
+              </InputGroup>
+
+              </form>
+              
 
 
 
@@ -148,15 +188,14 @@ const Market_update = () => {
 
                 <CKEditor config={{ ckfinder: { uploadUrl: '/comm/ckupload' } }}
                   editor={ClassicEditor}
-                  data={uid === sessionStorage.getItem("uid") ?
-                    form.contents : ''}
+                  data={uid === sessionStorage.getItem("uid") &&form.contents }
                   onChange={(event, editor) => { onChangeContents(editor.getData()); }} />
 
 
               </Col>
             </Row>
             <div className='mt-2'>
-              <Comm_plant />
+              <Comm_plant form={form} setForm={setForm} />
             </div>
           </Card>
 

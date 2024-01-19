@@ -34,8 +34,8 @@ const HomePage = () => {
         const res1 = await axios.get(`/magazine/list.json?query=''&page=1&size=8`);
         //const res2 = await axios.get(`/comm/list.json?category=3&page=1&size=10&query=''`); //커뮤니티
         const res3 = await axios.get(`/plant/list.json`); // 플랜트
-        // setStore(res.data.list);
-        // setMagazine(res1.data.list);
+         setStore(res.data.list);
+         setMagazine(res1.data.list);
         //setCommunity(res2.data.list);
         setPlants(res3.data.list);
         setLoading(false);
@@ -106,7 +106,7 @@ const HomePage = () => {
                                 </Card.Footer>
                             </Card>
                         </SwiperSlide>
-                    )} */}
+                    )} 
                 </Swiper>
                 <Row className='mt-5'>
                     <Col>
