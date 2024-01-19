@@ -17,8 +17,8 @@ const MainBannerPage = () => {
           autoplay={{ delay: 5500 }}
           navigation
           style={{ "--swiper-navigation-color": "#ffffff" }}>
-          <SwiperSlide><img src='/image/1.jpg' width={"100%"} height={500} /></SwiperSlide>
-          <SwiperSlide><img src='/image/2.jpg' width={"100%"} height={500} /></SwiperSlide>
+          <SwiperSlide><img src='/image/1.jpg' width={"100%"} height={600} /></SwiperSlide>
+          <SwiperSlide><img src='/image/2.jpg' width={"100%"} height={600} /></SwiperSlide>
           <SwiperSlide><img src='/image/3.jpg' width={"100%"} height={500} /></SwiperSlide>
           <SwiperSlide><img src='/image/4.jpg' width={"100%"} height={500} /></SwiperSlide>
         </Swiper>
