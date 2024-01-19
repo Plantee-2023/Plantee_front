@@ -51,15 +51,15 @@ const MagazineList = () => {
 
     if (loading) return <div className='text-center my-5'><Spinner animation="border" variant="success" /></div>
     return (
-        <div id="main_wrap">
-            <div className="main_contents">
-                <div className='magazine-list-title'>매거진</div>
+        <div className='plant_wrap'>
+            <div className='plant_contents'>
+                <h3 className='magazine-list-title'>매거진</h3>
                 <Row>
                     <Col>
                         <form onSubmit={onSubmit}>
                             <InputGroup className='search'>
-                                <Form.Control type='search' value={searchTerm} onChange={handleSearchChange} placeholder='검색어' />
-                                <Button className='magazine-btn'>검색</Button>
+                                <input type='search' className='search_input_textinput' placeholder='검색어를 입력해주세요.' value={searchTerm} onChange={handleSearchChange} />
+                                <button className='search_input_searchbtn' type='submit'><img src='/image/search_icon.png' /></button>
                             </InputGroup>
                         </form>
                     </Col>

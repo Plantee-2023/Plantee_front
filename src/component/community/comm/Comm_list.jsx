@@ -28,6 +28,8 @@ const Comm_list = () => {
   const key = 10;
   const [post_id, setPost_id] = useState(0);
 
+
+  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   const getPost = async () => {
     setLoading(true);
     const result = await axios.get(`/comm/filter_list.json?category=3&page=1&size=${size}&query=${query}&filter=${filter}`);
@@ -51,22 +53,17 @@ const Comm_list = () => {
     // setLast(Math.ceil(result1.data.total/5));
     setLoading(false);
   }
+ ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
-  const onDelete = async (post_id) => {
-    if (window.confirm(`${post_id}번 상품을 삭제하시겠습니까?`)) {
-      await axios.get(`/shop/delete?post_id=${post_id}`);
-      // await axios.get(`/deleteFile?file=${shop.image}`);
-      alert("게시글이 삭제되었습니다.");
-      //  navi(`/shop/list?page=1&siez=${size}&query=${query}`);
-
-    }
-  }
+ 
 
   const onClickDelete = async () => {
     let count = 0;
 
     for (const post of posts) {
+      if (post.uid != sessionStorage.getItem("uid")) {
+        alert("본인 게시글만 삭제할 수 있습니다. ");
+      }
       if (post.uid === sessionStorage.getItem("uid")) {
 
 
@@ -76,13 +73,13 @@ const Comm_list = () => {
             count++;
         }
 
-        alert("게시글이 삭제되었습니다.");
-        getPost();
-      } if (post.uid != sessionStorage.getItem("uid")) {
-        alert("본인 게시글만 삭제할 수 있습니다. ");
-      }
-    }
+       
 
+      } 
+
+    }
+ alert("게시글이 삭제되었습니다.");
+        getPost();
 
   }
 
@@ -186,7 +183,7 @@ const Comm_list = () => {
 
           <thead>
             <tr>
-              <input type='checkbox' onChange={onChangeAll} checked={posts.length === cnt && !posts.length === 0} />
+              <input type='checkbox' onChange={onChangeAll} checked={posts.length === cnt && posts.length > 0} />
               <th>No</th>
               <th>구분</th>
               <th>제목</th>
