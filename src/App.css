@@ -15,8 +15,6 @@
 .fixed_navbar {position: fixed; top: 0; width: 100%; z-index: 1000;}
 .menu_contents.scrolling {background-color: #FDFFFD; box-shadow: 0 2px 5px rgb(0, 0, 0, 0.1);}
 
-.menu_navdropdown .nav-link {background-color: #E3F5E5; color: #011c11;}
-
 .menu_mymenu { display: flex; align-items: center;}
 .menu_right ul { list-style: none; display: flex; align-items: center; margin-top: 5%;}
 .menu_mymenu>li { align-items: center; margin-left: 2rem;}
