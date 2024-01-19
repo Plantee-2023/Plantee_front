@@ -1,7 +1,7 @@
 import React, { useEffect, useContext } from 'react'
 import axios from 'axios';
 import { Col, Form, InputGroup, Row, Button, Table, Spinner, Card } from 'react-bootstrap'
-import { NavLink, useLocation, useNavigate } from 'react-router-dom'
+import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom'
 import { AiOutlineEdit } from "react-icons/ai";
 import { useState } from 'react';
 import Pagination from 'react-js-pagination';
@@ -52,27 +52,27 @@ const MagazineList = () => {
 
     if (loading) return <div className='text-center my-5'><Spinner animation="border" variant="success" /></div>
     return (
-        <div id="main_wrap">
-            <div className="main_contents">
-                <div className='magazine-list-title'>매거진</div>
+        <div className='plant_wrap'>
+            <div className='plant_contents'>
+                <h3 className='magazine-list-title'>매거진</h3>
                 <Row>
                     <Col>
                         <form onSubmit={onSubmit}>
                             <InputGroup className='search'>
-                                <Form.Control type='search' value={searchTerm} onChange={handleSearchChange} placeholder='검색어' />
-                                <Button className='magazine-btn'>검색</Button>
+                                <input type='search' className='search_input_textinput' placeholder='검색어를 입력해주세요.' value={searchTerm} onChange={handleSearchChange} />
+                                <button className='search_input_searchbtn' type='submit'><img src='/image/search_icon.png' /></button>
                             </InputGroup>
                         </form>
                     </Col>
                     <Col>
                         {sessionStorage.getItem('uid') === "admin" &&
-                            <Button className="magazine-write-btn">
-                                <NavLink className="magazine-insert" to="/magazine/magazineinsert"><AiOutlineEdit />글쓰기</NavLink>
-                            </Button>
+                            <div className='plant_insert'>
+                                <Link to="/magazine/magazineinsert"><button>추가하기</button></Link>
+                            </div>
                         }
                     </Col>
                 </Row>
-                <Table className='list' bordered hover>
+                <Table className='mt-5' bordered hover>
                     <thead className='text-center'>
                         <tr>
                             <th>번호</th>
@@ -85,10 +85,10 @@ const MagazineList = () => {
                     <tbody>
                         {filteredList.map(m =>
                             <tr key={m.magazine_num}>
-                                <td style={{width:50}} className='text-center'>{m.magazine_num}</td>
+                                <td style={{ width: 50 }} className='text-center'>{m.magazine_num}</td>
                                 <td><NavLink style={{ color: '#000000' }} to={`/magazine/read/${m.magazine_num}`}>{m.title}</NavLink></td>
                                 <td style={{ width: '100px' }} className='text-center'>{m.nickname}</td>
-                                <td style={{ width: '300px' }} className='text-center'>{m.red_date}</td>
+                                <td style={{ width: '300px' }} className='text-center'>{m.fmtdate}</td>
                                 <td style={{ width: '100px' }} className='text-center'>{m.view_cnt}회</td>
                             </tr>
                         )}

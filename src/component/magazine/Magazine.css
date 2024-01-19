@@ -1,127 +1,119 @@
-#main_wrap {
+.main_wrap {
     width: 100%;
     margin: 0 auto;
+}
 
-    .main_contents {
-        width: 1280px;
-        margin: 0 auto;
-    }
+.main_contents {
+    width: 1280px;
+    margin: 0 auto;
+}
 
-    /* 매거진 리스트 */
-    td>a {
-        text-decoration: none;
-    }
+/* 매거진 리스트 */
+td>a {
+    text-decoration: none;
+}
 
-    .search {
-        width: 300px !important;
-    }
+.search {
+    width: 300px !important;
+    border-bottom: 1px solid #ddd;
+    padding: 1.5%;
+}
 
-    .magazine-btn {
-        background-color: #4cc67c !important;
-        font-weight: 900 !important;
-        border: none !important;
-    }
+.magazine-btn {
+    background-color: #4cc67c !important;
+    font-weight: 900 !important;
+    border: none !important;
+}
 
-    .select {
-        width: 100px !important;
-        margin-left: 85%;
-    }
+.select {
+    width: 100px !important;
+    margin-left: 85%;
+}
 
-    .magazine-insert {
-        text-decoration: none;
-        color: #000000;
-        font-size: large;
-    }
+.magazine-insert {
+    text-decoration: none;
+    color: #000000;
+    font-size: large;
+}
 
-    .magazine-write-btn {
-        width: 100px;
-        margin-left: 84%;
-        background-color: aliceblue !important;
-        border: none !important;
-    }
+.magazine-list-title {
+    text-align: center;
+    margin-top: 70px;
+    font-size: 60px;
+    margin-bottom: 50px;
+}
 
-    .list {
-        margin-top: 50px;
-    }
+/* 매거진 */
 
-    .magazine-list-title {
-        text-align: center;
-        margin-top: 70px;
-        font-size: 60px;
-        margin-bottom: 50px;
-    }
-
-    /* 매거진 */
-
-    .magazine-title {
-        text-align: center;
-        margin-top: 70px;
-        font-size: 60px;
-    }
+.magazine-title {
+    text-align: center;
+    margin-top: 70px;
+    font-size: 60px;
+}
 
 
-    .magazine-count {
-        text-align: end;
-        margin-right: 30px;
-        margin-bottom: 100px;
-    }
+.magazine-count {
+    text-align: end;
+    margin-right: 30px;
+    margin-bottom: 100px;
+}
 
-    .magazine-img {
-        text-align: center;
-    }
+.magazine-img {
+    text-align: center;
+}
 
-    .magazine-text {
-        text-align: center;
-        margin-top: 100px;
-    }
+.magazine-text {
+    text-align: center;
+    margin-top: 100px;
+}
 
-    .magazine-update-btn{
-        background-color: #4cc67c !important;
-        border: none !important;
-        color: #ffffff;
-        padding: 5px;
-        border-radius: 5px;
-        font-weight: 600;
-    }
-    .magazine-delete-btn{
-        background-color: #4cc67c !important;
-        border: none !important;
-        color: #ffffff;
-        padding: 5px;
-        border-radius: 5px;
-        font-weight: 600;
-    }
+.magazine-update-btn {
+    background-color: #4cc67c !important;
+    border: none !important;
+    color: #ffffff;
+    padding: 5px;
+    border-radius: 5px;
+    font-weight: 600;
+}
 
-    /* 매거진 추가 */
+.magazine-delete-btn {
+    background-color: #4cc67c !important;
+    border: none !important;
+    color: #ffffff;
+    padding: 5px;
+    border-radius: 5px;
+    font-weight: 600;
+}
 
-    .insert-btn1 {
-        background-color: #4cc67c !important;
-        border: none !important;
-        margin: 0 auto;
-        margin-top: 20px;
-    }
+/* 매거진 추가 */
 
-    .insert-img {
-        text-align: center;
-    }
+.insert-btn1 {
+    background-color: #4cc67c !important;
+    border: none !important;
+    margin: 0 auto;
+    margin-top: 20px;
+}
 
-    .insert-text {
-        margin-left: 5%;
-        margin-top: 50px;
-        margin-bottom: 50px;
-        max-width: 900px;
-    }
+.insert-img {
+    text-align: center;
+}
 
-    .insert-card {
-        width: 1000px;
-        margin: 0 auto;
-        margin-top: 30px;
-    }
+.insert-text {
+    margin-left: 5%;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    max-width: 900px;
+}
 
-    .insert-img-btn {
-        background-color: #4cc67c !important;
-        font-weight: 900 !important;
-        border: none !important;
-        margin-top: 15px;
-    }
+.insert-card {
+    width: 1000px;
+    margin: 0 auto;
+    margin-top: 30px;
+}
+
+.insert-img-btn {
+    background-color: #4cc67c !important;
+    font-weight: 900 !important;
+    border: none !important;
+    margin-top: 15px;
 }

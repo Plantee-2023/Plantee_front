@@ -78,44 +78,53 @@ const HeaderPage = () => {
                 </>
                 :
                 <>
-                  <li><NavLink to='/users/mypage'>마이 페이지</NavLink></li>
-                  <li>
-                    <div onClick={toggleShowA} style={{ cursor: 'pointer' }} >{sessionStorage.getItem("uid")}님
-                      <ToastContainer position={'top-end'} className='menu-toast'>
-                        <Toast show={showA}>
-                          <CloseButton className='menu-close-btn' />
-                          <Toast.Body>
-                            <Card className='menu-card-card'>
-                              <div className="menu-card-text">마이페이지</div>
-                              <ul>
-                                <li>
-                                  <Card className='menu-card1'><a href='/diary/calendar'>
-                                    <img className='mypage_calander' src='/image/mypage_calendar_icon.png'/></a></Card>
-                                  <div className='menu-toast-text'>캘린더</div>
-                                </li>
-                                <li>
-                                  <Card className='menu-card2'><a href='/plant/recipe'>
-                                    <PiCookingPot className='menu-toast-icon' style={{ color: '#000000' }} /></a></Card>
-                                  <div className='menu-toast-text'>레시피</div>
-                                </li>
-                                <li>
-                                  <Card className='menu-card3'><a href='/mypage/mypagecomment'>
-                                    <TfiWrite className='menu-toast-icon' style={{ color: '#000000' }} /></a></Card>
-                                  <div className='menu-toast-text'>나의 글</div>
-                                </li>
-                                <li>
-                                  <Card className='menu-card4'><a href='/mypage/mypagefavorite'>
-                                    <MdFavoriteBorder className='menu-toast-icon' style={{ color: '#000000' }} /></a></Card>
-                                  <div className='menu-toast-text'>좋아요</div>
-                                </li>
-                              </ul>
-                            </Card>
-                          </Toast.Body>
-                        </Toast>
-                      </ToastContainer>
-                    </div>
-                  </li>
-                  <li><NavLink onClick={onLogout}>로그아웃</NavLink></li>
+                  {sessionStorage.getItem('uid') === 'admin' ?
+                    <>
+                      <li><NavLink to='/users/adminpage'>회원관리</NavLink></li>
+                      <li><NavLink onClick={onLogout}>로그아웃</NavLink></li>
+                    </>
+                    :
+                    <>
+                      <li><NavLink to='/users/mypage'>마이 페이지</NavLink></li>
+                      <li>
+                        <div onClick={toggleShowA} style={{ cursor: 'pointer' }} >{sessionStorage.getItem("uid")}님
+                          <ToastContainer position={'top-end'} className='menu-toast'>
+                            <Toast show={showA}>
+                              <CloseButton className='menu-close-btn' />
+                              <Toast.Body>
+                                <Card className='menu-card-card'>
+                                  <div className="menu-card-text">마이페이지</div>
+                                  <ul>
+                                    <li>
+                                      <Card className='menu-card1'><a href='/diary/calendar'>
+                                        <img className='mypage_calander' src='/image/mypage_calendar_icon.png' /></a></Card>
+                                      <div className='menu-toast-text'>캘린더</div>
+                                    </li>
+                                    <li>
+                                      <Card className='menu-card2'><a href='/plant/recipe'>
+                                        <PiCookingPot className='menu-toast-icon' style={{ color: '#000000' }} /></a></Card>
+                                      <div className='menu-toast-text'>레시피</div>
+                                    </li>
+                                    <li>
+                                      <Card className='menu-card3'><a href='/mypage/mypagecomment'>
+                                        <TfiWrite className='menu-toast-icon' style={{ color: '#000000' }} /></a></Card>
+                                      <div className='menu-toast-text'>나의 글</div>
+                                    </li>
+                                    <li>
+                                      <Card className='menu-card4'><a href='/mypage/mypagefavorite'>
+                                        <MdFavoriteBorder className='menu-toast-icon' style={{ color: '#000000' }} /></a></Card>
+                                      <div className='menu-toast-text'>좋아요</div>
+                                    </li>
+                                  </ul>
+                                </Card>
+                              </Toast.Body>
+                            </Toast>
+                          </ToastContainer>
+                        </div>
+                      </li>
+                      <li><NavLink onClick={onLogout}>로그아웃</NavLink></li>
+                    </>
+                  }
                 </>
               }
             </ul>
