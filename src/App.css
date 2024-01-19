@@ -19,23 +19,25 @@
 .menu_mymenu>li { align-items: center; margin-left: 2rem;}
 .menu_mymenu a {font-size: 17px; text-decoration: none; color: #333333;}
 .menu-icon { font-size: 25px; margin-top: 10px; margin-right: 10px; margin-left: 30px;}
-.menu-card1 { margin-right: 16px; margin-left: 22px; margin-bottom: 10px; border: none; background-color: #BA55D3 !important; padding: 3px;}
-.menu-card2 { margin-right: 16px;  margin-bottom: 10px; border: none; background-color: #1E90FF !important; padding: 3px;}
-.menu-card3 { margin-right: 16px;  margin-bottom: 10px; border: none; background-color: #90EE90 !important; padding: 3px;}
-.menu-card4 { margin-right: 16px;  margin-bottom: 10px; border: none; background-color: #CD5C5C !important; padding: 3px;}
+.menu-card1 { margin-right: 13px; margin-left: 22px; margin-bottom: 10px; border: none; background-color:#00FA9A !important; padding: 3px; width: 60px; height: 60px !important;}
+.menu-card2 { margin-right: 13px;  margin-bottom: 10px; border: none; background-color: #2ddb2d !important; padding: 3px; width: 60px; height: 60px !important;}
+.menu-card3 { margin-right: 13px;  margin-bottom: 10px; border: none; background-color: #abe449 !important; padding: 3px;width: 60px; height: 60px !important;}
+.menu-card4 { margin-right: 13px;  margin-bottom: 10px; border: none; background-color:	#3CB371 !important; padding: 3px;width: 60px; height: 60px !important;}
+.menu-card-icon{margin: 0 auto; display: block; margin-top: 10px; width: 30px; height: 30px; color: #ffffff;} 
 .menu-card-card {margin-top: 10px;}
 .menu-margin{padding: 0px !important;}
 ul,li {list-style: none; padding: 0px;}
-.menu-toast-icon { font-size: 50px;}
 .menu-btn { background-color: #4cc67c !important; border: none !important; color: #ffffff !important; font-weight: 600; margin-left: 78%;}
 .menu-toast { margin-right: 6%; margin-top: 3%;}
-.menu-toast-text {margin-bottom: 7px; margin-left: 10px; font-weight: 600; font-size: 15px;}
-.menu-toast-text1 {margin-bottom: 7px; margin-left: 30px; font-weight: 600; font-size: 15px;}
+.menu-toast-text {margin-bottom: 7px; margin-left: 5px; font-weight: 600; font-size: 15px;}
+.menu-toast-text1 {margin-bottom: 7px; margin-left: 33px; font-weight: 600; font-size: 15px;}
 .menu-card-text { font-weight: 600; margin-left: 10px; margin-top: 13px;}
 .menu-close-btn { margin-left: 90%; margin-top: 3%;}
+.menu-id{align-items: center; font-size: 1rem; margin-left: 5px; font-weight: 600; }
+.menu-mypage-btn{text-align: end; margin-bottom: 10px; align-items: center;}
 .ellipsis { overflow: hidden; text-overflow: ellipsis; display: -webkit-box ; -webkit-line-clamp: 2; -webkit-box-orient: vertical;}
 .banner{ --swiper-theme-color:#ffffff !important;}
-.mypage_calander {width: 50px; height: 50px;}
+.mypage_calander {width: 30px; height: 30px; margin: 0 auto; display: block; margin-top: 10px;}
 
 /* HomePage */
 .homepage_wrap {width: 100%;}

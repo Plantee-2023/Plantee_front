@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useRef, useState } from 'react'
-import { NavDropdown, Navbar, Nav, Toast, CloseButton, ToastContainer, Card } from 'react-bootstrap'
+import { NavDropdown, Navbar, Nav, Toast, CloseButton, ToastContainer, Card, Row, Col, Button, ProgressBar } from 'react-bootstrap'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { LiaStoreAltSolid } from "react-icons/lia";
 import { PiUserListBold, PiCookingPot } from "react-icons/pi";
@@ -9,6 +9,7 @@ import { CiCalendar } from "react-icons/ci";
 import { MdFavoriteBorder } from "react-icons/md";
 import { TfiWrite } from "react-icons/tfi";
 import { BoxContext } from './common/BoxContext';
+import axios from 'axios';
 
 export const useScroll = () => {
 	const [state, setState] = useState({
@@ -85,8 +86,32 @@ const HeaderPage = () => {
 												<Toast show={showA}>
 													<CloseButton className='menu-close-btn' />
 													<Toast.Body>
+														<Row>
+															<Col className='menu-id' >{sessionStorage.getItem("uid")}님</Col>
+															<Col className='menu-mypage-btn'>
+																<NavLink to={`/users/mypage`} style={{ backgroundColor: '#07955C', border: 'none', color:'#ffffff' }} className='btn btn-sm'>내정보</NavLink>
+															</Col>
+														</Row>
+														<Card>
+															<Row style={{ display: 'flex' }}>
+																<Col className='text-center'>
+																	<div className='mt-2'>나의 활동 등급</div>
+																	<img className='mb-3 mt-2' src='http://via.placeholder.com/50x50' />
+																</Col>
+																<Col style={{ borderLeft: 'solid 1px #DCDCDC' }}>
+																	<div className='mt-2 mb-2'>총 게시글 : 1개</div>
+																	<div>
+																		<Row >
+																			<Col>now</Col>
+																			<Col><div className='text-center'>Exp</div></Col>
+																			<Col className='text-end me-3'>next</Col>
+																		</Row>
+																		<ProgressBar variant='success' className='me-3' now={35} />
+																	</div>
+																</Col>
+															</Row>
+														</Card>
 														<Card className='menu-card-card'>
-															<div className="menu-card-text">마이페이지</div>
 															<ul className='menu-margin'>
 																<li>
 																	<Card className='menu-card1'><a href='/diary/calendar'>
@@ -94,19 +119,19 @@ const HeaderPage = () => {
 																	<div className='menu-toast-text1'>캘린더</div>
 																</li>
 																<li>
-																	<Card className='menu-card2'><a href='/recipe'>
-																		<PiCookingPot className='menu-toast-icon' style={{ color: '#000000' }} /></a></Card>
-																	<div className='menu-toast-text'>레시피</div>
+																	<Card className='menu-card2'><a href='/users/mypage/productcart'>
+																		<PiCookingPot className='menu-card-icon' /></a></Card>
+																	<div className='menu-toast-text'>장바구니</div>
 																</li>
 																<li>
-																	<Card className='menu-card3'><a href='/mypage/mypagecomment'>
-																		<TfiWrite className='menu-toast-icon' style={{ color: '#000000' }} /></a></Card>
-																	<div className='menu-toast-text'>나의 글</div>
+																	<Card className='menu-card3'><a href='/users/mypage/productpurchase'>
+																		<TfiWrite className='menu-card-icon' /></a></Card>
+																	<div className='menu-toast-text'>구매내역</div>
 																</li>
 																<li>
 																	<Card className='menu-card4'><a href='/mypage/mypagefavorite'>
-																		<MdFavoriteBorder className='menu-toast-icon' style={{ color: '#000000' }} /></a></Card>
-																	<div className='menu-toast-text'>좋아요</div>
+																		<MdFavoriteBorder className='menu-card-icon' /></a></Card>
+																	<div className='menu-toast-text'>나의활동</div>
 																</li>
 															</ul>
 														</Card>
