@@ -69,6 +69,7 @@ const MagazineList = () => {
                             <div className='plant_insert'>
                                 <Link to="/magazine/magazineinsert"><button>추가하기</button></Link>
                             </div>
+
                         }
                     </Col>
                 </Row>

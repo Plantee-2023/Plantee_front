@@ -5,9 +5,9 @@ import '../MyPage.css'
 const ProductOrder = () => {
     return (
         <div id="main_wrap">
-            <Card>
+            <Card className='all-card'>
                 <h1 className='all-title'>주문 / 배송조회</h1>
-                <Table className='list' hover striped bordered>
+                <Table className='all-list' hover striped bordered>
                     <thead className='text-center'>
                         <tr>
                             <th><Form.Check /></th>

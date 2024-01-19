@@ -93,7 +93,7 @@ const PlantInsert = () => {
           <div className='details_info_layout'>
             <section className='details_info_section'>
               <section className='details_title_section'>
-                <div className='detail_logo'>Plantee<img src='/image/carelevel_icon.png'/></div>
+                <div className='plantinsertdetail_logo'>Plantee<img src='/image/carelevel_icon.png'/></div>
                 
               </section>
               <section className='insert_simpleinfo_section'>

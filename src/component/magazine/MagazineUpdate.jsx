@@ -61,7 +61,7 @@ const MagazineUpdate = () => {
     const onSubmit = async (e) => {
         e.preventDefault();
         const storage = getStorage();
-        const fileRef = ref(storage, 'plant/' + uuidv4());
+        const fileRef = ref(storage, 'magazine/' + uuidv4());
 
         // 이미지를 firebase storage에 업로드
         const response = await uploadString(fileRef, attachment, 'data_url');
@@ -70,21 +70,34 @@ const MagazineUpdate = () => {
         const downloadURL = await getDownloadURL(fileRef);
         //console.log(downloadURL)
 
-        if (window.confirm("수정하시겠습니까?")) {
-            try {
-                const data = { ...update, image: downloadURL, user_id: 1, category: 7, nickname: 'admin' }
-                const res = await axios.post('/magazine/update', data);
-                if (res.data === 0) {
-                    alert("등록 실패!");
-                } else {
-                    alert("수정 완료");
-                    navi(`/magazine/read/${magazine_num}`);
+        setBox({
+            show: true,
+            message: "매거진을 수정 하시겠습니까?",
+            action: async () => {
+                try {
+                    const data = { ...update, image: downloadURL, user_id: 1, category: 7, nickname: 'admin' }
+                    const res = await axios.post('/magazine/update', data);
+                    if (res.data === 0) {
+                        setBox({
+                            show : true,
+                            message : "수정을 실패하였습니다."
+                        })
+                    } else {
+                        setBox({
+                            show : true,
+                            message : "수정이 완료되었습니다."
+                        })
+                        navi(`/magazine/read/${magazine_num}`);
+                    }
+                } catch (error) {
+                    console.error("등록 에러 : ", error);
+                    setBox({
+                        show : true,
+                        message : "수정 중 오류가 발생하였습니다."
+                    })
                 }
-            } catch (error) {
-                console.error("등록 에러 : ", error);
-                alert("등록 중 오류가 발생했습니다.")
             }
-        }
+        })
     }
 
     if (loading) return <div className='text-center my-5'><Spinner animation="border" variant="success" /></div>
