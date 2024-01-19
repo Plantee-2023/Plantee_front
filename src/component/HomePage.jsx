@@ -14,16 +14,24 @@ import MainBannerPage from './MainBannerPage';
 
 const HomePage = () => {
     const [plants, setPlants] = useState([]); // 플랜트
+    const [searchTerm, setSearchTerm] = useState('');
+    const [selectedCareLevel, setSelectedCareLevel] = useState(null);
+
     const [community, setCommunity] = useState([]); // 커뮤니티
     const [magazine, setMagazine] = useState([]);
     const [store, setStore] = useState([]); //스토어
     const [loading, setLoading] = useState(false);
 
+    const [page, setPage] = useState(1);
+    const size = 20;
+    const [query, setQuery] = useState("");
+
+
     const getMain = async () => {
         setLoading(true);
 
-        // const res = await axios.get(`/store/list.json`);
-        // const res1 = await axios.get(`/magazine/list.json?query=''&page=1&size=8`);
+        const res = await axios.get(`/store/list.json?page=${page}&size=20&query=${query}`);
+        const res1 = await axios.get(`/magazine/list.json?query=''&page=1&size=8`);
         //const res2 = await axios.get(`/comm/list.json?category=3&page=1&size=10&query=''`); //커뮤니티
         const res3 = await axios.get(`/plant/list.json`); // 플랜트
         // setStore(res.data.list);
@@ -36,83 +44,117 @@ const HomePage = () => {
         getMain();
     }, []);
 
+    const handleCareLevelFilter = (careLevel) => {
+        setSelectedCareLevel(careLevel);
+    };
+
+    const filteredList = plants.filter((item) => {
+        const nameMatches = item.common_name.toLowerCase().includes(searchTerm.toLowerCase());
+        const careLevelMatches = selectedCareLevel ? item.care_level == selectedCareLevel : true;
+        return nameMatches && careLevelMatches;
+    });
+
+    const getPlant = (care_level) => {
+        switch (care_level) {
+            case '1':
+                return '초보자용';
+            case '2':
+                return '중급자용';
+            default:
+                return '상급자용';
+        }
+    };
+
     if (loading) return <div className='main-spinner'><Spinner /></div>
     return (
         <div className='homepage_wrap'>
-            <MainBannerPage/>
+            <MainBannerPage />
             <div className='homepage_contents'>
                 <Row className='mt-5'>
                     <Col>
                         <div className='homepage_maintitle'>
-                            이번달 식물 추천
+                            🌳 이번달 식물 추천
                         </div>
                     </Col>
                     <Col>
                         <a className='homepage_more' href='/store/main'>
-                            더보기<CgChevronRight className='homepage_more_icon'/>
+                            더보기<CgChevronRight className='homepage_more_icon' />
                         </a>
                     </Col>
                 </Row>
                 <Swiper
                     modules={[Navigation, Autoplay]}
-                    spaceBetween={70}
-                    slidesPerView={4}
+                    spaceBetween={30}
+                    slidesPerView={5}
                     autoplay={{ delay: 2000 }}
                     navigation
-                    style={{"--swiper-navigation-color": "#ffffff"}}>
-                    {/* {store.map(s =>
+
+                    style={{ "--swiper-navigation-color": "#ffffff" }}>
+                    {store.map(s =>
                         <SwiperSlide>
-                            <Card>
+                            <Card className='store-line'>
                                 <Card.Body >
-                                    <Card.Img src={s.image || 'http://via.placeholder.com/150x150'} width={200} height={200} >
+                                    <Card.Img src={s.image || 'http://via.placeholder.com/150x150'} width={200} height={240} >
                                     </Card.Img>
                                     <Card.Body className='main_text'>
-                                        <div>이름 : {s.title}</div><br />
-                                        <div>가격 : {s.fmtprice}</div>
+                                        <h4 className='homepage-ellipsis'>{s.title}</h4>
+                                        <div>{s.fmtprice} 원</div>
                                     </Card.Body>
                                 </Card.Body>
-                                <Card.Footer className='text-start'>
-                                    {s.like_cnt} <MdFavoriteBorder /> {s.review_cnt} <LiaComment size={20} />
+                                <Card.Footer className='text-end'>
+                                    <MdFavoriteBorder style={{ color: "red" }} className='mx-2' />{s.like_cnt} <LiaComment size={20} className='mx-2' /> {s.review_cnt}
                                 </Card.Footer>
                             </Card>
                         </SwiperSlide>
                     )} */}
                 </Swiper>
-                <Row>
+                <Row className='mt-5'>
                     <Col>
                         <div className='homepage_maintitle'>
-                            식물 도감
+                            🌱 식물 도감
                         </div>
                     </Col>
                     <Col>
                         <a className='homepage_more' href='/plant'>
-                            더보기<CgChevronRight className='homepage_more_icon'/>
+                            더보기<CgChevronRight className='homepage_more_icon' />
                         </a>
                     </Col>
                 </Row>
-                <div className='homepage_tagbtn'>
-                    <button className='homepage_btn'>태그</button>
-                    <button className='homepage_btn'>태그</button>
-                    <button className='homepage_btn'>태그</button>
-                    <button className='homepage_btn'>태그</button>
+                <div className='first_filter_section'>
+                    <div className='first_filter_between'>
+                        <ul className='filter_list'>
+                            <button className={`filter_reset_btn ${selectedCareLevel === null ? 'active' : ''}`} type='button' onClick={() => handleCareLevelFilter(null)}>
+                                <img src='/image/reset_icon.png' alt='reset icon' />
+                            </button>
+                            <button className={`filter_btn ${selectedCareLevel === 1 ? 'active' : ''}`} type='button' onClick={() => handleCareLevelFilter(1)}>
+                                초보자용
+                            </button>
+                            <button className={`filter_btn ${selectedCareLevel === 2 ? 'active' : ''}`} type='button' onClick={() => handleCareLevelFilter(2)}>
+                                중급자용
+                            </button>
+                            <button className={`filter_btn ${selectedCareLevel === 3 ? 'active' : ''}`} type='button' onClick={() => handleCareLevelFilter(3)}>
+                                상급자용
+                            </button>
+                        </ul>
+                    </div>
                 </div>
                 <Swiper
                     modules={[Navigation, Pagination, Autoplay]}
-                    spaceBetween={70}
-                    slidesPerView={4}
-                    autoplay={{ delay: 2000 }}
+                    spaceBetween={30}
+                    slidesPerView={5}
+                    autoplay={{ delay: 13000 }}
                     navigation
-                    style={{"--swiper-navigation-color": "#ffffff"}}>
-                    {plants.map(p =>
+                    style={{ "--swiper-navigation-color": "#ffffff" }}>
+                    {filteredList.map(p =>
                         <SwiperSlide>
                             <Card className='mt-5 mb-5'>
                                 <Card.Body>
-                                    <Card.Img src={p.image || 'http://via.placeholder.com/150x150'} width={200} height={200} ></Card.Img>
+                                    <Card.Img src={p.image || 'http://via.placeholder.com/150x150'} width={150} height={250} ></Card.Img>
                                     <Card.Body>
-                                        <div>이름 : {p.common_name}</div>
-                                        <div>난이도 : {p.care_level}단계</div>
-                                        <div>햇빛 : {p.sunlight}</div>
-                                        <div>물주기 : {p.watering}</div>
+                                        <h4 className='homepage-ellipsis'>{p.common_name}</h4>
+                                        <div>난이도 : {getPlant(p.care_level)}</div>
+                                        <div>햇빛 　: {p.sunlight}일</div>
+                                        <div>물주기 : {p.watering}일</div>
                                     </Card.Body>
                                 </Card.Body>
                             </Card>
@@ -122,7 +164,7 @@ const HomePage = () => {
                 <Row>
                     <Col>
                         <div className='homepage_maintitle'>
-                            스토리
+                            📖 스토리
                         </div>
                     </Col>
                     <Col>
@@ -131,6 +173,11 @@ const HomePage = () => {
                         </a>
                     </Col>
                 </Row>
+                <div className='homepage_tagbtn'>
+                    <button className='homepage_btn'>전체보기</button>
+                    <button className='homepage_btn'>식물자랑</button>
+                    <button className='homepage_btn'>거래</button>
+                </div>
                 <Carousel className='mb-5 mt-5'>
                     {/* {community.map(c =>
                         <Carousel.Item>
@@ -156,31 +203,32 @@ const HomePage = () => {
                 <Row>
                     <Col>
                         <h2 className='homepage_maintitle'>
-                            매거진
+                            💚 초보 가드너를 위한 반려식물 이야기 💚
                         </h2>
                     </Col>
+                    <Col>
+                        <a className='homepage_more' href='/magazine/magazineList'>
+                            더보기<CgChevronRight className='homepage_more_icon' />
+                        </a>
+                    </Col>
                 </Row>
-                <Swiper
-                    modules={[Navigation, Autoplay]}
-                    spaceBetween={70}
-                    slidesPerView={4}
-                    autoplay={{ delay: 2000 }}
-                    navigation={true}
-                    style={{"--swiper-navigation-color": "#ffffff"}}>
-                    {/* {magazine.map(m =>
-                        <SwiperSlide>
-                            <Card>
-                                <Card.Body>
-                                    <Card.Img src={m.image || 'http://via.placeholder.com/150x150'} width={200} height={200} />
-                                    <hr />
-                                    <div>제목 : {m.title}</div>
-                                    <hr />
-                                    <div>내용 : {m.contents}</div>
-                                </Card.Body>
-                            </Card>
-                        </SwiperSlide>
-                    )} */}
-                </Swiper>
+                <Row>
+                    {magazine.map(m =>
+                        <Col>
+                            <div className='homepage_magazine_layout'>
+                                {m.magazine_num > 4 && (
+                                    <Card className='homepage_magazine'>
+                                        <Card.Body>
+                                            <Card.Img src={m.image || 'http://via.placeholder.com/150x150'} width={30} height={175} />
+                                            <hr />
+                                            <h5 className='text-center'><b>{m.title}</b></h5>
+                                        </Card.Body>
+                                    </Card>
+                                )}
+                            </div>
+                        </Col>
+                    )}
+                </Row>
             </div>
         </div>
     )

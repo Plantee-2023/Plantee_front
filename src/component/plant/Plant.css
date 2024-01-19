@@ -28,8 +28,9 @@
 .plantlist_contents_section {width: 100%; height: auto; margin-top: 2rem;}
 .plantlist_contents_grid {width: 100%; display: grid; grid-template-columns: repeat(auto-fill, minmax(232px, 1fr)); gap: 56px 20px; overflow-x: initial; padding: 0; margin: 0;}
 .plantlist_contents_grid a {margin: 0; padding: 0; border: 0; text-decoration: none; color: #333;}
+.plantlist_contents_item:hover {color: #07955C;}
 .plantlist_contents_item p {margin-bottom: 0;}
-.plantlist_contents_item img {width: 240px; height: 240px;}
+.plantlist_contents_item img {width: 240px; height: 240px; border-radius: 15px; border: 1PX solid #f0f0f0;}
 .plantlist_commonname {width: 100%; margin-top: 1rem; text-align: center; overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical;
     font-size: 15px; line-height: 20px; letter-spacing: 0.25px; font-weight: 600;}
 
@@ -50,7 +51,7 @@ input:focus {outline:none;}
 .details_contents {width: 70%; margin: 0 auto;}
 .details_layout {display: flex; flex-wrap: wrap; margin-top: 3rem;}
 .details_img_section {width: 425px; margin: 0 56px 0 0; position: relative;}
-.details_img_section img {width: 480px; height: 480px;}
+.details_img_section img {width: 480px; height: 480px; border-radius: 15px;}
 
 .details_info_layout {width: calc(100% - 31rem);}
 .details_info_section {margin-left: 3rem;}
@@ -81,7 +82,7 @@ input:focus {outline:none;}
 
 /* PlantInsertPage */
 .insert_simpleinfo_section {width: 100%; padding: 0;}
-.insert_textarea {width: 100%; margin: 1rem 0 0 0; display: flex; flex-wrap: wrap;}
+.insert_textarea {width: 100%; margin: 0.6rem 0 0 0; display: flex; flex-wrap: wrap;}
 .insert_title {width: 100%; margin-bottom: 0.5rem;}
 .insert_info {width: 32.6%; margin-bottom: 0.6rem; margin-right: 0.5rem;}
 .insert_info:nth-child(4) {margin-right: 0;}
@@ -94,6 +95,8 @@ input:focus {outline:none;}
 .plantinsert_btngroup {width: 35%; display: flex; margin: 0 auto;}
 .insert_submit {width: 100px; height: 40px; border: none; border-radius: 50px; background-color: #07955C; color: #fff; margin-right: 1rem;}
 .insert_cancel {width: 100px; height: 40px; border: 1px solid #acacac; border-radius: 50px; background-color: #fff; color: #acacac;}
+.plantinsertdetail_logo {font-weight: 900; font-style: italic; color: #07955C; padding: 0.6rem 0 0 0.6rem;}
+.plantinsertdetail_logo img {width: 16px; height: 16px; margin: 0 0 4px 4px}
 
 /* RecipePage */
 .recipe_wrap {width: 100%; margin: 0 auto;}
@@ -116,6 +119,7 @@ input:focus {outline:none;}
 
 .recipe_contents_grid a {margin: 0; padding: 0; border: 0; text-decoration: none; color: #333;}
 
+.recipe_content_item img {border-radius: 15px;}
 .recipe_content_item p {margin-bottom: 0;}
 
 .recipe_content_item img {width: 250px; height: 250px;}
@@ -208,3 +212,17 @@ input:focus {outline:none;}
 
 .plantrecipe_comment_comment {display: flex; justify-content: space-between; margin-top: 1rem; margin-bottom: 2rem;}
 .plantrecipe_comment_comment button {width: 80px; margin-left: 10px; border: none; border-radius: 5px; background-color: #07955C; color: #fff;}
+
+/* PlantStartPage */
+.test_wrap {width: 100%; margin: 0 auto;}
+.test_content {width: 82%; margin: 0 auto;}
+.test_textarea {width: 50%; margin: 0 auto;}
+.test_maintitle {text-align: center; font-size: 35px; font-weight: 700; padding: 2rem 0; margin-top: 3rem;}
+.test_subtext {text-align: center; margin: 0; padding-bottom: 5px;}
+.test_btnarea {width: 50%; margin: 0 auto; display: flex; justify-content: center; padding: 1rem 0; margin-top: 50px;}
+.test_startbtn {width: 150px; height: 60px; border: none; text-align: center; background-color: #07955C; color: #fff; font-weight: 800; border-radius: 10px;}
+
+.test_decoimg {width: 200px; display: flex; margin: 0 auto; padding-top: 5rem; padding-right: 10px;}
+
+.question_layout {width: 50%; text-align: center; margin: 0 auto; border: 1px solid red;}
+.question_listcount {margin-top: 3rem; padding: 2rem 0; font-size: 18px;}

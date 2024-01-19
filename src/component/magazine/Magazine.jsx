@@ -5,14 +5,8 @@ import { useState } from 'react';
 import { Spinner, Row, Col, Button } from 'react-bootstrap';
 import { NavLink, useParams, useNavigate } from 'react-router-dom';
 import { BoxContext } from '../common/BoxContext'
-import { app } from '../../firebaseInit'
-import { getFirestore, setDoc, doc, getDoc } from 'firebase/firestore'
-import { getStorage, uploadBytes, ref, getDownloadURL } from 'firebase/storage'
 
 const Magazine = () => {
-    const db = getFirestore(app);
-    const storage = getStorage(app);
-    const [filename, setFileName] = useState('https:via.placeholder.com/200x200');
 
     const navi = useNavigate();
     const { box, setBox } = useContext(BoxContext);
@@ -31,10 +25,7 @@ const Magazine = () => {
         setLoading(true);
         try {
             const res = await axios(`/magazine/read/${magazine_num}`);
-            const result = await getDoc(doc(db, 'user', uid));
-            setPost(result.data());
             setPost(res.data);
-            setFileName(result.data().image ? result.data().image : 'https://via.placeholder.com/200x200');
             setLoading(false);
         } catch (error) {
             alert(error.message);
@@ -78,7 +69,7 @@ const Magazine = () => {
                         </Col>
                     </Row>
                     <div className='magazine-img'>
-                        <img src={image || 'http://via.placeholder.com/150x150'} width={300} height={300}></img>
+                        <img src={image || 'http://via.placeholder.com/150x150'} width={900} height={600}></img>
                     </div>
                     <h5 className='magazine-text'>{contents}</h5>
                 </div>

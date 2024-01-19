@@ -30,7 +30,7 @@ input:focus {outline:none;}
 
 /* 상단 태그 */
 .diary_btn {background-color: #fff; border: 1px solid #adadad; border-radius: 2rem; margin-right: 0.5rem; padding: 0.6rem 2rem 0.6rem 2rem;}
-.diary_btn a {text-decoration: none;}
+.diary_btn a {text-decoration: none; color: black;}
 .diary_btn:hover {background-color: #4cc67c; border-radius: 2rem; color: #fff; padding: 0.6rem 2rem 0.6rem 2rem; margin-right: 0.5rem; justify-content: center; align-items: center;}
 .diary_btn_clicked {background-color: #4cc67c; border: none; border-radius: 30px; color: #fff; padding: 0 25px 0 25px; height: 40px; justify-content: center; align-items: center;}
 
@@ -67,10 +67,11 @@ input:focus {outline:none;}
 .diary-img-update{width: 25px; height: auto; margin-bottom: 10px; margin-left: 5px;}
 
 /* 캘린더 카드 */
-.calendar_card{ margin-left: 300px; margin-right: 300px; width: auto; height: auto; justify-content: center;}
+.selected{margin-right: 400px;}
+.calendar_card{ margin: 0 auto; width: 39%; height: 0 auto; padding: 10px;}
 /* 캘린더 */
 button {cursor: pointer;}
-.diary {width: 1000px; height: 910px; margin: 3rem auto; padding: 40px 40px; border: 1px solid rgba(128, 128, 128, 0.267);/*position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);*/}
+.diary {width: 1000px; height: 980px; margin: 3rem auto; padding: 40px 40px; border: 1px solid rgba(128, 128, 128, 0.267);/*position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);*/}
 .diary .title {display: flex;}
 .diary .title > button { border: none; margin-left: 5px; height: 20px; align-self: center; background: none;}
 .diary .title .pagination { margin: 0 auto; align-self: center;}

@@ -1,7 +1,7 @@
 /* Main */
 
 .allmypage_wrap {width: 100%; margin: 0 auto;}
-.allmypage_contents {width: 99%; margin: 0 auto;}
+.allmypage_contents {width: 82%; margin: 0 auto;}
 
 .mypage_wrap {display: flex; max-width: 100%; flex-direction: row; justify-content: center; padding: 0 1.25rem; margin: 0 auto;}
 .mypage_contents {flex-grow: 1; padding-bottom: 40px; padding-left: 60px; margin-top: 48px;}
@@ -9,143 +9,57 @@
 
 /* SideMenu */
 .mypage_sidebar_wrap {margin-top: 3rem;}
-.mypage_sidebar_box {width: 16rem; height: 90%; border: 0.0625rem solid #d7e2eb; border-radius: 0.9375rem; margin-bottom: 6.0625rem; background-color: #fff;}/*height: 100%; 주면 사이드 박스 높이 채워서 가능*/
+.mypage_sidebar_box {width: 16rem; height: 95%; border: 0.0625rem solid #ddd; border-radius: 0.9375rem; margin-bottom: 6.0625rem; background-color: #fff;}/*height: 100%; 주면 사이드 박스 높이 채워서 가능*/
 .mypage_sidebar_ol {padding: 0 2.5rem;}
 .account_menagement {margin-bottom: 2.5rem; font-size: inherit; list-style-type: none;}
 .wish_menagement {margin-bottom: 2.5rem; font-size: inherit; list-style-type: none;}
 .activities_menagement {margin-bottom: 2.5rem; font-size: inherit; list-style-type: none;}
 
-.mypage_account {margin-top: 2.5rem; margin-bottom: 1.0625rem; color: #333; font-size: .9375rem; font-weight: 700; line-height: 1.375rem;}
+.mypage_account {margin-top: 4.8rem; margin-bottom: 1.0625rem; color: #333; font-size: .9375rem; font-weight: 700; line-height: 1.375rem;}
 
 .account_menagement ol, .wish_menagement ol, .activities_menagement ol {padding-left: 0;}
 .account_menagement ol a, .wish_menagement ol a, .activities_menagement ol a {padding: 0.6875rem 1rem; border-radius: 0.25rem;  font-size: 1rem; line-height: 1.4375rem; display: flex; flex-direction: column; color: #333; text-decoration: none;}
-.account_menagement a:hover, .wish_menagement a:hover, .activities_menagement a:hover {background: #e8f5ed; font-weight: bold; color: #fff;}
+.account_menagement a:hover, .wish_menagement a:hover, .activities_menagement a:hover {background: #e8f5ed; font-weight: bold; color: #096C41;}
+
+.user_section {width: 150px; height: 150px; margin: 30px auto;}
+.user_img {width: 100%; height: 100%; border-radius: 50%; border: 1px solid #f0f0f0;}
+.user_nickname {text-align: center; font-size: 25px; font-weight: 800;}
 
 /* UserUpdatePage */
 .update-card {margin: 0 auto;}
-.all-title {text-align: center; font-weight: 600;}
+.all-title {text-align: center; font-weight: 600; margin-top: 50px;}
 .update_img {margin: 0 auto; margin-top: 2rem;}
-
+.all-list{width: 1300px !important; margin: 0 auto; margin-top: 30px;}
+.all-card{width: 1400px;}
 /* UserPasswordUpdatePage */
 .password-card { margin: 0 auto;}
 
-#main_wrap {
-    width: 100%;
-    margin: 0 auto;
-    }
+#main_wrap {width: 100%;margin: 0 auto;}
 
     /* 회원 수정 */
-    .update-img-btn {
-        background-color: #4cc67c !important;
-        font-weight: 900;
-        border: none !important;
-        margin-left: 33%;
-        margin-top: 20px;
-        margin-bottom: 20px;
-    }
-
-    .update-input{
-        margin-top: 20px;
-    }
-
-    .update-check {
-        margin-top: 15px;
-    }
-
-    .update-address{
-        margin: 0 auto;
-        margin-bottom: 5px;
-        margin-top: 20px;
-    }
-    
-    .update-text {
-        width: 110px;
-    }
-
-    .update-btn {
-        background-color: #4cc67c !important;
-        color: #ffffff !important;
-        border: none !important;
-        border-radius: 5px;
-        font-weight: 500;
-        font-size: large;
-        width: 100px;
-    }
-
-    .password-group {
-        margin: 0 auto;
-        margin-top: 20px;
-        width: 550px;
-    }
-
-    .password-text {
-        width: 130px;
-    }
-
-    .password-btn {
-        width: 550px;
-        background-color: #4cc67c !important;
-        border: none !important;
-        margin-top: 20px;
-        margin-bottom: 20px;
-    }
-
+    .update-img-btn {background-color: #4cc67c !important;font-weight: 900;border: none !important;margin-left: 33%;margin-top: 20px;margin-bottom: 20px;}
+    .update-input{margin-top: 20px;}
+    .update-check {margin-top: 15px;}
+    .update-address{margin: 0 auto;margin-bottom: 5px;margin-top: 20px;}
+    .update-text {width: 110px;}
+    .update-btn {background-color: #4cc67c !important;color: #ffffff !important;border: none !important;border-radius: 5px;font-weight: 500;font-size: large;width: 100px;}
+    /* 비밀번호 변경 */
+    .password-group {margin: 0 auto;margin-top: 20px;width: 550px;}
+    .password-text {width: 130px;}
+    .password-btn {width: 550px;background-color: #4cc67c !important;border: none !important;
+        margin-top: 20px;margin-bottom: 20px;}
     /* 회원 탈퇴 */
-    .delete-btn {
-        background-color: #4cc67c !important;
-        border: none !important;
-    }
-
+    .delete-btn {background-color: #4cc67c !important;border: none !important;}
+    .delete-card {text-align: center; width: 300px; margin:0 auto;}
     /* 좋아요 리스트 */
-    .favorite-list-delete-btn {
-        margin-bottom: 10px;
-        background-color: #4cc67c !important;
-        border: none !important;
-        font-weight: 600;
-        width: 100px;
-        color: #ffffff;
-        border-radius: 5px;
-    }
-
+    .favorite-list-delete-btn {margin-bottom: 10px;background-color: #4cc67c !important; border: none !important;margin-left: 64px; font-weight: 600;width: 100px;color: #ffffff;border-radius: 5px;}
     /* 장바구니 */
-    .cart-btn-order {
-        background-color: #4cc67c !important;
-        border: none !important;
-        margin-right: 5px;
-    }
-
-    .cart-btn-cancel {
-        background-color: #4cc67c !important;
-        border: none !important;
-    }
-
-    .cart-alert {
-        margin: 0 auto;
-        background-color: #4cc67c !important;
-        border: none !important;
-        opacity: 70%;
-    }
-
-    .cart-price {
-        color: #ffffff;
-    }
-
-    .cart-order-btn {
-        background-color: #4cc67c !important;
-        margin-top: 10px;
-        border: none !important;
-        width: 100px;
-        margin-right: 10px;
-        font-weight: 600;
-    }
-
-    .cart-cancel-btn {
-        background-color: #4cc67c !important;
-        border: none !important;
-        font-weight: 600;
-        margin-top: 10px;
-    }
-
+    .cart-btn-order {background-color: #4cc67c !important;border: none !important;margin-right: 5px;}
+    .cart-btn-cancel {background-color: #4cc67c !important;border: none !important;}
+    .cart-alert {width: 1300px; margin: 0 auto; background-color: #4cc67c !important;border: none !important;opacity: 70%;}
+    .cart-price {color: #ffffff;}
+    .cart-order-btn {background-color: #4cc67c !important;margin-top: 10px;border: none !important;width: 100px;margin-right: 10px;font-weight: 600;}
+    .cart-cancel-btn {background-color: #4cc67c !important;border: none !important;font-weight: 600;margin-top: 10px;}
 /* 주문 / 배송조회 */
 /* 취소 / 반품 / 교환 */
 /* 게시글 */

@@ -3,17 +3,12 @@ import React, { useRef, useState, useContext, useEffect } from 'react'
 import { Button, Card, Form, Spinner } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
 import { BoxContext } from '../common/BoxContext'
-import { app } from '../../firebaseInit'
-import { getFirestore, setDoc, doc, getDoc } from 'firebase/firestore'
-import { getStorage, uploadBytes, ref, getDownloadURL } from 'firebase/storage'
+import { ref, getDownloadURL, uploadBytes, getStorage, uploadString } from "firebase/storage";
+import { v4 as uuidv4 } from 'uuid'; //랜덤 식별자를 생성해주는 라이브러리
 
 
 const MagazineInsert = () => {
-    const db = getFirestore(app);
-    const storage = getStorage(app);
-    const [file, setFile] = useState(null);
-    const [filename, setFileName] = useState('https:via.placeholder.com/200x200');
-
+    const [attachment, setAttachment] = useState();
     const { setBox } = useContext(BoxContext);
     const img_ref = useRef(null);
     const navi = useNavigate();
@@ -23,46 +18,28 @@ const MagazineInsert = () => {
         title: '',
         image: '',
         uid: 'admin',
-        magazine_num : ''
+        magazine_num: ''
     });
-
     const { contents, title, image, uid, magazine_num } = form;
 
-    useEffect(() => {
-        getMagazine();
-    }, [])
 
-    const onUpdate = async () => {
-        if (!window.confirm('사진을 등록하시겠습니까?')) return;
-        try {
-            if (file) {
-                const snapshot = await uploadBytes(ref(storage, `/photo/${Date.now()}.jpg`), file);
-                const url = await getDownloadURL(snapshot.ref);
-                await setDoc(doc(db, 'user', uid), { ...form, image: url });
-            } else {
-                await setDoc(doc(db, 'user', uid), { ...form });
-            }
-        } catch (error) {
-            alert(error.message);
-        }
-    }
+    const onFileChange = (evt) => {
+        // 업로드 된 file
+        const files = evt.target.files;
+        const theFile = files[0];
 
-    const getMagazine = async () => {
-        setLoading(true);
-        try {
-            const result = await getDoc(doc(db, 'user', uid));
-            setForm(result.data());
-            setFileName(result.data().image ? result.data().image : 'https:via.placeholder.com/200x200');
-            setLoading(false);
-        } catch (error) {
-            alert(error.message);
-        }
-    }
+        // FileReader 생성
+        const reader = new FileReader();
 
-    const onChangeFile = (e) => {
-        setFileName(URL.createObjectURL(e.target.files[0]));
-        setFile(e.target.files[0]);
-    }
+        // file 업로드가 완료되면 실행
+        reader.onloadend = (finishedEvent) => {
+            // 업로드한 이미지 URL 저장
+            const result = finishedEvent.currentTarget.result;
+            setAttachment(result);
+        };
+        // 파일 정보를 읽기
+        reader.readAsDataURL(theFile);
+    };
 
     const onChange = (e) => {
         setForm({
@@ -71,75 +48,67 @@ const MagazineInsert = () => {
         })
     }
 
-    const onInsert = async () => {
+    const onSubmit = async (e) => {
+        e.preventDefault();
+        const storage = getStorage();
+        const fileRef = ref(storage, 'magaznie/' + uuidv4());
+
+        // 이미지를 firebase storage에 업로드
+        const response = await uploadString(fileRef, attachment, 'data_url');
+
+        // 업로드한 이미지 url 가져오기
+        const downloadURL = await getDownloadURL(fileRef);
+        //console.log(downloadURL)
+
         setBox({
             show: true,
-            message: '새로운 매거진을 등록 하시겠습니까?',
+            message: "매거진을 등록하시겠습니까?",
             action: async () => {
-                const data = { ...form, user_id: 1, category: 7, nickname: 'admin' }
-                const res = await axios.post(`/magazine/insert`, data);
-                if (res.data === 0) {
+                try {
+                    // 서버에 업데이트된 form을 전송
+                    const data = { ...form, image: downloadURL, user_id: 1, category: 7, nickname: 'admin' }
+                    const res = await axios.post(`/magazine/insert`, data);
+                    if (res.data === 0) {
+                        setBox({
+                            show: true,
+                            message: "등록을 실패하였습니다."
+                        })
+                    } else {
+                        setBox({
+                            show: true,
+                            message: "등록이 완료되었습니다."
+                        })
+                        navi('/magazine/magazineList');
+                    }
+                } catch (error) {
+                    console.error("등록 에러 : ", error);
                     setBox({
                         show: true,
-                        message: "등록을 실패 하였습니다."
-                    });
-                } else {
-                    setBox({
-                        show: true,
-                        message: "매거진이 등록 되었습니다."
-                    });
-                    navi(`/magazine/magazineList`);
+                        message: "등록중 오류가 발생하였습니다."
+                    })
                 }
             }
         })
     }
-
-    // const onChangeFile = (e) => {
-    //     setForm({
-    //         ...form,
-    //         image: URL.createObjectURL(e.target.files[0]),
-    //         file: e.target.files[0]
-    //     })
-    // }
-    // const onUpdatePhoto = async () => {
-    //     if (!file) {
-    //         setBox({
-    //             show: true,
-    //             message: "사진을 선택해주세요."
-    //         })
-    //     } else {
-    //         setBox({
-    //             show: true,
-    //             message: "사진을 저장하시겠습니까?",
-    //             action: async () => {
-    //                 const formData = new FormData();
-    //                 formData.append("file", file);
-    //                 formData.append("uid", uid);
-    //                 await axios.post(`/magazine/image`, formData);
-    //                 alert("사진 등록!")
-    //             }
-    //         })
-    //     }
-    // }
     if (loading) return <div className='text-center my-5'><Spinner animation="border" variant="success" /></div>
     return (
         <div id="main_wrap">
             <div className="main_contents">
-                <Card className='insert-card'>
-                    <Form.Control onChange={onChange} name='magazine_num' placeholder='번호' className='insert-text' style={{width:100}} />
-                    <Form.Control onChange={onChange} name='title' placeholder='제목을 입력해주세요.' className='insert-text' />
-                    <form encType='multipart/form-data' className='insert-img'>
-                        <img name='image' src={filename || 'http://via.placeholder.com/150x150'} onClick={() => img_ref.current.click()} width={300} height={300} style={{ cursor: 'pointer' }} />
-                        <input onChange={onChangeFile} type='file' ref={img_ref} style={{ display: 'none' }} />
-                        <br />
-                        <Button onClick={onUpdate} className='insert-img-btn'>이미지 등록</Button>
-                    </form>
-                    <Form.Control onChange={onChange} name='contents' placeholder='내용을 입력해주세요.' as="textarea" rows={10} className='insert-text' />
-                </Card>
-                <Button onClick={onInsert} className='insert-btn1 btn-lg'>등록</Button>
-                <Button type='reset' className='insert-btn2 btn-lg'>취소</Button>
+                <form onSubmit={onSubmit} className='insert-img'>
+                    <Card className='insert-card'>
+                        <Form.Control onChange={onChange} name='magazine_num' placeholder='번호' className='insert-text' style={{ width: 100 }} />
+                        <Form.Control onChange={onChange} name='title' placeholder='제목을 입력해주세요.' className='insert-text' />
+                        <div className='insert-img'>
+                            <img value={image} name='image' src={attachment || 'http://via.placeholder.com/150x150'} onClick={() => img_ref.current.click()} width={300} height={300} style={{ cursor: 'pointer' }} />
+                            <input onChange={onFileChange} type='file' ref={img_ref} style={{ display: 'none' }} />
+                            <br />
+                        </div>
+                        <Form.Control onChange={onChange} name='contents' placeholder='내용을 입력해주세요.' as="textarea" rows={10} className='insert-text' />
+                    </Card>
+                    <Button type='submit' className='insert-btn1 btn-lg'>등록</Button>
+                </form>
             </div>
-        </div>
+        </div >
     )
 }
 

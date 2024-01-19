@@ -3,8 +3,13 @@ import { Button, InputGroup, Form } from 'react-bootstrap'
 import { useNavigate, useParams } from 'react-router-dom';
 import { BoxContext } from '../common/BoxContext';
 import axios from 'axios';
+import { ref, getDownloadURL, uploadBytes, getStorage, uploadString } from "firebase/storage";
+import { v4 as uuidv4 } from 'uuid'; //랜덤 식별자를 생성해주는 라이브러리
+import { app } from '../../firebaseConfig'
 
 const DiaryInsert = () => {
+    const [attachment, setAttachment] = useState();
+
     const navi = useNavigate();
     const img_ref = useRef(null);
     const [plants, setplants] = useState([]);
@@ -21,13 +26,51 @@ const DiaryInsert = () => {
 
     const { plant_name, image, contents, reg_date, fmtdate, watering, common_name, date_now, date_water, date_medicine, date_change, plant_id } = insertDiary;
 
-    const onChange = (e) => {
-        setinsertDiary({
-            ...insertDiary,
-            [e.target.name]: e.target.value,
-            plant_id: selectedValue,
-        });
-        console.log(insertDiary);
+    const onFileChange = (evt) => {
+        // 업로드 된 file
+        const files = evt.target.files;
+        const theFile = files[0];
+
+        // FileReader 생성
+        const reader = new FileReader();
+
+        // file 업로드가 완료되면 실행
+        reader.onloadend = (finishedEvent) => {
+            // 업로드한 이미지 URL 저장
+            const result = finishedEvent.currentTarget.result;
+            setAttachment(result);
+        };
+        // 파일 정보를 읽기
+        reader.readAsDataURL(theFile);
+    };
+
+
+    const onChange = async(e) => {
+        const storage = getStorage();
+        const fileRef = ref(storage, 'diary/' + uuidv4());
+
+        try {
+            // 이미지를 Firebase Storage에 업로드
+            await uploadString(fileRef, attachment, 'data_url');
+
+            // 업로드한 이미지 URL 가져오기
+            const downloadURL = await getDownloadURL(fileRef);
+            console.log(downloadURL);
+
+            // 이미지 URL을 insertDiary에 설정
+            setinsertDiary({
+                ...insertDiary,
+                [e.target.name]: e.target.value,
+                plant_id: selectedValue,
+                uid: sessionStorage.getItem('uid'),
+                image: downloadURL,
+            });
+            console.log(insertDiary);
+        } catch (error) {
+            console.error("이미지 업로드 중 오류:", error);
+            alert("이미지 업로드 중 오류가 발생했습니다.");
+        }
+
     }
 
     const onSubmit = () => {
@@ -92,10 +135,9 @@ const DiaryInsert = () => {
                 <div className='text-center'>
                     <h1 className='mt-5'>나의 식물 수정하기</h1>
                     <div className='mt-5'>
-                        <img src="http://via.placeholder.com/250x250" onClick={() => img_ref.current.click()} style={{ cursor: 'pointer' }} onChange={onChange} name='image' value={image} />
-                        <input type='file' ref={img_ref} style={{ display: 'none' }}  />
+                        <img src={attachment || "http://via.placeholder.com/250x250"} onClick={() => img_ref.current.click()} style={{ cursor: 'pointer' }} value={image}  />
+                        <input type='file' ref={img_ref} style={{ display: 'none' }} onChange={onFileChange} />
                         <br />
-                        <Button className='diary-img-btn'>이미지 수정</Button>
                         <div>
                             <InputGroup className='diary-input'>
                                 <InputGroup.Text className='diary-text'>식물 이름</InputGroup.Text>

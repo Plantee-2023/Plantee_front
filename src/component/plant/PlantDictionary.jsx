@@ -3,6 +3,7 @@ import './Plant.css';
 import { InputGroup, Spinner } from 'react-bootstrap';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import BtnToTop from '../common/BtnToTop';
 
 const PlantDictionary = () => {
 
@@ -14,12 +15,12 @@ const PlantDictionary = () => {
 
   const getList = async () => {
     setLoading(true)
-      const res = await axios.get(`/plant/list.json`);
-      //console.log('API Response:', res.data);
-      setplants(res.data.list)
-      setTotal(res.data.total)
-      setLoading(false);
-    }
+    const res = await axios.get(`/plant/list.json`);
+    //console.log('API Response:', res.data);
+    setplants(res.data.list)
+    setTotal(res.data.total)
+    setLoading(false);
+  }
 
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
@@ -35,7 +36,7 @@ const PlantDictionary = () => {
     return nameMatches && careLevelMatches;
   });
 
-  useEffect(() =>{
+  useEffect(() => {
     getList();
   }, []);
 
@@ -47,7 +48,7 @@ const PlantDictionary = () => {
         <div className='first_filter_section'>
           <div className='first_filter_between'>
             <ul className='filter_list'>
-            <button className={`filter_reset_btn ${selectedCareLevel === null ? 'active' : ''}`} type='button' onClick={() => handleCareLevelFilter(null)}>
+              <button className={`filter_reset_btn ${selectedCareLevel === null ? 'active' : ''}`} type='button' onClick={() => handleCareLevelFilter(null)}>
                 <img src='/image/reset_icon.png' alt='reset icon' />
               </button>
               <button className={`filter_btn ${selectedCareLevel === 1 ? 'active' : ''}`} type='button' onClick={() => handleCareLevelFilter(1)}>
@@ -73,33 +74,34 @@ const PlantDictionary = () => {
         <div className='plant_data'>
           <div className='plant_layout'>
             <div className='plant_total'>
-            <span>총 식물 데이터 : <strong>{total}</strong> </span>
+              <span>총 식물 데이터 : <strong>{total}</strong> </span>
             </div>
             <div className='search_input_wrap'>
               <form>
                 <InputGroup className='search_input_inputgroup'>
-                  <input type='search' className='search_input_textinput' placeholder='검색어를 입력해주세요.' value={searchTerm} onChange={handleSearchChange}/>
+                  <input type='search' className='search_input_textinput' placeholder='검색어를 입력해주세요.' value={searchTerm} onChange={handleSearchChange} />
                   <button className='search_input_searchbtn' type='submit'><img src='/image/search_icon.png' /></button>
                 </InputGroup>
               </form>
             </div>
           </div>
         </div>
-        
-        
-        
+
+
+
         <div className='plantlist_contents_section'>
           <div className='plantlist_contents_grid'>
             {filteredList.map(p =>
-                <a href={`/plant/read/${p.plant_id}`}>
-                  <div className='plantlist_contents_item'>
-                    <img src='/image/plant01.jpg'/>
-                    <p className='plantlist_commonname'>{p.common_name}</p>
-                  </div>
-                </a>
+              <a href={`/plant/read/${p.plant_id}`}>
+                <div className='plantlist_contents_item'>
+                  <img src={p.image} />
+                  <p className='plantlist_commonname'>{p.common_name}</p>
+                </div>
+              </a>
             )}
           </div>
         </div>
+        <BtnToTop/>
       </div>
     </div>
   )

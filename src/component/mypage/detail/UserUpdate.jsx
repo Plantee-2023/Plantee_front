@@ -3,11 +3,13 @@ import axios from 'axios'
 import { Card, Form, InputGroup, Button, Spinner } from 'react-bootstrap'
 import { BoxContext } from '../../common/BoxContext';
 import { useNavigate } from 'react-router-dom';
+import ModalPostCode from '../../common/ModalPostCode'
 
 const UserUpdate = () => {
     const navi = useNavigate();
     const img_ref = useRef(null);
     const [users, setUsers] = useState('');
+    const [attachment, setAttachment] = useState();
     const [loading, setLoading] = useState(false);
     const { box, setBox } = useContext(BoxContext);
     const [user, setUser] = useState({
@@ -19,6 +21,24 @@ const UserUpdate = () => {
     })
 
     const { uid ,nickname, image, phone, address1, address2 } = user;
+
+    const onFileChange = (e) => {
+        // 업로드 된 file
+        const files = e.target.files;
+        const theFile = files[0];
+
+        // FileReader 생성
+        const reader = new FileReader();
+
+        // file 업로드가 완료되면 실행
+        reader.onloadend = (finishedEvent) => {
+            // 업로드한 이미지 URL 저장
+            const result = finishedEvent.currentTarget.result;
+            setAttachment(result);
+        };
+        // 파일 정보를 읽기
+        reader.readAsDataURL(theFile);
+    };
 
     const onChange = (e) => {
         setUser({
@@ -50,7 +70,7 @@ const UserUpdate = () => {
     const getList = async () => {
         setLoading(true);
         const res = await axios.get(`/users/read.json/${sessionStorage.getItem("uid")}`);
-        //console.log(res.data)
+        console.log(res.data)
         setUsers(res.data);
         //console.log(users)
         setLoading(false);
@@ -84,15 +104,15 @@ const UserUpdate = () => {
                 <InputGroup className='update-address'>
                     <InputGroup.Text className='update-text'>주소</InputGroup.Text>
                     <Form.Control value={address1} name='address1' type='text' onChange={onChange} />
-                    <button className='update-btn'>검색</button>
+                    <ModalPostCode/>
                 </InputGroup>
-                <Form.Control value={address2} name='address2' className='join-input' type='text' placeholder='상세주소' onChange={onChange} />
+                <Form.Control value={address2} name='address2' className='update-address' type='text' placeholder='상세주소' onChange={onChange} />
                 <Form className='update-check'>
                     <Form.Check label="꽃집 사장님"></Form.Check>
                 </Form>
                 <InputGroup className='update-input'>
                     <InputGroup.Text className='update-text'>사업자 등록증</InputGroup.Text>
-                    <Form.Control />
+                    <Form.Control/>
                     <button className='update-btn'>파일 검색</button>
                 </InputGroup>
             </Card>

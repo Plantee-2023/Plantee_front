@@ -6,6 +6,13 @@ const SideMenu = () => {
     <div className='mypage_sidebar_wrap'>
             <div className="mypage_sidebar_box">
                 <ol className='mypage_sidebar_ol'>
+                    <li className='user_section'>
+                        <img className='user_img' src='/image/userimage_01.jpg'/>
+                        <div>
+                            <img/>
+                            <h3 className='user_nickname'>{sessionStorage.getItem("uid")}님</h3>
+                        </div>
+                    </li>
                     <li className='account_menagement'>
                         <h3 className='mypage_account'>회원정보</h3>
                         <ol>
