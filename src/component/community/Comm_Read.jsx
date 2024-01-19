@@ -66,8 +66,7 @@ const Comm_Read = () => {
                                 <div>
                                    
                                 공유하기 : <p className='me-2'> <Comm_share/> </p> 
-                 
- 
+                
                                 </div>
                                
                             </Col>
