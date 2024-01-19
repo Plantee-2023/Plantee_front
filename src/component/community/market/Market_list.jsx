@@ -165,7 +165,7 @@ const Market_list = () => {
 
           <thead>
             <tr>
-              <input type='checkbox' onChange={onChangeAll} checked={posts.length === cnt && posts.length != 0} />
+              <input type='checkbox' onChange={onChangeAll} checked={posts.length === cnt && posts.length > 0} />
               <th>No</th>
               <th>구분</th>
               <th>지역</th>

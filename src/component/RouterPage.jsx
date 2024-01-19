@@ -29,6 +29,7 @@ import Comm_list from './community/comm/Comm_list';
 import Market_write from './community/market/Market_write';
 import Market_list from './community/market/Market_list';
 import Market_read from './community/market/Market_read';
+import Comm_Update from './community/comm/Comm_Update';
 import DiaryMain from './diary/DiaryMain';
 import DiaryInsert from './diary/DiaryInsert';
 import DiaryUpdate from './diary/DiaryUpdate';
@@ -47,9 +48,8 @@ import MagazineUpdate from './magazine/MagazineUpdate';
 import StoreBuyNow from './store/StoreBuyNow';
 import HomePage from './HomePage';
 import MainBannerPage from './MainBannerPage';
+import Market_update from './community/market/Market_update';
 import AdminPage from './users/AdminPage';
-
-
 
 const RouterPage = () => {
     return (
@@ -102,11 +102,13 @@ const RouterPage = () => {
             <Route path="/comm" element={<Comm_list />} />
             <Route path="/comm/write" element={<Comm_write />} />
             <Route path="/comm/read/:post_id" element={<Comm_Read />} />
+            <Route path="/comm/update/:post_id" element={<Comm_Update/>} />
 
             {/* 나눔 */}
             <Route path="/comm/market" element={<Market_list/>} />
             <Route path="/comm/market/write" element={<Market_write />} />
             <Route path="/comm/market/read/:post_id" element={<Market_read />} />
+            <Route path="/comm/market/:post_id" element={<Market_update/>} />
 
             {/* 스토어 */}
             <Route path='/store' element={<StoreMain />} />

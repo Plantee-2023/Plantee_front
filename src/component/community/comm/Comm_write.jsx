@@ -11,20 +11,19 @@ import { useNavigate } from 'react-router-dom';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import Comm_plant from '../Comm_plant';
-import Comm_vote from '../Comm_vote';
-import CandidateList from '../CandidateList';
+
 import Comm_voteList from './Comm_voteList';
 
 const Comm_Write = () => {
   const [isChecked, setChecked] = useState(false);
-  const [vote, setVote] = useState({vote_1: '', vote_2: '', vote_3: ''});
+  const [vote, setVote] = useState({ res: '', res2: '', res3: '' });
   const db = getStorage(app);
   const [file, setFile] = useState(null);
   const navigate = useNavigate();
   const [selectedValue, setSelectedValue] = useState('');
   const [form, setForm] = useState({
-    user_id: 5, title: '', category: 3, contents: '', filter: '', image: ''
-    
+    user_id: 5, title: '', category: 3, contents: '', filter: '', image: '' , plant_id:'', link:'', store_id:'',plant_title:''
+
   });
 
   const onChangeContents = (data) => {
@@ -32,6 +31,7 @@ const Comm_Write = () => {
       ...form,
       title: form.title,
       contents: data
+
     });
   }
 
@@ -53,13 +53,18 @@ const Comm_Write = () => {
   };
 
 
-  const handleChangeVote = (values) => {
-    setForm({
+  const handleChangeVote = (vote) => {
 
-      
-      vote_1:vote.vote_1,
-      vote_2:vote.vote_2,
-      vote_3:vote.vote_3
+
+
+    setVote({
+
+
+
+
+      res: vote.res,
+      res2: vote.res2,
+      res3: vote.res3
     }); // Component2에서 전달받은 값을 상태에 저장
   };
 
@@ -74,9 +79,10 @@ const Comm_Write = () => {
           contents: form.contents, uid: sessionStorage.getItem("uid"),
           category: 3,
           title: form.title
+          
 
         };
-        //console.log(data);
+        console.log(data);
         await axios.post("/comm/insert", data);
         alert("저장을 완료했습니다.");
         handleGoBack();
@@ -88,10 +94,10 @@ const Comm_Write = () => {
 
 
   const onClickVoteSave = async () => {
-    if (form.vote_1 === ""||form.vote_2=== "" ||form.vote_3=== "" ) {
+    if (vote.res === "" || vote.res2 === "" || vote.res3 === "") {
       alert(form,
         "내용을 입력해주세요.");
-        console.log(vote)
+      console.log(vote)
     } else {
       if (window.confirm("저장하시겠습니까?")) {
 
@@ -99,14 +105,23 @@ const Comm_Write = () => {
           ...form, filter: selectedValue,
           contents: form.contents, uid: sessionStorage.getItem("uid"),
           category: 3,
-          title: form.title,
-          vote_1:handleChangeVote.vote_1,
-          vote_2:handleChangeVote.vote_2,
-          vote_3:handleChangeVote.vote_3
+          title: form.title
 
         };
-        //console.log(data);
+
+        const data2 = {
+          title: form.title,
+          res: vote.res,
+          res2: vote.res2,
+          res3: vote.res3
+        }
+        console.log(data);
+        console.log(data2);
         await axios.post("/comm/insert", data);
+        await new Promise(resolve => setTimeout(resolve, 10000));
+
+        await axios.post("/comm/vote_insert", data2);
+
         alert("저장을 완료했습니다.");
         handleGoBack();
       }
@@ -137,7 +152,7 @@ const Comm_Write = () => {
     <div className='my-5'  >
       <h1 className='text-center mb-5'>게시글 작성</h1>
       <div className='text-start mb-2'>
-        <Button vaiant='success'>목록</Button>
+        <a className='btn btn-success' style={{ color: "white" }} href='/comm'   >목록</a>
 
       </div>
       <Row className='justify-content-center'>
@@ -188,25 +203,31 @@ const Comm_Write = () => {
               <Col>
 
 
-                {!isChecked ?
+                {isChecked &&
+
                   <>
 
-                    <CKEditor config={{ ckfinder: { uploadUrl: '/comm/ckupload' } }}
-                      editor={ClassicEditor}
-                      data={form.contents}
-                      onChange={(event, editor) => { onChangeContents(editor.getData()); }} />
+                    <Comm_voteList vote={vote} setVote={handleChangeVote} />
+                    <br />
 
                   </>
-                  :
-                  <>
 
-                    <Comm_voteList vote={vote}setVote={setVote}/>
-                  </>
                 }
+                <>
+
+                  <CKEditor config={{ ckfinder: { uploadUrl: '/comm/ckupload' } }}
+                    editor={ClassicEditor}
+                    data={form.contents}
+                    onChange={(event, editor) => { onChangeContents(editor.getData()); }} />
+
+                </>
+
+
+
               </Col>
             </Row>
             <div className='mt-2'>
-              <Comm_plant />
+              <Comm_plant form={form} setForm={setForm}/>
             </div>
           </Card>
 
