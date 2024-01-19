@@ -11,26 +11,50 @@ import { TfiWrite } from "react-icons/tfi";
 import { BoxContext } from './common/BoxContext';
 
 export const useScroll = () => {
+  // 스크롤 위치 상태 초기화
+  const [scrollTop, setScrollTop] = useState(0);
+
+  //useEffect를 사용하여 scrollTop의 상태가 변할 때마다 스크롤 이벤트, 함수 실행
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [scrollTop]);
+
+  const handleScroll = () => {
+    const winScroll = 
+      document.body.scrollTop || document.documentElement.scrollTop;
+    const { scrollHeight, clientHeight } = document.documentElement;
+    const scrollTop = winScroll / (scrollHeight - clientHeight);
+    setScrollTop(scrollTop);
+  };
+
   const [state, setState] = useState({
     x: 0,
     y: 0
   });
+
   const onScroll = () => {
     setState({ y: window.scrollY, x: window.screenX });
   };
+
   useEffect(() => {
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
   return state;
 };
 
 const HeaderPage = () => {
   const { y } = useScroll();
   const [showA, setShowA] = useState(false);
+  const [isNavbarFixed, setIsNavbarFixed] = useState(false); // 네비바 고정
   const toggleShowA = () => setShowA(!showA);
   const { box, setBox } = useContext(BoxContext);
   const navigate = useNavigate();
+
   const onLogout = () => {
     setBox({
       show: true,
@@ -41,9 +65,18 @@ const HeaderPage = () => {
       }
     });
   }
+
+  useEffect(()=> {
+    if (y>0) {
+      setIsNavbarFixed(true);
+    } else {
+      setIsNavbarFixed(false);
+    }
+  }, [y]);
+
   return (
-    <div id='menu_wrap'>
-      <div className='menu_contents'>
+    <div id='menu_wrap' className={isNavbarFixed ? 'fixed_navbar' : ''}>
+      <div className={`menu_contents ${isNavbarFixed ? 'scrolling' : ''}`}>
         <div className='menu_header'>
           <div className='menu_left'>
             <div className='menu_left_img'>
