@@ -14,7 +14,10 @@ const Market_write = () => {
  
   const [selectedValue, setSelectedValue] = useState('5');
   const [selectedValue2, setSelectedValue2] = useState('7');
-  const [form, setForm] = useState("");
+  const [form, setForm] = useState({
+    user_id: '', title: '', category: 4, contents: '', filter: '', image: '' , plant_id:'', link:'', store_id:'',plant_title:''
+
+  });
   const priceRef = useRef(null);
   const ref_file = useRef(null);
   const [src, setSrc] = useState('http://via.placeholder.com/200x200');
@@ -75,7 +78,7 @@ const onClickSave = async () => {
 
           const value=(selectedValue ==='6' || selectedValue===null) ? selectedValue2 : selectedValue ;
           const data = 
-          {  contents: form.contents ,  uid: sessionStorage.getItem("uid"),
+          {  ...form, contents: form.contents ,  uid: sessionStorage.getItem("uid"),
             category: 4,  filter:value,
           title:form.title, 
           price:form.price };
@@ -84,8 +87,7 @@ const onClickSave = async () => {
             await axios.post("/comm/insert", data);
             alert("저장을 완료했습니다.");
             
-            // 데이터 저장이 성공하면 뒤로 가기
-           // setTimeout(() => {
+ 
            handleGoBack();
            // }, 10000);
           } catch (error) {
@@ -174,7 +176,7 @@ const onClickSave = async () => {
               </Col>
             </Row>
             <div className='mt-2'>
-            <Comm_plant />
+            <Comm_plant form={form} setForm={setForm}/>
             </div>
           </Card>
        

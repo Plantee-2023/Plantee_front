@@ -22,7 +22,7 @@ const Comm_Write = () => {
   const navigate = useNavigate();
   const [selectedValue, setSelectedValue] = useState('');
   const [form, setForm] = useState({
-    user_id: 5, title: '', category: 3, contents: '', filter: '', image: '' , plant_id:'', link:'', store_id:'',plant_title:''
+    user_id: '', title: '', category: 3, contents: '', filter: '', image: '' , plant_id:'', link:'', store_id:'',plant_title:''
 
   });
 

@@ -16,7 +16,7 @@ const Market_read = () => {
     const { post_id } = useParams();
     const [post, setPost] = useState('');
     const [mylikes, setMylikes] = useState(0);
-    const {  red_date, title,  contents, address, nickname, uid, price } = post;
+    const {  red_date, title,  contents, address, nickname, uid, price,user_photo,address1 } = post;
  
 
 
@@ -24,7 +24,7 @@ const Market_read = () => {
         const res = await axios(`/comm/info/${post_id}?uid=${sessionStorage.getItem("uid")}`);
     
         setMylikes(res.data.mylikes);
-        console.log(".........",res)
+        console.log(".........",res.data.read)
         setPost(res.data.read);
 
 
@@ -111,14 +111,14 @@ const Market_read = () => {
                     <Card className='p-5'>
 
                         <div style={{ padding: "100px" }}>
-                            <h4 className="text-center" style={{ "font-weight": "bold" }}>[{address}] {title} </h4>
+                            <h4 className="text-center" style={{ "font-weight": "bold" }}>[{address1}] {title} </h4>
 
 
                             <Row>
 
                                 <Col lg={3} xs={5} md={4} className='align-self-center'>
                                     <div className='mt-1'>
-                                        <Image src="http://via.placeholder.com/171x180" roundedCircle />
+                                        <Image src={user_photo} roundedCircle width="80%" />
 
 
                                     </div>

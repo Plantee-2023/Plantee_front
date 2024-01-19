@@ -15,27 +15,32 @@ const Comm_Update = () => {
   const [selectedValue, setSelectedValue] = useState('');
     const [isChecked, setChecked] = useState(false);
     const {post_id } = useParams();
-    const [form, setForm] = useState("");
+    const [form, setForm] = useState( {
+      user_id: '', title: '', category: 3, contents: '', filter: '', image: '' , plant_id:'', link:'', store_id:'',plant_title:''
+  
+    });
     const ref_file = useRef(null);
     const [src, setSrc] = useState('http://via.placeholder.com/200x200');
     const [file, setFile] = useState(null);
     const navigate  = useNavigate();
     const {title}=form;
+ 
     
  
     const getPost = async () => {
-    //   const res = await axios(`/comm/read.json/${post_id}`);
+  
           const res = await axios(`/comm/info/${post_id}?uid=${sessionStorage.getItem("uid")}`);
        console.log('res',res.data);
-        //const data = {...res.data, html:contents}
+ 
         setForm(res.data.read);
+
+        if (res.data.show_vote.length > 0) {
         setVote(
           {res:res.data.show_vote[0].res  , res2: res.data.show_vote[0].res2, res3:res.data.show_vote[0].res3}
 
           
-          );
-        console.log("레스",res)
-        console.log(res.data.myvote);
+          );}
+    
         setChecked(res.data.show_vote.length > 0 ? true : false);
         console.log("checked",isChecked);
 
@@ -241,7 +246,7 @@ const onClickSave = async ( ) => {
               </Col>
             </Row>
             <div className='mt-2'>
-              <Comm_plant />
+              <Comm_plant form={form} setForm={setForm} />
             </div>
           </Card>
 
