@@ -10,7 +10,7 @@ const SideMenu = () => {
                         <img className='user_img' src='/image/userimage_01.jpg'/>
                         <div>
                             <img/>
-                            <h3 className='user_nickname'>UserID</h3>
+                            <h3 className='user_nickname'>{sessionStorage.getItem("uid")}님</h3>
                         </div>
                     </li>
                     <li className='account_menagement'>

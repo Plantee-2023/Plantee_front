@@ -67,7 +67,7 @@ const MagazineList = () => {
                     <Col>
                         {sessionStorage.getItem('uid') === "admin" &&
                             <Button className="magazine-write-btn">
-                                <NavLink className="magazine-insert" to="/magazine/magazineinsert"><AiOutlineEdit />글쓰기</NavLink>
+                                <NavLink className="magazine-insert" to="/magazine/magazineinsert" style={{color:'#ffffff'}}><AiOutlineEdit />글쓰기</NavLink>
                             </Button>
                         }
                     </Col>

@@ -8,9 +8,9 @@ import StoreBuyNow from '../../store/StoreBuyNow';
 const ProductCart = () => {
     return (
         <div id="main_wrap">
-            <Card>
+            <Card className='all-card'>
                 <h1 className='all-title'>장바구니</h1>
-                <Table className='list' hover striped bordered>
+                <Table className='all-list' hover striped bordered>
                     <thead className='text-center'>
                         <tr>
                             <th><Form.Check /></th>

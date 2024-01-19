@@ -4,11 +4,11 @@ import '../MyPage.css'
 const ProductCancel = () => {
     return (
         <div id="main_wrap">
-            <Card>
+            <Card className='all-card'>
                 <h1 className='all-title mb-5'>취소 / 반품 / 교환</h1>
                 <Tabs defaultActiveKey="cancel" id="fill-tab-example" className="mb-3" fill>
                     <Tab eventKey="cancel" title="취소/반품/교환 신청">
-                        <Table className='list' hover striped bordered>
+                        <Table className='all-list' hover striped bordered>
                             <thead className='text-center'>
                                 <tr>
                                     <th><Form.Check /></th>
@@ -36,7 +36,7 @@ const ProductCancel = () => {
                         </Table>
                     </Tab>
                     <Tab eventKey="profile" title="취소처리 현황">
-                        <Table className='list' hover striped bordered>
+                        <Table className='all-list' hover striped bordered>
                             <thead className='text-center'>
                                 <tr>
                                     <th>요청일</th>
@@ -64,7 +64,7 @@ const ProductCancel = () => {
                         </Table>
                     </Tab>
                     <Tab eventKey="change" title="반품/교환처리 현황">
-                        <Table className='list' hover striped bordered>
+                        <Table className='all-list' hover striped bordered>
                             <thead className='text-center'>
                                 <tr>
                                     <th><Form.Check /></th>

@@ -60,22 +60,35 @@ const MagazineInsert = () => {
         const downloadURL = await getDownloadURL(fileRef);
         //console.log(downloadURL)
 
-        if (window.confirm("매거진을 등록하시겠습니까?")) {
-            try {
-                // 서버에 업데이트된 form을 전송
-                const data = { ...form, image: downloadURL, user_id: 1, category: 7, nickname: 'admin' }
-                const res = await axios.post(`/magazine/insert`, data);
-                if (res.data === 0) {
-                    alert("등록 실패!");
-                } else {
-                    alert("등록 완료");
-                    navi('/magazine/magazineList');
+        setBox({
+            show: true,
+            message: "매거진을 등록하시겠습니까?",
+            action: async () => {
+                try {
+                    // 서버에 업데이트된 form을 전송
+                    const data = { ...form, image: downloadURL, user_id: 1, category: 7, nickname: 'admin' }
+                    const res = await axios.post(`/magazine/insert`, data);
+                    if (res.data === 0) {
+                        setBox({
+                            show: true,
+                            message: "등록을 실패하였습니다."
+                        })
+                    } else {
+                        setBox({
+                            show: true,
+                            message: "등록이 완료되었습니다."
+                        })
+                        navi('/magazine/magazineList');
+                    }
+                } catch (error) {
+                    console.error("등록 에러 : ", error);
+                    setBox({
+                        show: true,
+                        message: "등록중 오류가 발생하였습니다."
+                    })
                 }
-            } catch (error) {
-                console.error("등록 에러 : ", error);
-                alert("등록 중 오류가 발생했습니다.");
             }
-        }
+        })
     }
     if (loading) return <div className='text-center my-5'><Spinner animation="border" variant="success" /></div>
     return (

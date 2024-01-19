@@ -4,10 +4,10 @@ import '../MyPage.css'
 const ProductLike = () => {
   return (
     <div id="main_wrap">
-      <Card>
+      <Card className='all-card'>
         <h1 className='all-title'>좋아요 리스트</h1>
         <button className='favorite-list-delete-btn'>삭제</button>
-        <Table className="list" hover striped bordered>
+        <Table className="all-list" hover striped bordered>
           <thead className='text-center'>
             <tr>
               <th><Form.Check /></th>

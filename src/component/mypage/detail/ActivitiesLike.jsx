@@ -4,9 +4,9 @@ import '../MyPage.css'
 const ActivitiesLike = () => {
 	return (
 		<div id="main_wrap">
-			<Card>
+			<Card className='all-card'>
 				<h1 className='all-title'>좋아요</h1>
-				<Table className='list' hover striped bordered>
+				<Table className='all-list' hover striped bordered>
 					<thead className='text-center'>
 						<tr>
 							<th>번호</th>
