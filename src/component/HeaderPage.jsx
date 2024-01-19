@@ -43,7 +43,7 @@ const HeaderPage = () => {
 	}
 	return (
 		<div id='menu_wrap'>
-			<div className={y < 100 ? "menu_contents" : "menu_contents-fixed"}>
+			<div className={y < 30 ? "menu_contents" : "menu_contents-fixed"}>
 				<div className='menu_header'>
 					<div className='menu_left'>
 						<div className='menu_left_img'>
@@ -94,7 +94,7 @@ const HeaderPage = () => {
 																	<div className='menu-toast-text1'>캘린더</div>
 																</li>
 																<li>
-																	<Card className='menu-card2'><a href='/plant/recipe'>
+																	<Card className='menu-card2'><a href='/recipe'>
 																		<PiCookingPot className='menu-toast-icon' style={{ color: '#000000' }} /></a></Card>
 																	<div className='menu-toast-text'>레시피</div>
 																</li>
