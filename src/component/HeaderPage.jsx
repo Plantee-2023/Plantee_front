@@ -108,7 +108,6 @@ const HeaderPage = () => {
 										</>
 										:
 										<>
-											<li><NavLink to='/users/mypage'>마이 페이지</NavLink></li>
 											<li>
 												<div onClick={toggleShowA} style={{ cursor: 'pointer' }} >{sessionStorage.getItem("uid")}님
 													<ToastContainer position={'top-end'} className='menu-toast'>
