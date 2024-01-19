@@ -22,12 +22,12 @@ const HomePage = () => {
     const getMain = async () => {
         setLoading(true);
 
-        const res = await axios.get(`/store/list.json`);
-        const res1 = await axios.get(`/magazine/list.json?query=''&page=1&size=8`);
+        // const res = await axios.get(`/store/list.json`);
+        // const res1 = await axios.get(`/magazine/list.json?query=''&page=1&size=8`);
         //const res2 = await axios.get(`/comm/list.json?category=3&page=1&size=10&query=''`); //커뮤니티
         const res3 = await axios.get(`/plant/list.json`); // 플랜트
-        setStore(res.data.list);
-        setMagazine(res1.data.list);
+        // setStore(res.data.list);
+        // setMagazine(res1.data.list);
         //setCommunity(res2.data.list);
         setPlants(res3.data.list);
         setLoading(false);
@@ -60,7 +60,7 @@ const HomePage = () => {
                     autoplay={{ delay: 2000 }}
                     navigation
                     style={{"--swiper-navigation-color": "#ffffff"}}>
-                    {store.map(s =>
+                    {/* {store.map(s =>
                         <SwiperSlide>
                             <Card>
                                 <Card.Body >
@@ -76,7 +76,7 @@ const HomePage = () => {
                                 </Card.Footer>
                             </Card>
                         </SwiperSlide>
-                    )}
+                    )} */}
                 </Swiper>
                 <Row>
                     <Col>
@@ -167,7 +167,7 @@ const HomePage = () => {
                     autoplay={{ delay: 2000 }}
                     navigation={true}
                     style={{"--swiper-navigation-color": "#ffffff"}}>
-                    {magazine.map(m =>
+                    {/* {magazine.map(m =>
                         <SwiperSlide>
                             <Card>
                                 <Card.Body>
@@ -179,7 +179,7 @@ const HomePage = () => {
                                 </Card.Body>
                             </Card>
                         </SwiperSlide>
-                    )}
+                    )} */}
                 </Swiper>
             </div>
         </div>

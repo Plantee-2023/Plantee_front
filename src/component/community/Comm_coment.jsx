@@ -45,7 +45,7 @@ const Comm_coment = ({post_id,post}) => {
             
             const data={post_id, uid:sessionStorage.getItem("uid"), contents}
             
-            await axios.post("/comments/insert_comments", data);
+         await axios.post("/comments/insert_comments", data);
             setContents("");
             alert("등록완료 ")
              getComent();
@@ -92,7 +92,7 @@ const Comm_coment = ({post_id,post}) => {
         }else{
             if(window.confirm(`${comment_id}번 리뷰를 수정하실래요?`)){
                 //리뷰수정
-                await axios.post("/coment/update", {comment_id, contents});
+                await axios.post("/comments/update_comments", {comment_id, contents});
                 alert("수정완료!");
                 getComent();
             }
