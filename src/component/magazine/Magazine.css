@@ -6,7 +6,7 @@
     .magazine-btn {background-color: #4cc67c !important;font-weight: 900 !important;border: none !important;}
     .select {width: 100px !important;margin-left: 85%;}
     .magazine-insert {text-decoration: none;color: #000000;font-size: large;}
-    .magazine-write-btn {width: 100px;margin-left: 100%;background-color: aliceblue !important;border: none !important;}
+    .magazine-write-btn {font-weight: 600; width: 100px;margin-left: 84%;background-color: #4cc37c !important;border: none !important;}
     .list {margin-top: 50px;}
     .magazine-list-title {text-align: center;margin-top: 70px;font-size: 60px;margin-bottom: 50px;}
     /* 매거진 */

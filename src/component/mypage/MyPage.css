@@ -29,45 +29,37 @@
 .update-card {margin: 0 auto;}
 .all-title {text-align: center; font-weight: 600; margin-top: 50px;}
 .update_img {margin: 0 auto; margin-top: 2rem;}
-.list{width: 1400px !important; margin: 0 auto;}
-
+.all-list{width: 1300px !important; margin: 0 auto; margin-top: 30px;}
+.all-card{width: 1400px;}
 /* UserPasswordUpdatePage */
 .password-card { margin: 0 auto;}
 
 #main_wrap {width: 100%;margin: 0 auto;}
 
     /* 회원 수정 */
-    .update-img-btn {background-color: #4cc67c !important;font-weight: 900;border: none !important;
-        margin-left: 33%;margin-top: 20px;margin-bottom: 20px;}
+    .update-img-btn {background-color: #4cc67c !important;font-weight: 900;border: none !important;margin-left: 33%;margin-top: 20px;margin-bottom: 20px;}
     .update-input{margin-top: 20px;}
     .update-check {margin-top: 15px;}
     .update-address{margin: 0 auto;margin-bottom: 5px;margin-top: 20px;}
     .update-text {width: 110px;}
-    .update-btn {background-color: #4cc67c !important;color: #ffffff !important;border: none !important;
-        border-radius: 5px;font-weight: 500;font-size: large;width: 100px;}
-
+    .update-btn {background-color: #4cc67c !important;color: #ffffff !important;border: none !important;border-radius: 5px;font-weight: 500;font-size: large;width: 100px;}
+    /* 비밀번호 변경 */
     .password-group {margin: 0 auto;margin-top: 20px;width: 550px;}
     .password-text {width: 130px;}
     .password-btn {width: 550px;background-color: #4cc67c !important;border: none !important;
         margin-top: 20px;margin-bottom: 20px;}
-
     /* 회원 탈퇴 */
     .delete-btn {background-color: #4cc67c !important;border: none !important;}
     .delete-card {text-align: center; width: 300px; margin:0 auto;}
-
     /* 좋아요 리스트 */
-    .favorite-list-delete-btn {margin-bottom: 10px;background-color: #4cc67c !important; border: none !important;
-        margin-left: 64px; font-weight: 600;width: 100px;color: #ffffff;border-radius: 5px;}
+    .favorite-list-delete-btn {margin-bottom: 10px;background-color: #4cc67c !important; border: none !important;margin-left: 64px; font-weight: 600;width: 100px;color: #ffffff;border-radius: 5px;}
     /* 장바구니 */
     .cart-btn-order {background-color: #4cc67c !important;border: none !important;margin-right: 5px;}
     .cart-btn-cancel {background-color: #4cc67c !important;border: none !important;}
     .cart-alert {width: 1400px; margin: 0 au; background-color: #4cc67c !important;border: none !important;opacity: 70%;}
     .cart-price {color: #ffffff;}
-    .cart-order-btn {background-color: #4cc67c !important;margin-top: 10px;border: none !important;
-        width: 100px;margin-right: 10px;font-weight: 600;}
-    .cart-cancel-btn {background-color: #4cc67c !important;border: none !important;font-weight: 600;
-        margin-top: 10px;}
-
+    .cart-order-btn {background-color: #4cc67c !important;margin-top: 10px;border: none !important;width: 100px;margin-right: 10px;font-weight: 600;}
+    .cart-cancel-btn {background-color: #4cc67c !important;border: none !important;font-weight: 600;margin-top: 10px;}
 /* 주문 / 배송조회 */
 /* 취소 / 반품 / 교환 */
 /* 게시글 */
