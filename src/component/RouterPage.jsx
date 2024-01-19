@@ -46,7 +46,9 @@ import PlantRecipeUpdate from './plant/PlantRecipeUpdate';
 import MagazineUpdate from './magazine/MagazineUpdate';
 import StoreBuyNow from './store/StoreBuyNow';
 import HomePage from './HomePage';
-import PlantStartPage from './plant/plantee_i/PlantStartPage';
+import MainBannerPage from './MainBannerPage';
+import AdminPage from './users/AdminPage';
+
 
 
 const RouterPage = () => {
@@ -80,6 +82,7 @@ const RouterPage = () => {
             <Route path='/mypage/mypagecomment' element={<MyPageComment/>} />
 
             {/* 회원 */}
+            <Route path='/users/adminpage' element={<AdminPage />} />
             <Route path='/users/loginPage' element={<LoginPage />} />
             <Route path='/users/join' element={<Join />} />
             <Route path='/users/myPage' element={<MyPage />} />

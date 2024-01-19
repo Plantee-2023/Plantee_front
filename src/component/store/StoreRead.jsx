@@ -33,7 +33,7 @@ const StoreRead = () => {
     let [form, setForm] = useState({ store_id: store_id, uid: sessionStorage.getItem('uid') });
 
 
-    const [fmtTotalPrice , setFmtTotalPrice] = useState("");
+    const [fmtTotalPrice, setFmtTotalPrice] = useState("");
     const [qnt, setQnt] = useState(1);
 
     const getStore = async () => {
@@ -132,7 +132,7 @@ const StoreRead = () => {
 
     const onChangeQnt = (e) => {
         setQnt(Number(e.target.value));
-        setFmtTotalPrice((Number(price)*Number(e.target.value)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+        setFmtTotalPrice((Number(price) * Number(e.target.value)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
     }
 
     useEffect(() => { getStore(); }, [])
@@ -154,14 +154,14 @@ const StoreRead = () => {
                                         </Card.ImgOverlay>
                                     </>
                                     :
-                                    <img src="http://via.placeholder.com/200x200" />
+                                    <Card.Img variant="top" src={image} />
                                 }
                             </div>
                         </section>
 
                         <div className='store_info_layout'>
                             <section className='store_info_section'>
-
+                                <div className='detail_logo'>Plantee<img src='/image/carelevel_icon.png' /></div>
                                 <section className='store_title_section'>
                                     <div className='store_title'>
                                         <ul className='store_items'>
@@ -177,7 +177,7 @@ const StoreRead = () => {
                                         <h1 className='store_maintitle'>{title}</h1>
                                     </div>
                                 </section>
-                                
+
                                 <section className='store_simpleinfo_section'>
                                     <Row className='plant_items'>
                                         <Col className='store_subtitle ms-2'>{fmtprice}원</Col>
@@ -187,7 +187,7 @@ const StoreRead = () => {
                                                 {like_cnt === 0 ?
                                                     <FaRegHeart onClick={onClickHeart} />
                                                     :
-                                                    <FaHeart  color="#ff0000" onClick={onClickHeartDelete} />
+                                                    <FaHeart color="#ff0000" onClick={onClickHeartDelete} />
                                                 }
                                                 <small>{like_cnt}</small>
                                             </span>
@@ -217,7 +217,7 @@ const StoreRead = () => {
                                     <Alert style={{ background: "#adadad2b", border: 'none' }}>
                                         <div className='details_subtitle pb-3'>수량선택</div>
                                         <Row>
-                                            <Col><input type='number' defaultValue={1} onChange={onChangeQnt}/></Col>
+                                            <Col><input type='number' defaultValue={1} onChange={onChangeQnt} /></Col>
                                             <Col className='text-end me-2'>총 {fmtTotalPrice}원</Col>
                                         </Row>
                                     </Alert>
@@ -250,7 +250,9 @@ const StoreRead = () => {
                         fill >
                         {/* 여기서 보내는 props는 판매글쓴이에 대한 정보 */}
                         <Tab eventKey="info" title="상세정보">
-                            {Parser(contents)}
+                            <div className='text-center'>
+                                {Parser(contents)}
+                            </div>
                         </Tab>
                         <Tab eventKey="review" title="상품리뷰">
                             <StoreReviewList uid={uid} />

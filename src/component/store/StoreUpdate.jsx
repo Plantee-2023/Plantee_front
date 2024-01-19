@@ -33,14 +33,13 @@ const StoreUpdate = ({ match, history }) => {
         setForm({
             ...form,
             [e.target.name]: e.target.value,
-            contents: e
         });
     }
 
     const onChangeContents = (e) => {
         setForm({
             ...form,
-            
+            contents: e
         });
     }
 
@@ -122,7 +121,6 @@ const StoreUpdate = ({ match, history }) => {
             <div className='store_wrap'>
                 <div className='store_contents'>
                     <div className='store_layout'>
-
                         <section className='store_img_section'>
                         <form className='store_img' onSubmit={onSubmit}>
                             <img src={attachment || image} style={{cursor:'pointer'}} value={image} onClick={() => img_ref.current.click()}/>
@@ -173,8 +171,8 @@ const StoreUpdate = ({ match, history }) => {
 
                                     <div className='plantinsert_section'>
                                         <div className='plantinsert_btngroup'>
-                                            <button className='insert_submit' type='submit'>등록하기</button>
-                                            <button className='insert_cancel' onClick={onClickCancel}>취소하기</button>
+                                            <button className='insert_submit' type='submit'>수정</button>
+                                            <button className='insert_cancel' onClick={onClickCancel}>취소</button>
                                         </div>
                                     </div>
                                 </form>
