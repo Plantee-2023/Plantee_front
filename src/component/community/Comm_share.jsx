@@ -19,7 +19,7 @@ function clip(){
   return (
     < span> 
 
-        <button
+        <button className='comm_btn'
         onClick={()=>clip()}>URL 복사</button>
 
     </ span>

@@ -43,6 +43,10 @@ const PlantDictionary = () => {
   if (loading) return <div className='text-center my-5'><Spinner animation="border" variant="success" /></div>
 
   return (
+    <>
+    <div>
+        <img src="/image/plante_11.png" width={1900}/>
+        </div>
     <div className='plant_wrap'>
       <div className='plant_contents'>
         <div className='first_filter_section'>
@@ -104,6 +108,7 @@ const PlantDictionary = () => {
         <BtnToTop/>
       </div>
     </div>
+    </>
   )
 }
 
