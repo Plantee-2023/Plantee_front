@@ -27,7 +27,8 @@
 .menu-card3 { margin-right: 13px;  margin-bottom: 10px; border: none; background-color: #abe449 !important; padding: 3px;width: 60px; height: 60px !important;}
 .menu-card4 { margin-right: 13px;  margin-bottom: 10px; border: none; background-color:	#3CB371 !important; padding: 3px;width: 60px; height: 60px !important;}
 .menu-card-icon{margin: 0 auto; display: block; margin-top: 10px; width: 30px; height: 30px; color: #ffffff;} 
-.menu-card-card {margin-top: 10px;}
+.menu-card-card {margin-top: 10px; box-shadow: 0 0.2rem 1.4rem 0 rgba(0,0,0,.078);}
+.menu-shadow{box-shadow: 0 0.2rem 1.4rem 0 rgba(0,0,0,.078);}
 .menu-margin{padding: 0px !important;}
 ul,li {list-style: none; padding: 0px;}
 .menu-btn { background-color: #4cc67c !important; border: none !important; color: #ffffff !important; font-weight: 600; margin-left: 78%;}

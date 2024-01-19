@@ -56,9 +56,15 @@ const UserUpdate = () => {
                 const res = await axios.post('/users/update', user);
                 //console.log(res)
                 if (res.data === 0) {
-                    alert("수정 실패!");
+                    setBox({
+                        show:true,
+                        message : "수정 실패!"
+                    })
                 } else {
-                    alert("수정 완료");
+                    setBox({
+                        show:true,
+                        message : "수정 완료"
+                    })
                     //navi('/');
                     console.log(users)
                     console.log(user)
@@ -89,9 +95,8 @@ const UserUpdate = () => {
                 <h1 className='all-title'>정보 수정</h1>
                 <div className='update_img'>
                     <img src='http://via.placeholder.com/150x150' onClick={() => img_ref.current.click()} style={{ cursor: 'pointer' }} width={300} height={300} />
-                    <input type='file' ref={img_ref} style={{ display: 'none' }} />
+                    <input onChange={onFileChange} type='file' ref={img_ref} style={{ display: 'none' }} />
                     <br />
-                    <Button className='update-img-btn'>이미지 수정</Button>
                 </div>
                 <InputGroup className='update-input'>
                     <InputGroup.Text className='update-text'>닉네임</InputGroup.Text>

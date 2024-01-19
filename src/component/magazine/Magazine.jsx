@@ -28,7 +28,10 @@ const Magazine = () => {
             setPost(res.data);
             setLoading(false);
         } catch (error) {
-            alert(error.message);
+            setBox({
+                show: true,
+                message: `${error.message}`
+            });
         }
     }
 

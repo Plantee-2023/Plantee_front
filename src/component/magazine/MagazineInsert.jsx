@@ -1,9 +1,9 @@
 import axios from 'axios'
-import React, { useRef, useState, useContext, useEffect } from 'react'
+import React, { useRef, useState, useContext } from 'react'
 import { Button, Card, Form, Spinner } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
 import { BoxContext } from '../common/BoxContext'
-import { ref, getDownloadURL, uploadBytes, getStorage, uploadString } from "firebase/storage";
+import { ref, getDownloadURL, getStorage, uploadString } from "firebase/storage";
 import { v4 as uuidv4 } from 'uuid'; //랜덤 식별자를 생성해주는 라이브러리
 
 

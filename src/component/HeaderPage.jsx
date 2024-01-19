@@ -75,7 +75,7 @@ const HeaderPage = () => {
 				<div id='menu_wrap' className={isNavbarFixed ? 'fixed_navbar' : ''}>
 					<div className={`menu_contents ${isNavbarFixed ? 'scrolling' : ''}`}>
 						<div className='menu_header'>
-							<div className='menu_left'>F
+							<div className='menu_left'>
 								<div className='menu_left_img'>
 									<h1 className='menu_logo'>
 										<a href='/'><img src='/image/logo.png' /></a>
@@ -120,7 +120,7 @@ const HeaderPage = () => {
 																		<NavLink to={`/users/mypage`} style={{ backgroundColor: '#07955C', border: 'none', color: '#ffffff' }} className='btn btn-sm'>내정보</NavLink>
 																	</Col>
 																</Row>
-																<Card>
+																<Card className='menu-shadow'>
 																	<Row style={{ display: 'flex' }}>
 																		<Col className='text-center'>
 																			<div className='mt-2'>나의 활동 등급</div>
@@ -142,24 +142,29 @@ const HeaderPage = () => {
 																<Card className='menu-card-card'>
 																	<ul className='menu-margin'>
 																		<li>
-																			<Card className='menu-card1'><a href='/diary/calendar'>
-																				<img className='mypage_calander' src='/image/mypage_calendar_icon.png' /></a></Card>
-																			<div className='menu-toast-text1'>캘린더</div>
+																			<a href='/diary/calendar'><Card className='menu-card1'>
+																				<img className='mypage_calander' src='/image/mypage_calendar_icon.png' /></Card>
+																				<div className='menu-toast-text1'>캘린더</div>
+																			</a>
 																		</li>
 																		<li>
-																			<Card className='menu-card2'><a href='/users/mypage/productcart'>
-																				<PiCookingPot className='menu-card-icon' /></a></Card>
-																			<div className='menu-toast-text'>장바구니</div>
+																			<a href='/users/mypage/productcart'><Card className='menu-card2'>
+																				<PiCookingPot className='menu-card-icon' /></Card>
+																				<div className='menu-toast-text'>장바구니</div>
+																			</a>
+
 																		</li>
 																		<li>
-																			<Card className='menu-card3'><a href='/users/mypage/productpurchase'>
-																				<TfiWrite className='menu-card-icon' /></a></Card>
-																			<div className='menu-toast-text'>구매내역</div>
+																			<a href='/users/mypage/productpurchase'><Card className='menu-card3'>
+																				<TfiWrite className='menu-card-icon' /></Card>
+																				<div className='menu-toast-text'>구매내역</div>
+																			</a>
 																		</li>
 																		<li>
-																			<Card className='menu-card4'><a href='/mypage/mypagefavorite'>
-																				<MdFavoriteBorder className='menu-card-icon' /></a></Card>
-																			<div className='menu-toast-text'>나의활동</div>
+																			<a href='/mypage/mypagefavorite'><Card className='menu-card4'>
+																				<MdFavoriteBorder className='menu-card-icon' /></Card>
+																				<div className='menu-toast-text'>나의활동</div>
+																			</a>
 																		</li>
 																	</ul>
 																</Card>
@@ -177,7 +182,7 @@ const HeaderPage = () => {
 					</div>
 				</div>
 			</div>
-		</div>
+		</div >
 	)
 }
 

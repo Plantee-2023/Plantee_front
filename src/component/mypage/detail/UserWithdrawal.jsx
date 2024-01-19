@@ -1,7 +1,6 @@
 import axios from 'axios';
 import React, { useContext, useEffect, useState } from 'react'
 import { Button, Card, Spinner } from 'react-bootstrap'
-import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { BoxContext } from '../../common/BoxContext';
 
@@ -28,10 +27,18 @@ const UserWithdrawal = () => {
       action: async () => {
         const res = await axios.post(`/users/delete/${user_id}`);
         if (res.data === 0) {
-          alert("삭제 실패");
+          setBox({
+            show: true,
+            message: "회원 탈퇴를 실패하였습니다."
+          });
         } else {
-          alert("회원 탈퇴가 되었습니다.");
-          sessionStorage.clear();
+          setBox({
+            show: true,
+            message: "회원 탈퇴에 성공 하였습니다.",
+            action: () => {
+              sessionStorage.clear();
+            }
+          })
           navi("/");
         }
       }

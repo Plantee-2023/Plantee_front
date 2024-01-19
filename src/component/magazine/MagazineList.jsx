@@ -1,13 +1,12 @@
 import React, { useEffect, useContext } from 'react'
 import axios from 'axios';
-import { Col, Form, InputGroup, Row, Button, Table, Spinner, Card } from 'react-bootstrap'
+import { Col, Form, InputGroup, Row, Button, Container, Spinner, Card } from 'react-bootstrap'
 import { NavLink, useLocation, useNavigate } from 'react-router-dom'
 import { AiOutlineEdit } from "react-icons/ai";
 import { useState } from 'react';
-import Pagination from 'react-js-pagination';
-import "../common/Pagination.css"
 import './Magazine.css'
 import { BoxContext } from '../common/BoxContext'
+
 
 const MagazineList = () => {
     const [searchTerm, setSearchTerm] = useState('');
@@ -67,33 +66,26 @@ const MagazineList = () => {
                     <Col>
                         {sessionStorage.getItem('uid') === "admin" &&
                             <Button className="magazine-write-btn">
-                                <NavLink className="magazine-insert" to="/magazine/magazineinsert" style={{color:'#ffffff'}}><AiOutlineEdit />글쓰기</NavLink>
+                                <NavLink className="magazine-insert" to="/magazine/magazineinsert" style={{ color: '#ffffff' }}><AiOutlineEdit />글쓰기</NavLink>
                             </Button>
                         }
                     </Col>
                 </Row>
-                <Table className='list' bordered hover>
-                    <thead className='text-center'>
-                        <tr>
-                            <th>번호</th>
-                            <th>제목</th>
-                            <th>작성자</th>
-                            <th>등록일</th>
-                            <th>조회수</th>
-                        </tr>
-                    </thead>
-                    <tbody>
+                <Row sm={1} md={2} lg={3} className='magazine-grid'>
                         {filteredList.map(m =>
-                            <tr key={m.magazine_num}>
-                                <td style={{width:50}} className='text-center'>{m.magazine_num}</td>
-                                <td><NavLink style={{ color: '#000000' }} to={`/magazine/read/${m.magazine_num}`}>{m.title}</NavLink></td>
-                                <td style={{ width: '100px' }} className='text-center'>{m.nickname}</td>
-                                <td style={{ width: '300px' }} className='text-center'>{m.red_date}</td>
-                                <td style={{ width: '100px' }} className='text-center'>{m.view_cnt}회</td>
-                            </tr>
+                            <Col key={m.magazine_num} >
+                                <Card style={{ border: 'none' }}>
+                                    <NavLink to={`/magazine/read/${m.magazine_num}`} style={{ color: "black",textDecoration:'none' }}>
+                                        <Card.Img width={220} height={220} src={m.image || 'http://via.placeholder.com/10x10'} />
+                                        <Card.Body>
+                                            <Card.Title className='text-center'>{m.title}</Card.Title>
+                                            <Card.Text className='ellipsis'>{m.contents}<br /></Card.Text>
+                                        </Card.Body>
+                                    </NavLink>
+                                </Card>
+                            </Col>
                         )}
-                    </tbody>
-                </Table>
+                    </Row>
             </div>
         </div>
     )

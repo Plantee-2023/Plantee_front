@@ -3,7 +3,7 @@ import axios from 'axios'
 import { useParams, useNavigate } from 'react-router-dom'
 import { BoxContext } from '../common/BoxContext';
 import { Spinner, Card, Form, Button } from 'react-bootstrap'
-import { ref, getDownloadURL, uploadBytes, getStorage, uploadString } from "firebase/storage";
+import { ref, getDownloadURL, getStorage, uploadString } from "firebase/storage";
 import { v4 as uuidv4 } from 'uuid'; //랜덤 식별자를 생성해주는 라이브러리
 
 
@@ -40,9 +40,9 @@ const MagazineUpdate = () => {
         });
     }
 
-    const onFileChange = (evt) => {
+    const onFileChange = (e) => {
         // 업로드 된 file
-        const files = evt.target.files;
+        const files = e.target.files;
         const theFile = files[0];
 
         // FileReader 생성
