@@ -11,7 +11,7 @@ const Comm_plant = ({form,setForm}) => {
   const [query, setQuery] = useState("");
   const [page, setPage] = useState(1);
   const [cnt, setCnt] = useState(0);
-  const {title, image, plant_id, store_id, plant_link}=form
+  const {plant_title, image, plant_id, store_id, plant_link}=form
   const size=10;
 
   const getList = async() => {
@@ -26,8 +26,7 @@ const Comm_plant = ({form,setForm}) => {
         console.log("굿즈",goods);
     
     
-  //  let data=res.data.list.map(s=>s && {...s, title:stripHtmlTags(s.title)});
-   //  data=data.map(item=>item && {...item, checked:false});
+ 
    setList(res.data.list)
     console.log("plant",res);
     

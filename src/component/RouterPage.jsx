@@ -47,10 +47,11 @@ import PlantRecipeUpdate from './plant/PlantRecipeUpdate';
 import MagazineUpdate from './magazine/MagazineUpdate';
 import StoreBuyNow from './store/StoreBuyNow';
 import HomePage from './HomePage';
-import MainBannerPage from './MainBannerPage';
 import Market_update from './community/market/Market_update';
 import AdminPage from './users/AdminPage';
-import PlantStartPage from './plant/plantee_i/PlantStartPage'
+import PlantStartPage from './plant/plantee_i/PlantStartPage';
+ 
+import Comm_insertReply from './community/comm/Comm_insertReply';
 
 const RouterPage = () => {
     return (
@@ -104,12 +105,15 @@ const RouterPage = () => {
             <Route path="/comm/write" element={<Comm_write />} />
             <Route path="/comm/read/:post_id" element={<Comm_Read />} />
             <Route path="/comm/update/:post_id" element={<Comm_Update/>} />
+            <Route path="/comm/reply/:post_id" element={<Comm_insertReply/>} />
+            
 
             {/* 나눔 */}
             <Route path="/comm/market" element={<Market_list/>} />
             <Route path="/comm/market/write" element={<Market_write />} />
             <Route path="/comm/market/read/:post_id" element={<Market_read />} />
-            <Route path="/comm/market/:post_id" element={<Market_update/>} />
+            <Route path="/comm/market/update/:post_id" element={<Market_update/>} />
+
 
             {/* 스토어 */}
             <Route path='/store' element={<StoreMain />} />

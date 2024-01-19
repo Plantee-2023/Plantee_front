@@ -22,7 +22,7 @@ const Comm_Read = () => {
     const [rtotal, setRtotal] = useState(0);
     const [mylikes, setMylikes] = useState(0);
     const [myvote, setMyVote] = useState('');
-    const { title, red_date, contents, address, nickname, uid, post_origin, plant_id, store_id, plant_title, image, plant_link } = post;
+    const { title, red_date, contents, address, nickname, user_photo, uid, post_origin, plant_id, store_id, plant_title, image, plant_link } = post;
     const { myvote_cnt, myvote_option } = myvote;
     const { vote_title, res, res2, res3, result1, result2, result3 } = vote;
 
@@ -31,11 +31,12 @@ const Comm_Read = () => {
     const getPost = async () => {
         setShow(false);
         const res = await axios(`/comm/info/${post_id}?uid=${sessionStorage.getItem("uid")}`)
+        setPost(res.data.read);
         console.log("length", res.data.show_vote.length)
 
 
         console.log(res);
-        setPost(res.data.read);
+       
 
 
         setMylikes(res.data.mylikes);
@@ -135,7 +136,7 @@ const Comm_Read = () => {
 
 
     const onClickReply = (post_id) => {
-        window.location.href = `/comm/write/${post_id}`;
+        window.location.href = `/comm/reply/${post_id}`;
 
 
     }
@@ -178,9 +179,9 @@ const Comm_Read = () => {
                         <div className='comm'> 커뮤니티 ＞ 식물자랑   </div>
                         <h4 className="text-center" style={{ "font-weight": "bold" }}>[{address}] {title} </h4>
                         <Row>
-                            <Col lg={3} xs={5} md={4} className='align-self-center'>
+                            <Col lg={2} xs={6} md={1} className='align-self-center'>
                                 <div className='mt-1'>
-                                    <Image src="http://via.placeholder.com/171x180" roundedCircle />
+                                    <Image src={user_photo} roundedCircle width="70%" />
 
 
                                 </div>
@@ -205,19 +206,19 @@ const Comm_Read = () => {
 
                             </Col>
                         </Row>
-                        <Row>
-                            <Col>
+                        <Row className='justify-content-center' >
+                             
                                 <hr />
 
-
-                                <div className='text-center' >
+<Row className='justify-content-center'>
+                                <div className='justify-content-center' >
                                     {
                                         show === true &&
                                         <>
-
+                                        {myvote.cnt<=0&&
                                             <>
 
-                                                <Col xs={6} md={4} lg={4}  >
+                                                <Col className='justify-content-center'    >
                                                     <Card className='mb-2' style={{ padding: "10px" }}  >
                                                         <Card style={{ padding: "10px" }} className='mb-2'  >
 
@@ -240,6 +241,7 @@ const Comm_Read = () => {
 
                                                 </Col>
                                             </>
+                                            }
                                             {myvote &&
                                                 <>
                                                     <Col xs={6} md={4} lg={4}  >
@@ -270,15 +272,18 @@ const Comm_Read = () => {
                                                 </>
                                             }
                                         </>
+                                        
                                     }
+                                  
                                 </div>
+                                </Row>
                                 <div className='text-center' dangerouslySetInnerHTML={{ __html: contents }}>
 
 
                                 </div>
                                 <br />
 
-                            </Col>
+                             
                         </Row>
 
                         <div className='mx-auto' width="100%" style={{ padding: "3px", width: '5%', borderStyle: "solid", borderWidth: '3px' }}>
@@ -290,7 +295,8 @@ const Comm_Read = () => {
                     </Card>
                     <Row>
                         <Col lg={15}>
-
+{plant_id &&
+<>
                             <h3 className='mt-2'>연관식물</h3>
 
                             <Card style={{ padding: "20px" }} className='mt-2'>
@@ -314,6 +320,8 @@ const Comm_Read = () => {
 
                                 </Col>
                             </Card>
+                            </>
+}
                         </Col>
                     </Row>
                     <div className='text-end mt-2'>
