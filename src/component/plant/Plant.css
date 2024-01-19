@@ -210,3 +210,14 @@ input:focus {outline:none;}
 
 .plantrecipe_comment_comment {display: flex; justify-content: space-between; margin-top: 1rem; margin-bottom: 2rem;}
 .plantrecipe_comment_comment button {width: 80px; margin-left: 10px; border: none; border-radius: 5px; background-color: #07955C; color: #fff;}
+
+/* TestPage */
+.test_wrap {width: 100%; margin: 0 auto;}
+.test_content {width: 82%; margin: 0 auto;}
+.test_textarea {width: 50%; margin: 0 auto;}
+.test_maintitle {text-align: center; font-size: 35px; font-weight: 700; padding: 2rem 0; margin-top: 3rem;}
+.test_subtext {text-align: center; margin: 0; padding-bottom: 5px;}
+.test_btnarea {width: 50%; margin: 0 auto; display: flex; justify-content: center; padding: 1rem 0; margin-top: 50px;}
+.test_startbtn {width: 150px; height: 60px; border: none; text-align: center; background-color: #07955C; color: #fff; font-weight: 800; border-radius: 10px;}
+
+.test_decoimg {width: 200px; display: flex; margin: 0 auto; padding-top: 5rem; padding-right: 10px;}

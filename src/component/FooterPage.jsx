@@ -1,6 +1,7 @@
 import React from 'react'
 
 const FooterPage = () => {
+  if (window.location.pathname === '/plant/test') return null;
   return (
     <div className='footerpage_wrap'>
       <hr />
