@@ -87,11 +87,11 @@ const HeaderPage = () => {
                           <Toast.Body>
                             <Card className='menu-card-card'>
                               <div className="menu-card-text">마이페이지</div>
-                              <ul>
+                              <ul className='menu-margin'>
                                 <li>
                                   <Card className='menu-card1'><a href='/diary/calendar'>
                                     <img className='mypage_calander' src='/image/mypage_calendar_icon.png'/></a></Card>
-                                  <div className='menu-toast-text'>캘린더</div>
+                                  <div className='menu-toast-text1'>캘린더</div>
                                 </li>
                                 <li>
                                   <Card className='menu-card2'><a href='/plant/recipe'>

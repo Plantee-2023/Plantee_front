@@ -22,7 +22,8 @@
 .menu-card2 { margin-right: 16px;  margin-bottom: 10px; border: none; background-color: #1E90FF !important; padding: 3px;}
 .menu-card3 { margin-right: 16px;  margin-bottom: 10px; border: none; background-color: #90EE90 !important; padding: 3px;}
 .menu-card4 { margin-right: 16px;  margin-bottom: 10px; border: none; background-color: #CD5C5C !important; padding: 3px;}
-.menu-card-card { margin-top: 10px;}
+.menu-card-card {margin-top: 10px;}
+.menu-margin{padding: 0px !important;}
 ul,li {list-style: none; padding: 0px;}
 .menu-toast-icon { font-size: 50px;}
 .menu-btn { background-color: #4cc67c !important; border: none !important; color: #ffffff !important; font-weight: 600; margin-left: 78%;}
