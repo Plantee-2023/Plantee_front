@@ -109,7 +109,7 @@ const HeaderPage = () => {
 										:
 										<>
 											<li>
-												<div onClick={toggleShowA} style={{ cursor: 'pointer' }} >{sessionStorage.getItem("uid")}님
+												<div onClick={toggleShowA} style={{ cursor: 'pointer' }} >마이페이지
 													<ToastContainer position={'top-end'} className='menu-toast'>
 														<Toast show={showA}>
 															<CloseButton className='menu-close-btn' />
@@ -131,7 +131,6 @@ const HeaderPage = () => {
 																			<div>
 																				<Row >
 																					<Col>now</Col>
-																					<Col><div className='text-center'>Exp</div></Col>
 																					<Col className='text-end me-3'>next</Col>
 																				</Row>
 																				<ProgressBar variant='success' className='me-3' now={35} />

@@ -85,7 +85,7 @@ const MagazineUpdate = () => {
                     } else {
                         setBox({
                             show : true,
-                            message : "수정이 완료되었습니다."
+                            message : "수정에 성공하였습니다."
                         })
                         navi(`/magazine/read/${magazine_num}`);
                     }
@@ -102,8 +102,8 @@ const MagazineUpdate = () => {
 
     if (loading) return <div className='text-center my-5'><Spinner animation="border" variant="success" /></div>
     return (
-        <div id="main_wrap">
-            <div className="main_contents">
+        <div id="plant_wrap">
+            <div className="plant_contents">
                 <form onSubmit={onSubmit} className='insert-img'>
                     <h1 className='text-center mt-3 mb-3'>[{magazine_num}] 정보수정</h1>
                     <Card className='insert-card'>

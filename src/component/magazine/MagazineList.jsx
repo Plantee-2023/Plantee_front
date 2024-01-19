@@ -1,11 +1,11 @@
 import React, { useEffect, useContext } from 'react'
 import axios from 'axios';
-import { Col, Form, InputGroup, Row, Button, Container, Spinner, Card } from 'react-bootstrap'
+import { Col, InputGroup, Row, Button, Spinner, Card } from 'react-bootstrap'
 import { NavLink, useLocation, useNavigate } from 'react-router-dom'
 import { AiOutlineEdit } from "react-icons/ai";
 import { useState } from 'react';
-import './Magazine.css'
 import { BoxContext } from '../common/BoxContext'
+import './Magazine.css'
 
 
 const MagazineList = () => {
@@ -53,11 +53,11 @@ const MagazineList = () => {
     return (
         <div className='plant_wrap'>
             <div className='plant_contents'>
-                <h3 className='magazine-list-title'>매거진</h3>
+                <div style={{ textAlign: 'center', marginBottom: '70px', marginTop: "70px", fontSize: '4rem' }}>매거진</div>
                 <Row>
                     <Col>
                         <form onSubmit={onSubmit}>
-                            <InputGroup className='search'>
+                            <InputGroup style={{ marginBottom: '70px' }}>
                                 <input type='search' className='search_input_textinput' placeholder='검색어를 입력해주세요.' value={searchTerm} onChange={handleSearchChange} />
                                 <button className='search_input_searchbtn' type='submit'><img src='/image/search_icon.png' /></button>
                             </InputGroup>
@@ -65,27 +65,27 @@ const MagazineList = () => {
                     </Col>
                     <Col>
                         {sessionStorage.getItem('uid') === "admin" &&
-                            <Button className="magazine-write-btn">
-                                <NavLink className="magazine-insert" to="/magazine/magazineinsert" style={{ color: '#ffffff' }}><AiOutlineEdit />글쓰기</NavLink>
+                            <Button style={{ backgroundColor: '#07955C', border: 'none', fontWeight: '600', marginLeft: '89%' }}>
+                                <NavLink className="magazine-insert" to="/magazine/magazineinsert" style={{ color: '#ffffff', textDecoration: 'none' }}><AiOutlineEdit />글쓰기</NavLink>
                             </Button>
                         }
                     </Col>
                 </Row>
                 <Row sm={1} md={2} lg={3} className='magazine-grid'>
-                        {filteredList.map(m =>
-                            <Col key={m.magazine_num} >
-                                <Card style={{ border: 'none' }}>
-                                    <NavLink to={`/magazine/read/${m.magazine_num}`} style={{ color: "black",textDecoration:'none' }}>
-                                        <Card.Img width={220} height={220} src={m.image || 'http://via.placeholder.com/10x10'} />
-                                        <Card.Body>
-                                            <Card.Title className='text-center'>{m.title}</Card.Title>
-                                            <Card.Text className='ellipsis'>{m.contents}<br /></Card.Text>
-                                        </Card.Body>
-                                    </NavLink>
-                                </Card>
-                            </Col>
-                        )}
-                    </Row>
+                    {filteredList.map(m =>
+                        <Col key={m.magazine_num} >
+                            <Card style={{ border: 'none' }}>
+                                <NavLink to={`/magazine/read/${m.magazine_num}`} style={{ color: "black", textDecoration: 'none' }}>
+                                    <Card.Img width={300} height={300} src={m.image || 'http://via.placeholder.com/10x10'} />
+                                    <Card.Body>
+                                        <Card.Title className='text-center'>{m.title}</Card.Title>
+                                        <Card.Text className='ellipsis'>{m.contents}<br /></Card.Text>
+                                    </Card.Body>
+                                </NavLink>
+                            </Card>
+                        </Col>
+                    )}
+                </Row>
             </div>
         </div>
     )

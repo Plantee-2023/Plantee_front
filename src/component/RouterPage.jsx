@@ -29,7 +29,7 @@ import Comm_list from './community/comm/Comm_list';
 import Market_write from './community/market/Market_write';
 import Market_list from './community/market/Market_list';
 import Market_read from './community/market/Market_read';
-import Comm_Update from './community/comm/Comm_Update';
+import Comm_Update from './community/comm/Comm_update';
 import DiaryMain from './diary/DiaryMain';
 import DiaryInsert from './diary/DiaryInsert';
 import DiaryUpdate from './diary/DiaryUpdate';
@@ -50,6 +50,7 @@ import HomePage from './HomePage';
 import MainBannerPage from './MainBannerPage';
 import Market_update from './community/market/Market_update';
 import AdminPage from './users/AdminPage';
+import PlantStartPage from './plant/plantee_i/PlantStartPage'
 
 const RouterPage = () => {
     return (
