@@ -6,7 +6,7 @@ import axios from 'axios';
 import { ref, getDownloadURL, uploadBytes, getStorage, uploadString} from "firebase/storage";
 import { v4 as uuidv4 } from 'uuid'; //랜덤 식별자를 생성해주는 라이브러리
 
-const PlantRecipeInsert = () => {
+const PlantRecipeUpdate = () => {
   const { recipe_id } = useParams();
   const navi = useNavigate();
   const array = [0, 1, 2, 3, 4];
@@ -48,26 +48,27 @@ const PlantRecipeInsert = () => {
     reader.readAsDataURL(theFile);
   };
 
-
-  const onChange = (e) => {
-    setForm({
-      ...form,
-      [e.target.name]: e.target.value,
-    });
-  };
-
   const handleStarClick = (index) => {
-    let clickStates = [...clicked];
-    for (let i = 0; i < 5; i++) {
-      clickStates[i] = i <= index;
-    }
-    setClicked(clickStates);
-
-    // 난이도 업데이트
-    setForm({
-      ...form,
-      level: index + 1,
+    setClicked((prevClicked) => {
+      let clickStates = [...prevClicked];
+      for (let i = 0; i < 5; i++) {
+        clickStates[i] = i <= index;
+      }
+      return clickStates;
     });
+  
+    // 난이도 업데이트
+    setForm((prevForm) => ({
+      ...prevForm,
+      level: index + 1,
+    }));
+  };
+  
+  const onChange = (e) => {
+    setForm((prevForm) => ({
+      ...prevForm,
+      [e.target.name]: e.target.value,
+    }));
   };
 
   const onSubmit = async(e) => {
@@ -116,7 +117,7 @@ const PlantRecipeInsert = () => {
           <div className='recipe_readcontents_grid'>
             <div className='recipe_image_section'>
               <form onSubmit={onSubmit}>
-                <img className='recipe_image' src={attachment} style={{cursor:'pointer'}} value={image} onClick={() => img_ref.current.click()}/>
+                <img className='recipe_image' src={attachment || image} style={{cursor:'pointer'}} value={image} onClick={() => img_ref.current.click()}/>
                 <input accept="image/*" type="file" onChange={onFileChange} style={{display:'none'}} ref={img_ref}/>
               </form>
             </div>
@@ -130,6 +131,7 @@ const PlantRecipeInsert = () => {
                     </InputGroup>
                   </div>
                 </div>
+
                 <div className='recipe_insert_level'>
                   <div className='recipe_insert_leveltext_area'>
                     <p className='recipe_insert_level_text'>난이도</p>
@@ -145,6 +147,7 @@ const PlantRecipeInsert = () => {
                     ))}
                   </div>
                 </div>
+
                 <div className='recipe_insert_description'>
                   <InputGroup>
                     <Form.Control
@@ -177,4 +180,4 @@ const PlantRecipeInsert = () => {
   );
 };
 
-export default PlantRecipeInsert;
+export default PlantRecipeUpdate;

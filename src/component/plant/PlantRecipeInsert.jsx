@@ -103,7 +103,7 @@ const PlantRecipeInsert = ({recipe_id}) => {
           <div className='recipe_readcontents_grid'>
             <div className='recipe_image_section'>
               <form onSubmit={onSubmit}>
-                <img className='recipe_image' src={attachment} style={{cursor:'pointer'}} value={image} onClick={() => img_ref.current.click()}/>
+                <img className='recipe_image' src={attachment || "http://via.placeholder.com/500x600"} style={{cursor:'pointer'}} value={image} onClick={() => img_ref.current.click()}/>
                 <input accept="image/*" type="file" onChange={onFileChange} style={{display:'none'}} ref={img_ref}/>
               </form>
             </div>
