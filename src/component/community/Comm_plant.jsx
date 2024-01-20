@@ -2,25 +2,31 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { Row, Table, Form, Col, Card, Button, FormControl, InputGroup } from 'react-bootstrap'
 
-const Comm_plant = () => {
+const Comm_plant = ({form,setForm}) => {
 
-
+  const [Total,setTotal]=useState(0);
+  const [goods, setGoods]=useState([]);
   const [loading, setLoading] = useState(false);
   const [list, setList] = useState([]);
   const [query, setQuery] = useState("");
   const [page, setPage] = useState(1);
   const [cnt, setCnt] = useState(0);
-
+  const {plant_title, image, plant_id, store_id, plant_link}=form
   const size=10;
 
   const getList = async() => {
     const encodedQuery = encodeURIComponent(query);
     const url = `/comm/search_list.json?page=${page}&size=${size}&query=${encodedQuery}`  ;
     const res=await axios.get(url) ;
+
+    const str_res = await axios.get(`/store/list.json?page=${page}&size=20&query=${query}`);
+    let data=str_res.data.list.map(item=>item &&{...item, checked:true})
+        setGoods(str_res.data.list);
+        setTotal(str_res.data.total);
+        console.log("굿즈",goods);
     
     
-  //  let data=res.data.list.map(s=>s && {...s, title:stripHtmlTags(s.title)});
-   //  data=data.map(item=>item && {...item, checked:false});
+ 
    setList(res.data.list)
     console.log("plant",res);
     
@@ -32,17 +38,34 @@ useEffect(() => {
 }, []);
 
 
-const onSubmit=()=>{
-  //검색 
+const onSubmit = (e) => {
+
+  e.preventDefault();
+  if (query === "") {
+    alert("검색어를 입력하세요!");
+  } else {
+    getList();
+  }
 }
 
 
-const onChangeSingle=()=>{
+
+const onClickPlant=()=>{
   //검색 
 }
 
-const onCheckedSave=()=>{
-  //검색 
+const onCheckedSave=(plant_id,image, title, store_id)=>{
+  
+  setForm({
+    ...form,
+    plant_id:plant_id,
+    image:image,
+    plant_title:title,
+    plant_link:`/store/read/${store_id}`,
+    store_id:store_id
+  })
+  console.log("폼폼",form)
+  
 }
 
 const onChangeAll=()=>{
@@ -81,7 +104,7 @@ const onSave =()=>{
 
 
 <div className='my-5'>
-  <hr/>
+
             <h1 className='text-center mb-5'>연관 식물 검색</h1>
             <Row className='mb-2'>
                 <Col md={4}>
@@ -93,23 +116,22 @@ const onSave =()=>{
                         </InputGroup>
                     </form>
                 </Col>
-                <Col className='text-end'>
-                    <Button onClick={onCheckedSave}>선택저장</Button>
-                </Col>
-            </Row>
+             
+            </Row>  <hr/>
             <Row className='mb-2'>
-            {list.map(s=>
+            {goods.map(g=>
       
-            <Col xs={6} md={4} lg={2} >
+            <Col xs={6} md={4} lg={2} key={g.plant_id} >
             
-        <Card>
+        <Card className='mb-2' style={{ width: "180px", height: "250px" }}>
 
-          <Card.Body>
+          <Card.Body style={{ height: "200px", overflow: "hidden" }} >
 
-            <img src="http://via.placeholder.com/170x250" width="100%" />
+            <img src={g.image} style={{width: "100%", height: "100%", objectFit: "cover"  }}   />
 
-          </Card.Body>
-          <Card.Footer className="text-end">{s.common_name}</Card.Footer>
+          </Card.Body  >
+          <Card.Footer  style={{ height: "50px" }} className="text-end"><input 
+          onClick={()=>onCheckedSave(g.plant_id,g.image, g.title, g.store_id)} className='text-start' type="checkbox"/>{g.store_id}{g.title}</Card.Footer>
 
         </Card>
  

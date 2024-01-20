@@ -8,6 +8,10 @@ import { Col, Card, FormControl, Form, InputGroup,  Pagination,  ProgressBar, Ro
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
  
+ 
+
+ 
+ 
 
 
 const Comm_editor = ({form,setForm}) => {
@@ -31,9 +35,12 @@ const Comm_editor = ({form,setForm}) => {
            
             
                  
-                    <CKEditor config={{ ckfinder: { uploadUrl: '/comm/ckupload'  } }}
+                    <CKEditor  editor={ClassicEditor}
+                    config={{ ckfinder: { uploadUrl: '/comm/ckupload'  }
+                   
+                 }}
 
-                    editor={ClassicEditor}
+                   
                     data={form.contents}
                     onChange={(event, editor) => { onChangeContent(editor.getData()); }} />
            

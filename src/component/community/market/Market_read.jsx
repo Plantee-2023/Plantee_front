@@ -7,8 +7,7 @@ import Comm_share from '../Comm_share'
 import { useParams, useNavigate } from 'react-router-dom'
 import { FaRegThumbsUp } from "react-icons/fa";
 import Chat_modal from './Chat_modal';
-import CandidateList from '../CandidateList';
-import Comm_vote from '../Comm_vote';
+ 
 import { TiHeart } from "react-icons/ti";
 
 
@@ -16,13 +15,22 @@ const Market_read = () => {
     const navi = useNavigate();
     const { post_id } = useParams();
     const [post, setPost] = useState('');
-    const { title, red_date, contents, address, nickname, uid, price } = post;
+    const [mylikes, setMylikes] = useState(0);
+    const {  red_date, title,  contents, address, nickname, uid, price,user_photo,address1 } = post;
+ 
 
 
     const getPost = async () => {
         const res = await axios(`/comm/info/${post_id}?uid=${sessionStorage.getItem("uid")}`);
-        console.log(res.data)
-        setPost(res.data);
+    
+        setMylikes(res.data.mylikes);
+        console.log(".........",res.data.read)
+        setPost(res.data.read);
+
+
+
+
+
     }
 
     useEffect(() => {
@@ -30,16 +38,16 @@ const Market_read = () => {
     }, []);
 
 
-    // HTML 태그를 제거하는 함수
-    const stripHtmlTags = (htmlString) => {
-        const doc = new DOMParser().parseFromString(htmlString, 'text/html');
-        return doc.body.textContent || "";
-    }
+    
+ 
 
     const handleGoBack = () => {
         navi(-1); // 이전 페이지로 이동
     };
 
+
+
+   
 
 
 
@@ -56,18 +64,23 @@ const Market_read = () => {
     }
 
     //좋아요 //
-    const onClickLike = async () => {
-        if (!sessionStorage.getItem("uid")) {
-            sessionStorage.setItem("target", `/comm/info/${post_id}`);
-            window.location.href = "/login";
-        } else {
-            //좋아요추가
-            await axios(`/comm/insert/favorites?post_id=${post_id}&uid=${sessionStorage.getItem("uid")}`);
-            alert("좋아요추가!");
-            getPost();
-        }
+ const onClickLike = async () => {
+    if (!sessionStorage.getItem("uid")) {
+        sessionStorage.setItem("target", `/comm/info/${post_id}`);
+        window.location.href = "/login";
+    }   if(mylikes>0){
+        alert("이미 좋아요 하셨습니다.");
     }
-
+       
+      else {
+        
+       
+        //좋아요추가
+        await axios(`/comm/insert/favorites?post_id=${post_id}&uid=${sessionStorage.getItem("uid")}`);
+        alert("좋아요추가!");
+        getPost();
+    }
+}
 
 
     const onClickDeleteLike = async () => {
@@ -75,6 +88,9 @@ const Market_read = () => {
         alert("좋아요삭제!");
         getPost();
     }
+
+
+
 
 
 
@@ -95,14 +111,14 @@ const Market_read = () => {
                     <Card className='p-5'>
 
                         <div style={{ padding: "100px" }}>
-                            <h4 className="text-center" style={{ "font-weight": "bold" }}>[{address}] {title} </h4>
+                            <h4 className="text-center" style={{ "font-weight": "bold" }}>[{address1}] {title} </h4>
 
 
                             <Row>
 
                                 <Col lg={3} xs={5} md={4} className='align-self-center'>
                                     <div className='mt-1'>
-                                        <Image src="http://via.placeholder.com/171x180" roundedCircle />
+                                        <Image src={user_photo} roundedCircle width="80%" />
 
 
                                     </div>
@@ -139,16 +155,17 @@ const Market_read = () => {
 
                                 </Col>
                             </Row>
-                            <Row>
-                                <Col>
-                                    <hr />
-                                    <div className='text-center'>
-                                        {stripHtmlTags(contents)}
-                                    </div>
-                                    <br />
-
-                                </Col>
-                            </Row>
+                           <Row>
+                            <Col>
+                            <hr/>
+                            <div className='text-center'dangerouslySetInnerHTML={{ __html:contents }}>
+                             
+ 
+                            </div>
+                            <br/>
+                           
+                            </Col>
+                        </Row>
 
                             <div className='mx-auto' width="100%" style={{ padding: "3px", width: '5%', borderStyle: "solid", borderWidth: '3px' }}>
                                 <div className='text-center'>
@@ -172,7 +189,7 @@ const Market_read = () => {
                         {sessionStorage.getItem("uid") === uid &&
                             <>
 
-                                <Button className='ms-2 me-2' vaiant='success'>수정</Button>
+                                <a vaiant='success' href={`/comm/market/update/${post_id}`} className='btn btn-success ms-2 me-2' >수정</a>
                                 <Button onClick={() => onDelete(post_id)} className='ms-2 me-2' vaiant='success'>삭제</Button>
                             </>
                         }
