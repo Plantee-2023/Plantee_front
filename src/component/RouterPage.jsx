@@ -46,8 +46,8 @@ import PlantRecipeUpdate from './plant/PlantRecipeUpdate';
 import MagazineUpdate from './magazine/MagazineUpdate';
 import StoreBuyNow from './store/StoreBuyNow';
 import HomePage from './HomePage';
-import MainBannerPage from './MainBannerPage';
 import AdminPage from './users/AdminPage';
+import PlantStartPage from './plant/plantee_i/PlantStartPage';
 
 
 

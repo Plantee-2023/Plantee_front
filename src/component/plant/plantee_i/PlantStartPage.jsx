@@ -8,9 +8,7 @@ const PlantStartPage = () => {
     {
       q: ['식물을 키워본 경험이 있나요?'],
       a: [{ type: 'care_level1', text: '아니요 처음이에요 ㅜㅠ' },
-      { type: 'care_level2', text: '가끔식 식물을 돌보아 본 적이 있어요.' },
-      { type: 'care_level3', text: '식물 친구들이 제 삶에 활기를 불어넣어 줘요! 🌿✨' }
-      ]
+      { type: 'care_level2', text: '식물 친구들이 제 삶에 활기를 불어넣어 줘요! 🌿✨' }]
     },
 
     {
@@ -21,27 +19,72 @@ const PlantStartPage = () => {
 
     {
       q: ['키우는 곳에 햇빛의 양은 어떤가요?'],
-      a: [{ type: 'sunlight1', text: '거의 빛이 없는 공간이에요. 🌑' },
-      { type: 'sunlight2', text: '약간의 햇빛이 드는 실내 공간이에요. ☁️' },
-      { type: 'sunlight3', text: '햇빛이 잘 들어오는 공간이에요. 🌞✨' }
-      ]
+      a: [{ type: 'sunlight1', text: '거의 빛이 없는 공간이에요. 🌑' },,
+      { type: 'sunlight2', text: '햇빛이 잘 들어오는 공간이에요. 🌞✨' }]
     },
 
     {
       q: ['어떤 종류의 식물을 키우고 싶은가요?'],
-      a: [{ type: 'type1', text: '아름다운 잎 모양이나 색깔을 감상하고 싶어요.' },
-      { type: 'type2', text: '예쁜 꽃이 피면 더 기쁠 것 같아요.' },
-      { type: 'type3', text: '열매를 수확하면서 다양한 맛을 느끼고 싶어요.' },
-      { type: 'type4', text: '작고 귀여운 다육식물을 키워보고 싶어요. 🌱💚' }
-      ]
+      a: [{ type: 'type1', text: '아름다운 잎 모양이나 꽃을 감상하고 싶어요.' },
+      { type: 'type2', text: '작고 귀여운 다육식물을 키워보고 싶어요. 🌱💚' }]
     },
 
-    {q: ['🌱 테스트가 완료되었습니다. 결과를 확인하시겠습니까? 🌱']}
+    {
+      q: ['🌱 테스트가 완료되었습니다. 결과를 확인하시겠습니까? 🌱'],
+      a: [{ type: '', text: '결과 보러 가기' }]
+    }
   ];
 
   const [platnList, setPlantList] = useState([
-    {name:''}
-  ])
+    { name: 'care_level1', count: 0 }, { name: 'care_level2', count: 0 },
+    { name: 'indoor', count: 0 }, { name: 'outdoor', count: 0 }, { name: 'sunlight1', count: 0 }, { name: 'sunlight2', count: 0 },
+    { name: 'type1', count: 0 }, { name: 'type2', count: 0 },
+  ]);
+
+  const handleCkAnswer = (type, idx) => {
+    let ls = platnList
+    for (let i = 0; i < ls.length; i++) {
+      if (ls[i].name === type) {
+        ls[i].count = ls[i].count + 1
+      }
+    }
+
+    setPlantList(ls);
+    setPage(page + 1);
+
+    if (idx + 1 === questionList.length) {
+      // console.log('결과보기');
+      setPlant();
+    }
+  };
+
+  const [plantContents, setPlantContents] = useState([]);
+
+  function setPlant() {
+    let mc = [
+      {plant: 'C1IS1T1', contents: ['/image/test/PlantTestResult_01.png']},
+    ]
+
+    let CareLevel =
+      platnList.find(function(data){return data.name === 'care_level1'}).count >
+      platnList.find(function(data){return data.name === 'care_level2'}).count ? 'care_level1' : 'care_level2'
+
+    let CareArea =
+    platnList.find(function(data){return data.name === 'indoor'}).count >
+    platnList.find(function(data){return data.name === 'outdoor'}).count ? 'indoor' : 'outdoor'
+
+    let Sunlight =
+    platnList.find(function(data){return data.name === 'sunlight1'}).count >
+    platnList.find(function(data){return data.name === 'sunlight2'}).count ? 'sunlight1' : 'sunlight2'
+
+    let Type =
+    platnList.find(function(data){return data.name === 'type1'}).count >
+    platnList.find(function(data){return data.name === 'type2'}).count ? 'type1' : 'type2'
+
+    let PlantTest = mc.find(val => val.plant === (CareLevel + CareArea + Sunlight + Type)) || mc[0];
+
+    setPlantContents(PlantTest);
+  }
 
   return (
     <div className='test_wrap'>
@@ -59,31 +102,61 @@ const PlantStartPage = () => {
             </div>
           </div>
 
-          :page <= questionList.length?
+          : page <= questionList.length ?
 
-          <div className='question_layout'>
-            <div className='question_listcount'>
-              <div>{page} / <strong>{questionList.length}</strong></div>
+            <div className='question_layout'>
+              <div className='question_listcount'>
+                <div>{page} / <strong>{questionList.length}</strong></div>
+              </div>
+
+              {questionList.map((val, idx) =>
+                <div className='qustion_list' key={idx} style={{ display: page === idx + 1 ? '' : 'none' }}>
+                  <div className='question_qlist'>
+                    {val.q.map((qval, qidx) =>
+                      <div className='question_q' key={qidx}>
+                        {qval}
+                      </div>
+                    )}
+                  </div>
+                  <div className='question_deco_section'>
+                    <div className='question_image_section'>
+                      <img className='qustion_image' src='/image/planttest_02.jpg' />
+                    </div>
+                  </div>
+                  <div className='question_alist'>
+                    {val.a && val.a.map((aval, aidx) =>
+                      <div className='question_abox' key={aidx} onClick={() => handleCkAnswer(aval.type, idx)}>
+                        <div className='question_text'>{aval.text}</div>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              )}
             </div>
 
-            {questionList.map((val, idx) =>
-            <>
-              <div className='question_list'>
-                질문리스트
-              </div>
-              <div>
-                답변
-              </div>
-            </>
-            )}
-            
-          </div>
+            :
 
-          :
-
-          <div>
-            결과페이지
-          </div>
+            <div className='question_layout'>
+              <div className='qustion_list' style={{ display: '' }}>
+                <div className='question_qlist'>
+                </div>
+                <div className='answer_layout'>
+                  <div className='anwer_box'>
+                    <div className='answer_title'>🌱 당신에게 추천하는 식물은? 🌱</div>
+                    <img className='answer_image' src={plantContents.contents[0]} alt="Plant Image" />
+                  </div>
+                  {/* <div className='answer_recommendplant_layout'>
+                    <div className='answer_recommendplant_title'>추천 식물</div>
+                    <div className='answer_recommendplant_plant'></div>
+                  </div> */}
+                  <div className='question_resetlayout'>
+                    <div v className='question_reset' onClick={()=>window.location.reload()}>
+                      <p className='question_p'>다시하기</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
         }
       </div>
     </div>
