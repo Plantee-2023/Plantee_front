@@ -139,7 +139,7 @@ const Comm_list = () => {
               </InputGroup>
             </form>
           </div>
-          <Table className='comm-table' striped bordered hover>
+          <Table className='text-center' striped bordered hover>
             <thead>
               <tr>
                 <input type='checkbox' onChange={onChangeAll} checked={posts.length === cnt && posts.length > 0} />

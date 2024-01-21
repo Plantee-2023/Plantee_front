@@ -57,8 +57,7 @@ const MagazineList = () => {
             </div>
             <div className='plant_wrap'>
                 <div className='plant_contents'>
-                    <div style={{ textAlign: 'center', marginBottom: '70px', marginTop: "70px", fontSize: '4rem' }}>매거진</div>
-                    <Row>
+                    <Row className='mt-5'>
                         <Col>
                             <form onSubmit={onSubmit}>
                                 <InputGroup style={{ marginBottom: '70px' }}>
