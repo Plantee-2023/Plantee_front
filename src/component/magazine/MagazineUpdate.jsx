@@ -3,7 +3,7 @@ import axios from 'axios'
 import { useParams, useNavigate } from 'react-router-dom'
 import { BoxContext } from '../common/BoxContext';
 import { Spinner, Card, Form, Button } from 'react-bootstrap'
-import { ref, getDownloadURL, uploadBytes, getStorage, uploadString } from "firebase/storage";
+import { ref, getDownloadURL, getStorage, uploadString } from "firebase/storage";
 import { v4 as uuidv4 } from 'uuid'; //랜덤 식별자를 생성해주는 라이브러리
 
 
@@ -40,9 +40,9 @@ const MagazineUpdate = () => {
         });
     }
 
-    const onFileChange = (evt) => {
+    const onFileChange = (e) => {
         // 업로드 된 file
-        const files = evt.target.files;
+        const files = e.target.files;
         const theFile = files[0];
 
         // FileReader 생성
@@ -85,7 +85,7 @@ const MagazineUpdate = () => {
                     } else {
                         setBox({
                             show : true,
-                            message : "수정이 완료되었습니다."
+                            message : "수정에 성공하였습니다."
                         })
                         navi(`/magazine/read/${magazine_num}`);
                     }
@@ -102,8 +102,8 @@ const MagazineUpdate = () => {
 
     if (loading) return <div className='text-center my-5'><Spinner animation="border" variant="success" /></div>
     return (
-        <div id="main_wrap">
-            <div className="main_contents">
+        <div id="plant_wrap">
+            <div className="plant_contents">
                 <form onSubmit={onSubmit} className='insert-img'>
                     <h1 className='text-center mt-3 mb-3'>[{magazine_num}] 정보수정</h1>
                     <Card className='insert-card'>

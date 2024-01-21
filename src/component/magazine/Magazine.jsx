@@ -28,7 +28,10 @@ const Magazine = () => {
             setPost(res.data);
             setLoading(false);
         } catch (error) {
-            alert(error.message);
+            setBox({
+                show: true,
+                message: `${error.message}`
+            })
         }
     }
 
@@ -53,8 +56,8 @@ const Magazine = () => {
 
         if (loading) return <div className='text-center my-5'><Spinner animation="border" variant="success" /></div>
         return (
-            <div id="main_wrap">
-                <div className="main_contents">
+            <div id="plant_wrap">
+                <div className="plant_contents">
                     <h1 className='magazine-title'>{title}</h1>
                     <hr />
                     <Row>

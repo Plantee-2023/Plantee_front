@@ -1,10 +1,11 @@
 import axios from 'axios'
-import React, { useRef, useState, useContext, useEffect } from 'react'
+import React, { useRef, useState, useContext } from 'react'
 import { Button, Card, Form, Spinner } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
 import { BoxContext } from '../common/BoxContext'
-import { ref, getDownloadURL, uploadBytes, getStorage, uploadString } from "firebase/storage";
+import { ref, getDownloadURL, getStorage, uploadString } from "firebase/storage";
 import { v4 as uuidv4 } from 'uuid'; //랜덤 식별자를 생성해주는 라이브러리
+import './Magazine.css'
 
 
 const MagazineInsert = () => {
@@ -92,8 +93,8 @@ const MagazineInsert = () => {
     }
     if (loading) return <div className='text-center my-5'><Spinner animation="border" variant="success" /></div>
     return (
-        <div id="main_wrap">
-            <div className="main_contents">
+        <div id="plant_wrap">
+            <div className="plant_contents">
                 <form onSubmit={onSubmit} className='insert-img'>
                     <Card className='insert-card'>
                         <Form.Control onChange={onChange} name='magazine_num' placeholder='번호' className='insert-text' style={{ width: 100 }} />
