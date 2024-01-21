@@ -228,11 +228,11 @@ input:focus {outline:none;}
 .question_layout {width: 50%; text-align: center; margin: 0 auto;}
 .question_listcount {margin-top: 2rem; padding-top: 2rem; font-size: 18px;}
 .qustion_list {width: 100%; height: auto; margin: 0 auto;}
-.question_qlist {width: 100%; margin: 1rem 0; padding: 1rem 0;}
+.question_qlist {width: 100%; margin: 1rem 0;}
 .question_q {font-size: 30px; font-weight: 700;}
 
 .question_deco_section {width: 100%; margin: 2rem 0;}
-.question_image_section {width: 30%; height: 250px; margin: 0 auto;}
+.question_image_section {width: 30%; height: 350px; margin: 0 auto;}
 .qustion_image {width: 100%; height: 100%;}
 
 .question_alist {width: 100%; margin: 2.2rem 0;}
