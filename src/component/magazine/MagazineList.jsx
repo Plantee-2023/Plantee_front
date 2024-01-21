@@ -52,51 +52,55 @@ const MagazineList = () => {
 
     if (loading) return <div className='text-center my-5'><Spinner animation="border" variant="success" /></div>
     return (
-        <div className='plant_wrap'>
-            <div className='plant_contents'>
-                <h3 className='magazine-list-title'>매거진</h3>
-                <Row>
-                    <Col>
-                        <form onSubmit={onSubmit}>
-                            <InputGroup className='search'>
-                                <input type='search' className='search_input_textinput' placeholder='검색어를 입력해주세요.' value={searchTerm} onChange={handleSearchChange} />
-                                <button className='search_input_searchbtn' type='submit'><img src='/image/search_icon.png' /></button>
-                            </InputGroup>
-                        </form>
-                    </Col>
-                    <Col>
-                        {sessionStorage.getItem('uid') === "admin" &&
-                            <div className='plant_insert'>
-                                <Link to="/magazine/magazineinsert"><button>추가하기</button></Link>
-                            </div>
-
-                        }
-                    </Col>
-                </Row>
-                <Table className='mt-5' bordered hover>
-                    <thead className='text-center'>
-                        <tr>
-                            <th>번호</th>
-                            <th>제목</th>
-                            <th>작성자</th>
-                            <th>등록일</th>
-                            <th>조회수</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {filteredList.map(m =>
-                            <tr key={m.magazine_num}>
-                                <td style={{ width: 50 }} className='text-center'>{m.magazine_num}</td>
-                                <td><NavLink style={{ color: '#000000' }} to={`/magazine/read/${m.magazine_num}`}>{m.title}</NavLink></td>
-                                <td style={{ width: '100px' }} className='text-center'>{m.nickname}</td>
-                                <td style={{ width: '300px' }} className='text-center'>{m.fmtdate}</td>
-                                <td style={{ width: '100px' }} className='text-center'>{m.view_cnt}회</td>
-                            </tr>
-                        )}
-                    </tbody>
-                </Table>
+        <>
+            <div className='mainbanner_section'>
+                <img className='banner_img' src="/image/header/Magazine.png" />
             </div>
-        </div>
+            <div className='plant_wrap'>
+                <div className='plant_contents'>
+                    <Row>
+                        <Col className='mt-5'>
+                            <form onSubmit={onSubmit}>
+                                <InputGroup className='search'>
+                                    <input type='search' className='search_input_textinput' placeholder='검색어를 입력해주세요.' value={searchTerm} onChange={handleSearchChange} />
+                                    <button className='search_input_searchbtn' type='submit'><img src='/image/search_icon.png' /></button>
+                                </InputGroup>
+                            </form>
+                        </Col>
+                        <Col>
+                            {sessionStorage.getItem('uid') === "admin" &&
+                                <div className='plant_insert'>
+                                    <Link to="/magazine/magazineinsert"><button>추가하기</button></Link>
+                                </div>
+
+                            }
+                        </Col>
+                    </Row>
+                    <Table className='mt-5' bordered hover>
+                        <thead className='text-center'>
+                            <tr>
+                                <th>번호</th>
+                                <th>제목</th>
+                                <th>작성자</th>
+                                <th>등록일</th>
+                                <th>조회수</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {filteredList.map(m =>
+                                <tr key={m.magazine_num}>
+                                    <td style={{ width: 50 }} className='text-center'>{m.magazine_num}</td>
+                                    <td><NavLink style={{ color: '#000000' }} to={`/magazine/read/${m.magazine_num}`}>{m.title}</NavLink></td>
+                                    <td style={{ width: '100px' }} className='text-center'>{m.nickname}</td>
+                                    <td style={{ width: '300px' }} className='text-center'>{m.fmtdate}</td>
+                                    <td style={{ width: '100px' }} className='text-center'>{m.view_cnt}회</td>
+                                </tr>
+                            )}
+                        </tbody>
+                    </Table>
+                </div>
+            </div>
+        </>
     )
 }
 

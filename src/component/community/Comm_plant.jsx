@@ -2,15 +2,16 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { Row, Table, Form, Col, Card, Button, FormControl, InputGroup } from 'react-bootstrap'
 
-const Comm_plant = () => {
+const Comm_plant = ({form,setForm}) => {
 
-
+  const [Total,setTotal]=useState(0);
+  const [goods, setGoods]=useState([]);
   const [loading, setLoading] = useState(false);
   const [list, setList] = useState([]);
   const [query, setQuery] = useState("");
   const [page, setPage] = useState(1);
   const [cnt, setCnt] = useState(0);
-
+  const {plant_title, image, plant_id, store_id, plant_link}=form
   const size=10;
 
   const getList = async() => {

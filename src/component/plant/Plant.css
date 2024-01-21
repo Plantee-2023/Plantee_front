@@ -34,6 +34,9 @@
 .plantlist_commonname {width: 100%; margin-top: 1rem; text-align: center; overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical;
     font-size: 15px; line-height: 20px; letter-spacing: 0.25px; font-weight: 600;}
 
+.mainbanner_section {width: 100%; height: auto;}
+.banner_img {width: 100%; height: 100%;}
+
 /* searchbox */
 .search_input_inputgroup {border-bottom: 1px solid #ddd; padding: 1.5%;}
 .search_input_textinput {width: 85%; border: none;}

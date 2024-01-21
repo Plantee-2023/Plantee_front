@@ -22,7 +22,7 @@ const Comm_Write = () => {
     setForm(res.data);
   }
 
-  const { uid, title, contents, image, filter,post_origin} = form;
+  const { uid, title, contents, image, filter, post_origin } = form;
 
 
   const onChangeContents = (data) => {
@@ -36,9 +36,7 @@ const Comm_Write = () => {
   const onChange = (e) => {
     setForm({
       ...form,
-
       [e.target.name]: e.target.value
-
     });
   }
 
@@ -58,7 +56,7 @@ const Comm_Write = () => {
           contents: form.contents, uid: sessionStorage.getItem("uid"),
           category: 3,
           title: form.title
-        
+
 
         };
         //console.log(data);
@@ -81,9 +79,9 @@ const Comm_Write = () => {
           ...form, filter: selectedValue,
           contents: form.contents, uid: sessionStorage.getItem("uid"),
           category: 3,
-          title:'[답변] '+ form.title,
-          post_origin:post_id
-          
+          title: '[답변] ' + form.title,
+          post_origin: post_id
+
 
         };
         //console.log(data);
@@ -111,106 +109,109 @@ const Comm_Write = () => {
 
 
   return (
-    <div className='my-5'  >
-      <h1 className='text-center mb-5'>게시글 작성</h1>
-      <div className='text-start mb-2'>
-        <Button vaiant='success'>목록</Button>
+    <>
+      <div className='mainbanner_section'>
+        <img className='banner_img' src="/image/header/Community.png" />
+      </div>
+      <div className='my-5'  >
+        <div className='text-start mb-2'>
+          <Button vaiant='success'>목록</Button>
+
+        </div>
+        <Row className='justify-content-center'>
+          <Col xs lg={15}>
+            <Card className='p-5'>
+              <h4 className="text-center" style={{ "font-weight": "bold" }}>
+
+                <div className='text-start'>
+                  <input type="checkbox" /> 투표
+                </div>
+
+
+                <InputGroup className="mb-2">
+                  <InputGroup.Text>선택</InputGroup.Text>
+                  <Form.Select name="filter" value={filter} onChange={handleDropdownChange} >
+                    <option value="0">식물자랑</option>
+                    <option value="1">Q&A</option>
+
+
+
+                  </Form.Select  >
+                </InputGroup>
+                <InputGroup className="mb-2">
+                  <InputGroup.Text>제목</InputGroup.Text>
+                  <FormControl name='title'
+                    value={
+                      uid === sessionStorage.getItem("uid") ? title : title
+                    } onChange={onChange}
+                    placeholder="제목"
+
+                  />
+
+                </InputGroup>
+
+
+
+
+
+
+              </h4>
+              <Row>
+
+                <Col className='px-3 text-start' >
+                  <h5  > </h5>
+
+
+                </Col>
+              </Row>
+              <Row>
+                <Col>
+                  <hr />
+
+
+                  <CKEditor config={{ ckfinder: { uploadUrl: '/comm/ckupload' } }}
+                    editor={ClassicEditor}
+                    data={uid === sessionStorage.getItem("uid") ?
+                      form.contents : ''}
+                    onChange={(event, editor) => { onChangeContents(editor.getData()); }} />
+
+
+                </Col>
+              </Row>
+              <div className='mt-2'>
+                <Comm_plant />
+              </div>
+            </Card>
+
+
+            <div className='text-start'>
+
+
+            </div>
+
+
+
+
+
+            <div className='text-end mt-2'>
+              {uid === sessionStorage.getItem("uid") ?
+                <>
+                  <Button className='me-2' vaiant='success' onClick={onClickSave}>등록</Button>
+                </>
+                :
+                <>
+                  <Button className='me-2' vaiant='success' onClick={onClickReplySave}>답변</Button>
+                </>
+
+              }
+              <Button className='text-end' vaiant='secondary'>취소</Button>
+
+            </div>
+          </Col>
+        </Row>
 
       </div>
-      <Row className='justify-content-center'>
-        <Col xs lg={15}>
-          <Card className='p-5'>
-            <h4 className="text-center" style={{ "font-weight": "bold" }}>
-
-              <div className='text-start'>
-                <input type="checkbox" /> 투표
-              </div>
-
-
-              <InputGroup className="mb-2">
-                <InputGroup.Text>선택</InputGroup.Text>
-                <Form.Select name="filter" value={filter} onChange={handleDropdownChange} >
-                  <option value="0">식물자랑</option>
-                  <option value="1">Q&A</option>
-
-
-
-                </Form.Select  >
-              </InputGroup>
-              <InputGroup className="mb-2">
-                <InputGroup.Text>제목</InputGroup.Text>
-                <FormControl name='title'
-                  value={
-                    uid === sessionStorage.getItem("uid") ? title : title
-                  } onChange={onChange}
-                  placeholder="제목"
-
-                />
-
-              </InputGroup>
-
-
-
-
-
-
-            </h4>
-            <Row>
-
-              <Col className='px-3 text-start' >
-                <h5  > </h5>
-
-
-              </Col>
-            </Row>
-            <Row>
-              <Col>
-                <hr />
-
-
-                <CKEditor config={{ ckfinder: { uploadUrl: '/comm/ckupload' } }}
-                  editor={ClassicEditor}
-                  data={uid === sessionStorage.getItem("uid") ?
-                    form.contents : ''}
-                  onChange={(event, editor) => { onChangeContents(editor.getData()); }} />
-
-
-              </Col>
-            </Row>
-            <div className='mt-2'>
-              <Comm_plant />
-            </div>
-          </Card>
-
-
-          <div className='text-start'>
-
-
-          </div>
-
-
-
-
-
-          <div className='text-end mt-2'>
-            {uid === sessionStorage.getItem("uid") ?
-              <>
-                <Button className='me-2' vaiant='success' onClick={onClickSave }>등록</Button>
-              </>
-              :
-              <>
-                <Button className='me-2' vaiant='success' onClick={onClickReplySave}>답변</Button>
-              </>
-
-            }
-            <Button className='text-end' vaiant='secondary'>취소</Button>
-
-          </div>
-        </Col>
-      </Row>
-
-    </div>
-
+    </>
   )
 }
 

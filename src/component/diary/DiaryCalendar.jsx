@@ -167,92 +167,91 @@ const DiaryCalendar = () => {
     }, [selectedYear, selectedMonth, dateTotalCount, today, list, handleDateButtonClick]);
 
     return (
-        <div className="diary_wrap">
-            <div className="diary_contents">
-                <div className='mt-3'>
-                    <Container>
-                        <DiaryTag />
-                    </Container>
-                </div>
-                <div className="text-center mt-5">
-                    <h1><b>스케줄</b></h1>
-                </div>
-                <div className='text-end mt-3'>
-                    <Link to={`/diary/insert`}>
-                        <img src='/image/icon-add.png' className='diary-img-insert' />
-                        <span className='diary-insert-size'><b><u>등록하기</u></b></span>
-                    </Link>
-                </div>
-                <div className="diary">
-                    <div className="title">
-                        <div className="pagination">
-                            <button onClick={handlePrevMonthButtonClick}>◀︎</button>
-                            <h3>
-                                {selectedYear}년 {selectedMonth}월
-                            </h3>
-                            <button onClick={handleNextMonthButtonClick}>▶︎</button>
-                            <button onClick={handleTodayButtonClick}>Today</button>
-                        </div>
+        <>
+            <div className='mainbanner_section'>
+                <img className='banner_img' src="/image/header/Calendar.png" />
+            </div>
+            <div className="diary_wrap">
+                <div className="diary_contents">
+                    <div className='mt-3'>
+                        <Container>
+                            <DiaryTag />
+                        </Container>
                     </div>
-                    <div className="week">
-                        {week.map((day) => (
-                            <div
-                                key={day}
-                                className={cx(
-                                    { weekday: true },
-                                    { sunday: day === "일" },
-                                    { saturday: day === "토" }
-                                )}
-                            >
-                                {day}
+                    <div className='plant_insert'>
+                        <Link to="/diary/insert"><button>추가하기</button></Link>
+                    </div>
+                    <div className="diary">
+                        <div className="title">
+                            <div className="pagination">
+                                <button onClick={handlePrevMonthButtonClick}>◀︎</button>
+                                <h3>
+                                    {selectedYear}년 {selectedMonth}월
+                                </h3>
+                                <button onClick={handleNextMonthButtonClick}>▶︎</button>
+                                <button onClick={handleTodayButtonClick}>Today</button>
+                            </div>
+                        </div>
+                        <div className="week">
+                            {week.map((day) => (
+                                <div
+                                    key={day}
+                                    className={cx(
+                                        { weekday: true },
+                                        { sunday: day === "일" },
+                                        { saturday: day === "토" }
+                                    )}
+                                >
+                                    {day}
+                                </div>
+                            ))}
+                        </div>
+                        <div className="date">{returnDay()}</div>
+                    </div>
+                </div>
+                {selectedDate && (
+                    <div className="selected-date-events">
+                        {/* <h4>Selected Date: {moment(selectedDate).format("YYYY-MM-DD")}</h4> */}
+                        <h4 className="text-center mb-4">{moment(selectedDate).format("YYYY-MM-DD")} 날짜에 함께 한 반려식물</h4>
+                        {selectedDateEvents.map((event, index) => (
+                            <div key={index} className={cx('selected-event')}>
+                                {event.title}
+                                {list
+                                    .filter(d => moment(d.reg_date).isSame(selectedDate, 'day'))
+                                    .map((d, index) => (
+                                        <div className="diary_detail">
+                                            <Link to={`/diary/read/${d.diary_id}`}>
+                                                <Card className="calendar_card" key={index}>
+                                                    <div>
+                                                        <Card.Body>
+                                                            <Row>
+                                                                <Col md={3}>
+                                                                    <img src={d.image} width={150} height={150} />
+                                                                </Col>
+                                                                <Col className="mt-3">
+                                                                    <h3><span style={{ color: "green" }}>✔</span> {d.plant_name}</h3>
+                                                                    <h5>
+                                                                        {' '}{' '}
+                                                                        함께 한 날 {d.date_now}일
+                                                                    </h5>
+                                                                    <p>
+                                                                        물 주는 날 D-{d.date_water}일 남았습니다!
+                                                                    </p>
+                                                                </Col>
+                                                            </Row>
+                                                        </Card.Body>
+                                                    </div>
+                                                </Card>
+                                            </Link>
+                                        </div>
+                                    ))}
                             </div>
                         ))}
                     </div>
-                    <div className="date">{returnDay()}</div>
-                </div>
+                )}
+                <BtnToTop />
             </div>
-            {selectedDate && (
-                <div className="selected-date-events">
-                    {/* <h4>Selected Date: {moment(selectedDate).format("YYYY-MM-DD")}</h4> */}
-                    <h4 className="text-center mb-4">{moment(selectedDate).format("YYYY-MM-DD")} 날짜에 함께 한 반려식물</h4>
-                    {selectedDateEvents.map((event, index) => (
-                        <div key={index} className={cx('selected-event')}>
-                            {event.title}
-                            {list
-                                .filter(d => moment(d.reg_date).isSame(selectedDate, 'day'))
-                                .map((d, index) => (
-                                    <div className="diary_detail">
-                                        <Link to={`/diary/read/${d.diary_id}`}>
-                                            <Card className="calendar_card" key={index}>
-                                                <div>
-                                                    <Card.Body>
-                                                        <Row>
-                                                            <Col md={3}>
-                                                                <img src={d.image} width={150} height={150} />
-                                                            </Col>
-                                                            <Col className="mt-3">
-                                                                <h3><span style={{ color: "green" }}>✔</span> {d.plant_name}</h3>
-                                                                <h5>
-                                                                    {' '}{' '}
-                                                                    함께 한 날 {d.date_now}일
-                                                                </h5>
-                                                                <p>
-                                                                    물 주는 날 D-{d.date_water}일 남았습니다!
-                                                                </p>
-                                                            </Col>
-                                                        </Row>
-                                                    </Card.Body>
-                                                </div>
-                                            </Card>
-                                        </Link>
-                                    </div>
-                                ))}
-                        </div>
-                    ))}
-                </div>
-            )}
-            <BtnToTop />
-        </div>
+        </>
     );
 };
 

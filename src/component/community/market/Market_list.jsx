@@ -13,10 +13,10 @@ const Market_list = () => {
   const navi = useNavigate();
   const location = useLocation();
   const search = new URLSearchParams(location.search);
-  const size = 10;
+  const size = 15;
   const [cnt, setCnt] = useState(0);
-  const [query, setQuery]=useState('');
-  const [filter, setfilter]=useState('10');
+  const [query, setQuery] = useState('');
+  const [filter, setfilter] = useState('10');
   const category = 4;
   const [total, setTotal] = useState(0);
   const page = search.get("page") ? parseInt(search.get("page")) : 1;
@@ -49,15 +49,15 @@ const Market_list = () => {
   const onClickDelete = async () => {
     let count = 0;
     for (const post of posts) {
-      if(post.uid===sessionStorage.getItem("uid")){
-      if (post.checked) {
-        const res = await axios.post('/comm/delete', { post_id: post.post_id });
-        if (res.data === 1)
-          count++;
-      }
-    alert(`${post.post_id}게시글이 삭제되었습니다.`);
-    getPost();
-      } if(post.uid!=sessionStorage.getItem("uid")) {
+      if (post.uid === sessionStorage.getItem("uid")) {
+        if (post.checked) {
+          const res = await axios.post('/comm/delete', { post_id: post.post_id });
+          if (res.data === 1)
+            count++;
+        }
+        alert(`${post.post_id}게시글이 삭제되었습니다.`);
+        getPost();
+      } if (post.uid != sessionStorage.getItem("uid")) {
         alert(`${post.post_id} 타인의 게시글은 삭제할 수 없습니다.`);
       }
     }
@@ -106,55 +106,57 @@ const Market_list = () => {
   }, [posts]);
 
   return (
-
-    <div className='community_wrap' >
-      <div className='community_contents'>
-        <Row className='market_list_row'>
-          <h1 className='community_title mt-5'>거래 게시판</h1>
-          <div className='community_filter_section'>
-                <ul className='community_filter_list'>
-                  <button className='community_filter_btn' type='button' onClick={(e) => onChangeFilter(e, '')}  >전체</button>
-                  <button className='community_filter_btn' type='button'onClick={(e) => onChangeFilter(e, 5)}  >무료나눔</button>
-                  <button className='community_filter_btn' type='button'  onClick={(e) => onChangeFilter(e,8)}>팝니다</button>
-                  <button className='community_filter_btn' type='button' onClick={(e) => onChangeFilter(e, 7)} >삽니다</button>
-                </ul>
-                <div className='market_list_btnsection'> <button className='market_list_deletebtn' onClick={() => onClickDelete()}  >삭제</button></div>
+    <>
+      <div className='mainbanner_section'>
+        <img className='banner_img' src="/image/header/Transaction.png" />
+      </div>
+      <div className='community_wrap' >
+        <div className='community_contents'>
+          <Row className='market_list_row mt-5'>
+            <div className='community_filter_section'>
+              <ul className='community_filter_list'>
+                <button className='community_filter_btn' type='button' onClick={(e) => onChangeFilter(e, '')}  >전체</button>
+                <button className='community_filter_btn' type='button' onClick={(e) => onChangeFilter(e, 5)}  >무료나눔</button>
+                <button className='community_filter_btn' type='button' onClick={(e) => onChangeFilter(e, 8)}>팝니다</button>
+                <button className='community_filter_btn' type='button' onClick={(e) => onChangeFilter(e, 7)} >삽니다</button>
+              </ul>
+              <div className='market_list_btnsection'> <button className='market_list_deletebtn' onClick={() => onClickDelete()}  >삭제</button></div>
+            </div>
+          </Row>
+          <div className='comm_market_search'>
+            <form>
+              <InputGroup className='community_searchinputwrap'>
+                <input onChange={(e) => setQuery(e.target.value)} type='search' className='community_searchinput' placeholder='검색어를 입력해주세요.' />
+                <button className='community_searchbtn' type='submit' onClick={onSubmit}><img className='community_img' src='/image/search_icon.png' /></button>
+              </InputGroup>
+            </form>
           </div>
-        </Row>
-        <div className='comm_market_search'>
-          <form>
-            <InputGroup className='community_searchinputwrap'>
-              <input onChange={(e) => setQuery(e.target.value)} type='search' className='community_searchinput' placeholder='검색어를 입력해주세요.' />
-              <button className='community_searchbtn' type='submit' onClick={onSubmit}><img className='community_img' src='/image/search_icon.png' /></button>
-            </InputGroup>
-          </form>
-        </div>
-        <Table className='comm-table' striped bordered hover>
-          <thead>
-            <tr>
-              <input type='checkbox' onChange={onChangeAll} checked={posts.length === cnt && posts.length != 0} />
-              <th>No</th>
-              <th>구분</th>
-              <th>지역</th>
-              <th>제목</th>
-              <th>가격</th>
-              <th>닉네임(ID)</th>
-              <th>추천</th>
-              <th>조회</th>
-              <th>날짜</th>
-            </tr>
-          </thead>
-          <tbody>
-            {posts.map(post =>
-              <tr key={post.post_id}>
+          <Table className='comm-table' striped bordered hover>
+            <thead>
+              <tr>
+                <input type='checkbox' onChange={onChangeAll} checked={posts.length === cnt && posts.length != 0} />
+                <th>No</th>
+                <th>구분</th>
+                <th>지역</th>
+                <th>제목</th>
+                <th>가격</th>
+                <th>닉네임(ID)</th>
+                <th>추천</th>
+                <th>조회</th>
+                <th>날짜</th>
+              </tr>
+            </thead>
+            <tbody>
+              {posts.map(post =>
+                <tr key={post.post_id}>
                   <>
                     <td><input onChange={(e) => onChangeSingle(e, post.post_id)} type='checkbox' checked={post.checked} /></td>
                     <td>{post.post_id}</td>
                     <td>
-                    {post.filter === 5 && '무료나눔'}
-                    {post.filter === 7 && '삽니다'}
-                    {post.filter === 8 && '팝니다'}
-                      </td>
+                      {post.filter === 5 && '무료나눔'}
+                      {post.filter === 7 && '삽니다'}
+                      {post.filter === 8 && '팝니다'}
+                    </td>
                     <td>{post.user_address}</td>
                     <td>
                       <div>
@@ -169,23 +171,24 @@ const Market_list = () => {
                     <td>{post.view_cnt}</td>
                     <td>{post.red_date}</td>
                   </>
-              </tr>
-            )}
-          </tbody>
-        </Table>
-      </div>
+                </tr>
+              )}
+            </tbody>
+          </Table>
+        </div>
 
-      {total > size &&
-        <Pagination
-          activePage={page}
-          itemsCountPerPage={size}
-          totalItemsCount={total}
-          pageRangeDisplayed={10}
-          prevPageText={"‹"}
-          nextPageText={"›"}
-          onChange={(cpage) => { navi(`/comm?page=${cpage}&size=${size}&query=${query}&filter=${filter}`) }} />
-      }
-    </div>
+        {total > size &&
+          <Pagination
+            activePage={page}
+            itemsCountPerPage={size}
+            totalItemsCount={total}
+            pageRangeDisplayed={10}
+            prevPageText={"‹"}
+            nextPageText={"›"}
+            onChange={(cpage) => { navi(`/comm?page=${cpage}&size=${size}&query=${query}&filter=${filter}`) }} />
+        }
+      </div>
+    </>
   )
 }
 

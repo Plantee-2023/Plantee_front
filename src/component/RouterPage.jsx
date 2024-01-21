@@ -47,6 +47,7 @@ import PlantRecipeUpdate from './plant/PlantRecipeUpdate';
 import MagazineUpdate from './magazine/MagazineUpdate';
 import StoreBuyNow from './store/StoreBuyNow';
 import HomePage from './HomePage';
+import Market_update from './community/market/Market_update';
 import AdminPage from './users/AdminPage';
 import PlantStartPage from './plant/plantee_i/PlantStartPage';
 import Comm_insertReply from './community/comm/Comm_insertReply';
@@ -110,6 +111,8 @@ const RouterPage = () => {
             <Route path="/comm/market" element={<Market_list/>} />
             <Route path="/comm/market/write" element={<Market_write />} />
             <Route path="/comm/market/read/:post_id" element={<Market_read />} />
+            <Route path="/comm/market/update/:post_id" element={<Market_update/>} />
+
 
             {/* 스토어 */}
             <Route path='/store' element={<StoreMain />} />

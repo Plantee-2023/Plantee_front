@@ -80,115 +80,118 @@ const DiaryMain = () => {
 
     if (loading) return <div className='my-5 text-center'><Spinner variant='success' /></div>
     return (
-        <div className='diary_wrap'>
-            <div className='diary_contents'>
-                <div className='mt-3'>
-                    <Container>
-                        <DiaryTag />
-                    </Container>
-                </div>
-                <div className='diary_searchwrap'>
-                    <form>
-                        <InputGroup className='diary_searchinputwrap'>
-                            <input type='search' className='diary_searchinput' placeholder='검색어를 입력해주세요.' value={searchTerm} onChange={handleSearchChange} />
-                            {/* <button className='diary_searchbtn' type='submit'><img src='/image/search_icon.png' /></button> */}
-                        </InputGroup>
-                    </form>
-                </div>
-                <div className='text-end mt-3'>
-                    <Link to={`/diary/insert`}>
-                        <img src='/image/icon-add.png' className='diary-img-insert' /><span className='diary-insert-size'><b><u>등록하기</u></b></span>
-                    </Link>
-                </div>
-                <div className='text-center'>
-                    {filteredList.map(d =>
-                        <div className='diary_detail my-5'>
-                            <Row>
-                                {d.date_water > 2 ?
-                                    <>
-                                        <Col>
-                                            <br />
-                                            <h1>D-{d.date_water}</h1>
-                                            <hr className='diary_dayline' />
-                                            <p className='diary_icon_sun'>
-                                                <p>{getSun(d.sunlight)}</p>
-                                            </p>
-                                            <p className='diary_icon_sun'>
-                                                <p>{getWater(d.watering)}</p>
-                                            </p>
-                                        </Col>
-                                    </>
-                                    :
-                                    <>
-                                        <Col>
-                                            <div className='mt-5'>
-                                                <h3>{d.plant_name}의 물 주는 날이</h3><h4>{d.date_water}일 남았어요!</h4>
-                                                <div className='mt-5'>
-                                                    <img
-                                                        src='/image/icon-watering-can.png'
-                                                        width={'100px'}
-                                                        height={'100px'}
-                                                        onClick={() => handleWateringCanClick(d.diary_id)}
-                                                    />
-                                                </div>
-                                            </div>
-                                        </Col>
-                                    </>
-                                }
-
-                                <Col>
-                                    <Link to={`/diary/read/${d.diary_id}`}>
-                                        <div>
-                                            {/* <img src={d.image} width={300} height={300} /> */}
-                                            {d.image ? (
-                                                <img src={d.image} width={300} height={300} />
-                                            ) : (
-                                                <img src='http://via.placeholder.com/300x300' alt='대체 이미지' />
-                                            )}
-                                        </div>
-                                    </Link>
-                                </Col>
-                                <Col>
-                                    <br /><br /><br /><br />
-                                    <h1>{d.plant_name}</h1>
-                                </Col>
-                            </Row>
-                        </div>
-                    )}
-                    <div className='diarymain_cardgroup'>
-                        <Card className='diary_plant_card'>
-                            <Card.Body>
+        <>
+            <div className='mainbanner_section'>
+                <img className='banner_img' src="/image/header/Calendar.png" />
+            </div>
+            <div className='diary_wrap'>
+                <div className='diary_contents'>
+                    <div className='mt-3'>
+                        <Container>
+                            <DiaryTag />
+                        </Container>
+                    </div>
+                    <div className='diary_searchwrap'>
+                        <form>
+                            <InputGroup className='diary_searchinputwrap'>
+                                <input type='search' className='diary_searchinput' placeholder='검색어를 입력해주세요.' value={searchTerm} onChange={handleSearchChange} />
+                                {/* <button className='diary_searchbtn' type='submit'><img src='/image/search_icon.png' /></button> */}
+                            </InputGroup>
+                        </form>
+                    </div>
+                    <div className='plant_insert'>
+                        <Link to="/diary/insert"><button>추가하기</button></Link>
+                    </div>
+                    <div className='text-center'>
+                        {filteredList.map(d =>
+                            <div className='diary_detail my-5'>
                                 <Row>
-                                    <Col md='5'>
-                                        <div className='diary_logo'>
-                                            <img src='/image/logo.png' />
-                                        </div>
+                                    {d.date_water > 2 ?
+                                        <>
+                                            <Col>
+                                                <br />
+                                                <h1>D-{d.date_water}</h1>
+                                                <hr className='diary_dayline' />
+                                                <p className='diary_icon_sun'>
+                                                    <p>{getSun(d.sunlight)}</p>
+                                                </p>
+                                                <p className='diary_icon_sun'>
+                                                    <p>{getWater(d.watering)}</p>
+                                                </p>
+                                            </Col>
+                                        </>
+                                        :
+                                        <>
+                                            <Col>
+                                                <div className='mt-5'>
+                                                    <h3>{d.plant_name}의 물 주는 날이</h3><h4>{d.date_water}일 남았어요!</h4>
+                                                    <div className='mt-5'>
+                                                        <img
+                                                            src='/image/icon-watering-can.png'
+                                                            width={'100px'}
+                                                            height={'100px'}
+                                                            onClick={() => handleWateringCanClick(d.diary_id)}
+                                                        />
+                                                    </div>
+                                                </div>
+                                            </Col>
+                                        </>
+                                    }
+
+                                    <Col>
+                                        <Link to={`/diary/read/${d.diary_id}`}>
+                                            <div>
+                                                {/* <img src={d.image} width={300} height={300} /> */}
+                                                {d.image ? (
+                                                    <img src={d.image} width={300} height={300} />
+                                                ) : (
+                                                    <img src='http://via.placeholder.com/300x300' alt='대체 이미지' />
+                                                )}
+                                            </div>
+                                        </Link>
                                     </Col>
-                                    <Col className='mt-2'>
-                                        {(() => {
-                                            const wateringDay = list.find(d => d.date_water < 1);
-                                            if (wateringDay) {
-                                                return (
-                                                    <>
-                                                        오늘은{' '}
-                                                        <span>
-                                                            [{wateringDay.plant_name}]
-                                                        </span>
-                                                        {' '} 물 주는 날입니다.
-                                                    </>
-                                                );
-                                            }
-                                            return '나의 반려식물 키우기'; // 아무것도 렌더링하지 않음
-                                        })()}
+                                    <Col>
+                                        <br /><br /><br /><br />
+                                        <h1>{d.plant_name}</h1>
                                     </Col>
                                 </Row>
-                            </Card.Body>
-                        </Card>
+                            </div>
+                        )}
+                        <div className='diarymain_cardgroup'>
+                            <Card className='diary_plant_card'>
+                                <Card.Body>
+                                    <Row>
+                                        <Col md='5'>
+                                            <div className='diary_logo'>
+                                                <img src='/image/logo.png' />
+                                            </div>
+                                        </Col>
+                                        <Col className='mt-2'>
+                                            {(() => {
+                                                const wateringDay = list.find(d => d.date_water < 1);
+                                                if (wateringDay) {
+                                                    return (
+                                                        <>
+                                                            오늘은{' '}
+                                                            <span>
+                                                                [{wateringDay.plant_name}]
+                                                            </span>
+                                                            {' '} 물 주는 날입니다.
+                                                        </>
+                                                    );
+                                                }
+                                                return '나의 반려식물 키우기'; // 아무것도 렌더링하지 않음
+                                            })()}
+                                        </Col>
+                                    </Row>
+                                </Card.Body>
+                            </Card>
+                        </div>
                     </div>
                 </div>
+                <BtnToTop />
             </div>
-            <BtnToTop/>
-        </div>
+        </>
     );
 };
 

@@ -62,6 +62,8 @@ input:focus {outline:none;}
 .community_delete_btn, .community_insert_btn {width: 100px; height: 45px; border: none; border-radius: 50px; background-color: #07955C; color: #fff;}
 .community_delete_btn {margin-left: 10px;}
 .community_insert_btn_text {color: #fff; text-decoration: none; display: flex; justify-content: center; line-height: 2.7;}
+community_insert_btn_text a {color: #fff;}
+
 
 .community_search_section {display: flex; justify-content: space-between; margin-bottom: 2rem;}
 .community {width: 24px; height: 24px; line-height: 2.7; display: flex; justify-content: center;}
@@ -108,7 +110,8 @@ input:focus {outline:none;}
 .comm_coment_deletetbtn {width: 100px; height: 45px; border: 1px solid #a4a4a4; border-radius: 50px; background-color: #fff; color: #a4a4a4;}
 
 /* CommSharePage */
-.comm_read_url {border: none; width: 100px; height: 35px; border-radius: 10px; background-color: #07955C; color: #fff;}
+.comm_read_url {width: 100px; height: 30px; line-height: 28px; border: 1px solid #999; border-radius: 20px; background: #fff; font-size: 14px;}
+.comm_read_url:hover {background: #666; border: none; color: #fff;}
 
 /* CommComentPage */
 .comm_coment_insertbtn {width: 100px; height: 45px; border: none; border-radius: 50px; background-color: #07955C; color: #fff;}
