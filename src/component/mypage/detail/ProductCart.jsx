@@ -18,28 +18,19 @@ const ProductCart = () => {
     const [carts, setCarts] = useState([]);
 
     const [total, setTotal] = useState(0);
-    const [sum, setSum] = useState(1);
+    const [sum, setSum] = useState(0);
     const [count, setCount] = useState(0); //체크 된 체크박스 갯수
 
     const [sumprice, setSumprice] = useState(0);
     const [sumqnt, setSumqnt] = useState(0);
 
 
-    // 구매하기 페이지로 넘어감
-    const onClickOrder = () => {
-        if (count === 0) {
-            setBox({ show: true, message: "주문할 상품을 선택하세요." })
-        } else {
-            navi(`${pathname}?show=order`)
-        }
-    }
-
     // 장바구니 목록
     const getCart = async () => {
         setLoading(true);
         const res = await axios(`/cart/list.json/${sessionStorage.getItem("uid")}`);
         let list = res.data.list;
-        list = list.map(cart => cart && { ...cart, checked: false })
+        list = list.map(cart => cart && { ...cart, checked: true })
         setCarts(list);
 
         let sum1 = 0;
@@ -86,7 +77,6 @@ const ProductCart = () => {
         setCarts(list);
     }
 
-
     // 장바구니 삭제
     const onDeleteCart = (cart_id) => {
         setBox({
@@ -99,7 +89,7 @@ const ProductCart = () => {
     }
 
     // 체크한거 삭제
-    const onDeleteChecked = () => {
+    const onDeleteChecked = (cart_id) => {
         if (count === 0) {
             setBox({ show: true, message: "삭제할 상품을 선택하세요." });
         } else {
@@ -109,7 +99,7 @@ const ProductCart = () => {
                 action: async () => {
                     for (const cart of carts) {
                         if (cart.checked) {
-                            // await axios.post(`/cart/delete/${cart_id}`);
+                            await axios.post(`/cart/delete/${cart.cart_id}`);
                         }
                         getCart();
                     }
@@ -118,7 +108,18 @@ const ProductCart = () => {
         }
     }
 
+    // 구매하기 페이지로 넘어감
+    const onClickOrder = () => {
+        if (count === 0) {
+            setBox({ show: true, message: "주문할 상품을 선택하세요." })
+        } else {
+            navi(`${pathname}?show=order`)
+        }
+    }
+
     useEffect(() => { getCart(); }, [])
+
+    useEffect(() => { let count = 0; carts.forEach(cart => cart.checked && count++); setCount(count); }, [carts])
 
     if (loading) return <div className='text-center my-5'><Spinner animation="border" variant="success" /></div>
     return (
@@ -127,7 +128,7 @@ const ProductCart = () => {
                 <div id="main_wrap">
                     <h1 className='all-title'>장바구니</h1>
 
-                    <Button className='cart-cancel-btn' onClick={() => onDeleteChecked()}>선택삭제</Button>
+                    <Button className='cart-cancel-btn' onClick={() => onDeleteChecked(carts.cart_id)}>선택삭제</Button>
                     <Table striped bordered>
                         <thead className='text-center'>
                             <tr>
@@ -135,7 +136,7 @@ const ProductCart = () => {
                                 <th>상품명</th>
                                 <th>수량</th>
                                 <th>상품금액</th>
-                                <th>주문 / 삭제</th>
+                                <th>삭제</th>
                             </tr>
                         </thead>
                         <tbody className='text-center'>
@@ -148,9 +149,8 @@ const ProductCart = () => {
                                             value={cart.qnt} size={2} type='number' />개
                                         <button onClick={(e) => onUpdateQnt(cart.title, cart.cart_id, cart.qnt)}>변경</button>
                                     </td>
-                                    <td>{cart.fmtprice}원</td>
+                                    <td>{cart.fmtsum}원</td>
                                     <td>
-                                        <Button className='cart-btn-order btn-sm'>주문</Button>
                                         <Button className='cart-btn-cancel btn-sm' onClick={() => onDeleteCart(cart.cart_id)}>삭제</Button>
                                     </td>
                                 </tr>
@@ -170,7 +170,7 @@ const ProductCart = () => {
                 </div>
             }
 
-            {show === "order" && <StoreBuyNow />}
+            {show === "order" && <StoreBuyNow carts={carts} />}
 
         </>
     )
