@@ -36,7 +36,7 @@ const SideMenu = () => {
                     <li className='user_section'>
                         <img className='user_img' src='/image/userimage_01.jpg'/>
                         <div className='user_info'>
-                            <img className='user_grade' src='/image/user/user_grade_03.png'/>
+                            <img className='user_grade' src='/image/user_icon/user_3.png'/>
                             <h3 className='user_nickname'>{sessionStorage.getItem("uid")}님</h3>
                         </div>
                     </li>
