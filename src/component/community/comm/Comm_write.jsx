@@ -121,52 +121,54 @@ const Comm_Write = () => {
     <div className='community_wrap'>
       <div className='community_contents'>
         <h1 className='community_title'>게시글 작성</h1>
-        <div className='text-start mb-2'>
-          <a className='btn btn-success' style={{ color: "white" }} href='/comm'>목록</a>
+        <div className='comm_backbtn'>
+          <a href='/comm'>목록</a>
         </div>
-        <Row className='justify-content-center'>
+        <Row>
           <Col xs lg={15}>
-            <Card className='p-5'>
-              <h4 className="text-center" style={{ "font-weight": "bold" }}>
-                <div className='text-start'>
-                  <input name="ck_vote" type="checkbox" checked={isChecked} onChange={handleCheckboxChange}/> 투표
-                </div>
-                <InputGroup className="mb-2">
-                  <InputGroup.Text>선택</InputGroup.Text>
-                  <Form.Select name="filter" value={selectedValue} onChange={handleDropdownChange} >
-                    <option value="0">식물자랑</option>
-                    <option value="1">질문</option>
-                  </Form.Select  >
-                </InputGroup>
-                <InputGroup className="mb-2">
-                  <InputGroup.Text>제목</InputGroup.Text>
-                  <FormControl name='title'
-                    value={form.title} onChange={onChange}
-                    placeholder="제목"/>
-                </InputGroup>
-              </h4>
-              <Row>
-                <Col className='px-3 text-start'>
-                </Col>
-              </Row>
-              <Row>
-                <Col>
-                  {isChecked &&
+            <Card className='community_write_section p-5'>
+              <div className='community_write_inside'>
+                <h4 className="text-center" style={{ "font-weight": "bold" }}>
+                  <div className='community_vote_title'>
+                    <input name="ck_vote" type="checkbox" checked={isChecked} onChange={handleCheckboxChange}/><p className='community_vote_text'>투표</p>
+                  </div>
+                  <InputGroup className="mb-2">
+                    <InputGroup.Text>선택</InputGroup.Text>
+                    <Form.Select name="filter" value={selectedValue} onChange={handleDropdownChange} >
+                      <option value="0">식물자랑</option>
+                      <option value="1">질문</option>
+                    </Form.Select  >
+                  </InputGroup>
+                  <InputGroup className="mb-2">
+                    <InputGroup.Text>제목</InputGroup.Text>
+                    <FormControl name='title'
+                      value={form.title} onChange={onChange}
+                      placeholder="제목"/>
+                  </InputGroup>
+                </h4>
+                <Row>
+                  <Col className='px-3 text-start'>
+                  </Col>
+                </Row>
+                <Row>
+                  <Col>
+                    {isChecked &&
+                      <>
+                        <Comm_voteList vote={vote} setVote={handleChangeVote} />
+                        <br/>
+                      </>
+                    }
                     <>
-                      <Comm_voteList vote={vote} setVote={handleChangeVote} />
-                      <br/>
+                      <CKEditor config={{ ckfinder: { uploadUrl: '/comm/ckupload' } }}
+                        editor={ClassicEditor}
+                        data={form.contents}
+                        onChange={(event, editor) => { onChangeContents(editor.getData()); }} />
                     </>
-                  }
-                  <>
-                    <CKEditor config={{ ckfinder: { uploadUrl: '/comm/ckupload' } }}
-                      editor={ClassicEditor}
-                      data={form.contents}
-                      onChange={(event, editor) => { onChangeContents(editor.getData()); }} />
-                  </>
-                </Col>
-              </Row>
-              <div className='mt-2'>
-                <Comm_plant form={form} setForm={setForm}/>
+                  </Col>
+                </Row>
+                <div className='mt-2'>
+                  <Comm_plant form={form} setForm={setForm}/>
+                </div>
               </div>
             </Card>
             <div className='text-start'>
@@ -174,12 +176,12 @@ const Comm_Write = () => {
             <div className='text-end mt-2'>
               {!isChecked ?
                 <>
-                  <Button className='me-2' vaiant='success' onClick={onClickSave}>등록</Button>
+                  <button className='comm_write_insertbtn' onClick={onClickSave}>등록</button>
                 </>
                 :
-                <>  <Button className='me-2' vaiant='success' onClick={onClickVoteSave}>투표등록</Button>
+                <>  <button className='comm_write_insertvotebtn' vaiant='success' onClick={onClickVoteSave}>투표등록</button>
                 </>}
-              <Button className='text-end' vaiant='secondary'>취소</Button>
+              <button className='comm_write_deletebtn' vaiant='secondary'>취소</button>
             </div>
           </Col>
         </Row>

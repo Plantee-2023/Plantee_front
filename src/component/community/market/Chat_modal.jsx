@@ -1,4 +1,3 @@
- 
 import React, { useEffect, useState, useRef } from 'react'
 import { Row, Col, Card, Form,Button,Modal } from 'react-bootstrap'
 import moment from 'moment'
@@ -49,18 +48,10 @@ const Chat_modal = ({post,box,setBox}) => {
     //useEffect(() => {
       //  ref_bottom.current.scrollIntoView({ behavior: 'smooth' });
     //}); 
-    
-
-
-    
-
 
     return (
         <>
-
-<Button variant="primary" onClick={handleShow}>
-               대화하기
-            </Button>
+        <button className='chat_btn' onClick={handleShow}>대화하기</button>
 
 
         <Modal
