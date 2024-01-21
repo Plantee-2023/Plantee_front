@@ -8,30 +8,35 @@ const PlantStartPage = () => {
     {
       q: ['식물을 키워본 경험이 있나요?'],
       a: [{ type: 'care_level1', text: '아니요 처음이에요 ㅜㅠ' },
-      { type: 'care_level2', text: '식물 친구들이 제 삶에 활기를 불어넣어 줘요! 🌿✨' }]
+      { type: 'care_level2', text: '식물 친구들이 제 삶에 활기를 불어넣어 줘요! 🌿✨' }],
+      image : '/image/test/icon/test_01.png',
     },
 
     {
       q: ['식물을 키울 곳은 어디인가요?'],
       a: [{ type: 'indoor', text: '작은 공간에서 식물 친구와 함께하고 싶어요.' },
-      { type: 'outdoor', text: '밖에서 자유롭게 햇빛을 받으며 식물을 키우고 싶어요.' }]
+      { type: 'outdoor', text: '밖에서 자유롭게 햇빛을 받으며 식물을 키우고 싶어요.' }],
+      image : '/image/test/icon/test_02.png'
     },
 
     {
       q: ['키우는 곳에 햇빛의 양은 어떤가요?'],
       a: [{ type: 'sunlight1', text: '거의 빛이 없는 공간이에요. 🌑' },,
-      { type: 'sunlight2', text: '햇빛이 잘 들어오는 공간이에요. 🌞✨' }]
+      { type: 'sunlight2', text: '햇빛이 잘 들어오는 공간이에요. 🌞✨' }],
+      image : '/image/test/icon/test_03.png'
     },
 
     {
       q: ['어떤 종류의 식물을 키우고 싶은가요?'],
       a: [{ type: 'type1', text: '아름다운 잎 모양이나 꽃을 감상하고 싶어요.' },
-      { type: 'type2', text: '작고 귀여운 다육식물을 키워보고 싶어요. 🌱💚' }]
+      { type: 'type2', text: '작고 귀여운 다육식물을 키워보고 싶어요. 🌱💚' }],
+      image : '/image/test/icon/test_04.png'
     },
 
     {
       q: ['🌱 테스트가 완료되었습니다. 결과를 확인하시겠습니까? 🌱'],
-      a: [{ type: '', text: '결과 보러 가기' }]
+      a: [{ type: '', text: '결과 보러 가기' }],
+      image : '/image/test/icon/test_05.png'
     }
   ];
 
@@ -115,13 +120,13 @@ const PlantStartPage = () => {
                     {val.q.map((qval, qidx) =>
                       <div className='question_q' key={qidx}>
                         {qval}
+                        <div className='question_deco_section'>
+                        <div className='question_image_section'>
+                          <img className='qustion_image' src={val.image} />
+                        </div>
+                        </div>
                       </div>
                     )}
-                  </div>
-                  <div className='question_deco_section'>
-                    <div className='question_image_section'>
-                      <img className='qustion_image' src='/image/planttest_02.jpg' />
-                    </div>
                   </div>
                   <div className='question_alist'>
                     {val.a && val.a.map((aval, aidx) =>

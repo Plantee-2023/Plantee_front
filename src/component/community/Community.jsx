@@ -4,8 +4,6 @@ import React, { useEffect, useState } from 'react'
 import { InputGroup, Table, FormControl, Button, Pagination, Row, NavLink, Col } from 'react-bootstrap'
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 
-
-
 const Community = () => {
 
   const [posts, setPosts] = useState([]);
@@ -15,10 +13,9 @@ const Community = () => {
   const search = new URLSearchParams(location.search);
   const size = 5;
   const [cnt,setCnt]=useState(0);
-   
+
   const [total, setTotal] = useState(0);
   const page = search.get("page") ? parseInt(search.get("page")) : 1;
-
 
   const getPost = async () => {
     setLoading(true);
@@ -28,15 +25,10 @@ const Community = () => {
     //console.log(result1.data.total);
 
     let data = result.data.list.map(p => p && { ...p, checked:false });
-     
     setPosts(data);
- 
-
- 
     // setLast(Math.ceil(result1.data.total/5));
     setLoading(false);
   }
-
 
   const onDelete = async (post_id) => {
     if(window.confirm(`${post_id}번 상품을 삭제하시겠습니까?`)){
@@ -47,35 +39,28 @@ const Community = () => {
     }
 }
 
-const onClickDelete = async () => {
-  let count=0;
-  for(const post of posts){
-    if(post.checked) {
-  const res=await axios.post('/comm/delete', {post_id: post.post_id});
-  if(res.data === 1) 
-  count++;
-    
-    
-     
+  const onClickDelete = async () => {
+    let count=0;
+    for(const post of posts){
+      if(post.checked) {
+    const res=await axios.post('/comm/delete', {post_id: post.post_id});
+    if(res.data === 1) 
+    count++;
+      }
+    }
+    alert("게시글이 삭제되었습니다.");
+    getPost();
   }
- 
-}
-alert("게시글이 삭제되었습니다.");
-getPost();
 
-}
+  const onChangeAll = (e) => {
+    const data = posts.map(item => item && {...item, checked:e.target.checked});
+    setPosts(data);
+  }
 
-const onChangeAll = (e) => {
-  const data = posts.map(item => item && {...item, checked:e.target.checked});
-  setPosts(data);
-}
-
-const onChangeSingle = (e, post_id) => {
-  const data = posts.map(item => item.post_id === post_id ? {...item, checked:e.target.checked} : item);
-  setPosts(data);
-}
-
-
+  const onChangeSingle = (e, post_id) => {
+    const data = posts.map(item => item.post_id === post_id ? {...item, checked:e.target.checked} : item);
+    setPosts(data);
+  }
 
   useEffect(() => {
     getPost();
@@ -88,24 +73,16 @@ const onChangeSingle = (e, post_id) => {
     });
     //console.log(chk);
     setCnt(chk);
-},[posts]);
+  },[posts]);
 
   return (
-
-    <div className='my-5' >
-      <div className='text-center'>
+    <div className='community_wrap' >
+      <div className='community_contents'>
         <Row className='justify-content-center'>
-
           <h1 text-center mb-5>커뮤니티</h1>
-
-         
           <div className='text-end mb-2'> <Button  onClick={()=>onClickDelete()}  >삭제</Button></div>
-
         </Row>
-
-
         <Table className='comm-table' striped bordered hover>
-
           <thead>
             <tr>
             <input type='checkbox' onChange={onChangeAll} checked={posts.length === cnt}/>
@@ -117,7 +94,6 @@ const onChangeSingle = (e, post_id) => {
               <th>추천</th>
               <th>조회</th>
               <th>날짜</th>
-
             </tr>
           </thead>
           <tbody>
@@ -129,10 +105,8 @@ const onChangeSingle = (e, post_id) => {
                 <td>
                   <div>
                   <Link to={`/comm/read/${post.post_id}`}>
-                                    <div className='ellipsis'>{post.title}</div>
-                                </Link>
-                   
-
+                    <div className='ellipsis'>{post.title}</div>
+                  </Link>
                   </div>
                 </td>
                 <td>{post.address}</td>
@@ -140,33 +114,15 @@ const onChangeSingle = (e, post_id) => {
                 <td>{post.like_cnt}</td>
                 <td>{post.view_cnt}</td>
                 <td>{post.red_date}</td>
-
-
-                
-
               </tr>
-            
-
-
-
             )}
           </tbody>
-          
-        
         </Table>
         <div className='text-end mb-2' >  <a className='btn btn-success' href="http://localhost:3000/comm/write">글쓰기</a> </div>
-
-        
-  
-
         <InputGroup className="mb-3">
-          <FormControl
-            placeholder="Recipient's username"
-
-          /><Button variant='success'>검색</Button>
-
+          <FormControl placeholder="Recipient's username"/>
+            <Button variant='success'>검색</Button>
         </InputGroup>
-
 
         <Pagination  >
           <Pagination.First />
@@ -186,7 +142,6 @@ const onChangeSingle = (e, post_id) => {
           <Pagination.Last />
         </Pagination>
       </div>
-
     </div>
   )
 }
