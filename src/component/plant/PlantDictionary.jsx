@@ -45,7 +45,7 @@ const PlantDictionary = () => {
   return (
     <>
     <div>
-        <img src="/image/plante_11.png" width={1900}/>
+        <img src="/image/header/plantee_header.png" width={1900} height={350}/>
         </div>
     <div className='plant_wrap'>
       <div className='plant_contents'>
