@@ -29,6 +29,7 @@ import Comm_list from './community/comm/Comm_list';
 import Market_write from './community/market/Market_write';
 import Market_list from './community/market/Market_list';
 import Market_read from './community/market/Market_read';
+import Comm_update from './community/comm/Comm_update';
 import DiaryMain from './diary/DiaryMain';
 import DiaryInsert from './diary/DiaryInsert';
 import DiaryUpdate from './diary/DiaryUpdate';
@@ -48,6 +49,7 @@ import StoreBuyNow from './store/StoreBuyNow';
 import HomePage from './HomePage';
 import AdminPage from './users/AdminPage';
 import PlantStartPage from './plant/plantee_i/PlantStartPage';
+import Comm_insertReply from './community/comm/Comm_insertReply';
 
 const RouterPage = () => {
     return (
@@ -100,6 +102,9 @@ const RouterPage = () => {
             <Route path="/comm" element={<Comm_list />} />
             <Route path="/comm/write" element={<Comm_write />} />
             <Route path="/comm/read/:post_id" element={<Comm_Read />} />
+            <Route path="/comm/update/:post_id" element={<Comm_update/>} />
+            <Route path="/comm/reply/:post_id" element={<Comm_insertReply/>} />
+            
 
             {/* 나눔 */}
             <Route path="/comm/market" element={<Market_list/>} />

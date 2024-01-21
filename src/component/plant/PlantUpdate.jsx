@@ -15,10 +15,23 @@ const PlantUpdate = () => {
   const img_ref = useRef(null);
   
   const getPlant = async () => {
-    setLoading(true);
-    const res = await axios.get(`/plant/read/${plant_id}`);
-    setForm(res.data);
-    setLoading(false);
+    try {
+      setLoading(true);
+      const res = await axios.get(`/plant/read/${plant_id}`);
+      
+      // 응답 데이터 구조에 따라 조건을 추가
+      if (res.data) {
+        setForm(res.data);
+      } else {
+        // 응답 데이터가 없는 경우에 대한 처리
+        console.error("데이터를 불러오지 못했습니다.");
+      }
+  
+      setLoading(false);
+    } catch (error) {
+      console.error("데이터를 불러오는 중 에러 발생:", error);
+      setLoading(false);
+    }
   }
 
   const { common_name, image, contents, watering, sunlight, care_level, leaf, flowers, fruits, type, indoor, poisonous_pet, cuisine } = form;
@@ -27,10 +40,10 @@ const PlantUpdate = () => {
     // 업로드 된 file
     const files = evt.target.files;
     const theFile = files[0];
-
+  
     // FileReader 생성
     const reader = new FileReader();
-
+  
     // file 업로드가 완료되면 실행
     reader.onloadend = (finishedEvent) => {
       // 업로드한 이미지 URL 저장
@@ -50,6 +63,12 @@ const PlantUpdate = () => {
 
   const onSubmit = async(e) => {
     e.preventDefault();
+
+    if (!attachment) {
+      alert("이미지를 선택하세요."); // 또는 다른 메시지로 사용자에게 알림
+      return;
+    }
+    
     const storage = getStorage();
     const fileRef = ref(storage, 'plant/' + uuidv4());
 
@@ -94,7 +113,7 @@ const PlantUpdate = () => {
           <section className='details_img_section'>
             <div className='details_img'>
             <form onSubmit={onSubmit}>
-                <img className='plant_image' src={attachment} style={{cursor:'pointer'}} value={image} onClick={() => img_ref.current.click()}/>
+                <img className='plant_image' src={attachment || image} style={{cursor:'pointer'}} value={image} onClick={() => img_ref.current.click()}/>
                 <input accept="image/*" type="file" onChange={onFileChange} style={{display:'none'}} ref={img_ref}/>
               </form>
             </div>

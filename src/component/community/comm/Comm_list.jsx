@@ -30,6 +30,7 @@ const Comm_list = () => {
     // console.log(query, page, size);
     console.log(result);
     //     setTotal(resultTotal.data);
+
     let data = result.data.list.map(p => p && { ...p, checked: false });
     setPosts(data);
     console.log(posts);
@@ -37,37 +38,23 @@ const Comm_list = () => {
     // setLast(Math.ceil(result1.data.total/5));
     setLoading(false);
   }
-  const onDelete = async (post_id) => {
-    if (window.confirm(`${post_id}번 상품을 삭제하시겠습니까?`)) {
-      await axios.get(`/shop/delete?post_id=${post_id}`);
-      // await axios.get(`/deleteFile?file=${shop.image}`);
-      alert("게시글이 삭제되었습니다.");
-      //  navi(`/shop/list?page=1&siez=${size}&query=${query}`);
-
-    }
-  }
 
   const onClickDelete = async () => {
     let count = 0;
 
     for (const post of posts) {
       if (post.uid === sessionStorage.getItem("uid")) {
-
-
         if (post.checked) {
           const res = await axios.post('/comm/delete', { post_id: post.post_id });
           if (res.data === 1)
             count++;
         }
-
-        alert("게시글이 삭제되었습니다.");
-        getPost();
-      } if (post.uid != sessionStorage.getItem("uid")) {
-        alert("본인 게시글만 삭제할 수 있습니다. ");
-      }
+      } 
     }
+  alert("게시글이 삭제되었습니다.");
+  getPost();
   }
-
+  
   const onChangeAll = (e) => {
     const data = posts.map(item => item && { ...item, checked: e.target.checked });
     setPosts(data);
@@ -102,7 +89,6 @@ const Comm_list = () => {
     setCnt(chk);
   }, [posts]);
 
-
   const onSubmit = (e) => {
     e.preventDefault();
     if (query === "") {
@@ -118,78 +104,86 @@ const Comm_list = () => {
   //navi(`/comm?page=${cpage}&size=${size}&query=${query}`)
 
   return (
-    <div className='comm_wrap' >
-      <div className='comm_contents'>
-          <Row className='justify-content-center'>
-            <h1 className='text-center mb-5'>커뮤니티</h1>
-            <div className='first_filter_section'>
-              <ul className='filter_list'>
-                <button className='filter_btn' type='button' onClick={(e) => onChangeFilter(e, '')} >전체보기</button>
-                <button className='filter_btn' type='button' onClick={(e) => onChangeFilter(e, 0)} >식물자랑</button>
-                <button className='filter_btn' type='button' onClick={(e) => onChangeFilter(e, 1)} >Q&A</button>
-              </ul>
-            </div>
-            <div className='plant_insert'><a href="http://localhost:3000/comm/write"><button>등록하기</button></a></div>
-            <div className='text-end'>
-              <form>
-                <InputGroup className='comm_search_input_inputgroup'>
-                  <input onChange={(e) => setQuery(e.target.value)} type='search' className='comm_search_input_textinput' placeholder='검색어를 입력해주세요.' />
-                  <button className='comm_search_input_searchbtn' type='submit' onClick={onSubmit}><img src='/image/search_icon.png' /></button>
-                </InputGroup>
-              </form>
-            </div>
-            <div>
-              {(sessionStorage.getItem('uid') === posts.user_uid || sessionStorage.getItem('uid') === 'admin') &&
-                <div className='mb-2'> <Button onClick={() => onClickDelete()} >삭제</Button></div>
+
+    <div className='community_wrap' >
+      <div className='community_contents'>
+      <h1 className='community_title'>커뮤니티</h1>
+        <Row className='community_list_row'>
+          <div className='community_filter_section'>
+            <ul className='community_filter_list'>
+              <div>
+              <button className='community_filter_btn' type='button' onClick={(e) => onChangeFilter(e, '')} >전체보기</button>
+              <button className='community_filter_btn' type='button' onClick={(e) => onChangeFilter(e, 0)} >식물자랑</button>
+              <button className='community_filter_btn' type='button' onClick={(e) => onChangeFilter(e, 1)} >Q&A</button>
+              </div>
+            </ul>
+            <div className='community_btn_section' >
+              <div className='community_insert_btn'>
+              <Link className='community_insert_btn_text' to="/comm/write">글쓰기</Link>
+              </div>
+              {/* <button className='community_insert_btn' href="http://localhost:3000/comm/write">글쓰기</button> */}
+              {(sessionStorage.getItem('uid') === posts.uid || sessionStorage.getItem('uid') === 'admin') &&
+              <button className='community_delete_btn' onClick={() => onClickDelete()}>삭제</button>
               }
             </div>
-          </Row>
-          <Table className='text-center' bordered hover>
-            <thead>
-              <tr>
-                <input type='checkbox' onChange={onChangeAll} checked={posts.length === cnt && !posts.length === 0} />
-                <th>No</th>
-                <th>구분</th>
-                <th>제목</th>
-                <th>지역</th>
-                <th>닉네임(ID)</th>
-                <th>추천</th>
-                <th>조회</th>
-                <th>날짜</th>
-              </tr>
-            </thead>
-            {posts.map(post =>
-              <tbody>
-                <tr key={post.post_id}>
-                  <td><input onChange={(e) => onChangeSingle(e, post.post_id)} type='checkbox' checked={post.checked} /></td>
-                  <td>{post.post_id}</td>
-                  <td>
-                    {post.filter === 0 && '식물자랑'}
-                    {post.filter === 1 && 'Q&A'}
-                  </td>
-                  <td>
-                    <div>
-                      <Link to={`/comm/read/${post.post_id}`}>
-                        <div className='comm_table_title'>{post.title}</div>
-                      </Link>
-                    </div>
-                  </td>
-                  <td>{post.user_address}</td>
-                  <td>{post.user_nickname}({post.uid})</td>
-                  <td>{post.like_cnt}</td>
-                  <td>{post.view_cnt}</td>
-                  <td>{post.red_date}</td>
-                </tr>
-                {post.post_id === 185 &&
-                  <>
-                    <Comm_reply post_id={post.post_id} />
-                  </>
-                }
-              </tbody>
-            )}
-
-          </Table>
+          </div>
+        </Row>
+        <div className='community_search_section'>
+          <div className='community_total'>총 게시글 수 : <strong>{total}</strong></div>
+          <form>
+            <InputGroup className='community_searchinputwrap'>
+              <input onChange={(e) => setQuery(e.target.value)} type='search' className='community_searchinput' placeholder='검색어를 입력해주세요.' />
+              <button className='community_searchbtn' type='submit' onClick={onSubmit}><img className='community_img' src='/image/search_icon.png' /></button>
+            </InputGroup>
+          </form>
         </div>
+        <Table className='comm-table' striped bordered hover>
+          <thead>
+            <tr>
+              <input type='checkbox' onChange={onChangeAll} checked={posts.length === cnt && posts.length > 0} />
+              <th>No</th>
+              <th>구분</th>
+              <th>제목</th>
+              <th>지역</th>
+              <th>닉네임(ID)</th>
+              <th>추천</th>
+              <th>조회</th>
+              <th>날짜</th>
+            </tr>
+          </thead>
+          {posts.map(post =>
+            <tbody>
+              <tr key={post.post_id}>
+                <td><input onChange={(e) => onChangeSingle(e, post.post_id)} type='checkbox' checked={post.checked} /></td>
+                <td>{post.post_id}</td>
+                <td>
+                  {post.filter === 0 && '식물자랑'}
+                  {post.filter === 1 && 'Q&A'}
+                </td>
+                <td>
+                  <div>
+                    <Link className='community_link' to={`/comm/read/${post.post_id}`}>
+                      <div className='community_posttitle'>{post.title}</div>
+                    </Link>
+                  </div>
+                </td>
+                <td>{post.user_address}</td>
+                <td>{post.user_nickname}({post.uid})</td>
+                <td>{post.like_cnt}</td>
+                <td>{post.view_cnt}</td>
+                <td>{post.red_date}</td>
+              </tr>
+
+              {post.post_id === 185 &&
+                <>
+                  <Comm_reply post_id={post.post_id} />
+                </>
+              }
+            </tbody>
+          )}
+        </Table>
+      </div>
+
       {total > size &&
         <Pagination
           activePage={page}
