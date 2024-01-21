@@ -79,6 +79,10 @@ const PlantRecipe = () => {
   if (loading) return <div className='text-center my-5'><Spinner animation="border" variant="success" /></div>
 
   return (
+    <>
+      <div className='mainbanner_section'>
+        <img className='banner_img' src="/image/header/Recipe.png" />
+      </div>
     <div className='recipe_wrap'>
       <div className='recipe_contents'>
         <div className='recipe_select_section'>
@@ -131,6 +135,7 @@ const PlantRecipe = () => {
         </div>
       </div>
     </div>
+    </>
   )
 }
 

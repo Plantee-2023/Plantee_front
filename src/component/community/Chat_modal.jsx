@@ -48,9 +48,6 @@ const Chat_modal = ({box,setBox}) => {
     //useEffect(() => {
       //  ref_bottom.current.scrollIntoView({ behavior: 'smooth' });
     //}); 
-
-
-     
     
 
 

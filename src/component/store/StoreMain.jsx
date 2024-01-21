@@ -113,7 +113,11 @@ const StoreMain = () => {
 
     if (loading) return <div className='text-center my-5'><Spinner animation="border" variant="success" /></div>
     return (
+
         <>
+            <div className='mainbanner_section'>
+                <img className='banner_img' src="/image/header/Store.png" />
+            </div>
             <div className='store_wrap'>
                 <div className='store_contents'>
 

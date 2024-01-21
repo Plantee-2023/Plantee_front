@@ -17,7 +17,7 @@ const Magazine = () => {
         contents: '',
         image: '',
         view_cnt: '',
-        uid:'admin'
+        uid: 'admin'
     });
     const { title, view_cnt, image, contents, uid } = post;
 
@@ -35,27 +35,31 @@ const Magazine = () => {
         }
     }
 
-        const onDelete = () => {
-            setBox({
-                show: true,
-                message: `매거진을 삭제하시겠습니까?`,
-                action: async () => {
-                    await axios.get(`/magazine/delete/${magazine_num}`);
-                    setBox({
-                        show: true,
-                        message: "삭제 완료되었습니다."
-                    })
-                    navi(`/magazine/magazineList`);
-                }
-            })
-        }
+    const onDelete = () => {
+        setBox({
+            show: true,
+            message: `매거진을 삭제하시겠습니까?`,
+            action: async () => {
+                await axios.get(`/magazine/delete/${magazine_num}`);
+                setBox({
+                    show: true,
+                    message: "삭제 완료되었습니다."
+                })
+                navi(`/magazine/magazineList`);
+            }
+        })
+    }
 
-        useEffect(() => {
-            getMagazine();
-        }, [])
+    useEffect(() => {
+        getMagazine();
+    }, [])
 
-        if (loading) return <div className='text-center my-5'><Spinner animation="border" variant="success" /></div>
-        return (
+    if (loading) return <div className='text-center my-5'><Spinner animation="border" variant="success" /></div>
+    return (
+        <>
+            <div className='mainbanner_section'>
+                <img className='banner_img' src="/image/header/Magazine.png" />
+            </div>
             <div id="plant_wrap">
                 <div className="plant_contents">
                     <h1 className='magazine-title'>{title}</h1>
@@ -77,7 +81,8 @@ const Magazine = () => {
                     <h5 className='magazine-text'>{contents}</h5>
                 </div>
             </div>
-        )
-    }
+        </>
+    )
+}
 
-    export default Magazine
+export default Magazine

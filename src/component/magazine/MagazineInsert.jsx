@@ -110,6 +110,28 @@ const MagazineInsert = () => {
                 </form>
             </div>
         </div >
+        <>
+            <div className='mainbanner_section'>
+                <img className='banner_img' src="/image/header/Magazine.png" />
+            </div>
+            <div id="main_wrap">
+                <div className="main_contents">
+                    <form onSubmit={onSubmit} className='insert-img'>
+                        <Card className='insert-card'>
+                            <Form.Control onChange={onChange} name='magazine_num' placeholder='번호' className='insert-text' style={{ width: 100 }} />
+                            <Form.Control onChange={onChange} name='title' placeholder='제목을 입력해주세요.' className='insert-text' />
+                            <div className='insert-img'>
+                                <img value={image} name='image' src={attachment || 'http://via.placeholder.com/150x150'} onClick={() => img_ref.current.click()} width={300} height={300} style={{ cursor: 'pointer' }} />
+                                <input onChange={onFileChange} type='file' ref={img_ref} style={{ display: 'none' }} />
+                                <br />
+                            </div>
+                            <Form.Control onChange={onChange} name='contents' placeholder='내용을 입력해주세요.' as="textarea" rows={10} className='insert-text' />
+                        </Card>
+                        <Button type='submit' className='insert-btn1 btn-lg'>등록</Button>
+                    </form>
+                </div>
+            </div >
+        </>
     )
 }
 

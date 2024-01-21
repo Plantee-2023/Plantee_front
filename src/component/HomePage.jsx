@@ -105,7 +105,7 @@ const HomePage = () => {
                                 </Card.Footer>
                             </Card>
                         </SwiperSlide>
-                    )} 
+                    )}
                 </Swiper>
                 <Row className='mt-5'>
                     <Col>

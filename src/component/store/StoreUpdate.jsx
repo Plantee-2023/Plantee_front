@@ -6,7 +6,7 @@ import { BoxContext } from '../common/BoxContext';
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import "./Store.css";
-import { ref, getDownloadURL, uploadBytes, getStorage, uploadString} from "firebase/storage";
+import { ref, getDownloadURL, uploadBytes, getStorage, uploadString } from "firebase/storage";
 import { v4 as uuidv4 } from 'uuid'; //랜덤 식별자를 생성해주는 라이브러리
 
 const StoreUpdate = ({ match, history }) => {
@@ -44,7 +44,7 @@ const StoreUpdate = ({ match, history }) => {
     }
 
     const onChangeFile = (e) => {
-         // 업로드 된 file
+        // 업로드 된 file
         const files = e.target.files;
         const theFile = files[0];
 
@@ -53,9 +53,9 @@ const StoreUpdate = ({ match, history }) => {
 
         // file 업로드가 완료되면 실행
         reader.onloadend = (finishedEvent) => {
-        // 업로드한 이미지 URL 저장
-        const result = finishedEvent.currentTarget.result;
-        setAttachment(result);
+            // 업로드한 이미지 URL 저장
+            const result = finishedEvent.currentTarget.result;
+            setAttachment(result);
         };
         // 파일 정보를 읽기
         reader.readAsDataURL(theFile);
@@ -72,31 +72,31 @@ const StoreUpdate = ({ match, history }) => {
         // 업로드한 이미지 url 가져오기
         const downloadURL = await getDownloadURL(fileRef);
         //console.log(downloadURL)
-        
+
         if (window.confirm("글 수정을 완료하시겠습니까?")) {
             //이미지저장 url호출
             const updateForm = {
                 ...form,
                 store_id,
-                image:downloadURL
+                image: downloadURL
             };
 
             try {
                 const res = await axios.post(`/store/update`, updateForm);
 
-                if(res.data === 0){
+                if (res.data === 0) {
                     alert("글 수정이 실패하였습니다.");
-                }else {
+                } else {
                     alert("글 수정이 완료되었습니다.");
                     navi(`/store/read/${store_id}`)
                 }
-            } catch(error) {
+            } catch (error) {
                 console.error("등록 에러 : ", error);
                 alert("등록 중 오류가 발생했습니다.");
             }
-        }    
+        }
     }
-    
+
 
     // const onClickSave = async (e) => {
     //     e.preventDefault();
@@ -117,15 +117,17 @@ const StoreUpdate = ({ match, history }) => {
     if (loading) return <div className='text-center my-5'><Spinner animation="border" variant="success" /></div>
     return (
         <>
-
+            <div className='mainbanner_section'>
+                <img className='banner_img' src="/image/header/Store.png" />
+            </div>
             <div className='store_wrap'>
                 <div className='store_contents'>
                     <div className='store_layout'>
                         <section className='store_img_section'>
-                        <form className='store_img' onSubmit={onSubmit}>
-                            <img src={attachment || image} style={{cursor:'pointer'}} value={image} onClick={() => img_ref.current.click()}/>
-                            <input accept="image/*" type="file" onChange={onChangeFile} style={{display:'none'}} ref={img_ref}/>
-                        </form>
+                            <form className='store_img' onSubmit={onSubmit}>
+                                <img src={attachment || image} style={{ cursor: 'pointer' }} value={image} onClick={() => img_ref.current.click()} />
+                                <input accept="image/*" type="file" onChange={onChangeFile} style={{ display: 'none' }} ref={img_ref} />
+                            </form>
                         </section>
 
 
@@ -163,11 +165,11 @@ const StoreUpdate = ({ match, history }) => {
                                     </div>
 
                                     <CKEditor
-                                    config={{ ckfinder: { uploadUrl: '/store/ckupload' } }}
-                                    editor={ClassicEditor}
-                                    data={contents}
-                                    onChange={(event, editor) => { onChangeContents(editor.getData()); }}
-                                    onReady={(editor) => { }} />
+                                        config={{ ckfinder: { uploadUrl: '/store/ckupload' } }}
+                                        editor={ClassicEditor}
+                                        data={contents}
+                                        onChange={(event, editor) => { onChangeContents(editor.getData()); }}
+                                        onReady={(editor) => { }} />
 
                                     <div className='plantinsert_section'>
                                         <div className='plantinsert_btngroup'>
@@ -178,7 +180,7 @@ const StoreUpdate = ({ match, history }) => {
                                 </form>
                             </section>
 
-                            
+
                         </div>
 
 

@@ -79,21 +79,21 @@ const MagazineUpdate = () => {
                     const res = await axios.post('/magazine/update', data);
                     if (res.data === 0) {
                         setBox({
-                            show : true,
-                            message : "수정을 실패하였습니다."
+                            show: true,
+                            message: "수정을 실패하였습니다."
                         })
                     } else {
                         setBox({
-                            show : true,
-                            message : "수정에 성공하였습니다."
+                            show: true,
+                            message: "수정이 완료되었습니다."
                         })
                         navi(`/magazine/read/${magazine_num}`);
                     }
                 } catch (error) {
                     console.error("등록 에러 : ", error);
                     setBox({
-                        show : true,
-                        message : "수정 중 오류가 발생하였습니다."
+                        show: true,
+                        message: "수정 중 오류가 발생하였습니다."
                     })
                 }
             }
@@ -102,22 +102,27 @@ const MagazineUpdate = () => {
 
     if (loading) return <div className='text-center my-5'><Spinner animation="border" variant="success" /></div>
     return (
-        <div id="plant_wrap">
-            <div className="plant_contents">
-                <form onSubmit={onSubmit} className='insert-img'>
-                    <h1 className='text-center mt-3 mb-3'>[{magazine_num}] 정보수정</h1>
-                    <Card className='insert-card'>
-                        <Form.Control onChange={onChange} value={title} name='title' placeholder='제목을 입력해주세요.' className='insert-text' />
-                        <div className='insert-img'>
-                            <img value={image} name='image' className='image' src={attachment || 'http://via.placeholder.com/150x150'} onClick={() => img_ref.current.click()} width={300} height={300} style={{ cursor: 'pointer' }} />
-                            <input accept='image/jpg' type='file' onChange={onFileChange} ref={img_ref} style={{ display: 'none' }} />
-                        </div>
-                        <Form.Control onChange={onChange} value={contents} name='contents' placeholder='내용을 입력해주세요.' as="textarea" rows={10} className='insert-text' />
-                    </Card>
-                    <Button type='submit' className='insert-btn1 btn-lg'>등록</Button>
-                </form>
+        <>
+            <div className='mainbanner_section'>
+                <img className='banner_img' src="/image/header/Magazine.png" />
             </div>
-        </div>
+            <div id="main_wrap">
+                <div className="main_contents">
+                    <form onSubmit={onSubmit} className='insert-img'>
+                        <h1 className='text-center mt-3 mb-3'>[{magazine_num}] 정보수정</h1>
+                        <Card className='insert-card'>
+                            <Form.Control onChange={onChange} value={title} name='title' placeholder='제목을 입력해주세요.' className='insert-text' />
+                            <div className='insert-img'>
+                                <img value={image} name='image' className='image' src={attachment || 'http://via.placeholder.com/150x150'} onClick={() => img_ref.current.click()} width={300} height={300} style={{ cursor: 'pointer' }} />
+                                <input accept='image/jpg' type='file' onChange={onFileChange} ref={img_ref} style={{ display: 'none' }} />
+                            </div>
+                            <Form.Control onChange={onChange} value={contents} name='contents' placeholder='내용을 입력해주세요.' as="textarea" rows={10} className='insert-text' />
+                        </Card>
+                        <Button type='submit' className='insert-btn1 btn-lg'>등록</Button>
+                    </form>
+                </div>
+            </div>
+        </>
     )
 }
 

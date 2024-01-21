@@ -175,6 +175,7 @@ const Comm_insertReply = () => {
   }
 
   return (
+    
     <div className='my-5'  >
       <h1 className='text-center mb-5'>게시글 작성</h1>
       <div className='text-start mb-2'>
