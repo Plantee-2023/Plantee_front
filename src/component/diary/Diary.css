@@ -16,7 +16,7 @@
 .diary_read_store_card{margin: 0 auto;}
 
 /* 검색창 */
-.diary_searchwrap {width: 600px; margin: 0 auto; padding: 2rem;}
+.diary_searchwrap {width: 400px; margin: 0 auto; padding: 2rem;}
 .diary_searchinputwrap {border: 1px solid #4cc37c; padding: 2%; border-radius: 40px;}
 .diary_searchinput {width: 88%; border: none;}
 input:focus {outline:none;}

@@ -93,9 +93,9 @@ const DiaryMain = () => {
                     </div>
                     <div className='diary_searchwrap'>
                         <form>
-                            <InputGroup className='diary_searchinputwrap'>
-                                <input type='search' className='diary_searchinput' placeholder='검색어를 입력해주세요.' value={searchTerm} onChange={handleSearchChange} />
-                                {/* <button className='diary_searchbtn' type='submit'><img src='/image/search_icon.png' /></button> */}
+                            <InputGroup className='search_input_inputgroup'>
+                                <input type='search' className='search_input_textinput' placeholder='검색어를 입력해주세요.' value={searchTerm} onChange={handleSearchChange} />
+                                <button className='search_input_searchbtn' type='submit'><img src='/image/search_icon.png' /></button>
                             </InputGroup>
                         </form>
                     </div>

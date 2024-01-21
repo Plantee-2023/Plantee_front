@@ -128,8 +128,9 @@ const DiaryInsert = () => {
             <div className='plant_wrap'>
                 <div className='plant_contents'>
                     <div className='text-center'>
+                        <h3 className='mt-5'><strong>등록하기</strong></h3>
                         <div className='mt-5'>
-                            <img width={450} height={450} src={attachment || "http://via.placeholder.com/250x250"} onClick={() => img_ref.current.click()} style={{ cursor: 'pointer' }} value={image} />
+                            <img width={350} height={350} src={attachment || "http://via.placeholder.com/250x250"} onClick={() => img_ref.current.click()} style={{ cursor: 'pointer' }} value={image} />
                             <input type='file' ref={img_ref} style={{ display: 'none' }} onChange={onFileChange} />
                             <br />
                             <div className='mt-5'>
