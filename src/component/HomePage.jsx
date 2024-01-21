@@ -25,18 +25,18 @@ const HomePage = () => {
     const [page, setPage] = useState(1);
     const size = 20;
     const [query, setQuery] = useState("");
+    const filter = '';
 
 
     const getMain = async () => {
         setLoading(true);
-
         const res = await axios.get(`/store/list.json?page=${page}&size=20&query=${query}`);
         const res1 = await axios.get(`/magazine/list.json?query=''&page=1&size=8`);
-        //const res2 = await axios.get(`/comm/list.json?category=3&page=1&size=10&query=''`); //커뮤니티
+        const res2 = await axios.get(`/comm/filter_list.json?category=3&page=1&size=${size}&query=${query}&filter=${filter}`); //커뮤니티
         const res3 = await axios.get(`/plant/list.json`); // 플랜트
-         setStore(res.data.list);
-         setMagazine(res1.data.list);
-        //setCommunity(res2.data.list);
+        setStore(res.data.list);
+        setMagazine(res1.data.list);
+        setCommunity(res2.data.list);
         setPlants(res3.data.list);
         setLoading(false);
     }
@@ -88,7 +88,6 @@ const HomePage = () => {
                     slidesPerView={5}
                     autoplay={{ delay: 2000 }}
                     navigation
-
                     style={{ "--swiper-navigation-color": "#ffffff" }}>
                     {store.map(s =>
                         <SwiperSlide>
@@ -106,7 +105,7 @@ const HomePage = () => {
                                 </Card.Footer>
                             </Card>
                         </SwiperSlide>
-                    )} 
+                    )}
                 </Swiper>
                 <Row className='mt-5'>
                     <Col>
@@ -178,28 +177,23 @@ const HomePage = () => {
                     <button className='homepage_btn'>식물자랑</button>
                     <button className='homepage_btn'>거래</button>
                 </div>
-                <Carousel className='mb-5 mt-5'>
-                    {/* {community.map(c =>
-                        <Carousel.Item>
-                            <Row>
-                                <Col key={c.post_id}>
-                                    <Card>
-                                        <Card.Body>
-                                            <Card.Img src='/image/story1.jpg' width={200} height={200} />
-                                            <Card.Body>
-                                                <div> 제목 : {c.title}</div>
-                                                <div> 닉네임 : {c.nickname}</div>
-                                            </Card.Body>
-                                        </Card.Body>
-                                        <Card.Footer className='text-start'>
-                                            {c.like_cnt} <MdFavoriteBorder /> {c.view_cnt} : {c.coment_cnt} <LiaComment size={20} />
-                                        </Card.Footer>
-                                    </Card>
-                                </Col>
-                            </Row>
-                        </Carousel.Item>
-                    )} */}
-                </Carousel>
+                <Swiper
+                    modules={[Navigation, Pagination, Autoplay]}
+                    spaceBetween={30}
+                    slidesPerView={4}
+                    autoplay={{ delay: 13000 }}
+                    navigation
+                    style={{ "--swiper-navigation-color": "#ffffff" }}>
+                    {community.map(c =>
+                        <SwiperSlide>
+                            <Card className='mt-5 mb-5'>
+                                <Card.Body>
+                                    <Card.Img src={c.image || 'http://via.placeholder.com/150x150'} width={150} height={250} ></Card.Img>
+                                </Card.Body>
+                            </Card>
+                        </SwiperSlide>
+                    )}
+                </Swiper>
                 <Row>
                     <Col>
                         <h2 className='homepage_maintitle'>

@@ -52,7 +52,7 @@ const AdminPage = () => {
           <tbody>
             {list.map(u =>
               <tr key={u.user_id}>
-                <td style={{ width: 50 }} className='text-center'>{u.exp}</td>
+                <td style={{ width: 50 }} className='text-center'>{u.user_id}</td>
                 <td className='text-center'>{u.uname}</td>
                 <td className='text-center'>{u.phone}</td>
                 <td className='text-center'>{u.address1} {u.address2}</td>

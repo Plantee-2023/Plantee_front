@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
-import {Button, Form} from 'react-bootstrap'
+import { Button, Form } from 'react-bootstrap'
 import Pagination from 'react-js-pagination';
 import "../common/Pagination.css"
 
@@ -42,43 +42,43 @@ const getComent = async() => {
 
     const onClickLogin = () => {
         sessionStorage.setItem("target", `/shop/info/${post_id}`);
-        window.location.href="/login";
+        window.location.href = "/login";
     }
 
     const onClickBody = (comment_id) => {
-        const data=list.map(r=>r.comment_id===comment_id ? {...r, ellipsis:!r.ellipsis} : r);
+        const data = list.map(r => r.comment_id === comment_id ? { ...r, ellipsis: !r.ellipsis } : r);
         setList(data);
     }
 
-    const onDelete = async(comment_id)=> {
-        if(window.confirm(`${comment_id}번 댓글을 삭제하실래요?`)) {
+    const onDelete = async (comment_id) => {
+        if (window.confirm(`${comment_id}번 댓글을 삭제하실래요?`)) {
             await axios.post(`/comments/delete_comments/${comment_id}`);
             getComent();
-        }  
+        }
     }
 
-    const onClickUpdate = (comment_id)=> {
-        const data=list.map(r=>r.comment_id===comment_id ? {...r, view:false} : r);
+    const onClickUpdate = (comment_id) => {
+        const data = list.map(r => r.comment_id === comment_id ? { ...r, view: false } : r);
         setList(data);
     }
 
     const onClickCancel = (comment_id) => {
-        const data=list.map(r=>r.comment_id===comment_id ? {...r, view:true, contents:r.text} : r);
+        const data = list.map(r => r.comment_id === comment_id ? { ...r, view: true, contents: r.text } : r);
         setList(data);
     }
 
     const onChangeBody = (e, comment_id) => {
-        const data=list.map(r=>r.comment_id===comment_id ? {...r, contents:e.target.value} : r);
+        const data = list.map(r => r.comment_id === comment_id ? { ...r, contents: e.target.value } : r);
         setList(data);
     }
 
-    const onClickSave = async(comment_id, contents, text)=>{
-        if(contents===text){
+    const onClickSave = async (comment_id, contents, text) => {
+        if (contents === text) {
             onClickCancel(comment_id);
-        }else{
-            if(window.confirm(`${comment_id}번 리뷰를 수정하실래요?`)){
+        } else {
+            if (window.confirm(`${comment_id}번 리뷰를 수정하실래요?`)) {
                 //리뷰수정
-                await axios.post("/comments/update_comments", {comment_id, contents});
+                await axios.post("/coment/update", { comment_id, contents });
                 alert("수정완료!");
                 getComent();
             }
@@ -90,8 +90,8 @@ const getComent = async() => {
             <div> <h5 style={{"font-weight":"bold"}}>댓글수:{total}건</h5></div>
             {sessionStorage.getItem("uid") ?
                 <div>
-                    <Form.Control onChange={(e)=>setContents(e.target.value)} value={contents}
-                        as="textarea" rows={5} placeholder='내용을 입력하세요.'/>
+                    <Form.Control onChange={(e) => setContents(e.target.value)} value={contents}
+                        as="textarea" rows={5} placeholder='내용을 입력하세요.' />
                     <div className='text-end mt-2'>
                         <button onClick={onRegister}
                             className='comm_coment_insertbtn mt-3 mb-3'>등록</button>
@@ -100,11 +100,11 @@ const getComent = async() => {
                 :    
                 <div className='mb-5'>
                     <Button className='w-100' onClick={onClickLogin}>로그인</Button>
-                </div>    
+                </div>
             }
             <hr/>
             <div>
-                {list.map(r=>
+                {list.map(r =>
                     <div key={r.comment_id}>
                         <div>
                             <small>{r.reg_date}</small>

@@ -1,9 +1,36 @@
-import React from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import { Link } from 'react-router-dom'
+import axios from 'axios'
+import { BoxContext } from '../common/BoxContext'
 
 const SideMenu = () => {
+    const { box, setBox } = useContext(BoxContext);
+    const [user, setUser] = useState({
+        nickname: '',
+        image: '',
+        phone: '',
+        address1: '',
+        address2: '',
+    })
+    const { uid, nickname, image, phone, address1, address2 } = user;
+    const getList = async () => {
+        try {
+            const res = await axios(`/users/read.json/${sessionStorage.getItem("uid")}`);
+            console.log(res.data);
+            setUser(res.data);
+        } catch (error) {
+            setBox({
+                show: true,
+                message: `${error.message}`
+            })
+        }
+    }
+
+    useEffect(() => {
+        getList();
+    }, [])
     return (
-    <div className='mypage_sidebar_wrap'>
+        <div className='mypage_sidebar_wrap'>
             <div className="mypage_sidebar_box">
                 <ol className='mypage_sidebar_ol'>
                     <li className='user_section'>
@@ -44,7 +71,7 @@ const SideMenu = () => {
                 </ol>
             </div>
         </div>
-  )
+    )
 }
 
 export default SideMenu

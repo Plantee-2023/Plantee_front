@@ -8,7 +8,7 @@ import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { getFirestore, setDoc, doc, getDoc } from 'firebase/firestore'
 import "./Store.css";
 import Parser from 'html-react-parser';
-import { ref, getDownloadURL, uploadBytes, getStorage, uploadString} from "firebase/storage";
+import { ref, getDownloadURL, uploadBytes, getStorage, uploadString } from "firebase/storage";
 import { v4 as uuidv4 } from 'uuid'; //랜덤 식별자를 생성해주는 라이브러리
 
 const StoreInsert = () => {
@@ -37,15 +37,15 @@ const StoreInsert = () => {
         // 업로드 된 file
         const files = evt.target.files;
         const theFile = files[0];
-    
+
         // FileReader 생성
         const reader = new FileReader();
-    
+
         // file 업로드가 완료되면 실행
         reader.onloadend = (finishedEvent) => {
-        // 업로드한 이미지 URL 저장
-        const result = finishedEvent.currentTarget.result;
-        setAttachment(result);
+            // 업로드한 이미지 URL 저장
+            const result = finishedEvent.currentTarget.result;
+            setAttachment(result);
         };
         // 파일 정보를 읽기
         reader.readAsDataURL(theFile);
@@ -74,7 +74,7 @@ const StoreInsert = () => {
         const storage = getStorage();
         const fileRef = ref(storage, 'recipe/' + uuidv4());
 
-         // 이미지를 firebase storage에 업로드
+        // 이미지를 firebase storage에 업로드
         const response = await uploadString(fileRef, attachment, 'data_url');
 
         // 업로드한 이미지 url 가져오기
@@ -89,19 +89,19 @@ const StoreInsert = () => {
                     ...form,
                     uid: sessionStorage.getItem("uid"),
                     category: 5,
-                    image:downloadURL
+                    image: downloadURL
                 };
                 try {
                     // 서버에 업데이트된 form 을 전송
                     const res = await axios.post(`/store/insert`, updateForm);
-    
-                    if(res.data === 0) {
+
+                    if (res.data === 0) {
                         alert('등록 실패');
-                    }else {
+                    } else {
                         alert("등록 완료!");
                         navi("/store");
                     }
-                }catch(error) {
+                } catch (error) {
                     console.error("등록 에러 : ", error);
                     alert("등록 중 오류가 발생했습니다.");
                 };
@@ -112,16 +112,19 @@ const StoreInsert = () => {
     if (loading) return <div className='text-center my-5'><Spinner animation="border" variant="success" /></div>
     return (
         <>
+            <div className='mainbanner_section'>
+                <img className='banner_img' src="/image/header/Calendar.png" />
+            </div>
             <div className='store_wrap'>
                 <div className='store_contents'>
                     <div className='store_layout'>
 
                         <section className='store_img_section'>
                             <div className='store_img'>
-                            <form onSubmit={onClickSave}>
-                                <img className='recipe_image' src={attachment} style={{cursor:'pointer'}} value={image} onClick={() => img_ref.current.click()}/>
-                                <input accept="image/*" type="file" onChange={onFileChange} style={{display:'none'}} ref={img_ref}/>
-                            </form>
+                                <form onSubmit={onClickSave}>
+                                    <img className='recipe_image' src={attachment} style={{ cursor: 'pointer' }} value={image} onClick={() => img_ref.current.click()} />
+                                    <input accept="image/*" type="file" onChange={onFileChange} style={{ display: 'none' }} ref={img_ref} />
+                                </form>
                             </div>
                         </section>
 

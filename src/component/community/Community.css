@@ -3,13 +3,17 @@ a { text-decoration: none; }
 .wrap {height: 700px; padding: 40px 0; background-color: #A8C0D6; overflow-y: scroll;}
 
 /* 필터  */
-.plant_wrap {width: 100%; margin: 0 auto;}
-.plant_contents {width: 1280px; margin: 0 auto;}
+.comm_wrap {width: 100%; margin: 0 auto;}
+.comm_contents {width: 82%; margin: 0 auto;}
 .first_filter_section {margin: 2rem 0 0 -2rem; padding: 0; border: 0; vertical-align: baseline;}
 .filter_list {display: flex; flex-wrap: wrap;}
 
 /* 검색바 */
-.button_hide {background-color: #ffffff; border: #ffffff;}
+.comm_search_input_inputgroup {margin-top: 18px; margin-bottom: 18px; display: flex; justify-content: end;}
+.comm_search_input_textinput {width: 12%; border: none; border-bottom: 1px solid #ddd;}
+.comm_search_input_searchbtn {border: none; background: none; border-bottom: 1px solid #ddd;}
+.comm_search_input_searchbtn img {width: 26px; height: 26px;}
+/* .button_hide {background-color: #ffffff; border: #ffffff;}
 .store_filterbtn_group {margin-top: 2%;}
 .store_filterbtn {background-color: #fff; border: 1px solid #adadad; border-radius: 30px; color: #333333; padding: 0 25px 0 25px; height: 40px; justify-content: center; align-items: center;}
 .store_filterbtn:hover {background-color: #4cc67c; border-radius: 30px; color: #fff; padding: 0 25px 0 25px; height: 40px; justify-content: center; align-items: center;}
@@ -19,7 +23,10 @@ a { text-decoration: none; }
 .store_searchinput {width: 75%; border: none;}
 input:focus {outline:none;}
 .store_searchbtn {border: none; background: none;}
-.store_searchbtn img {width: 26px; height: 26px; margin-left: 70%;}
+.store_searchbtn img {width: 26px; height: 26px; margin-left: 70%;} */
+
+.comm_insert {width: 100%; height: 40px; margin: 0;}
+.comm_insert button {width: 100px; height: 100%; border: none; background-color: #07955C; border-radius: 100px; color: #fff; float: right;}
 
 /**/
 .comm{color:#4cc67c; font-weight: bold;}
@@ -55,6 +62,8 @@ input:focus {outline:none;}
 .community_delete_btn, .community_insert_btn {width: 100px; height: 45px; border: none; border-radius: 50px; background-color: #07955C; color: #fff;}
 .community_delete_btn {margin-left: 10px;}
 .community_insert_btn_text {color: #fff; text-decoration: none; display: flex; justify-content: center; line-height: 2.7;}
+community_insert_btn_text a {color: #fff;}
+
 
 .community_search_section {display: flex; justify-content: space-between; margin-bottom: 2rem;}
 .community {width: 24px; height: 24px; line-height: 2.7; display: flex; justify-content: center;}
@@ -101,7 +110,8 @@ input:focus {outline:none;}
 .comm_coment_deletetbtn {width: 100px; height: 45px; border: 1px solid #a4a4a4; border-radius: 50px; background-color: #fff; color: #a4a4a4;}
 
 /* CommSharePage */
-.comm_read_url {border: none; width: 100px; height: 35px; border-radius: 10px; background-color: #07955C; color: #fff;}
+.comm_read_url {width: 100px; height: 30px; line-height: 28px; border: 1px solid #999; border-radius: 20px; background: #fff; font-size: 14px;}
+.comm_read_url:hover {background: #666; border: none; color: #fff;}
 
 /* CommComentPage */
 .comm_coment_insertbtn {width: 100px; height: 45px; border: none; border-radius: 50px; background-color: #07955C; color: #fff;}
