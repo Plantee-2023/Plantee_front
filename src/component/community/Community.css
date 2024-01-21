@@ -54,7 +54,7 @@ input:focus {outline:none;}
 
 .community_delete_btn, .community_insert_btn {width: 100px; height: 45px; border: none; border-radius: 50px; background-color: #07955C; color: #fff;}
 .community_delete_btn {margin-left: 10px;}
-.community_insert_btn_text {color: #fff; text-decoration: none;}
+.community_insert_btn_text {color: #fff; text-decoration: none; display: flex; justify-content: center; line-height: 2.7;}
 
 .community_search_section {display: flex; justify-content: space-between; margin-bottom: 2rem;}
 .community {width: 24px; height: 24px; line-height: 2.7; display: flex; justify-content: center;}
@@ -66,5 +66,55 @@ input:focus {outline:none;}
 .community_searchbtn {border: none; background-color: #fff;}
 .community_total {justify-content: center; align-items: center; display: flex;}
 
-.community_link {text-decoration: none; color: #333;}
-.community_posttitle {overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; font-size: 14px; margin: 0; text-align: start;}
+.community_link {text-decoration: none; color: #000;}
+.community_posttitle {overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; font-size: 16px; margin: 0; text-align: start;}
+.community_posttitle:hover {font-weight: 700;}
+
+
+/* CommunityWritePage */
+.community_vote_title {display: flex;}
+.community_vote_text {font-size: 18px; padding: 0; font-weight: 500; margin-top: 15px; margin-left: 8px;}
+.community_write_inside {width: 96%; margin: 0 auto;}
+
+.community_store_serchbtn {width: 80px; border: none; border-radius: 0 6px 6px 0; background-color: #07955C; color: #fff;}
+.community_plant_hr {margin-bottom: 30px;}
+
+.community_plant_cardfooter{display: flex; justify-content: start;}
+.community_plant_check {display: flex;}
+.community_plant_cardfooter_text {margin-left: 8px; line-height: 2; overflow: hidden;}
+.comm_write_insertbtn, .comm_write_insertvotebtn {width: 100px; height: 45px; border: none; border-radius: 50px; background-color: #07955C; color: #fff;}
+.comm_write_deletebtn {width: 100px; height: 45px; border: 1px solid #a4a4a4; background-color: #fff; color: #a4a4a4; border-radius: 50px; margin-left: 15px;}
+
+.comm_backbtn {width: 100px; height: 45px; background-color: #07955C; border-radius: 50px; margin-bottom: 20px;}
+.comm_backbtn a {color: #fff; text-decoration: none; display: flex; justify-content: center; line-height: 2.8;}
+
+/* CommunityReadPage */
+.comm_read_userimg {border-radius: 500px; width: 200px; height: 200px;}
+.comm_read_contents_area {width: 85%; margin: 0 auto; padding: 3rem 0;}
+.comm_read_user_imgarea {margin-right: 1.4rem; margin-bottom: 2rem;}
+.comm_read_share {display: flex;}
+
+.comm_read_like {margin: 0 auto;}
+.comm_read_cnt {color: red;}
+.comm_read_contents_section {margin:2rem 0; text-align: center;}
+.comm_coment_commenttbtn {width: 100px; height: 45px; border: none; border-radius: 50px; background-color: #07955C; color: #fff;}
+.comm_coment_deletetbtn {width: 100px; height: 45px; border: 1px solid #a4a4a4; border-radius: 50px; background-color: #fff; color: #a4a4a4;}
+
+/* CommSharePage */
+.comm_read_url {border: none; width: 100px; height: 35px; border-radius: 10px; background-color: #07955C; color: #fff;}
+
+/* CommComentPage */
+.comm_coment_insertbtn {width: 100px; height: 45px; border: none; border-radius: 50px; background-color: #07955C; color: #fff;}
+.comm_coment_updatebtn {width: 60px; height: 35px; border: none; border-radius: 10px; background-color: #07955C; color: #fff;}
+.comm_coment_deletebtn {width: 60px; height: 35px; border: 1px solid #a4a4a4; border-radius: 10px; background-color: #fff; margin-left: 10px; color: #a4a4a4;}
+
+/* MarketListPage */
+.market_filter_section {display: flex; justify-content: space-between; margin-bottom: 1rem;}
+.market_list_deletebtn {width: 100px; height: 45px; border: none; background-color: #07955C; border-radius: 50px; color: #fff;}
+.comm_market_search {width: 100%; display: flex; justify-content: end; margin-bottom: 2rem;}
+
+/* Chat_modal */
+.chat_btn {width: 100px; height: 45px; border: none; border-radius: 50px; background-color: #07955C; color: #fff; margin-top: 1.4rem;}
+
+/* MarketReadPage */
+.market_btn_section {width: 100%; display: flex; justify-content: space-between;}

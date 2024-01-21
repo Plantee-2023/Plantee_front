@@ -5,17 +5,13 @@ import Pagination from 'react-js-pagination';
 import "../common/Pagination.css"
 
 const Comm_coment = ({post_id,post}) => {
-  const [myUid,setMyuid]= useState('');
-  const [contents, setContents] = useState('');
-  const [page, setPage] = useState(1);
-  const [list, setList] = useState([]);
-  const [total, setTotal]= useState(0);
-  const size=3;
- 
- 
-
-  const getComent = async() => {
-    
+const [myUid,setMyuid]= useState('');
+const [contents, setContents] = useState('');
+const [page, setPage] = useState(1);
+const [list, setList] = useState([]);
+const [total, setTotal]= useState(0);
+const size=3;
+const getComent = async() => {
     const res=await axios(`/comments/c_list.json?page=${page}&size=${size}&post_id=${post_id}`);
     const user_id=await axios(`/comments/read_id?uid=${sessionStorage.getItem("uid")}`);
     setMyuid(user_id.data);
@@ -23,37 +19,27 @@ const Comm_coment = ({post_id,post}) => {
     console.log("comments",res);
     console.log("uid",user_id.data);
     let data=res.data.list.map(r=>r && {...r, ellipsis:true, view:true, text:r.contents});
-  setList(data);
-    
-   setTotal(res.data.total);
+    setList(data);
+    setTotal(res.data.total);
+    }
 
-    
-  }
+    useEffect(()=>{
+        getComent();
+    }, [page ]);
 
-  useEffect(()=>{
-    getComent();
-}, [page ]);
- 
- 
- 
-//댓글 등록 
+    //댓글 등록 
     const onRegister = async() => {
-
         if(contents===""){
             alert("리뷰내용을 작성하세요!");
         }else{
-            
             const data={post_id, uid:sessionStorage.getItem("uid"), contents}
-            
-         await axios.post("/comments/insert_comments", data);
+        await axios.post("/comments/insert_comments", data);
             setContents("");
             alert("등록완료 ")
-             getComent();
+            getComent();
         }
-
-     
     }
- 
+
     const onClickLogin = () => {
         sessionStorage.setItem("target", `/shop/info/${post_id}`);
         window.location.href="/login";
@@ -99,32 +85,23 @@ const Comm_coment = ({post_id,post}) => {
         }
     }
 
-
-
- 
-
-  return (
-
-  
+    return (
         <div> 
-          <div> <h4 style={{"font-weight":"bold"}}>댓글수:{total}건</h4></div>
-             {sessionStorage.getItem("uid") ?
+            <div> <h5 style={{"font-weight":"bold"}}>댓글수:{total}건</h5></div>
+            {sessionStorage.getItem("uid") ?
                 <div>
                     <Form.Control onChange={(e)=>setContents(e.target.value)} value={contents}
                         as="textarea" rows={5} placeholder='내용을 입력하세요.'/>
                     <div className='text-end mt-2'>
-                        <Button onClick={onRegister}
-                            className='btn-sm px-5'>등록</Button>
+                        <button onClick={onRegister}
+                            className='comm_coment_insertbtn mt-3 mb-3'>등록</button>
                     </div>    
                 </div>
-
                 :    
                 <div className='mb-5'>
                     <Button className='w-100' onClick={onClickLogin}>로그인</Button>
                 </div>    
             }
-            
-         
             <hr/>
             <div>
                 {list.map(r=>
@@ -142,10 +119,10 @@ const Comm_coment = ({post_id,post}) => {
                             </div>    
                             {sessionStorage.getItem("uid")===r.uid && 
                                 <div className='text-end'>
-                                    <Button onClick={()=>onClickUpdate(r.comment_id)}
-                                        variant='success btn-sm'>수정</Button>
-                                    <Button onClick={()=>onDelete(r.comment_id)}
-                                        variant='danger btn-sm ms-2'>삭제</Button>
+                                    <button onClick={()=>onClickUpdate(r.comment_id)}
+                                        className='comm_coment_updatebtn'>수정</button>
+                                    <button onClick={()=>onDelete(r.comment_id)}
+                                        className='comm_coment_deletebtn'>삭제</button>
                                 </div>        
                             }
                         </>
@@ -162,14 +139,11 @@ const Comm_coment = ({post_id,post}) => {
                             </div>    
                         </div>    
                         }
-                        <hr/>
                     </div>
                 )}
             </div>
-          
-
     </div>
-  )
+    )
 }
 
 export default Comm_coment
