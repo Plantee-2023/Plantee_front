@@ -29,7 +29,7 @@ import Comm_list from './community/comm/Comm_list';
 import Market_write from './community/market/Market_write';
 import Market_list from './community/market/Market_list';
 import Market_read from './community/market/Market_read';
-import Comm_Update from './community/comm/Comm_update';
+import Comm_update from './community/comm/Comm_update';
 import DiaryMain from './diary/DiaryMain';
 import DiaryInsert from './diary/DiaryInsert';
 import DiaryUpdate from './diary/DiaryUpdate';
@@ -50,7 +50,6 @@ import HomePage from './HomePage';
 import Market_update from './community/market/Market_update';
 import AdminPage from './users/AdminPage';
 import PlantStartPage from './plant/plantee_i/PlantStartPage';
- 
 import Comm_insertReply from './community/comm/Comm_insertReply';
 
 const RouterPage = () => {
@@ -104,7 +103,7 @@ const RouterPage = () => {
             <Route path="/comm" element={<Comm_list />} />
             <Route path="/comm/write" element={<Comm_write />} />
             <Route path="/comm/read/:post_id" element={<Comm_Read />} />
-            <Route path="/comm/update/:post_id" element={<Comm_Update/>} />
+            <Route path="/comm/update/:post_id" element={<Comm_update/>} />
             <Route path="/comm/reply/:post_id" element={<Comm_insertReply/>} />
             
 

@@ -18,28 +18,20 @@ const Comm_plant = ({form,setForm}) => {
     const encodedQuery = encodeURIComponent(query);
     const url = `/comm/search_list.json?page=${page}&size=${size}&query=${encodedQuery}`  ;
     const res=await axios.get(url) ;
-
     const str_res = await axios.get(`/store/list.json?page=${page}&size=20&query=${query}`);
     let data=str_res.data.list.map(item=>item &&{...item, checked:true})
         setGoods(str_res.data.list);
         setTotal(str_res.data.total);
         console.log("굿즈",goods);
-    
-    
- 
-   setList(res.data.list)
+    setList(res.data.list)
     console.log("plant",res);
-    
-}
-
+  }
 
 useEffect(() => {
   getList();
 }, []);
 
-
 const onSubmit = (e) => {
-
   e.preventDefault();
   if (query === "") {
     alert("검색어를 입력하세요!");
@@ -48,14 +40,11 @@ const onSubmit = (e) => {
   }
 }
 
-
-
 const onClickPlant=()=>{
   //검색 
 }
 
 const onCheckedSave=(plant_id,image, title, store_id)=>{
-  
   setForm({
     ...form,
     plant_id:plant_id,
@@ -65,7 +54,6 @@ const onCheckedSave=(plant_id,image, title, store_id)=>{
     store_id:store_id
   })
   console.log("폼폼",form)
-  
 }
 
 const onChangeAll=()=>{
@@ -78,13 +66,11 @@ const onSave =()=>{
 
   return (
     <div>
-
       {/*
       <h4 style={{ "font-weight": "bold" }}>연관식물</h4>
       <InputGroup className="mb-3">
         <FormControl
           placeholder="Recipient's username"
-
         /><Button variant='success'>검색</Button>
 
 
@@ -100,46 +86,34 @@ const onSave =()=>{
 
         </Card>
       </Col>
-  */}
-
-
-<div className='my-5'>
-
-            <h1 className='text-center mb-5'>연관 식물 검색</h1>
-            <Row className='mb-2'>
-                <Col md={4}>
-                    <form onSubmit={onSubmit}>
-                        <InputGroup className='mb-3'>
-                            <Form.Control onChange={(e)=>setQuery(e.target.value)}
-                                placeholder='상품명, 제조사' value={query}/>
-                            <Button type="submit" >검색</Button>
-                        </InputGroup>
-                    </form>
-                </Col>
-             
-            </Row>  <hr/>
-            <Row className='mb-2'>
+      */}
+      <div className='my-5'>
+        <h1 className='community_title'>연관 식물 검색</h1>
+          <Row className='mb-2'>
+              <Col md={4}>
+                  <form onSubmit={onSubmit}>
+                      <InputGroup className='mb-3'>
+                          <Form.Control onChange={(e)=>setQuery(e.target.value)}
+                              placeholder='상품명, 제조사' value={query}/>
+                          <button className='community_store_serchbtn' type="submit" >검색</button>
+                      </InputGroup>
+                  </form>
+              </Col>
+          </Row>
+          <hr className='community_plant_hr'/>
+          <Row className='mb-2'>
             {goods.map(g=>
-      
             <Col xs={6} md={4} lg={2} key={g.plant_id} >
-            
-        <Card className='mb-2' style={{ width: "180px", height: "250px" }}>
-
-          <Card.Body style={{ height: "200px", overflow: "hidden" }} >
-
-            <img src={g.image} style={{width: "100%", height: "100%", objectFit: "cover"  }}   />
-
+          <Card className='mb-4' style={{ width: "210px", height: "280px"}}>
+          <Card.Body style={{ height: "200px", overflow: "hidden"}}>
+            <img src={g.image} style={{width: "100%", height: "100%", objectFit: "cover"}}/>
           </Card.Body  >
-          <Card.Footer  style={{ height: "50px" }} className="text-end"><input 
-          onClick={()=>onCheckedSave(g.plant_id,g.image, g.title, g.store_id)} className='text-start' type="checkbox"/>{g.store_id}{g.title}</Card.Footer>
-
+          <Card.Footer className='community_plant_check' style={{ height: "50px" }}><input 
+          onClick={()=>onCheckedSave(g.plant_id,g.image, g.title, g.store_id)} className='community_plant_cardfooter' type="checkbox"/><div className='community_plant_cardfooter_text'>{g.store_id}{g.title}</div></Card.Footer>
         </Card>
- 
         </Col>
-   
-
-)}
-     </Row>
+          )}
+        </Row>
             {/*
             <Table striped bordered hover>
                 <thead>
@@ -157,15 +131,14 @@ const onSave =()=>{
                         <td>{s.common_name}</td>
                         <td><img src={"http://via.placeholder.com/170x250"} width="50"/></td>
                         <td><div className='ellipsis'>{s.price}</div></td>
-                       
                         <td><Button onClick={()=>onSave(s)}
                             className='btn-sm'>등록</Button></td>
                     </tr>
                     )}
                 </tbody>
                 </Table>
-*/}
-                </div>
+              */}
+      </div>
     </div>
   )
 }
