@@ -1,10 +1,11 @@
 import axios from 'axios'
-import React, { useRef, useState, useContext, useEffect } from 'react'
+import React, { useRef, useState, useContext } from 'react'
 import { Button, Card, Form, Spinner } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
 import { BoxContext } from '../common/BoxContext'
-import { ref, getDownloadURL, uploadBytes, getStorage, uploadString } from "firebase/storage";
+import { ref, getDownloadURL, getStorage, uploadString } from "firebase/storage";
 import { v4 as uuidv4 } from 'uuid'; //랜덤 식별자를 생성해주는 라이브러리
+import './Magazine.css'
 
 
 const MagazineInsert = () => {
@@ -92,6 +93,23 @@ const MagazineInsert = () => {
     }
     if (loading) return <div className='text-center my-5'><Spinner animation="border" variant="success" /></div>
     return (
+        <div id="plant_wrap">
+            <div className="plant_contents">
+                <form onSubmit={onSubmit} className='insert-img'>
+                    <Card className='insert-card'>
+                        <Form.Control onChange={onChange} name='magazine_num' placeholder='번호' className='insert-text' style={{ width: 100 }} />
+                        <Form.Control onChange={onChange} name='title' placeholder='제목을 입력해주세요.' className='insert-text' />
+                        <div className='insert-img'>
+                            <img value={image} name='image' src={attachment || 'http://via.placeholder.com/150x150'} onClick={() => img_ref.current.click()} width={300} height={300} style={{ cursor: 'pointer' }} />
+                            <input onChange={onFileChange} type='file' ref={img_ref} style={{ display: 'none' }} />
+                            <br />
+                        </div>
+                        <Form.Control onChange={onChange} name='contents' placeholder='내용을 입력해주세요.' as="textarea" rows={10} className='insert-text' />
+                    </Card>
+                    <Button type='submit' className='insert-btn1 btn-lg'>등록</Button>
+                </form>
+            </div>
+        </div >
         <>
             <div className='mainbanner_section'>
                 <img className='banner_img' src="/image/header/Magazine.png" />

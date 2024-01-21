@@ -28,7 +28,6 @@
 /* UserUpdatePage */
 .update-card {margin: 0 auto;}
 .all-title {text-align: center; font-weight: 600; margin-top: 50px;}
-.update_img {margin: 0 auto; margin-top: 2rem;}
 .all-list{width: 1300px !important; margin: 0 auto; margin-top: 30px;}
 .all-card{width: 1400px;}
 /* UserPasswordUpdatePage */
@@ -37,7 +36,6 @@
 #main_wrap {width: 100%;margin: 0 auto;}
 
     /* 회원 수정 */
-    .update-img-btn {background-color: #4cc67c !important;font-weight: 900;border: none !important;margin-left: 33%;margin-top: 20px;margin-bottom: 20px;}
     .update-input{margin-top: 20px;}
     .update-check {margin-top: 15px;}
     .update-address{margin: 0 auto;margin-bottom: 5px;margin-top: 20px;}

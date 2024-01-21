@@ -1,13 +1,12 @@
 import React, { useEffect, useContext } from 'react'
 import axios from 'axios';
-import { Col, Form, InputGroup, Row, Button, Table, Spinner, Card } from 'react-bootstrap'
-import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom'
+import { Col, InputGroup, Row, Button, Spinner, Card } from 'react-bootstrap'
+import { NavLink, useLocation, useNavigate } from 'react-router-dom'
 import { AiOutlineEdit } from "react-icons/ai";
 import { useState } from 'react';
-import Pagination from 'react-js-pagination';
-import "../common/Pagination.css"
-import './Magazine.css'
 import { BoxContext } from '../common/BoxContext'
+import './Magazine.css'
+
 
 const MagazineList = () => {
     const [searchTerm, setSearchTerm] = useState('');
@@ -58,10 +57,11 @@ const MagazineList = () => {
             </div>
             <div className='plant_wrap'>
                 <div className='plant_contents'>
+                    <div style={{ textAlign: 'center', marginBottom: '70px', marginTop: "70px", fontSize: '4rem' }}>매거진</div>
                     <Row>
-                        <Col className='mt-5'>
+                        <Col>
                             <form onSubmit={onSubmit}>
-                                <InputGroup className='search'>
+                                <InputGroup style={{ marginBottom: '70px' }}>
                                     <input type='search' className='search_input_textinput' placeholder='검색어를 입력해주세요.' value={searchTerm} onChange={handleSearchChange} />
                                     <button className='search_input_searchbtn' type='submit'><img src='/image/search_icon.png' /></button>
                                 </InputGroup>
@@ -69,35 +69,27 @@ const MagazineList = () => {
                         </Col>
                         <Col>
                             {sessionStorage.getItem('uid') === "admin" &&
-                                <div className='plant_insert'>
-                                    <Link to="/magazine/magazineinsert"><button>추가하기</button></Link>
-                                </div>
-
+                                <Button style={{ backgroundColor: '#07955C', border: 'none', fontWeight: '600', marginLeft: '89%' }}>
+                                    <NavLink className="magazine-insert" to="/magazine/magazineinsert" style={{ color: '#ffffff', textDecoration: 'none' }}><AiOutlineEdit />글쓰기</NavLink>
+                                </Button>
                             }
                         </Col>
                     </Row>
-                    <Table className='mt-5' bordered hover>
-                        <thead className='text-center'>
-                            <tr>
-                                <th>번호</th>
-                                <th>제목</th>
-                                <th>작성자</th>
-                                <th>등록일</th>
-                                <th>조회수</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {filteredList.map(m =>
-                                <tr key={m.magazine_num}>
-                                    <td style={{ width: 50 }} className='text-center'>{m.magazine_num}</td>
-                                    <td><NavLink style={{ color: '#000000' }} to={`/magazine/read/${m.magazine_num}`}>{m.title}</NavLink></td>
-                                    <td style={{ width: '100px' }} className='text-center'>{m.nickname}</td>
-                                    <td style={{ width: '300px' }} className='text-center'>{m.fmtdate}</td>
-                                    <td style={{ width: '100px' }} className='text-center'>{m.view_cnt}회</td>
-                                </tr>
-                            )}
-                        </tbody>
-                    </Table>
+                    <Row sm={1} md={2} lg={3} className='magazine-grid'>
+                        {filteredList.map(m =>
+                            <Col key={m.magazine_num} >
+                                <Card style={{ border: 'none' }}>
+                                    <NavLink to={`/magazine/read/${m.magazine_num}`} style={{ color: "black", textDecoration: 'none' }}>
+                                        <Card.Img width={300} height={300} src={m.image || 'http://via.placeholder.com/10x10'} />
+                                        <Card.Body>
+                                            <Card.Title className='text-center'>{m.title}</Card.Title>
+                                            <Card.Text className='ellipsis'>{m.contents}<br /></Card.Text>
+                                        </Card.Body>
+                                    </NavLink>
+                                </Card>
+                            </Col>
+                        )}
+                    </Row>
                 </div>
             </div>
         </>

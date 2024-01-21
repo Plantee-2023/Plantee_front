@@ -28,7 +28,10 @@ const Magazine = () => {
             setPost(res.data);
             setLoading(false);
         } catch (error) {
-            alert(error.message);
+            setBox({
+                show: true,
+                message: `${error.message}`
+            })
         }
     }
 
@@ -57,8 +60,8 @@ const Magazine = () => {
             <div className='mainbanner_section'>
                 <img className='banner_img' src="/image/header/Magazine.png" />
             </div>
-            <div id="main_wrap">
-                <div className="main_contents">
+            <div id="plant_wrap">
+                <div className="plant_contents">
                     <h1 className='magazine-title'>{title}</h1>
                     <hr />
                     <Row>
