@@ -134,7 +134,7 @@ const Comm_Read = () => {
                                         </Col>
                                         <Col className='px-3 text-start' >
                                             <hr />
-                                            <div>작성자 : {nickname}({uid})</div>
+                                            <div>작성자 : {uid}</div>
                                             <div>작성일 :  {red_date} </div>
                                             <div>추천 :1 </div>
                                             <hr />
