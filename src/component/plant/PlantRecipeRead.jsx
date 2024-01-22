@@ -79,7 +79,8 @@ const PlantRecipeRead = () => {
               <div className='recipe_title_section'>
                 <div className='recipe_title_group'>
                   <div className='recipe_maintitle'>
-                    <h1 className='recipe_maintitle_title'>{title}<img src='/image/like_icon.png' /></h1>
+                    <h1 className='recipe_maintitle_title'>{title}</h1>
+                    {/* <img src='/image/like_icon.png' /> */}
                   </div>
                   <div className='recipe_mainwriter'>
                     <p className='recipe_mainwriter_writer'>{nickname}</p>
