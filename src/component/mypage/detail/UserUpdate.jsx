@@ -140,18 +140,18 @@ const UserUpdate = () => {
                     </div>
                     <InputGroup className='update-input'>
                         <InputGroup.Text className='update-text'>닉네임</InputGroup.Text>
-                        <Form.Control value={nickname} name='nickname' type='text' onChange={onChange} />
+                        <Form.Control value={nickname} name='nickname' type='text' onChange={onChange} placeholder='쪼랭이'/>
                     </InputGroup>
                     <InputGroup className='update-input'>
                         <InputGroup.Text className='update-text'>연락처</InputGroup.Text>
-                        <Form.Control value={phone} name='phone' type='text' onChange={onChange} />
+                        <Form.Control value={phone} name='phone' type='text' onChange={onChange} placeholder='010-0000-0000'/>
                     </InputGroup>
                     <InputGroup className='update-address'>
                         <InputGroup.Text className='update-text'>주소</InputGroup.Text>
-                        <Form.Control value={address1} name='address1' type='text' onChange={onChange} />
+                        <Form.Control value={address1} name='address1' type='text' onChange={onChange} placeholder='서울특별시 마포구 상암동'/>
                         <ModalPostCode user={user} setUser={setUser} />
                     </InputGroup>
-                    <Form.Control value={address2} name='address2' className='update-address' type='text' placeholder='상세주소' onChange={onChange} />
+                    <Form.Control value={address2} name='address2' className='update-address' type='text' placeholder='3198-8  1층(노형동)' onChange={onChange} />
                     <Form className='update-check'>
                         <Form.Check label="꽃집 사장님"></Form.Check>
                     </Form>

@@ -149,9 +149,9 @@ const { user_id, uid, level } = list;
                     </>
                     :
                     <>
-                      <li><NavLink to='/users/mypage'>마이 페이지</NavLink></li>
+                      {/* <li><NavLink to='/users/mypage'>마이 페이지</NavLink></li> */}
                       <li>
-                        <div onClick={toggleShowA} style={{ cursor: 'pointer' }} >{sessionStorage.getItem("uid")}님
+                        <div onClick={toggleShowA} style={{ cursor: 'pointer' }} >마이페이지
                           <ToastContainer position={'top-end'} className='menu-toast'>
                             <Toast show={showA}>
                               <CloseButton className='menu-close-btn' />
@@ -191,13 +191,13 @@ const { user_id, uid, level } = list;
                                     </li>
                                     <li>
                                       <a href='/users/mypage/productcart'><Card className='menu-card2'>
-                                        <PiCookingPot className='menu-card-icon' /></Card>
+                                      <img className='mypage_calander' src='/image/mypage_cart.png' /></Card>
                                         <div className='menu-toast-text'>장바구니</div>
                                       </a>
                                     </li>
                                     <li>
                                       <a href='/users/mypage/productpurchase'><Card className='menu-card3'>
-                                        <TfiWrite className='menu-card-icon' /></Card>
+                                      <img className='mypage_calander' src='/image/mypage_bill.png' /></Card>
                                         <div className='menu-toast-text'>구매내역</div>
                                       </a>
                                     </li>
