@@ -161,7 +161,7 @@ const ProductCart = () => {
 
                     <Alert style={{background:"#ddd", border:"none"}}>
                         <Row>
-                            <Col>총 주문 수 : {count}개</Col>
+                            <Col>총 주문 수 : {total}개</Col>
                             <Col className='text-end'>총 주문 금액 : {sum}원</Col>
                         </Row>
                     </Alert>

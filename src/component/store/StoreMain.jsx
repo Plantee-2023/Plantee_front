@@ -93,6 +93,7 @@ const StoreMain = () => {
                 return '상급자용';
         }
     };
+
     useEffect(() => { getList(); getUserInfo(); }, [location]);
 
     if (loading) return <div className='text-center my-5'><Spinner animation="border" variant="success" /></div>
@@ -109,7 +110,14 @@ const StoreMain = () => {
                         <Navbar bg="#ffffff" data-bs-theme="light" className='pt-5 pb-4'>
                             <div className='first_filter_section'>
                                 <div className='first_filter_between'>
-                                    <div className='filter_list'>
+                                    <div className='store_filter_list'>
+                                        {sellerYn === 'y' ?
+                                            <div className='store_insert'>
+                                                <Link to="/store/insert" ><button id='insertButton'>판매글 쓰기</button></Link>
+                                            </div>
+                                            :
+                                            <></>
+                                        }
                                         <button className={`filter_reset_btn ${selectedCareLevel === null ? 'active' : ''}`} type='button' onClick={() => handleCareLevelFilter(null)}>
                                             <img src='/image/reset_icon.png' alt='reset icon' />
                                         </button>
@@ -122,15 +130,6 @@ const StoreMain = () => {
                                         <button className={`filter_btn ${selectedCareLevel === 3 ? 'active' : ''}`} type='button' onClick={() => handleCareLevelFilter(3)}>
                                             상급자용
                                         </button>
-                                        <div className='store_admin_insert'>
-                                            {sellerYn === 'y' ?
-                                                <div className='plant_insert'>
-                                                    <Link to="/store/insert" ><button id='insertButton'>판매글 쓰기</button></Link>
-                                                </div>
-                                                :
-                                                <></>
-                                            }
-                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -170,7 +169,7 @@ const StoreMain = () => {
                             </Col>
                         )}
                     </Row>
-                </div>
+                </div >
             </div >
 
             <Pagination
