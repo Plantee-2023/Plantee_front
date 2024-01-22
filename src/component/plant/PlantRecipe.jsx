@@ -126,7 +126,7 @@ const PlantRecipe = () => {
                   <p className='recipe_writer'>{r.nickname}</p>
                     <div className='recipe_content_level'>
                       <span className='recipe_level'><img src='/image/recipe_level.png'/>{getCareLevelText(r.level)}</span>
-                      <span className='recipe_like'><img src='/image/like_icon.png'/> 4</span>
+                      {/* <span className='recipe_like'><img src='/image/like_icon.png'/> 4</span> */}
                   </div>
                 </div>
               </a>
