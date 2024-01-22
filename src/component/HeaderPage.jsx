@@ -111,69 +111,66 @@ const HeaderPage = () => {
 								</>
 								:
 								<>
-									<li><NavLink to='/users/mypage'>마이 페이지</NavLink></li>
-									<li>
-										<div onClick={toggleShowA} style={{ cursor: 'pointer' }} >{sessionStorage.getItem("uid")}님
-											<ToastContainer position={'top-end'} className='menu-toast'>
-												<Toast show={showA}>
-													<CloseButton className='menu-close-btn' />
-													<Toast.Body>
-														<Card className='menu-card-card'>
-															<Row>
-																<Col className='menu-id' >{sessionStorage.getItem("uid")}님</Col>
-																<Col className='menu-mypage-btn'>
-																	<NavLink to={`/users/mypage`} style={{ backgroundColor: '#07955C', border: 'none', color: '#ffffff' }} className='btn btn-sm'>내정보</NavLink>
+									<li><NavLink to='/users/mypage' onClick={toggleShowA}>마이 페이지</NavLink>
+										<ToastContainer position={'top-end'} className='menu-toast'>
+											<Toast show={showA}>
+												<CloseButton className='menu-close-btn' />
+												<Toast.Body>
+													<Card className='menu-card-card'>
+														<Row>
+															<Col className='menu-id' >{sessionStorage.getItem("uid")}님</Col>
+															<Col className='menu-mypage-btn'>
+																<NavLink to={`/users/mypage`} style={{ backgroundColor: '#07955C', border: 'none', color: '#ffffff' }} className='btn btn-sm'>내정보</NavLink>
+															</Col>
+														</Row>
+														<Card className='menu-shadow'>
+															<Row style={{ display: 'flex' }}>
+																<Col className='text-center'>
+																	<div className='mt-2'>나의 활동 등급</div>
+																	<img className='mb-3 mt-2' src='http://via.placeholder.com/50x50' />
+																</Col>
+																<Col style={{ borderLeft: 'solid 1px #DCDCDC' }}>
+																	<div className='mt-2 mb-2'>총 게시글 : 1개</div>
+																	<div>
+																		<Row >
+																			<Col>now</Col>
+																			<Col className='text-end me-3'>next</Col>
+																		</Row>
+																		<ProgressBar variant='success' className='me-3' now={35} />
+																	</div>
 																</Col>
 															</Row>
-															<Card className='menu-shadow'>
-																<Row style={{ display: 'flex' }}>
-																	<Col className='text-center'>
-																		<div className='mt-2'>나의 활동 등급</div>
-																		<img className='mb-3 mt-2' src='http://via.placeholder.com/50x50' />
-																	</Col>
-																	<Col style={{ borderLeft: 'solid 1px #DCDCDC' }}>
-																		<div className='mt-2 mb-2'>총 게시글 : 1개</div>
-																		<div>
-																			<Row >
-																				<Col>now</Col>
-																				<Col className='text-end me-3'>next</Col>
-																			</Row>
-																			<ProgressBar variant='success' className='me-3' now={35} />
-																		</div>
-																	</Col>
-																</Row>
-															</Card>
-															<ul className='menu-margin'>
-																<li>
-																	<a href='/diary/calendar'><Card className='menu-card1'>
-																		<img className='mypage_calander' src='/image/mypage_calendar_icon.png' /></Card>
-																		<div className='menu-toast-text1'>캘린더</div>
-																	</a>
-																</li>
-																<li>
-																	<a href='/users/mypage/productcart'><Card className='menu-card2'>
-																		<PiCookingPot className='menu-card-icon' /></Card>
-																		<div className='menu-toast-text'>장바구니</div>
-																	</a>
-																</li>
-																<li>
-																	<a href='/users/mypage/productpurchase'><Card className='menu-card3'>
-																		<TfiWrite className='menu-card-icon' /></Card>
-																		<div className='menu-toast-text'>구매내역</div>
-																	</a>
-																</li>
-																<li>
-																	<a href='/mypage/mypagefavorite'><Card className='menu-card4'>
-																		<MdFavoriteBorder className='menu-card-icon' /></Card>
-																		<div className='menu-toast-text'>나의활동</div>
-																	</a>
-																</li>
-															</ul>
 														</Card>
-													</Toast.Body>
-												</Toast>
-											</ToastContainer>
-										</div>
+														<ul className='menu-margin'>
+															<li>
+																<a href='/diary/calendar'><Card className='menu-card1'>
+																	<img className='mypage_calander' src='/image/mypage_calendar_icon.png' /></Card>
+																	<div className='menu-toast-text1'>캘린더</div>
+																</a>
+															</li>
+															<li>
+																<a href='/users/mypage/productcart'><Card className='menu-card2'>
+																	<PiCookingPot className='menu-card-icon' /></Card>
+																	<div className='menu-toast-text'>장바구니</div>
+																</a>
+															</li>
+															<li>
+																<a href='/users/mypage/productpurchase'><Card className='menu-card3'>
+																	<TfiWrite className='menu-card-icon' /></Card>
+																	<div className='menu-toast-text'>구매내역</div>
+																</a>
+															</li>
+															<li>
+																<a href='/mypage/mypagefavorite'><Card className='menu-card4'>
+																	<MdFavoriteBorder className='menu-card-icon' /></Card>
+																	<div className='menu-toast-text'>나의활동</div>
+																</a>
+															</li>
+														</ul>
+													</Card>
+												</Toast.Body>
+											</Toast>
+										</ToastContainer>
 									</li>
 									<li><NavLink onClick={onLogout}>로그아웃</NavLink></li>
 								</>
