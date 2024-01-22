@@ -126,9 +126,8 @@ const ProductCart = () => {
         <>
             {show === "cart" &&
                 <div id="main_wrap">
-                    <h1 className='all-title'>장바구니</h1>
+                    <h1 className='all-title mb-5'>장바구니</h1>
 
-                    <Button className='cart-cancel-btn' onClick={() => onDeleteChecked(carts.cart_id)}>선택삭제</Button>
                     <Table striped bordered>
                         <thead className='text-center'>
                             <tr>
@@ -146,8 +145,10 @@ const ProductCart = () => {
                                     <td>{cart.title}</td>
                                     <td className='text-end'>
                                         <input onChange={(e) => onChangeQnt(cart.cart_id, e)}
+                                            style={{ width: "40px", textAlign: "end" }}
                                             value={cart.qnt} size={2} type='number' />개
-                                        <button onClick={(e) => onUpdateQnt(cart.title, cart.cart_id, cart.qnt)}>변경</button>
+                                        <button className='store_btn_clean_sm ms-2'
+                                            onClick={(e) => onUpdateQnt(cart.title, cart.cart_id, cart.qnt)}>변경</button>
                                     </td>
                                     <td>{cart.fmtsum}원</td>
                                     <td>
@@ -158,14 +159,16 @@ const ProductCart = () => {
                         </tbody>
                     </Table>
 
-                    <Alert>
+                    <Alert style={{background:"#ddd", border:"none"}}>
                         <Row>
-                            <Col>총 주문 수 : {total}개</Col>
+                            <Col>총 주문 수 : {count}개</Col>
                             <Col className='text-end'>총 주문 금액 : {sum}원</Col>
                         </Row>
                     </Alert>
 
-                    <Button className='cart-order-btn' onClick={onClickOrder}>주문하기</Button>
+                    <div className='text-center'>
+                        <Button className='cart-order-btn' onClick={onClickOrder}>주문하기</Button>
+                    </div>
 
                 </div>
             }
