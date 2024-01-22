@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react'
 import { NavLink, Link, useLocation, useNavigate } from 'react-router-dom';
-import { Container, Nav, Navbar, Spinner, Row, Col, Card, Badge, InputGroup } from 'react-bootstrap';
+import { Navbar, Spinner, Row, Col, Card, Badge, InputGroup } from 'react-bootstrap';
 import "./Store.css";
 import Pagination from 'react-js-pagination';
 import "../common/Pagination.css"
@@ -27,15 +27,6 @@ const StoreMain = () => {
     const getList = async () => {
         setLoading(true);
         const res = await axios.get(`/store/list.json?page=${page}&size=20&query=${query}`);
-        // console.log(res.data.list[0].seller_yn);
-        // let isSeller = res.data.list;
-        // // 판매자인지 확인하기
-        // for (let i = 0; i < isSeller.length; i++) {
-        //     const s = isSeller[i];
-        //     if (s.seller_yn === "y") {
-        //         isSeller[i].seller_yn = s;
-        //     }
-        // }
         setGoods(res.data.list);
         setTotal(res.data.total);
         setLoading(false);
@@ -60,14 +51,8 @@ const StoreMain = () => {
     }
 
     const setQueryStr = (queryStr) => {
-        // console.log(queryStr);
         setQuery(queryStr);
     }
-
-    // const setQueryClean = () => {
-    //     setQuery("");
-    //     window.location.reload();
-    // }
 
     const onSubmit = async (e) => {
         e.preventDefault();
@@ -89,7 +74,6 @@ const StoreMain = () => {
     }
 
     const handleCareLevelFilter = (level) => {
-        // setPage(1);
         setSelectedCareLevel(level);
     };
 
@@ -109,6 +93,7 @@ const StoreMain = () => {
                 return '상급자용';
         }
     };
+
     useEffect(() => { getList(); getUserInfo(); }, [location]);
 
     if (loading) return <div className='text-center my-5'><Spinner animation="border" variant="success" /></div>
@@ -121,51 +106,18 @@ const StoreMain = () => {
             <div className='store_wrap'>
                 <div className='store_contents'>
 
-                    {/* <div className='store_filterbtn_group'>
-                        <button className='plant_filterbtn'>↺</button>
-                        <button className='button_hide' onClick={() => { setClickPlant((e) => !e); }} >
-                            <div className={`${!isClickPlant ? 'store_filterbtn' : 'store_filterbtn_clicked'}`} >
-                                <div>식물</div>
-                            </div>
-                        </button>
-                        <button className='button_hide' onClick={() => { setClickGoods((e) => !e); }} >
-                            <div className={`${!isClickGoods ? 'store_filterbtn' : 'store_filterbtn_clicked'}`} >
-                                <div>용품</div>
-                            </div>
-                        </button>
-                    </div>
-
-                    {isClickPlant && (
-                        <>
-                            <div className='store_filterbtn_group'>
-                                <button className='store_filterbtn'>초보자용</button>
-                                <button className='store_filterbtn'>중급자용</button>
-                                <button className='store_filterbtn'>상급자용</button>
-                            </div>
-                        </>
-                    )}
-                    {isClickGoods && (
-                        <>
-                            <div className='store_filterbtn_group'>
-                                <button className='store_filterbtn'>전체</button>
-                                <button className='store_filterbtn'>화분</button>
-                                <button className='store_filterbtn'>수분</button>
-                            </div>
-                        </>
-                    )} */}
-
                     <div>
                         <Navbar bg="#ffffff" data-bs-theme="light" className='pt-5 pb-4'>
-
-                            {/* <Nav className="me-auto my-2 my-lg-0" style={{ maxHeight: '100px' }} navbarScroll >
-                                        <Nav.Link href="#home">최신순</Nav.Link>
-                                        <Nav.Link href="#home">리뷰많은순</Nav.Link>
-                                        <Nav.Link href="#home">낮은가격순</Nav.Link>
-                                        <Nav.Link href="#home">높은가격순</Nav.Link>
-                                    </Nav> */}
                             <div className='first_filter_section'>
                                 <div className='first_filter_between'>
-                                    <div className='filter_list'>
+                                    <div className='store_filter_list'>
+                                        {sellerYn === 'y' ?
+                                            <div className='store_insert'>
+                                                <Link to="/store/insert" ><button id='insertButton'>판매글 쓰기</button></Link>
+                                            </div>
+                                            :
+                                            <></>
+                                        }
                                         <button className={`filter_reset_btn ${selectedCareLevel === null ? 'active' : ''}`} type='button' onClick={() => handleCareLevelFilter(null)}>
                                             <img src='/image/reset_icon.png' alt='reset icon' />
                                         </button>
@@ -180,18 +132,9 @@ const StoreMain = () => {
                                         </button>
                                     </div>
                                 </div>
-                                <div className='store_admin_insert'>
-                                    {sellerYn === 'y' ?
-                                        <div className='plant_insert'>
-                                            <Link to="/store/insert" ><button id='insertButton'>추가하기</button></Link>
-                                        </div>
-                                        :
-                                        <></>
-                                    }
-                                </div>
                             </div>
-
                         </Navbar>
+
                         <div className='plant_data'>
                             <div className='plant_layout'>
                                 <div className='store_total'>총 스토어 :<strong> {total}</strong>건</div>
@@ -226,7 +169,7 @@ const StoreMain = () => {
                             </Col>
                         )}
                     </Row>
-                </div>
+                </div >
             </div >
 
             <Pagination

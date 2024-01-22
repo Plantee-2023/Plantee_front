@@ -132,28 +132,28 @@ const StoreInsert = () => {
 
                             <section className='store_info_section'>
 
-                                <section className='details_title_section'>
-                                    <div className='detail_logo'>Plantee<img src='/image/carelevel_icon.png' /></div>
-                                </section>
-
-                                <form className='insert_textarea'>
-                                    <div className='insert_title'>
+                                <form className='store_insert_textarea'>
+                                    <div className='store_insert_title'>
                                         <InputGroup>
-                                            <InputGroup.Text className='insert_inputgrouptext'>제목</InputGroup.Text>
-                                            <Form.Control name='title' onChange={onChangeForm} placeholder="제목" />
+                                            <InputGroup.Text className='store_insert_inputgrouptext'>제목</InputGroup.Text>
+                                            <Form.Control name='title' onChange={onChangeForm} placeholder="제목을 입력해주세요." />
                                         </InputGroup>
                                     </div>
-                                    <div className='insert_info'>
-                                        <InputGroup className='insert_inputgroup'>
-                                            <InputGroup.Text className='insert_inputgrouptext'>가격</InputGroup.Text>
-                                            <Form.Control name='price' onChange={onChangeForm} placeholder='*단위:(원)' />
+                                    <div className='store_insert_info'>
+                                        <InputGroup className='store_insert_inputgroup'>
+                                            <InputGroup.Text className='store_insert_inputgrouptext'>가격</InputGroup.Text>
+                                            <Form.Control name='price' onChange={onChangeForm} placeholder='단위: 원' />
                                         </InputGroup>
                                     </div>
 
-                                    <div className='insert_info'>
-                                        <InputGroup className='insert_inputgroup'>
-                                            <InputGroup.Text className='insert_inputgrouptext'>재고</InputGroup.Text>
-                                            <Form.Control name='stock' onChange={onChangeForm} placeholder='*단위:(개)' />
+                                    <div className='store_insert_info'>
+                                        <InputGroup className='store_insert_inputgroup'>
+                                            <InputGroup.Text className='store_insert_inputgrouptext'>난이도</InputGroup.Text>
+                                            <Form.Select className='select_box' name='level' onChange={onChangeForm}>
+                                                <option className='text-center'>초보자용</option>
+                                                <option className='text-center'>중급자용</option>
+                                                <option className='text-center'>상급자용</option>
+                                            </Form.Select>
                                         </InputGroup>
                                     </div>
 
@@ -162,14 +162,11 @@ const StoreInsert = () => {
                                         data=""
                                         onChange={(event, editor) => { onChangeContents(editor.getData()); }}
                                         onReady={(editor) => { }} />
-
                                 </form>
 
-                                <div className='plantinsert_section'>
-                                    <div className='plantinsert_btngroup'>
-                                        <button className='insert_submit' onClick={onClickSave}>등록하기</button>
-                                        <button className='insert_cancel' onClick={onClickCancel}>취소하기</button>
-                                    </div>
+                                <div>
+                                    <button className='store_filterbtn_clicked me-3' onClick={onClickSave}>등록하기</button>
+                                    <button className='store_filterbtn_clean' onClick={onClickCancel}>취소하기</button>
                                 </div>
 
                             </section>
