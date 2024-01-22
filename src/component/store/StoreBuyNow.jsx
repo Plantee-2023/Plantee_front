@@ -67,19 +67,19 @@ const StoreBuyNow = ({ carts }) => {
                         <form>
                             <InputGroup className='mb-3'>
                                 <InputGroup.Text className='store_insert_inputgrouptext_buynow'>받는이</InputGroup.Text>
-                                <Form.Control />
+                                <Form.Control placeholder='김아름'/>
                             </InputGroup>
                             <InputGroup className='mb-3'>
                                 <InputGroup.Text className='store_insert_inputgrouptext_buynow'>전화번호</InputGroup.Text>
-                                <Form.Control />
+                                <Form.Control placeholder='010-0000-0000'/>
                             </InputGroup>
                             <InputGroup className='mb-3'>
                                 <InputGroup.Text className='store_insert_inputgrouptext_buynow'>주소</InputGroup.Text>
-                                <Form.Control />
+                                <Form.Control placeholder='서울특별시 마포구 상암동'/>
                             </InputGroup>
                             <InputGroup className='mb-3'>
-                                <Form.Control placeholder='상세주소를 입력해주세요.' />
-                            </InputGroup>
+                                <Form.Control placeholder='한림에스타워' />
+                            </InputGroup >
                         </form>
                     </Card>
                 </Col>

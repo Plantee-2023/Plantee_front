@@ -86,7 +86,7 @@ const PlantRecipe = () => {
     <div className='recipe_wrap'>
       <div className='recipe_contents'>
         <div className='recipe_select_section'>
-          <div className='recipe_filter'>
+          {/* <div className='recipe_filter'>
             <div className='recipe_select'>
               <a>최신순</a>
             </div>
@@ -96,7 +96,7 @@ const PlantRecipe = () => {
             <div className='recipe_select'>
               <a type='button' onClick={() => handleCareLevelFilter(1)}>난이도순</a>
             </div>
-          </div>
+          </div> */}
           <div className='recipe_btn'>
             <button className='recipe_insert' onClick={() => onClickInsertRecipe()}>글쓰기</button>
           </div>
