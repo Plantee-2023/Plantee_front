@@ -119,9 +119,9 @@ const HomePage = () => {
                         </a>
                     </Col>
                 </Row>
-                <div className='first_filter_section'>
-                    <div className='first_filter_between'>
-                        <ul className='filter_list'>
+                <div className='homepage_first_filter_section'>
+                    <div className='homepage_first_filter_between'>
+                        <ul className='homepage_filter_list'>
                             <button className={`filter_reset_btn ${selectedCareLevel === null ? 'active' : ''}`} type='button' onClick={() => handleCareLevelFilter(null)}>
                                 <img src='/image/reset_icon.png' alt='reset icon' />
                             </button>
@@ -173,35 +173,39 @@ const HomePage = () => {
                     </Col>
                 </Row>
                 <div className='homepage_tagbtn'>
-                    <button className='homepage_btn'>전체보기</button>
-                    <button className='homepage_btn'>식물자랑</button>
-                    <button className='homepage_btn'>거래</button>
+                    <button className='filter_btn'>전체보기</button>
+                    <button className='filter_btn'>식물자랑</button>
+                    <button className='filter_btn'>거래</button>
                 </div>
-                <Swiper
-                    modules={[Navigation, Pagination, Autoplay]}
-                    spaceBetween={30}
-                    slidesPerView={4}
-                    autoplay={{ delay: 13000 }}
-                    navigation
-                    style={{ "--swiper-navigation-color": "#ffffff" }}>
-                    {community.map(c =>
-                        <SwiperSlide>
-                            <Card className='mt-5 mb-5'>
-                                <Card.Body>
-                                    <Card.Img src={c.image || 'http://via.placeholder.com/150x150'} width={150} height={250} ></Card.Img>
-                                </Card.Body>
-                            </Card>
-                        </SwiperSlide>
-                    )}
-                </Swiper>
+                <div>
+                    {community.slice(0, 8).map((c, index) => (
+                        (index % 4 === 0) ? // Check if it's the start of a new row
+                            <div key={index} className="row">
+                                {[0, 1, 2, 3].map(i => (
+                                    (index + i < community.length) ? // Check if the current index is within the array bounds
+                                        <div key={index + i} className="col">
+                                            <div>
+                                                <div className='homepage_community mb-4'>
+                                                    <Card.Body>
+                                                        <Card.Img src={community[index + i].image || 'http://via.placeholder.com/150x150'} width={30} height={235} />
+                                                    </Card.Body>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        : null
+                                ))}
+                            </div>
+                            : null
+                    ))}
+                </div>
                 <Row>
-                    <Col>
-                        <h2 className='homepage_maintitle'>
+                    <Col className='homepage_lasttitle'>
+                        <h2 className='homepage_maintitle_last'>
                             💚 초보 가드너를 위한 반려식물 이야기 💚
                         </h2>
                     </Col>
                     <Col>
-                        <a className='homepage_more' href='/magazine/magazineList'>
+                        <a className='homepage_more mt-4' href='/magazine/magazineList'>
                             더보기<CgChevronRight className='homepage_more_icon' />
                         </a>
                     </Col>
